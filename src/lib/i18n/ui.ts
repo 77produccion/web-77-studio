@@ -108,6 +108,14 @@ export const uiTranslations = {
           query: '¿Cómo puedo agendar una llamada de diagnóstico con el equipo de 77 Studio?'
         }
       ]
+    },
+    whatsappFloating: {
+      ariaLabel: 'Escribir por WhatsApp a 77 Studio',
+      onlineStatus: 'En línea',
+      tooltipTitle: '¿Tienes un proyecto en mente? 👋',
+      tooltipSubtitle: 'Escríbenos directamente por WhatsApp y te orientamos en tiempo real.',
+      ctaButton: 'Chatear ahora',
+      closeTooltip: 'Cerrar notificación'
     }
   },
   en: {
@@ -212,6 +220,14 @@ export const uiTranslations = {
           query: 'How can I schedule a diagnostic call with the 77 Studio team?'
         }
       ]
+    },
+    whatsappFloating: {
+      ariaLabel: 'Message 77 Studio on WhatsApp',
+      onlineStatus: 'Online',
+      tooltipTitle: 'Have a project in mind? 👋',
+      tooltipSubtitle: 'Chat directly with us on WhatsApp for instant guidance.',
+      ctaButton: 'Chat now',
+      closeTooltip: 'Close notification'
     }
   }
 } as const;

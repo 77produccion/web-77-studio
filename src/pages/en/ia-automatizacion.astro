@@ -3,9 +3,9 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import HeroIA from '@/components/ia/HeroIA.astro';
 import IACapabilitiesGrid from '@/components/ia/IACapabilitiesGrid.astro';
-import WorkflowDiagramSection from '@/components/ia/WorkflowDiagramSection.astro';
+import IAProblemSection from '@/components/ia/IAProblemSection.astro';
 import AutomationVsAISection from '@/components/ia/AutomationVsAISection.astro';
-import IAProcessSection from '@/components/ia/IAProcessSection.astro';
+import IADepartmentsSection from '@/components/ia/IADepartmentsSection.astro';
 import IAContactSection from '@/components/ia/IAContactSection.astro';
 import { getIaTranslations } from '@/lib/i18n/pages/ia-automatizacion';
 
@@ -20,21 +20,21 @@ const t = getIaTranslations(lang);
   whatsappContext="ia"
   lang={lang}
 >
-  <!-- 01. AI Hero Section with Node Architecture & Dual CTAs -->
+  <!-- 01. Hero: AI and automation for businesses -->
   <HeroIA lang={lang} />
 
-  <!-- 02. Practical Applied Tech Capabilities Grid -->
+  <!-- 02. What We Can Do: Solutions to make your business more efficient -->
   <IACapabilitiesGrid lang={lang} />
 
-  <!-- 03. Real Workflow Anatomy (Lead to Closed Won) -->
-  <WorkflowDiagramSection lang={lang} />
+  <!-- 03. The Problem: Many companies have modern software, but still work manually -->
+  <IAProblemSection lang={lang} />
 
-  <!-- 04. Deterministic Automation vs Applied AI -->
+  <!-- 04. AI + Automation: Not everything needs AI. Not everything is solved with simple automation -->
   <AutomationVsAISection lang={lang} />
 
-  <!-- 05. 5-Step Implementation Methodology -->
-  <IAProcessSection lang={lang} />
+  <!-- 05. Where We Can Apply It: AI can be integrated across multiple areas of your company -->
+  <IADepartmentsSection lang={lang} />
 
-  <!-- 06. Commercial Closing Block with WhatsApp & Lead Form -->
+  <!-- 06. Closing: Which process in your company could run better? -->
   <IAContactSection lang={lang} />
 </BaseLayout>

@@ -31,6 +31,31 @@ export const WHATSAPP_CONFIG = {
 export type WhatsAppContext = keyof typeof WHATSAPP_CONFIG.messages.es;
 
 /**
+ * Obtiene el número limpio de WhatsApp
+ */
+export function getWhatsAppPhone(phone?: string): string {
+  const raw = phone || import.meta.env.PUBLIC_WHATSAPP_NUMBER || WHATSAPP_CONFIG.defaultPhone;
+  return raw.replace(/\D/g, '');
+}
+
+/**
+ * Reemplaza variables dinámicas al estilo Joinchat: {SITE}, {TITLE}, {URL}
+ */
+export function formatWhatsAppMessage(
+  template: string,
+  variables: { site?: string; title?: string; url?: string } = {}
+): string {
+  const site = variables.site || '77 Studio';
+  const title = variables.title || (typeof document !== 'undefined' ? document.title : '');
+  const url = variables.url || (typeof window !== 'undefined' ? window.location.href : '');
+
+  return template
+    .replace(/{SITE}/gi, site)
+    .replace(/{TITLE}/gi, title)
+    .replace(/{URL}/gi, url);
+}
+
+/**
  * Genera la URL de WhatsApp con mensaje prellenado contextual respetando el idioma
  */
 export function getWhatsAppUrl(
@@ -38,13 +63,15 @@ export function getWhatsAppUrl(
   phone: string = import.meta.env.PUBLIC_WHATSAPP_NUMBER || WHATSAPP_CONFIG.defaultPhone,
   lang: SupportedLocale = 'es'
 ): string {
-  const cleanPhone = phone.replace(/\D/g, '');
+  const cleanPhone = getWhatsAppPhone(phone);
   const langMessages = WHATSAPP_CONFIG.messages[lang] || WHATSAPP_CONFIG.messages.es;
   
-  const message = contextOrCustomMessage in langMessages
+  const rawMessage = contextOrCustomMessage in langMessages
     ? langMessages[contextOrCustomMessage as WhatsAppContext]
     : contextOrCustomMessage;
 
-  return `https://wa.me/${cleanPhone}?text=${encodeURIComponent(message)}`;
+  const message = formatWhatsAppMessage(rawMessage);
+
+  return `https://api.whatsapp.com/send?phone=${cleanPhone}&text=${encodeURIComponent(message)}`;
 }
 

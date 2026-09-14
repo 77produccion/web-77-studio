@@ -3,36 +3,38 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import HeroIA from '@/components/ia/HeroIA.astro';
 import IACapabilitiesGrid from '@/components/ia/IACapabilitiesGrid.astro';
-import WorkflowDiagramSection from '@/components/ia/WorkflowDiagramSection.astro';
+import IAProblemSection from '@/components/ia/IAProblemSection.astro';
 import AutomationVsAISection from '@/components/ia/AutomationVsAISection.astro';
-import IAProcessSection from '@/components/ia/IAProcessSection.astro';
+import IADepartmentsSection from '@/components/ia/IADepartmentsSection.astro';
 import IAContactSection from '@/components/ia/IAContactSection.astro';
+import { getIaTranslations } from '@/lib/i18n/pages/ia-automatizacion';
 
-const pageTitle = "IA + Automatización de Procesos Comerciales | 77 Studio";
-const pageDescription = "Diseñamos flujos automatizados e inteligencia artificial para optimizar seguimiento de leads, atención a clientes y eficiencia operativa (Colombia ↔ USA).";
+const lang = 'es';
+const t = getIaTranslations(lang);
 ---
 
 <BaseLayout
-  title={pageTitle}
-  description={pageDescription}
+  title={t.meta.title}
+  description={t.meta.description}
   canonical="https://77.studio/ia-automatizacion"
   whatsappContext="ia"
+  lang={lang}
 >
-  <!-- 01. Hero Section con arquitectura de nodos interactiva y CTAs duales -->
-  <HeroIA />
+  <!-- 01. Hero: IA y automatización para empresas -->
+  <HeroIA lang={lang} />
 
-  <!-- 02. Grid con las 4 Capacidades Prácticas de Tecnología -->
-  <IACapabilitiesGrid />
+  <!-- 02. Qué podemos hacer: Soluciones para hacer tu empresa más eficiente -->
+  <IACapabilitiesGrid lang={lang} />
 
-  <!-- 03. Anatomía de un Workflow Real en Acción (Lead a Venta) -->
-  <WorkflowDiagramSection />
+  <!-- 03. El problema: Muchas empresas tienen tecnología, pero siguen trabajando manualmente -->
+  <IAProblemSection lang={lang} />
 
-  <!-- 04. Diferenciación: Automatización Determinista vs Inteligencia Artificial -->
-  <AutomationVsAISection />
+  <!-- 04. IA + Automatización: No todo necesita IA. No todo se resuelve con una automatización simple -->
+  <AutomationVsAISection lang={lang} />
 
-  <!-- 05. Metodología de Implementación en 6 Pasos -->
-  <IAProcessSection />
+  <!-- 05. Dónde podemos aplicarlo: La IA puede entrar en diferentes áreas de tu empresa -->
+  <IADepartmentsSection lang={lang} />
 
-  <!-- 06. Bloque de Cierre Comercial con WhatsApp IA y Formulario -->
-  <IAContactSection />
+  <!-- 06. Cierre: ¿Qué proceso de tu empresa podría funcionar mejor? -->
+  <IAContactSection lang={lang} />
 </BaseLayout>

@@ -25,61 +25,11 @@ const t = getHomeTranslations(currentLang);
     />
   </div>
 
-  <!-- Subtle Background Grid/Gradients & Irregular Floating Logos -->
+  <!-- Subtle Background Grid/Gradients -->
   <div class="pointer-events-none select-none absolute inset-0 z-0 overflow-hidden">
     <!-- Gradients -->
     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[600px] w-[600px] rounded-full bg-gradient-to-tr from-opai-purple/15 to-transparent blur-[140px] opacity-60"></div>
     <div class="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[450px] w-[450px] rounded-full bg-gradient-to-bl from-blue-400/10 to-transparent blur-[110px] opacity-50"></div>
-
-    <!-- Irregular Floating Logos in Random Positions & Rotations -->
-    <!-- 1. Principal Top Left -->
-    <img 
-      src="/img/logo-variaciones/principal 2.png" 
-      alt="" 
-      class="absolute top-[8%] left-[2%] sm:left-[6%] w-20 sm:w-28 md:w-36 opacity-50 -rotate-18 animate-float-slow" 
-    />
-
-    <!-- 2. Naranja Top Right -->
-    <img 
-      src="/img/logo-variaciones/naranja2.png" 
-      alt="" 
-      class="absolute top-[10%] right-[3%] sm:right-[7%] w-24 sm:w-32 md:w-40 opacity-45 rotate-24 animate-float-delay-1" 
-    />
-
-    <!-- 3. Morado Middle Left -->
-    <img 
-      src="/img/logo-variaciones/morado2.png" 
-      alt="" 
-      class="absolute top-[42%] left-[1%] sm:left-[3%] w-16 sm:w-24 md:w-32 opacity-50 -rotate-35 animate-float-delay-2" 
-    />
-
-    <!-- 4. Azul Middle Right -->
-    <img 
-      src="/img/logo-variaciones/azul2.png" 
-      alt="" 
-      class="absolute top-[45%] right-[1%] sm:right-[5%] w-24 sm:w-36 md:w-44 opacity-45 rotate-15 animate-float-slow" 
-    />
-
-    <!-- 5. Principal Bottom Left -->
-    <img 
-      src="/img/logo-variaciones/principal 2.png" 
-      alt="" 
-      class="absolute bottom-[8%] left-[12%] sm:left-[18%] w-14 sm:w-20 md:w-28 opacity-45 rotate-42 animate-float-delay-1" 
-    />
-
-    <!-- 6. Naranja Bottom Right -->
-    <img 
-      src="/img/logo-variaciones/naranja2.png" 
-      alt="" 
-      class="absolute bottom-[6%] right-[14%] sm:right-[20%] w-18 sm:w-26 md:w-34 opacity-50 -rotate-22 animate-float-delay-2" 
-    />
-
-    <!-- 7. Morado Top Center -->
-    <img 
-      src="/img/logo-variaciones/morado2.png" 
-      alt="" 
-      class="absolute top-[4%] left-[36%] sm:left-[40%] w-14 sm:w-20 opacity-40 rotate-12 animate-float-slow" 
-    />
   </div>
 
   <div class="relative z-10 mx-auto max-w-[1290px] px-4 sm:px-6">
@@ -110,10 +60,10 @@ const t = getHomeTranslations(currentLang);
     </div>
 
     <!-- Visual Hero Interactive Composition -->
-    <div class="mt-14 relative mx-auto max-w-5xl xl:max-w-6xl">
+    <div class="mt-8 sm:mt-14 relative mx-auto max-w-5xl xl:max-w-6xl">
       
       <!-- Central Brain Image (with Floating Bounce Animation) -->
-      <figure data-opai-animate data-delay="0.4" data-instant class="mx-auto size-[320px] sm:size-[450px] md:size-[640px] lg:size-[709px] animate-float-brain">
+      <figure data-opai-animate data-delay="0.4" data-instant class="mx-auto size-[270px] sm:size-[420px] md:size-[640px] lg:size-[709px] animate-float-brain">
         <img
           src="/images/opai-img-300.png"
           alt="Inteligencia Artificial para potenciar negocios"
@@ -121,12 +71,12 @@ const t = getHomeTranslations(currentLang);
         />
       </figure>
 
-      <!-- Card One: Filmmaking (Floating Left Top - Static Image) -->
+      <!-- Card One: Filmmaking (Floating Left Top - Responsive Scale) -->
       <figure
         data-opai-animate
         data-delay="0.5"
         data-instant
-        class="absolute top-[6%] lg:top-[8%] xl:top-[10%] left-[-4%] lg:left-[-8%] xl:left-[-12%] 2xl:left-[-16%] hidden md:inline-block w-[230px] sm:w-[250px] lg:w-[265px] xl:w-[280px] aspect-[4/5] rounded-3xl overflow-hidden shadow-[0_12px_40px_-10px_rgba(0,0,0,0.08)] border border-stroke-2 transition-transform duration-500 hover:scale-105 z-10"
+        class="absolute top-[4%] sm:top-[6%] lg:top-[8%] xl:top-[10%] left-[0%] sm:left-[1%] md:left-[-4%] lg:left-[-8%] xl:left-[-12%] 2xl:left-[-16%] inline-block w-[95px] sm:w-[160px] md:w-[230px] lg:w-[265px] xl:w-[280px] aspect-[4/5] rounded-xl sm:rounded-2xl md:rounded-3xl overflow-hidden shadow-[0_8px_25px_-8px_rgba(0,0,0,0.12)] md:shadow-[0_12px_40px_-10px_rgba(0,0,0,0.08)] border border-stroke-2 transition-transform duration-500 hover:scale-105 z-10"
       >
         <img
           src={filmmakingImg.src}
@@ -135,12 +85,12 @@ const t = getHomeTranslations(currentLang);
         />
       </figure>
 
-      <!-- Card Two: Dev Team (Floating Right Middle - Static Image) -->
+      <!-- Card Two: Dev Team (Floating Right Middle - Responsive Scale) -->
       <figure
         data-opai-animate
         data-delay="0.6"
         data-instant
-        class="absolute top-[28%] lg:top-[26%] xl:top-[28%] right-[-3%] lg:right-[-6%] xl:right-[-10%] 2xl:right-[-14%] hidden md:inline-block w-[260px] sm:w-[290px] lg:w-[310px] xl:w-[330px] aspect-[16/11] rounded-3xl overflow-hidden shadow-[0_12px_40px_-10px_rgba(0,0,0,0.08)] border border-stroke-2 transition-transform duration-500 hover:scale-105 z-10"
+        class="absolute top-[22%] sm:top-[26%] md:top-[28%] lg:top-[26%] xl:top-[28%] right-[0%] sm:right-[1%] md:right-[-3%] lg:right-[-6%] xl:right-[-10%] 2xl:right-[-14%] inline-block w-[110px] sm:w-[185px] md:w-[260px] lg:w-[310px] xl:w-[330px] aspect-[16/11] rounded-xl sm:rounded-2xl md:rounded-3xl overflow-hidden shadow-[0_8px_25px_-8px_rgba(0,0,0,0.12)] md:shadow-[0_12px_40px_-10px_rgba(0,0,0,0.08)] border border-stroke-2 transition-transform duration-500 hover:scale-105 z-10"
       >
         <img
           src={desarrolloImg.src}
@@ -149,12 +99,12 @@ const t = getHomeTranslations(currentLang);
         />
       </figure>
 
-      <!-- Card Three: Marketing (Floating Left Bottom - Static Image) -->
+      <!-- Card Three: Marketing (Floating Left Bottom - Responsive Scale) -->
       <figure
         data-opai-animate
         data-delay="0.7"
         data-instant
-        class="absolute top-[58%] lg:top-[56%] xl:top-[58%] left-[4%] lg:left-[2%] xl:left-[0%] 2xl:left-[-2%] hidden md:inline-block w-[230px] sm:w-[250px] lg:w-[265px] xl:w-[280px] aspect-[4/5] rounded-3xl overflow-hidden shadow-[0_16px_45px_-12px_rgba(0,0,0,0.12)] border border-stroke-2 transition-transform duration-500 hover:scale-105 z-20"
+        class="absolute top-[58%] sm:top-[58%] md:top-[58%] lg:top-[56%] xl:top-[58%] left-[2%] sm:left-[3%] md:left-[4%] lg:left-[2%] xl:left-[0%] 2xl:left-[-2%] inline-block w-[95px] sm:w-[160px] md:w-[230px] lg:w-[265px] xl:w-[280px] aspect-[4/5] rounded-xl sm:rounded-2xl md:rounded-3xl overflow-hidden shadow-[0_10px_30px_-10px_rgba(0,0,0,0.15)] md:shadow-[0_16px_45px_-12px_rgba(0,0,0,0.12)] border border-stroke-2 transition-transform duration-500 hover:scale-105 z-20"
       >
         <img
           src={marketingImg.src}
@@ -179,33 +129,5 @@ const t = getHomeTranslations(currentLang);
   }
   .animate-float-brain {
     animation: floatBrain 4s ease-in-out infinite;
-  }
-
-  @keyframes floatSlow {
-    0%, 100% {
-      transform: translateY(0px);
-    }
-    50% {
-      transform: translateY(-12px);
-    }
-  }
-
-  @keyframes floatSlowReverse {
-    0%, 100% {
-      transform: translateY(0px);
-    }
-    50% {
-      transform: translateY(10px);
-    }
-  }
-
-  .animate-float-slow {
-    animation: floatSlow 6s ease-in-out infinite;
-  }
-  .animate-float-delay-1 {
-    animation: floatSlowReverse 7s ease-in-out 1s infinite;
-  }
-  .animate-float-delay-2 {
-    animation: floatSlow 8s ease-in-out 2s infinite;
   }
 </style>

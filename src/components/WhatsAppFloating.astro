@@ -1,0 +1,199 @@
+---
+// src/components/WhatsAppFloating.astro
+import '@/styles/whatsapp-floating.css';
+import { 
+  getWhatsAppUrl, 
+  getWhatsAppPhone, 
+  formatWhatsAppMessage,
+  WHATSAPP_CONFIG, 
+  type WhatsAppContext 
+} from '@/utils/whatsapp';
+import { uiTranslations, type SupportedLocale } from '@/lib/i18n/ui';
+
+interface Props {
+  whatsappContext?: WhatsAppContext;
+  phone?: string;
+  customMessage?: string;
+  lang?: SupportedLocale;
+  autoShowDelayMs?: number;
+}
+
+const currentLang = (Astro.props.lang || (Astro.currentLocale as SupportedLocale) || 'es') as SupportedLocale;
+const {
+  whatsappContext = 'home',
+  phone = WHATSAPP_CONFIG.defaultPhone,
+  customMessage,
+  autoShowDelayMs = 3500
+} = Astro.props;
+
+const t = uiTranslations[currentLang].whatsappFloating;
+const cleanPhone = getWhatsAppPhone(phone);
+const langMessages = WHATSAPP_CONFIG.messages[currentLang] || WHATSAPP_CONFIG.messages.es;
+const baseMessage = customMessage || (whatsappContext in langMessages ? langMessages[whatsappContext] : langMessages.home);
+const resolvedMessage = formatWhatsAppMessage(baseMessage);
+const whatsappUrl = getWhatsAppUrl(customMessage || whatsappContext, cleanPhone, currentLang);
+---
+
+<div
+  class="whatsapp-floating-widget"
+  id="whatsappFloatingWidget"
+  data-phone={cleanPhone}
+  data-message={resolvedMessage}
+  data-url={whatsappUrl}
+  data-auto-delay={autoShowDelayMs}
+>
+  <!-- Globo de atención / CTA Tooltip estilo Joinchat -->
+  <div 
+    class="whatsapp-tooltip-balloon" 
+    id="whatsappTooltipBalloon" 
+    role="dialog" 
+    aria-label={t.tooltipTitle}
+    aria-hidden="true"
+  >
+    <div class="whatsapp-tooltip-header">
+      <span class="whatsapp-tooltip-badge">
+        <span class="whatsapp-tooltip-badge-dot" aria-hidden="true"></span>
+        {t.onlineStatus}
+      </span>
+      <button 
+        class="whatsapp-tooltip-close-btn" 
+        id="whatsappTooltipClose" 
+        type="button" 
+        aria-label={t.closeTooltip}
+        title={t.closeTooltip}
+      >
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+    <div class="whatsapp-tooltip-title">{t.tooltipTitle}</div>
+    <p class="whatsapp-tooltip-text">{t.tooltipSubtitle}</p>
+    <button 
+      type="button" 
+      class="whatsapp-tooltip-action-btn" 
+      id="whatsappTooltipAction"
+    >
+      <span>{t.ctaButton}</span>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Botón Flotante Disparador -->
+  <div class="whatsapp-btn-wrapper">
+    <div class="whatsapp-pulse-ring" aria-hidden="true"></div>
+    <a
+      href={whatsappUrl}
+      id="whatsappTriggerBtn"
+      class="whatsapp-trigger-btn"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={t.ariaLabel}
+      title={t.ariaLabel}
+    >
+      <svg class="whatsapp-icon-svg" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
+      </svg>
+      <span class="whatsapp-online-dot" aria-hidden="true"></span>
+    </a>
+  </div>
+</div>
+
+<script>
+  import { dispatchWhatsAppClick, dispatchWhatsAppTooltipState } from '@/utils/analytics';
+
+  function initWhatsAppFloating() {
+    const widget = document.getElementById('whatsappFloatingWidget');
+    if (!widget) return;
+
+    const triggerBtn = document.getElementById('whatsappTriggerBtn') as HTMLAnchorElement | null;
+    const balloon = document.getElementById('whatsappTooltipBalloon');
+    const closeBtn = document.getElementById('whatsappTooltipClose');
+    const actionBtn = document.getElementById('whatsappTooltipAction');
+
+    const phone = widget.dataset.phone || '573148490955';
+    const message = widget.dataset.message || '';
+    const targetUrl = widget.dataset.url || triggerBtn?.href || `https://api.whatsapp.com/send?phone=${phone}`;
+    const autoDelay = parseInt(widget.dataset.autoDelay || '3500', 10);
+
+    const STORAGE_KEY = '77_wa_balloon_dismissed';
+
+    function showBalloon(trigger = 'auto') {
+      if (!balloon || balloon.classList.contains('is-visible')) return;
+      balloon.classList.add('is-visible');
+      balloon.setAttribute('aria-hidden', 'false');
+      dispatchWhatsAppTooltipState(true, trigger);
+    }
+
+    function hideBalloon(trigger = 'close_button') {
+      if (!balloon || !balloon.classList.contains('is-visible')) return;
+      balloon.classList.remove('is-visible');
+      balloon.setAttribute('aria-hidden', 'true');
+      dispatchWhatsAppTooltipState(false, trigger);
+    }
+
+    // Auto-mostrar el globo tras delay si no ha sido descartado en la sesión
+    if (autoDelay > 0 && typeof sessionStorage !== 'undefined') {
+      const dismissed = sessionStorage.getItem(STORAGE_KEY);
+      if (!dismissed) {
+        setTimeout(() => {
+          showBalloon('auto');
+        }, autoDelay);
+      }
+    }
+
+    // Cerrar globo
+    closeBtn?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      hideBalloon('close_button');
+      if (typeof sessionStorage !== 'undefined') {
+        sessionStorage.setItem(STORAGE_KEY, 'true');
+      }
+    });
+
+    // Manejador centralizado de clic en WhatsApp con analítica Joinchat
+    function handleWhatsAppLaunch(trigger: 'button' | 'bubble', e: Event) {
+      e.preventDefault();
+
+      const canProceed = dispatchWhatsAppClick({
+        link: targetUrl,
+        phone,
+        message,
+        trigger
+      });
+
+      if (canProceed) {
+        window.open(targetUrl, '_blank', 'noopener,noreferrer');
+      }
+    }
+
+    // Clic en botón circular
+    triggerBtn?.addEventListener('click', (e) => {
+      handleWhatsAppLaunch('button', e);
+    });
+
+    // Clic en botón CTA del globo
+    actionBtn?.addEventListener('click', (e) => {
+      handleWhatsAppLaunch('bubble', e);
+    });
+
+    // Hover sobre el disparador en desktop para reabrir si estaba cerrado
+    widget.addEventListener('mouseenter', () => {
+      if (!balloon?.classList.contains('is-visible')) {
+        showBalloon('hover');
+      }
+    });
+  }
+
+  // Inicializar al cargar el DOM o en transiciones Astro
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initWhatsAppFloating);
+  } else {
+    initWhatsAppFloating();
+  }
+
+  document.addEventListener('astro:page-load', initWhatsAppFloating);
+</script>
