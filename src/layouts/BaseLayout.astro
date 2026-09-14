@@ -5,6 +5,7 @@ import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
 import MobileStickyBar from '@/components/MobileStickyBar.astro';
 import AIChatWidget from '@/components/chat/AIChatWidget.astro';
+import WhatsAppFloating from '@/components/WhatsAppFloating.astro';
 import { DEFAULT_SEO } from '@/utils/seo';
 import type { WhatsAppContext } from '@/utils/whatsapp';
 import type { SupportedLocale } from '@/lib/i18n/ui';
@@ -60,6 +61,11 @@ const enUrl = new URL(getAlternateLocaleUrl(Astro.url, 'en'), Astro.site || Astr
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter+Tight:wght@300;400;500;600;700&family=Poppins:wght@700;800;900&family=Sora:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
+
+    <!-- Google Tag Manager & Analytics DataLayer Setup -->
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+    </script>
 
     <!-- SEO Primary Meta Tags -->
     <title>{title}</title>
@@ -125,7 +131,10 @@ const enUrl = new URL(getAlternateLocaleUrl(Astro.url, 'en'), Astro.site || Astr
 
     {!hideMobileBar && <MobileStickyBar whatsappContext={whatsappContext} lang={currentLang} />}
 
-    <!-- Asesora Comercial Flotante con IA (Sofía - 77 Studio) -->
+    <!-- Botón Flotante de WhatsApp con Tracking Avanzado (Joinchat Specs) - Lado Inferior Izquierdo -->
+    <WhatsAppFloating whatsappContext={whatsappContext} lang={currentLang} />
+
+    <!-- Asesora Comercial Flotante con IA (Sofía - 77 Studio) - Lado Inferior Derecho -->
     <AIChatWidget whatsappContext={whatsappContext} lang={currentLang} />
 
     <!-- 77 Studio Client-Side Animation Engine -->

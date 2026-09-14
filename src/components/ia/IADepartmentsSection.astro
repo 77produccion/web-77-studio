@@ -1,0 +1,133 @@
+---
+// src/components/ia/IADepartmentsSection.astro
+import {
+  FileText,
+  Sliders,
+  Target,
+  TrendingUp,
+  Headphones,
+  CreditCard,
+  Briefcase
+} from 'lucide-astro';
+import { getIaTranslations } from '@/lib/i18n/pages/ia-automatizacion';
+import type { SupportedLocale } from '@/lib/i18n/ui';
+
+interface Props {
+  lang?: SupportedLocale;
+}
+
+const currentLang = (Astro.props.lang || (Astro.currentLocale as SupportedLocale) || 'es') as SupportedLocale;
+const t = getIaTranslations(currentLang);
+const isEn = currentLang === 'en';
+
+const icons = [
+  FileText,
+  Sliders,
+  Target,
+  TrendingUp,
+  Headphones,
+  CreditCard,
+  Briefcase
+];
+
+const firstSix = t.departments.areas.slice(0, 6);
+const seventhCard = t.departments.areas[6];
+---
+
+<section class="py-20 sm:py-28 bg-white relative overflow-hidden">
+  <div class="mx-auto max-w-[1290px] px-4 sm:px-6">
+    
+    <!-- Section Header (Centered) -->
+    <div class="text-center max-w-4xl mx-auto mb-14 sm:mb-16">
+      <h2 data-text-reveal class="font-sora text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-background-13 leading-tight mb-4">
+        {t.departments.title}
+      </h2>
+
+      <p data-opai-animate data-delay="0.15" class="font-inter-tight text-base sm:text-lg text-background-13/70 max-w-2xl mx-auto leading-relaxed">
+        {t.departments.note}
+      </p>
+    </div>
+
+    <!-- First 6 Cards Grid (3 Columns x 2 Rows) -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+      {firstSix.map((area, idx) => {
+        const Icon = icons[idx];
+        return (
+          <a
+            href="#contacto"
+            data-opai-animate
+            data-delay={(0.06 * (idx + 1)).toFixed(2)}
+            class="group relative block rounded-3xl border border-stroke-2/70 bg-slate-50/80 p-6 sm:p-7 overflow-hidden transition-all duration-500 ease-in-out hover:border-black/20 hover:shadow-2xl hover:-translate-y-1"
+          >
+            <!-- Hover Background Image (negativo 1 p-100.jpg) -->
+            <div class="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out pointer-events-none">
+              <img 
+                src="/img/degrades/negativo 1 p-100.jpg" 
+                alt="" 
+                class="w-full h-full object-cover object-center scale-105 group-hover:scale-100 transition-transform duration-500 ease-in-out"
+              />
+              <div class="absolute inset-0 bg-slate-950/65 mix-blend-multiply"></div>
+            </div>
+
+            <!-- Content -->
+            <div class="relative z-10 flex flex-col justify-between h-full">
+              <!-- Top Row: Icon + Title aligned side-by-side -->
+              <div class="flex items-center gap-4 mb-3.5">
+                <div class="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-white text-background-13 shadow-xs border border-black/5 group-hover:bg-white/15 group-hover:border-white/20 group-hover:text-white transition-all duration-500 ease-in-out">
+                  <Icon class="size-6 text-background-13 group-hover:text-white transition-colors duration-500 ease-in-out" />
+                </div>
+                <h3 class="font-sora text-xl font-bold text-background-13 group-hover:text-white transition-colors duration-500 ease-in-out">
+                  {area.name}
+                </h3>
+              </div>
+
+              <!-- Description -->
+              <p class="font-inter-tight text-sm text-background-13/75 group-hover:text-white/90 transition-colors duration-500 ease-in-out leading-relaxed">
+                {area.desc}
+              </p>
+            </div>
+          </a>
+        );
+      })}
+    </div>
+
+    <!-- 7th Card (Gerencia) Centered Below the 3x2 Grid -->
+    <div class="mt-6 flex justify-center max-w-6xl mx-auto">
+      {seventhCard && (
+        <a
+          href="#contacto"
+          data-opai-animate
+          data-delay="0.45"
+          class="group relative block w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] rounded-3xl border border-stroke-2/70 bg-slate-50/80 p-6 sm:p-7 overflow-hidden transition-all duration-500 ease-in-out hover:border-black/20 hover:shadow-2xl hover:-translate-y-1"
+        >
+          <!-- Hover Background Image (negativo 1 p-100.jpg) -->
+          <div class="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out pointer-events-none">
+            <img 
+              src="/img/degrades/negativo 1 p-100.jpg" 
+              alt="" 
+              class="w-full h-full object-cover object-center scale-105 group-hover:scale-100 transition-transform duration-500 ease-in-out"
+            />
+            <div class="absolute inset-0 bg-slate-950/65 mix-blend-multiply"></div>
+          </div>
+
+          <!-- Content -->
+          <div class="relative z-10 flex flex-col justify-between h-full">
+            <div class="flex items-center gap-4 mb-3.5">
+              <div class="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-white text-background-13 shadow-xs border border-black/5 group-hover:bg-white/15 group-hover:border-white/20 group-hover:text-white transition-all duration-500 ease-in-out">
+                <Briefcase class="size-6 text-background-13 group-hover:text-white transition-colors duration-500 ease-in-out" />
+              </div>
+              <h3 class="font-sora text-xl font-bold text-background-13 group-hover:text-white transition-colors duration-500 ease-in-out">
+                {seventhCard.name}
+              </h3>
+            </div>
+
+            <p class="font-inter-tight text-sm text-background-13/75 group-hover:text-white/90 transition-colors duration-500 ease-in-out leading-relaxed">
+              {seventhCard.desc}
+            </p>
+          </div>
+        </a>
+      )}
+    </div>
+
+  </div>
+</section>

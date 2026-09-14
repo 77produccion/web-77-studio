@@ -1,0 +1,304 @@
+---
+// src/components/ia/IAProblemSection.astro
+import { CheckCircle2, ArrowRight } from 'lucide-astro';
+import { getIaTranslations } from '@/lib/i18n/pages/ia-automatizacion';
+import type { SupportedLocale } from '@/lib/i18n/ui';
+
+interface Props {
+  lang?: SupportedLocale;
+}
+
+const currentLang = (Astro.props.lang || (Astro.currentLocale as SupportedLocale) || 'es') as SupportedLocale;
+const t = getIaTranslations(currentLang);
+const isEn = currentLang === 'en';
+
+// Triplicate items array for seamless infinite spiral loop
+const tripleItems = [...t.problem.items, ...t.problem.items, ...t.problem.items];
+---
+
+<section id="el-problema-section" class="pt-6 pb-16 sm:pt-10 sm:pb-20 bg-white relative overflow-hidden">
+  <div class="mx-auto max-w-[1290px] px-4 sm:px-6">
+    
+    <!-- Top 2-Column Grid: Title Left, Compact Spiral Carousel Right -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center mb-16 max-w-5xl mx-auto">
+      
+      <!-- Left Column: Title ONLY -->
+      <div class="lg:col-span-6">
+        <h2 data-text-reveal class="font-sora text-3xl sm:text-4xl lg:text-[42px] font-bold tracking-tight text-background-13 leading-[1.15]">
+          {t.problem.title}
+        </h2>
+      </div>
+
+      <!-- Right Column: Compact Spiral Carousel without Box Border + Fade Masks -->
+      <div class="lg:col-span-6 flex justify-center lg:justify-end">
+        <div 
+          id="problem-carousel-viewport"
+          class="relative w-full max-w-[460px] h-[360px] sm:h-[390px] overflow-hidden select-none cursor-grab active:cursor-grabbing"
+        >
+          <!-- Top Fade Mask -->
+          <div class="pointer-events-none absolute top-0 inset-x-0 h-24 bg-gradient-to-b from-white via-white/90 to-transparent z-20"></div>
+          
+          <!-- Bottom Fade Mask -->
+          <div class="pointer-events-none absolute bottom-0 inset-x-0 h-24 bg-gradient-to-t from-white via-white/90 to-transparent z-20"></div>
+
+          <!-- Vertical Slide Track -->
+          <div 
+            id="problem-carousel-track" 
+            class="relative space-y-3.5 my-auto py-2"
+          >
+            {tripleItems.map((item, index) => {
+              const realNum = (index % t.problem.items.length) + 1;
+              return (
+                <div 
+                  class="problem-slide-card transition-all duration-500 rounded-2xl p-4 sm:p-5 flex items-center gap-4 bg-white border border-black/10 shadow-xs"
+                  data-virtual-index={index}
+                  data-real-index={realNum - 1}
+                >
+                  <div class="problem-card-badge flex size-9 shrink-0 items-center justify-center rounded-xl font-ibm-plex-mono text-xs font-bold transition-all duration-500">
+                    0{realNum}
+                  </div>
+                  <p class="problem-card-text font-inter-tight text-sm sm:text-base leading-snug transition-all duration-500">
+                    {item}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom Full-Width Conclusion Box -->
+    <div 
+      data-opai-animate 
+      data-delay="0.3" 
+      class="max-w-4xl mx-auto relative overflow-hidden rounded-3xl bg-gradient-to-r from-background-13 via-[#181126] to-background-13 text-white p-7 sm:p-9 border border-opai-purple/30 shadow-[0_20px_50px_rgba(0,0,0,0.15)] flex flex-col sm:flex-row items-center justify-between gap-6"
+    >
+      <div class="flex items-start gap-4">
+        <div class="flex size-11 shrink-0 items-center justify-center rounded-2xl bg-opai-purple text-white shadow-xs">
+          <CheckCircle2 class="size-6" />
+        </div>
+        <div>
+          <span class="font-ibm-plex-mono text-xs uppercase tracking-wider text-opai-purple block mb-1">
+            {isEn ? "77 Studio Approach" : "Enfoque 77 Studio"}
+          </span>
+          <p class="font-sora text-lg sm:text-xl font-bold leading-snug">
+            {t.problem.conclusion}
+          </p>
+        </div>
+      </div>
+
+      <a 
+        href="#contacto" 
+        class="shrink-0 inline-flex items-center gap-2 bg-white text-background-13 hover:bg-opai-purple hover:text-white font-ibm-plex-mono text-xs uppercase tracking-wider font-semibold py-3.5 px-6 rounded-xl transition-all shadow-sm active:scale-95"
+      >
+        <span>{isEn ? "Request Assessment" : "Solicitar Diagnóstico"}</span>
+        <ArrowRight class="size-3.5" />
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  /* Transition on track for smooth spiral movement */
+  #problem-carousel-track {
+    transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Active focused center card vs blurred inactive cards */
+  .problem-slide-card.is-active {
+    opacity: 1 !important;
+    filter: blur(0px) !important;
+    transform: scale(1) !important;
+    border-color: rgba(239, 68, 68, 0.35) !important;
+    box-shadow: 0 10px 25px -5px rgba(239, 68, 68, 0.14), 0 8px 10px -6px rgba(0, 0, 0, 0.05) !important;
+  }
+
+  .problem-slide-card.is-active .problem-card-badge {
+    background-color: #ef4444 !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.25) !important;
+  }
+
+  .problem-slide-card.is-active .problem-card-text {
+    color: #0f172a !important;
+    font-weight: 700 !important;
+  }
+
+  .problem-slide-card:not(.is-active) {
+    opacity: 0.32 !important;
+    filter: blur(1.5px) !important;
+    transform: scale(0.95) !important;
+    border-color: rgba(0, 0, 0, 0.05) !important;
+    box-shadow: none !important;
+  }
+
+  .problem-slide-card:not(.is-active) .problem-card-badge {
+    background-color: rgba(239, 68, 68, 0.1) !important;
+    color: #ef4444 !important;
+  }
+
+  .problem-slide-card:not(.is-active) .problem-card-text {
+    color: rgba(15, 23, 42, 0.7) !important;
+    font-weight: 500 !important;
+  }
+</style>
+
+<script>
+  function initProblemInfiniteSpiralCarousel() {
+    const viewport = document.getElementById('problem-carousel-viewport');
+    const track = document.getElementById('problem-carousel-track');
+    if (!viewport || !track) return;
+
+    const cards = track.querySelectorAll<HTMLElement>('.problem-slide-card');
+    if (cards.length === 0) return;
+
+    const itemsPerSet = 5; // original 5 cards
+    let virtualIndex = itemsPerSet; // Start at middle set (index 5)
+    let autoInterval: any = null;
+    let isUserInteracting = false;
+    let resumeTimeout: any = null;
+    let isResetting = false;
+
+    function updateCarouselState(animate = true) {
+      if (animate) {
+        track.style.transition = 'transform 0.65s cubic-bezier(0.16, 1, 0.3, 1)';
+      } else {
+        track.style.transition = 'none';
+      }
+
+      const activeCard = cards[virtualIndex];
+      if (!activeCard) return;
+
+      // Highlight current virtual card in center, blur others
+      cards.forEach((card, idx) => {
+        if (idx === virtualIndex) {
+          card.classList.add('is-active');
+        } else {
+          card.classList.remove('is-active');
+        }
+      });
+
+      // Translate track so current virtual card sits in exact center of viewport
+      const viewportHeight = viewport.clientHeight;
+      const activeOffsetTop = activeCard.offsetTop;
+      const activeHeight = activeCard.offsetHeight;
+
+      const targetTranslate = (viewportHeight / 2) - (activeOffsetTop + activeHeight / 2);
+      track.style.transform = `translateY(${targetTranslate}px)`;
+    }
+
+    function checkSeamlessReset() {
+      // If virtualIndex reaches end of Set 2 (>= 10), reset back to Set 1 (index - 5) seamlessly
+      if (virtualIndex >= itemsPerSet * 2) {
+        isResetting = true;
+        setTimeout(() => {
+          virtualIndex -= itemsPerSet;
+          updateCarouselState(false); // jump instantly without animation
+          isResetting = false;
+        }, 660);
+      } else if (virtualIndex < itemsPerSet) {
+        isResetting = true;
+        setTimeout(() => {
+          virtualIndex += itemsPerSet;
+          updateCarouselState(false); // jump instantly without animation
+          isResetting = false;
+        }, 660);
+      }
+    }
+
+    function nextSlide() {
+      if (isResetting) return;
+      virtualIndex++;
+      updateCarouselState(true);
+      checkSeamlessReset();
+    }
+
+    function prevSlide() {
+      if (isResetting) return;
+      virtualIndex--;
+      updateCarouselState(true);
+      checkSeamlessReset();
+    }
+
+    function startAutoLoop() {
+      stopAutoLoop();
+      autoInterval = setInterval(() => {
+        if (!isUserInteracting && !isResetting) {
+          nextSlide();
+        }
+      }, 2000);
+    }
+
+    function stopAutoLoop() {
+      if (autoInterval) {
+        clearInterval(autoInterval);
+        autoInterval = null;
+      }
+    }
+
+    function handleUserInteraction() {
+      isUserInteracting = true;
+      if (resumeTimeout) clearTimeout(resumeTimeout);
+
+      resumeTimeout = setTimeout(() => {
+        isUserInteracting = false;
+      }, 3500);
+    }
+
+    // Event listeners
+    viewport.addEventListener('mouseenter', () => {
+      isUserInteracting = true;
+    });
+
+    viewport.addEventListener('mouseleave', () => {
+      if (resumeTimeout) clearTimeout(resumeTimeout);
+      resumeTimeout = setTimeout(() => {
+        isUserInteracting = false;
+      }, 1500);
+    });
+
+    viewport.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      handleUserInteraction();
+      if (e.deltaY > 0) {
+        nextSlide();
+      } else {
+        prevSlide();
+      }
+    }, { passive: false });
+
+    let startY = 0;
+    viewport.addEventListener('touchstart', (e) => {
+      handleUserInteraction();
+      startY = e.touches[0].clientY;
+    }, { passive: true });
+
+    viewport.addEventListener('touchend', (e) => {
+      const endY = e.changedTouches[0].clientY;
+      const diffY = startY - endY;
+      if (Math.abs(diffY) > 30) {
+        if (diffY > 0) {
+          nextSlide();
+        } else {
+          prevSlide();
+        }
+      }
+    }, { passive: true });
+
+    // Initialize state
+    setTimeout(() => {
+      updateCarouselState(true);
+      startAutoLoop();
+    }, 150);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initProblemInfiniteSpiralCarousel);
+  } else {
+    initProblemInfiniteSpiralCarousel();
+  }
+  document.addEventListener('astro:page-load', initProblemInfiniteSpiralCarousel);
+</script>
