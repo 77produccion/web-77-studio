@@ -18,6 +18,7 @@ interface Props {
   ogImage?: string;
   whatsappContext?: WhatsAppContext;
   lang?: SupportedLocale;
+  heroImage?: string;
   hideNav?: boolean;
   hideFooter?: boolean;
   hideMobileBar?: boolean;
@@ -34,6 +35,7 @@ const {
   hideNav = false,
   hideFooter = false,
   hideMobileBar = false,
+  heroImage,
 } = Astro.props;
 
 const currentPath = Astro.url.pathname;
@@ -54,9 +56,16 @@ const enUrl = new URL(getAlternateLocaleUrl(Astro.url, 'en'), Astro.site || Astr
     <link rel="alternate" hreflang="en" href={enUrl} />
     <link rel="alternate" hreflang="x-default" href={esUrl} />
 
-    <!-- Google Fonts: Sora, Inter Tight, IBM Plex Mono, Poppins (Non-blocking async load) -->
+    <!-- DNS Prefetch & Preconnect for External Resources -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- LCP Hero Image Preload for Instant First Paint -->
+    <link rel="preload" as="image" href={heroImage || "/images/opai-img-300.webp"} type="image/webp" fetchpriority="high" />
+
+    <!-- Google Fonts: Sora, Inter Tight, IBM Plex Mono, Poppins (Non-blocking async load) -->
     <link
       rel="preload"
       as="style"
