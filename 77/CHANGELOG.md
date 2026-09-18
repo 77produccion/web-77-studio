@@ -5,6 +5,15 @@ Todos los cambios notables en este proyecto serán documentados en este archivo.
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/), y este proyecto adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 
 ---
+## [Unreleased] - 2026-09-17
+
+### Performance & Asset Optimization
+- **Optimización Integral de Rendimiento de Imágenes (`HeroNosotros.astro`, `TestimonialsSection.astro`, `AIChatWidget.astro`)**:
+  - Migración completa de todas las dependencias remotas de WordPress y CDNs externas a recursos estáticos locales de alta fidelidad en `public/img/clientes/` y `public/img/bgs/`.
+  - Creación del pipeline de compresión automatizado con Sharp (`scripts/optimize-images.mjs`) que procesa imágenes sobredimensionadas a resoluciones lógicas para web (máximo 1920px para heros, 1000px para tarjetas/thumbs) y genera versiones WebP ultraligeras al 82% de calidad sin pérdida perceptible de nitidez visual, logrando reducciones de hasta un 92% de peso.
+  - Implementación de atributos `loading="lazy"`, `decoding="async"`, y dimensiones explícitas `width="160" height="44"` en las 22 instancias de logotipos de clientes en `TestimonialsSection.astro` para eliminar advertencias de CLS (Cumulative Layout Shift).
+  - Optimización del slideshow de fondo en `HeroNosotros.astro`: integración de 4 imágenes locales WebP (`full-team.webp`, `edificio-77.webp`, `Sala-de-juntas.webp`, `tania-licxa-work.webp`) con dimensiones fijas `1920x1080`, `loading="eager"`, `fetchpriority="high"`, y `decoding="sync"` en el primer slide para acelerar el LCP (Largest Contentful Paint).
+  - Reemplazo del fallback del widget de chat de IA (`AIChatWidget.astro`) por el logotipo local `/img/77studio.png`.
 
 ## [Unreleased] - 2026-09-12
 

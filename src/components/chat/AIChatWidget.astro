@@ -23,7 +23,7 @@ const fallbackWhatsAppUrl = getWhatsAppUrl(whatsappContext, undefined, currentLa
 <div class="ai-chat-widget" id="aiChatWidget" data-api-endpoint={apiEndpoint} data-whatsapp-url={fallbackWhatsAppUrl} data-context={whatsappContext} data-lang={currentLang}>
   <!-- Botón Flotante Disparador -->
   <button class="chat-trigger-btn" id="chatTriggerBtn" aria-label={t.triggerTitle} title={t.triggerTitle}>
-    <img src="/img/77studio.png" alt="77 Studio" class="trigger-logo-img" onerror="this.src='https://77studio.co/wp-content/uploads/2026/08/77studio-scaled.png'" />
+    <img src="/img/77studio.webp" alt="77 Studio" class="trigger-logo-img" width="36" height="36" loading="lazy" decoding="async" />
     <span class="trigger-online-dot" id="chatTriggerOnlineDot" title={t.connectedStatus} data-tooltip={t.connectedStatus}></span>
     <span class="trigger-badge-count" id="triggerBadgeCount">1</span>
   </button>

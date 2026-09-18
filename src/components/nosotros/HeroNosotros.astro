@@ -13,15 +13,16 @@ const currentLang = (Astro.props.lang || (Astro.currentLocale as SupportedLocale
 const t = getNosotrosTranslations(currentLang);
 
 const heroImages = [
-  "https://77studio.co/wp-content/uploads/2024/11/77-scaled.jpg",
-  "https://77studio.co/wp-content/uploads/2025/09/IMG_1098-scaled.jpeg",
-  "https://77studio.co/wp-content/uploads/2025/09/IMG_1101-scaled.jpeg"
+  "/img/bgs/full-team.webp",
+  "/img/bgs/edificio-77.webp",
+  "/img/bgs/Sala-de-juntas.webp",
+  "/img/bgs/tania-licxa-work.webp"
 ];
 ---
 
 <section class="relative pt-36 pb-20 sm:pt-44 sm:pb-28 overflow-hidden bg-slate-900" id="hero-nosotros-section">
   
-  <!-- DYNAMIC BACKGROUND SLIDESHOW (3 Authentic Studio Photos with <img> tags) -->
+  <!-- DYNAMIC BACKGROUND SLIDESHOW (4 Authentic Studio Photos with <img> tags) -->
   <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none" id="nosotros-bg-slideshow">
     {heroImages.map((imgUrl, index) => (
       <img 
@@ -29,7 +30,11 @@ const heroImages = [
         alt={`77 Studio Ambiente ${index + 1}`}
         class={`nosotros-hero-slide absolute inset-0 w-full h-full object-cover object-center transition-all duration-1000 ease-out transform ${index === 0 ? 'opacity-100 scale-100' : 'opacity-0 scale-105'}`}
         data-slide-index={index}
+        width="1920"
+        height="1080"
         loading={index === 0 ? "eager" : "lazy"}
+        decoding={index === 0 ? "sync" : "async"}
+        fetchpriority={index === 0 ? "high" : "low"}
       />
     ))}
   </div>
