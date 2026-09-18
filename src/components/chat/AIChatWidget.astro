@@ -34,13 +34,13 @@ const fallbackWhatsAppUrl = getWhatsAppUrl(whatsappContext, undefined, currentLa
     <div class="chat-header">
       <div class="chat-header-info">
         <div class="chat-avatar-box">
-          <img src="/img/sofIA/profile-sofia-pic.webp" alt={t.botName} class="chat-avatar-img" onerror="this.src='/img/77studio.webp'" />
+          <img src="/img/sofIA/profile-sofia-pic.webp" alt={t.botName} class="chat-avatar-img" onerror="this.src='/img/77studio.webp'" / loading="lazy" decoding="async" />
           <span class="avatar-status-dot" id="chatAvatarStatusDot" title={t.connectedStatus} data-tooltip={t.connectedStatus}></span>
         </div>
         <div class="chat-header-text">
           <div class="chat-bot-name">
             <span>{t.botName}</span>
-            <img src="/img/sofIA/verified.webp" alt="Verificada" class="bot-verified-img" title={t.verifiedBadge} />
+            <img src="/img/sofIA/verified.webp" alt="Verificada" class="bot-verified-img" title={t.verifiedBadge} / loading="lazy" decoding="async" />
           </div>
         </div>
       </div>

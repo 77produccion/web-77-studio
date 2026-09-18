@@ -54,13 +54,26 @@ const enUrl = new URL(getAlternateLocaleUrl(Astro.url, 'en'), Astro.site || Astr
     <link rel="alternate" hreflang="en" href={enUrl} />
     <link rel="alternate" hreflang="x-default" href={esUrl} />
 
-    <!-- Google Fonts: Sora, Inter Tight, IBM Plex Mono, Poppins -->
+    <!-- Google Fonts: Sora, Inter Tight, IBM Plex Mono, Poppins (Non-blocking async load) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
+      rel="preload"
+      as="style"
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter+Tight:wght@300;400;500;600;700&family=Poppins:wght@700;800;900&family=Sora:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter+Tight:wght@300;400;500;600;700&family=Poppins:wght@700;800;900&family=Sora:wght@400;500;600;700;800&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter+Tight:wght@300;400;500;600;700&family=Poppins:wght@700;800;900&family=Sora:wght@400;500;600;700;800&display=swap"
+      />
+    </noscript>
 
     <!-- Google Tag Manager & Analytics DataLayer Setup -->
     <script is:inline>

@@ -104,11 +104,14 @@ const subtitle = isEn
           class="group relative overflow-hidden rounded-[24px] border border-stroke-2/60 border-b-2 border-b-transparent bg-white p-7 sm:p-8 transition-all duration-500 hover:shadow-xl hover:border-black/20 hover:border-b-opai-purple flex flex-col justify-start"
         >
           
-          <!-- Background Hover Image with 75% opacity -->
-          <div 
-            class="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-0 group-hover:opacity-75 transition-all duration-500 scale-100 group-hover:scale-105 pointer-events-none"
-            style={`background-image: url('${item.image}');`}
-          ></div>
+          <!-- Background Hover Image with 75% opacity (Native Lazy Loading) -->
+          <img
+            src={item.image}
+            alt=""
+            class="absolute inset-0 z-0 w-full h-full object-cover object-center opacity-0 group-hover:opacity-75 transition-all duration-500 scale-100 group-hover:scale-105 pointer-events-none"
+            loading="lazy"
+            decoding="async"
+          />
 
           <!-- Legibility Gradient Overlay on Hover -->
           <div class="absolute inset-0 z-0 bg-gradient-to-t from-white/95 via-white/80 to-white/70 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none backdrop-blur-[0.5px]"></div>

@@ -3,9 +3,6 @@
 import DualCTA from '@/components/DualCTA.astro';
 import { getHomeTranslations } from '@/lib/i18n/pages/home';
 import type { SupportedLocale } from '@/lib/i18n/ui';
-import desarrolloImg from '../../../img/hero/desarrollo.png';
-import filmmakingImg from '../../../img/hero/filmmaking-og.jpg';
-import marketingImg from '../../../img/hero/marketing-og.jpeg';
 
 interface Props {
   lang?: SupportedLocale;
@@ -22,6 +19,8 @@ const t = getHomeTranslations(currentLang);
       src="/img/logo-variaciones/negro2.webp"
       alt=""
       class="w-[750px] sm:w-[950px] md:w-[1150px] lg:w-[1350px] max-w-none opacity-[0.08] object-contain transform -translate-y-4"
+      loading="lazy"
+      decoding="async"
     />
   </div>
 
@@ -62,12 +61,15 @@ const t = getHomeTranslations(currentLang);
     <!-- Visual Hero Interactive Composition -->
     <div class="mt-8 sm:mt-14 relative mx-auto max-w-5xl xl:max-w-6xl">
       
-      <!-- Central Brain Image (with Floating Bounce Animation) -->
+      <!-- Central Brain Image (with Floating Bounce Animation - LCP Priority) -->
       <figure data-opai-animate data-delay="0.4" data-instant class="mx-auto size-[270px] sm:size-[420px] md:size-[640px] lg:size-[709px] animate-float-brain">
         <img
           src="/images/opai-img-300.webp"
           alt="Inteligencia Artificial para potenciar negocios"
           class="size-full object-cover"
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
         />
       </figure>
 
@@ -79,9 +81,11 @@ const t = getHomeTranslations(currentLang);
         class="absolute top-[4%] sm:top-[6%] lg:top-[8%] xl:top-[10%] left-[0%] sm:left-[1%] md:left-[-4%] lg:left-[-8%] xl:left-[-12%] 2xl:left-[-16%] inline-block w-[95px] sm:w-[160px] md:w-[230px] lg:w-[265px] xl:w-[280px] aspect-[4/5] rounded-xl sm:rounded-2xl md:rounded-3xl overflow-hidden shadow-[0_8px_25px_-8px_rgba(0,0,0,0.12)] md:shadow-[0_12px_40px_-10px_rgba(0,0,0,0.08)] border border-stroke-2 transition-transform duration-500 hover:scale-105 z-10"
       >
         <img
-          src={filmmakingImg.src}
+          src="/img/hero/filmmaking.webp"
           alt="Producción audiovisual y filmmaking"
           class="size-full object-cover origin-center"
+          loading="lazy"
+          decoding="async"
         />
       </figure>
 
@@ -93,9 +97,11 @@ const t = getHomeTranslations(currentLang);
         class="absolute top-[22%] sm:top-[26%] md:top-[28%] lg:top-[26%] xl:top-[28%] right-[0%] sm:right-[1%] md:right-[-3%] lg:right-[-6%] xl:right-[-10%] 2xl:right-[-14%] inline-block w-[110px] sm:w-[185px] md:w-[260px] lg:w-[310px] xl:w-[330px] aspect-[16/11] rounded-xl sm:rounded-2xl md:rounded-3xl overflow-hidden shadow-[0_8px_25px_-8px_rgba(0,0,0,0.12)] md:shadow-[0_12px_40px_-10px_rgba(0,0,0,0.08)] border border-stroke-2 transition-transform duration-500 hover:scale-105 z-10"
       >
         <img
-          src={desarrolloImg.src}
+          src="/img/hero/desarrollo.webp"
           alt="Desarrollo e ingeniería de software"
           class="size-full object-cover scale-[1.65] origin-center"
+          loading="lazy"
+          decoding="async"
         />
       </figure>
 
@@ -107,9 +113,11 @@ const t = getHomeTranslations(currentLang);
         class="absolute top-[58%] sm:top-[58%] md:top-[58%] lg:top-[56%] xl:top-[58%] left-[2%] sm:left-[3%] md:left-[4%] lg:left-[2%] xl:left-[0%] 2xl:left-[-2%] inline-block w-[95px] sm:w-[160px] md:w-[230px] lg:w-[265px] xl:w-[280px] aspect-[4/5] rounded-xl sm:rounded-2xl md:rounded-3xl overflow-hidden shadow-[0_10px_30px_-10px_rgba(0,0,0,0.15)] md:shadow-[0_16px_45px_-12px_rgba(0,0,0,0.12)] border border-stroke-2 transition-transform duration-500 hover:scale-105 z-20"
       >
         <img
-          src={marketingImg.src}
+          src="/img/hero/marketing.webp"
           alt="Estrategia y marketing digital"
           class="size-full object-cover origin-center"
+          loading="lazy"
+          decoding="async"
         />
       </figure>
 

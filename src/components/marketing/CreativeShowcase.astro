@@ -95,7 +95,7 @@ const subtitle = isEn
               src={item.bgImage} 
               alt="" 
               class="absolute inset-0 w-full h-full object-cover object-center z-0 transition-transform duration-700 group-hover:scale-105" 
-            />
+            / loading="lazy" decoding="async" />
             
             <!-- Dark Overlay -->
             <div class="absolute inset-0 bg-black/65 z-[1]"></div>
@@ -122,7 +122,7 @@ const subtitle = isEn
                   src={item.rightImage} 
                   alt={item.title} 
                   class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-110" 
-                />
+                / loading="lazy" decoding="async" />
               </div>
 
             </div>
