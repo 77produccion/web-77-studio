@@ -8,12 +8,23 @@ El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1
 ## [Unreleased] - 2026-09-17
 
 ### Performance & Asset Optimization
-- **Optimización Integral de Rendimiento de Imágenes (`HeroNosotros.astro`, `TestimonialsSection.astro`, `AIChatWidget.astro`)**:
-  - Migración completa de todas las dependencias remotas de WordPress y CDNs externas a recursos estáticos locales de alta fidelidad en `public/img/clientes/` y `public/img/bgs/`.
-  - Creación del pipeline de compresión automatizado con Sharp (`scripts/optimize-images.mjs`) que procesa imágenes sobredimensionadas a resoluciones lógicas para web (máximo 1920px para heros, 1000px para tarjetas/thumbs) y genera versiones WebP ultraligeras al 82% de calidad sin pérdida perceptible de nitidez visual, logrando reducciones de hasta un 92% de peso.
-  - Implementación de atributos `loading="lazy"`, `decoding="async"`, y dimensiones explícitas `width="160" height="44"` en las 22 instancias de logotipos de clientes en `TestimonialsSection.astro` para eliminar advertencias de CLS (Cumulative Layout Shift).
-  - Optimización del slideshow de fondo en `HeroNosotros.astro`: integración de 4 imágenes locales WebP (`full-team.webp`, `edificio-77.webp`, `Sala-de-juntas.webp`, `tania-licxa-work.webp`) con dimensiones fijas `1920x1080`, `loading="eager"`, `fetchpriority="high"`, y `decoding="sync"` en el primer slide para acelerar el LCP (Largest Contentful Paint).
-  - Reemplazo del fallback del widget de chat de IA (`AIChatWidget.astro`) por el logotipo local `/img/77studio.png`.
+- **Optimización Recursiva Global de Imágenes en `public/img`**:
+  - Extensión del pipeline automatizado con Sharp (`scripts/optimize-images.mjs`) para escanear recursivamente todas las 12 subcarpetas de `public/img` (`bgs`, `cards-nosotros`, `clientes`, `degrades`, `equipo`, `footer`, `header`, `logo-variaciones`, `logos-platforms`, `section-2-web`, `sofIA`, `svg`).
+  - Procesamiento y compresión in-place de 127 imágenes con algoritmos MozJPEG y PNG de alta compresión, reduciendo los archivos originales entre un 50% y un 95% sin alterar rutas existentes en el código HTML/CSS/Astro.
+  - Generación complementaria de versiones `.webp` modernas al 82% de calidad con esfuerzo de compresión alto (`effort: 5`) para cada activo.
+  - Reducción drástica en carpetas críticas:
+    - `public/img/degrades/`: De **10.51 MB** a **1.75 MB** (**-83.3%**).
+    - `public/img/header/`: De **3.14 MB** a **1.66 MB** (**-47.1%**).
+    - `public/img/cards-nosotros/`: De **2.01 MB** a **1.24 MB** (**-38.3%**).
+    - `public/img/logos-platforms/`: De **1.18 MB** a **0.44 MB** (**-62.7%**).
+    - `public/img/section-2-web/`: De **0.95 MB** a **0.39 MB** (**-58.9%**).
+  - Optimización en componentes clave (`HeroNosotros.astro`, `TestimonialsSection.astro`, `AIChatWidget.astro`):
+    - 4 imágenes del Hero de Nosotros en WebP con dimensiones explícitas `1920x1080` y aceleración LCP (`fetchpriority="high"`, `decoding="sync"`).
+    - 22 tarjetas de testimonios migradas a activos locales con dimensiones explícitas `width="160" height="44"`, `loading="lazy"` y `decoding="async"` para eliminación total de CLS.
+- **Migración Automatizada de Referencias a `.webp` en Código Fuente (`scripts/migrate-to-webp.mjs`)**:
+  - Reemplazo y actualización de **119 rutas de imágenes a formato `.webp`** a lo largo de **32 archivos de componentes** en `src/components/`, `src/layouts/` y utilidades.
+  - Ahora todas las vistas de la plataforma consumen directamente las versiones WebP ultraligeras, aprovechando al 100% la compresión moderna tanto en elementos `<img>` como en estilos CSS `background-image`.
+  - Compilación de producción con Astro 5 validada con 0 errores en 16 rutas estáticas.
 
 ## [Unreleased] - 2026-09-12
 
