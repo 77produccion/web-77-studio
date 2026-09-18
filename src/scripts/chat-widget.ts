@@ -573,7 +573,12 @@ export function init77ChatWidget() {
   };
 
   loadSavedState();
-  checkLiveConnection();
+  // Defer live backend healthcheck until page load settles or user interacts
+  if ('requestIdleCallback' in window) {
+    (window as any).requestIdleCallback(() => checkLiveConnection(), { timeout: 6000 });
+  } else {
+    setTimeout(checkLiveConnection, 5000);
+  }
 }
 
 // Inicializar en carga y en cambios de página

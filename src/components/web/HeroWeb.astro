@@ -14,9 +14,16 @@ const t = getWebTranslations(currentLang);
 ---
 
 <section 
-  class="relative pt-36 pb-16 sm:pt-44 sm:pb-24 overflow-hidden bg-cover bg-center bg-no-repeat"
-  style="background-image: url('/img/web-hero.webp');"
+  class="relative pt-36 pb-16 sm:pt-44 sm:pb-24 overflow-hidden"
 >
+  <img 
+    src="/img/web-hero.webp" 
+    alt="" 
+    class="absolute inset-0 w-full h-full object-cover object-center pointer-events-none -z-10" 
+    loading="eager" 
+    fetchpriority="high" 
+    decoding="async" 
+  />
   <!-- Balanced White Tint / Opacity Overlay -->
   <div class="absolute inset-0 bg-white/65 backdrop-blur-[1px]"></div>
 

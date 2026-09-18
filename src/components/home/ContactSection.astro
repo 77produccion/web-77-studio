@@ -16,9 +16,17 @@ const isEn = currentLang === 'en';
 
 <section 
   id="contacto" 
-  class="py-20 sm:py-28 relative overflow-hidden border-t border-black/10 bg-cover bg-center bg-no-repeat"
-  style="background-image: url('/img/backgorund-contacto.webp');"
+  class="py-20 sm:py-28 relative overflow-hidden border-t border-black/10"
 >
+  <!-- Background Image with Native Lazy Loading -->
+  <img 
+    src="/img/backgorund-contacto.webp" 
+    alt="" 
+    class="absolute inset-0 w-full h-full object-cover object-center pointer-events-none -z-10" 
+    loading="lazy" 
+    decoding="async" 
+  />
+
   <!-- Dark Fade & Blur Overlay -->
   <div class="absolute inset-0 bg-black/75 backdrop-blur-[2px]"></div>
 

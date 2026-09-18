@@ -178,7 +178,7 @@ const cardDegrades = [
           src="/img/logo-variaciones/morado1.webp" 
           alt="" 
           class="w-[320px] sm:w-[540px] opacity-[0.07] select-none"
-        />
+        / loading="lazy" decoding="async" />
       </div>
 
       <!-- Dynamic Full-Width Solid Watermark Text (Solid Fill, No Outline, Responsive, No Box Clipping) -->
@@ -229,7 +229,8 @@ const cardDegrades = [
                   data-scale={scale}
                   class="spotlight-character-img absolute bottom-0 h-[370px] sm:h-[460px] lg:h-[520px] w-auto max-w-[90vw] object-contain object-bottom drop-shadow-[0_15px_30px_rgba(0,0,0,0.18)] transition-all duration-350 ease-out opacity-0 pointer-events-none will-change-[opacity,transform]"
                   style={`mask-image: linear-gradient(to bottom, black 75%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, black 75%, transparent 100%); transform: scale(${scale * 0.95}) translateY(10px);`}
-                  loading="eager"
+                  loading="lazy"
+                  decoding="async"
                 />
               );
             })}
