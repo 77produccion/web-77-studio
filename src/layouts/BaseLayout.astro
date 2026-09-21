@@ -39,16 +39,11 @@ const {
 } = Astro.props;
 
 const currentPath = Astro.url.pathname;
-<<<<<<< HEAD
 const siteBaseUrl = Astro.site ? Astro.site.origin : 'https://77studio.co';
 const resolvedOgImage = ogImage.startsWith('http') ? ogImage : new URL(ogImage, siteBaseUrl).href;
 const esUrl = new URL(getAlternateLocaleUrl(Astro.url, 'es'), siteBaseUrl).href;
 const enUrl = new URL(getAlternateLocaleUrl(Astro.url, 'en'), siteBaseUrl).href;
-=======
-const esUrl = new URL(getAlternateLocaleUrl(Astro.url, 'es'), Astro.site || Astro.url.origin).href;
-const enUrl = new URL(getAlternateLocaleUrl(Astro.url, 'en'), Astro.site || Astro.url.origin).href;
 const gtmId = import.meta.env.PUBLIC_GTM_ID || 'GTM-M6NH5PGW';
->>>>>>> aa5b5639620da47dc02563d35594a12ff581ce7f
 ---
 
 <!DOCTYPE html>
