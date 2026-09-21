@@ -26,6 +26,14 @@ El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1
   - Ahora todas las vistas de la plataforma consumen directamente las versiones WebP ultraligeras, aprovechando al 100% la compresión moderna tanto en elementos `<img>` como en estilos CSS `background-image`.
   - Compilación de producción con Astro 5 validada con 0 errores en 16 rutas estáticas.
 
+### Added
+- **Tracking integral con Google Tag Manager (`BaseLayout.astro`, `tracking.ts`, `.env.example`)**:
+  - Instalación global del contenedor `GTM-M6NH5PGW` en las 16 rutas estáticas bilingües, con snippet en `<head>` e iframe `noscript` al inicio de `<body>`.
+  - Event Bus sin PII para vistas de servicios, WhatsApp, email, teléfono, CTAs de contacto, enlaces externos, formulario comercial, Sofía AI y profundidad de lectura.
+  - Tracking específico del widget flotante de WhatsApp mediante `link_location: whatsapp_floating`, diferenciando el botón circular y el CTA del globo sin duplicar eventos ni marcar el clic como lead confirmado.
+  - Persistencia en sesión de UTM, `gclid`, `gbraid`, `wbraid` y `fbclid`, con inyección de campos ocultos al formulario para futura atribución en CRM.
+  - Reserva del evento principal `generate_lead` exclusivamente para confirmaciones reales del backend mediante `77:lead-success`; los intentos se registran como `form_submit`.
+
 ## [Unreleased] - 2026-09-12
 
 ### Changed
