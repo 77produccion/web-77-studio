@@ -39,8 +39,10 @@ const {
 } = Astro.props;
 
 const currentPath = Astro.url.pathname;
-const esUrl = new URL(getAlternateLocaleUrl(Astro.url, 'es'), Astro.site || Astro.url.origin).href;
-const enUrl = new URL(getAlternateLocaleUrl(Astro.url, 'en'), Astro.site || Astro.url.origin).href;
+const siteBaseUrl = Astro.site ? Astro.site.origin : 'https://77studio.co';
+const resolvedOgImage = ogImage.startsWith('http') ? ogImage : new URL(ogImage, siteBaseUrl).href;
+const esUrl = new URL(getAlternateLocaleUrl(Astro.url, 'es'), siteBaseUrl).href;
+const enUrl = new URL(getAlternateLocaleUrl(Astro.url, 'en'), siteBaseUrl).href;
 ---
 
 <!DOCTYPE html>
@@ -95,28 +97,40 @@ const enUrl = new URL(getAlternateLocaleUrl(Astro.url, 'en'), Astro.site || Astr
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
 
-    <!-- Open Graph / Facebook -->
+    <!-- Open Graph / Facebook / WhatsApp -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonical} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={ogImage} />
+    <meta property="og:image" content={resolvedOgImage} />
+    <meta property="og:image:secure_url" content={resolvedOgImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:alt" content={title} />
     <meta property="og:locale" content={currentLang === 'en' ? 'en_US' : 'es_CO'} />
+    <meta property="og:site_name" content="77 Studio" />
 
-    <!-- Twitter -->
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonical} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={resolvedOgImage} />
+    <meta name="twitter:image:alt" content={title} />
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content={canonical} />
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content={ogImage} />
+    <meta property="twitter:image" content={resolvedOgImage} />
 
     <!-- JSON-LD Structured Data for Organization -->
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "ProfessionalService",
       "name": "77 Studio",
-      "image": "https://77.studio/img/77studio.png",
-      "url": "https://77.studio",
+      "image": "https://77studio.co/img/openGraph/og-image.png",
+      "url": "https://77studio.co",
       "telephone": "+573148490955",
       "priceRange": "$$",
       "address": [
