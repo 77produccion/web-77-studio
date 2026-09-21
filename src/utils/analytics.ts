@@ -1,12 +1,10 @@
 // src/utils/analytics.ts
 /**
- * Módulo de Analítica y Eventos Personalizados compatible con Joinchat, GTM, GA4 y Meta Pixel
+ * Eventos DOM compatibles con Joinchat para controlar la apertura del widget.
+ * La medición hacia GTM se centraliza en src/scripts/tracking.ts.
  */
 
 export interface WhatsAppEventPayload {
-  link: string;
-  phone: string;
-  message: string;
   trigger: 'button' | 'bubble' | 'trigger' | string;
 }
 
@@ -21,15 +19,6 @@ export interface JoinChatAnalyticsDetail {
   page_title: string;
 }
 
-// Declaraciones globales seguras de trackers
-declare global {
-  interface Window {
-    dataLayer?: Array<Record<string, unknown>>;
-    gtag?: (...args: unknown[]) => void;
-    fbq?: (...args: unknown[]) => void;
-  }
-}
-
 /**
  * Despacha el flujo de eventos de WhatsApp siguiendo la arquitectura Joinchat
  * @returns boolean `true` si la acción no fue cancelada por un listener, `false` si fue cancelada con preventDefault()
@@ -39,7 +28,7 @@ export function dispatchWhatsAppClick(payload: WhatsAppEventPayload): boolean {
 
   const isMobile = window.matchMedia('(max-width: 768px)').matches;
   const isMobileStr: 'yes' | 'no' = isMobile ? 'yes' : 'no';
-  const pageLocation = window.location.href;
+  const pageLocation = window.location.pathname;
   const pageTitle = document.title || '';
 
   // 1. Despachar evento DOM cancelable: joinchat:open
@@ -47,10 +36,8 @@ export function dispatchWhatsAppClick(payload: WhatsAppEventPayload): boolean {
     bubbles: true,
     cancelable: true,
     detail: {
-      link: payload.link,
       chat_channel: 'whatsapp',
-      chat_id: payload.phone,
-      chat_message: payload.message,
+      chat_id: 'business_primary',
       trigger: payload.trigger,
     }
   });
@@ -64,10 +51,10 @@ export function dispatchWhatsAppClick(payload: WhatsAppEventPayload): boolean {
   // 2. Despachar evento DOM cancelable de analítica: joinchat:event
   const analyticsDetail: JoinChatAnalyticsDetail = {
     event_category: 'JoinChat',
-    event_label: payload.link,
-    event_action: `whatsapp: ${payload.phone}`,
+    event_label: 'whatsapp_floating',
+    event_action: 'open_whatsapp',
     chat_channel: 'whatsapp',
-    chat_id: payload.phone,
+    chat_id: 'business_primary',
     is_mobile: isMobileStr,
     page_location: pageLocation,
     page_title: pageTitle,
@@ -79,57 +66,7 @@ export function dispatchWhatsAppClick(payload: WhatsAppEventPayload): boolean {
     detail: analyticsDetail
   });
 
-  const sendAnalytics = document.dispatchEvent(analyticsEvent);
-
-  if (sendAnalytics) {
-    // 3. Google Tag Manager (dataLayer)
-    window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({
-      event: 'JoinChat',
-      ...analyticsDetail
-    });
-
-    // Evento de conversión estándar GA4 para generación de leads
-    window.dataLayer.push({
-      event: 'generate_lead',
-      lead_source: 'whatsapp_floating',
-      channel: 'whatsapp',
-      phone: payload.phone,
-      page_location: pageLocation,
-      page_title: pageTitle
-    });
-
-    // 4. Google Analytics 4 directo (gtag) si está presente
-    if (typeof window.gtag === 'function') {
-      window.gtag('event', 'JoinChat', {
-        event_category: 'JoinChat',
-        event_action: `whatsapp: ${payload.phone}`,
-        event_label: payload.link,
-        channel: 'whatsapp'
-      });
-
-      window.gtag('event', 'generate_lead', {
-        method: 'whatsapp',
-        lead_source: 'whatsapp_floating'
-      });
-    }
-
-    // 5. Meta Pixel (fbq) si está presente
-    if (typeof window.fbq === 'function') {
-      window.fbq('trackCustom', 'JoinChat', {
-        channel: 'whatsapp',
-        phone: payload.phone,
-        page: pageLocation
-      });
-
-      window.fbq('track', 'Contact', {
-        content_category: 'WhatsApp',
-        content_name: 'WhatsApp Floating Lead'
-      });
-    }
-
-    console.info('[77 Studio Tracking] Eventos de WhatsApp despachados exitosamente:', analyticsDetail);
-  }
+  document.dispatchEvent(analyticsEvent);
 
   return true;
 }
