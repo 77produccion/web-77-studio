@@ -11,8 +11,8 @@ export interface SEOMetadata {
 export const DEFAULT_SEO: SEOMetadata = {
   title: "77 Studio | Digital Studio + Creative Partner + AI Company",
   description: "Un solo equipo para hacer que tu empresa se vea mejor, venda mejor y funcione mejor. Marketing, Web, IA + Automatización y Productos Digitales (Colombia + USA).",
-  canonical: "https://77.studio",
-  ogImage: "/img/77studio.webp",
+  canonical: "https://77studio.co",
+  ogImage: "https://77studio.co/img/openGraph/og-image.png",
   ogType: "website",
   keywords: [
     "77 Studio",
