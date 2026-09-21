@@ -36,114 +36,101 @@ related_slugs:
 
 ## 08.1 Arquitectura de Event Bus y Atribución
 
-Para garantizar la captura del 100% de los clientes potenciales (leads) sin perder atribución por bloqueadores de publicidad o restricciones de navegadores (iOS App Tracking Transparency), la plataforma utiliza un **Event Bus híbrido** (Front-end + Server-side).
+La web utiliza un **Event Bus client-side** centralizado en `src/scripts/tracking.ts`. Las interacciones se envían primero a `window.dataLayer` y Google Tag Manager decide qué eventos remitir a GA4, Google Ads u otras plataformas.
 
 ```
   [Usuario interactúa con 77 Studio]
                │
-      ┌────────┴────────┐
-      ▼                 ▼
-[Client-side Pixel]   [Server-side CAPI]
-  - Meta Pixel          - Meta Conversions API (CAPI)
-  - Google Tag (GTM)    - Google Ads Server Event
-  - GA4 Events          - CRM Webhook (Dokploy)
+               ▼
+    [src/scripts/tracking.ts]
+               │
+               ▼
+     [dataLayer del navegador]
+               │
+               ▼
+  [GTM-M6NH5PGW → GA4 / Google Ads]
 ```
+
+### Eventos disponibles
+
+| Evento | Cuándo se dispara | Uso recomendado |
+|---|---|---|
+| `view_service` | Visita a Marketing, Web, IA o Productos Digitales | Interés por servicio |
+| `click_whatsapp` | Clic en cualquier enlace de WhatsApp, incluido el widget flotante y Sofía | Conversión secundaria |
+| `click_email` / `click_phone` | Clic en correo o teléfono | Contacto secundario |
+| `contact_cta_click` | Clic interno hacia formulario o página de contacto | Microconversión |
+| `outbound_click` | Salida a un dominio externo | Navegación externa |
+| `form_start` | Primera interacción con el formulario comercial | Inicio de formulario |
+| `form_submit` | Intento de envío del formulario comercial | Diagnóstico; no es conversión final |
+| `generate_lead` | Solo después de una respuesta real de éxito del backend | Conversión principal |
+| `chat_open` / `chat_message_submit` | Apertura y uso de Sofía AI | Interacción comercial |
+| `scroll_depth` | Profundidad de 25%, 50%, 75% y 90% | Calidad de lectura |
 
 ---
 
-## 08.2 Meta Business Suite (Meta Pixel + Conversions API CAPI)
-
-### 1. Client-side Meta Pixel
-Inyectado en `BaseLayout.astro` con soporte para consentimiento de cookies.
-- **`PageView`**: Disparado en cada navegación de página.
-- **`ViewContent`**: Disparado cuando el usuario visualiza módulos clave de servicios (`/marketing`, `/web`, `/ia-automatizacion`).
-- **`Lead`**: Disparado al enviar con éxito un formulario de contacto.
-- **`Contact`**: Disparado al hacer clic en el botón primario de WhatsApp prellenado.
-
-### 2. Server-side Meta Conversions API (CAPI)
-Para garantizar 0% pérdida de datos de conversión, se especifica el endpoint serverless en Astro: `/api/events/meta-capi.ts`.
-- **Payload:** Hash SHA-256 de `email`, `phone`, `user_agent`, `client_ip_address`, `event_id`.
-- **Deduplicación:** Uso de la cabecera `event_id` compartida entre el pixel de cliente y la API CAPI.
-
-```typescript
-// Ejemplo de payload /api/events/meta-capi.ts
-export async function POST({ request }) {
-  const body = await request.json();
-  const eventId = body.eventId || crypto.randomUUID();
-  
-  // Enviar a Meta Graph API v19.0
-  const response = await fetch(`https://graph.facebook.com/v19.0/${import.meta.env.META_PIXEL_ID}/events?access_token=${import.meta.env.META_CAPI_TOKEN}`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      data: [{
-        event_name: body.eventName, // 'Lead' | 'Contact'
-        event_time: Math.floor(Date.now() / 1000),
-        event_id: eventId,
-        user_data: {
-          em: [hashSHA256(body.email)],
-          ph: [hashSHA256(body.phone)],
-          client_ip_address: body.ip,
-          client_user_agent: body.userAgent
-        },
-        custom_data: {
-          service_origin: body.serviceOrigin,
-          utm_source: body.utmSource
-        }
-      }]
-    })
-  });
-}
-```
-
----
-
-## 08.3 Google Ads, Google Tag Manager (GTM) & GA4
+## 08.2 Google Ads, Google Tag Manager (GTM) & GA4
 
 ### 1. Google Tag Manager Container
-- ID de Contenedor: `GTM-XXXXXXX` (configurable mediante `PUBLIC_GTM_ID`).
-- **Activadores (Triggers):**
-  - `Form_Submission_Success`: Evento `generate_lead`.
-  - `WhatsApp_Click`: Evento `click_whatsapp` con valor asignado.
+- **Contenedor:** `GTM-M6NH5PGW`.
+- **Configuración:** `PUBLIC_GTM_ID`, con el mismo ID como respaldo seguro en `BaseLayout.astro`.
+- El script principal se carga al inicio de `<head>` y el iframe `noscript` inmediatamente después de abrir `<body>`.
+- **Destino GA4 existente:** `G-8DCJ7P4HBB`.
+- **Destino Google Ads existente:** `AW-11397435689`.
 
 ### 2. Conversiones de Google Ads
-- Configuración del Tag de Conversión para campañas de Búsqueda y Performance Max:
-  - **Conversión Principal:** Envíos de formulario de cotización (`conversion_label: "lead_form"`).
-  - **Conversión Secundaria:** Inicios de conversación de WhatsApp (`conversion_label: "whatsapp_click"`).
+- **Conversión principal:** `generate_lead`, únicamente cuando el backend confirme que recibió el formulario.
+- **Conversión secundaria:** `click_whatsapp`.
+- El widget flotante se distingue con `link_location: whatsapp_floating` y `interaction_variant: floating_button` o `tooltip_cta`.
+- `form_submit` mide intención y errores del embudo, pero no debe importarse como conversión principal.
+- Los `conversion_label` se obtienen desde las acciones reales de Google Ads; no se inventan ni se incluyen en el repositorio.
+
+Para confirmar un lead real, la integración del formulario debe emitir:
+
+```typescript
+window.dispatchEvent(new CustomEvent('77:lead-success', {
+  detail: {
+    form_id: 'lead-contact-form',
+    form_origin: 'contacto',
+    selected_service: 'marketing'
+  }
+}));
+```
 
 ---
 
-## 08.4 UTM Engine & Tracking de Origen en Conversión Dual
+## 08.3 UTM Engine & Privacidad
 
-El script utilitario `src/utils/utm.ts` rastrea y persiste los parámetros URL de la campaña publicitaria durante la sesión del usuario:
+`src/scripts/tracking.ts` captura y conserva la atribución durante la sesión. También inyecta estos valores como campos ocultos en el formulario comercial para que el futuro backend pueda guardarlos junto al lead.
 
-### Parámetros Almacenados:
+### Parámetros almacenados
 - `utm_source` (ej. `facebook`, `google`, `linkedin`, `newsletter`)
 - `utm_medium` (ej. `cpc`, `paid_social`, `organic`)
 - `utm_campaign` (ej. `campana-q3-ia-automatizacion`)
 - `utm_content` / `utm_term`
-- `gclid` (Google Click Identifier) / `fbclid` (Facebook Click Identifier)
+- `gclid`, `gbraid`, `wbraid` y `fbclid`
 
-### Integración en la Conversión Dual:
+### Protección de datos
 
-1. **Formulario de Contacto:**
-   - Inyección de campos ocultos `<input type="hidden" name="utm_source" value={utmSource} />` para envío al CRM.
-
-2. **WhatsApp Contextual:**
-   - Si existen UTMs activos en la sesión, el mensaje prellenado incluye la marca de atribución:
-   - *Ejemplo:* `"Hola 77 Studio 👋 Estoy interesado en desarrollar una solución de IA para mi empresa. [Ref: Google Ads / Campaña IA Q3]"`
+- No se envían a `dataLayer` nombres, empresas, correos, teléfonos ni mensajes escritos.
+- Los enlaces se registran sin parámetros de consulta para no exponer el texto prellenado de WhatsApp.
+- `generate_lead` solo acepta metadatos técnicos permitidos: formulario, página de origen y servicio seleccionado.
 
 ---
 
-## 08.5 Variables de Entorno para Integraciones de Marketing
+## 08.4 Estado de Meta Pixel y CAPI
+
+La web no inyecta un segundo Meta Pixel directamente en el código. Si el contenedor existente tiene una etiqueta de Meta Pixel, debe administrarse desde GTM para evitar eventos duplicados. Meta CAPI server-side queda fuera de esta implementación hasta disponer de Pixel ID, token seguro, endpoint y estrategia de deduplicación.
+
+---
+
+## 08.5 Variables de entorno para integraciones de marketing
 
 ```env
-# Meta / Facebook Business
-PUBLIC_META_PIXEL_ID=1234567890
-META_CAPI_TOKEN=EAAG...
-
 # Google Ads & Analytics
-PUBLIC_GTM_ID=GTM-XXXXXXX
-PUBLIC_GA4_MEASUREMENT_ID=G-XXXXXXXXXX
-GOOGLE_ADS_CONVERSION_ID=AW-XXXXXXXXX
+PUBLIC_GTM_ID=GTM-M6NH5PGW
+PUBLIC_GA4_MEASUREMENT_ID=G-8DCJ7P4HBB
+PUBLIC_GOOGLE_ADS_ID=AW-11397435689
+
+# Meta / Facebook Business (pendiente de validar en GTM)
+PUBLIC_META_PIXEL_ID=
 ```
