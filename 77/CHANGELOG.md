@@ -7,6 +7,12 @@ El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1
 ---
 ## [Unreleased] - 2026-11-05
 
+### Added
+- **Blog con Astro Content Collections (`src/content.config.ts`, `src/pages/blog/`, `src/components/blog/BlogCard.astro`)**:
+  - Colección `blog` en MDX (pilar, objetivo, portada, borrador) e índice en `/blog/` con ficha por post.
+  - Primer artículo `seguimiento-whatsapp-despues-del-anuncio` con portada webp/jpg y Open Graph 1200×630.
+  - Etiqueta de breadcrumb `Blog` en `src/utils/seo.ts`.
+
 ### Fixed
 - **SEO canónico en `www.77studio.co` (`astro.config.mjs`, `BaseLayout.astro`, `src/utils/seo.ts`)**:
   - `site` pasa de `https://77studio.co` (308 hacia www) a `https://www.77studio.co`.
