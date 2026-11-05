@@ -6,7 +6,7 @@ import Footer from '@/components/Footer.astro';
 import MobileStickyBar from '@/components/MobileStickyBar.astro';
 import AIChatWidget from '@/components/chat/AIChatWidget.astro';
 import WhatsAppFloating from '@/components/WhatsAppFloating.astro';
-import { DEFAULT_SEO } from '@/utils/seo';
+import { DEFAULT_SEO, buildStructuredData, directoryPath, toPublicUrl } from '@/utils/seo';
 import type { WhatsAppContext } from '@/utils/whatsapp';
 import type { SupportedLocale } from '@/lib/i18n/ui';
 import { getLangFromUrl, getAlternateLocaleUrl } from '@/lib/i18n/utils';
@@ -14,7 +14,6 @@ import { getLangFromUrl, getAlternateLocaleUrl } from '@/lib/i18n/utils';
 interface Props {
   title?: string;
   description?: string;
-  canonical?: string;
   ogImage?: string;
   whatsappContext?: WhatsAppContext;
   lang?: SupportedLocale;
@@ -22,6 +21,7 @@ interface Props {
   hideNav?: boolean;
   hideFooter?: boolean;
   hideMobileBar?: boolean;
+  noindex?: boolean;
 }
 
 const currentLang = (Astro.props.lang || (Astro.currentLocale as SupportedLocale) || getLangFromUrl(Astro.url)) as SupportedLocale;
@@ -29,20 +29,32 @@ const currentLang = (Astro.props.lang || (Astro.currentLocale as SupportedLocale
 const {
   title = DEFAULT_SEO.title,
   description = DEFAULT_SEO.description,
-  canonical = Astro.url.href,
   ogImage = DEFAULT_SEO.ogImage,
   whatsappContext = 'home',
   hideNav = false,
   hideFooter = false,
   hideMobileBar = true,
   heroImage,
+  noindex = false,
 } = Astro.props;
 
 const currentPath = Astro.url.pathname;
-const siteBaseUrl = Astro.site ? Astro.site.origin : 'https://77studio.co';
-const resolvedOgImage = ogImage.startsWith('http') ? ogImage : new URL(ogImage, siteBaseUrl).href;
-const esUrl = new URL(getAlternateLocaleUrl(Astro.url, 'es'), siteBaseUrl).href;
-const enUrl = new URL(getAlternateLocaleUrl(Astro.url, 'en'), siteBaseUrl).href;
+const site = Astro.site ?? new URL('https://www.77studio.co');
+const canonicalUrl = toPublicUrl(site, directoryPath(Astro.url.pathname));
+const resolvedOgImage = ogImage
+  ? toPublicUrl(site, ogImage)
+  : toPublicUrl(site, DEFAULT_SEO.ogImage ?? '/img/openGraph/og-image.png');
+const esUrl = toPublicUrl(site, directoryPath(getAlternateLocaleUrl(Astro.url, 'es')));
+const enUrl = toPublicUrl(site, directoryPath(getAlternateLocaleUrl(Astro.url, 'en')));
+const structuredData = JSON.stringify(buildStructuredData({
+  site,
+  canonical: canonicalUrl,
+  pathname: directoryPath(Astro.url.pathname),
+  lang: currentLang,
+  title,
+  description,
+  noindex,
+})).replace(/</g, '\\u003c');
 const gtmId = import.meta.env.PUBLIC_GTM_ID || 'GTM-M6NH5PGW';
 ---
 
@@ -62,12 +74,18 @@ const gtmId = import.meta.env.PUBLIC_GTM_ID || 'GTM-M6NH5PGW';
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/png" href="/img/77studio.webp" />
-    <link rel="canonical" href={canonical} />
+    <link rel="canonical" href={canonicalUrl} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
 
     <!-- Hreflang SEO multi-idioma -->
-    <link rel="alternate" hreflang="es" href={esUrl} />
-    <link rel="alternate" hreflang="en" href={enUrl} />
-    <link rel="alternate" hreflang="x-default" href={esUrl} />
+    {!noindex && (
+      <>
+        <link rel="alternate" hreflang="es" href={esUrl} />
+        <link rel="alternate" hreflang="en" href={enUrl} />
+        <link rel="alternate" hreflang="x-default" href={esUrl} />
+      </>
+    )}
+    <link rel="sitemap" href="/sitemap-index.xml" />
 
     <!-- DNS Prefetch & Preconnect for External Resources -->
     <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
@@ -110,7 +128,7 @@ const gtmId = import.meta.env.PUBLIC_GTM_ID || 'GTM-M6NH5PGW';
 
     <!-- Open Graph / Facebook / WhatsApp -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content={canonical} />
+    <meta property="og:url" content={canonicalUrl} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={resolvedOgImage} />
@@ -124,46 +142,19 @@ const gtmId = import.meta.env.PUBLIC_GTM_ID || 'GTM-M6NH5PGW';
 
     <!-- Twitter Cards -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content={canonical} />
+    <meta name="twitter:url" content={canonicalUrl} />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={resolvedOgImage} />
     <meta name="twitter:image:alt" content={title} />
     <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content={canonical} />
+    <meta property="twitter:url" content={canonicalUrl} />
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={resolvedOgImage} />
 
-    <!-- JSON-LD Structured Data for Organization -->
-    <script type="application/ld+json" set:html={JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "ProfessionalService",
-      "name": "77 Studio",
-      "image": "https://77studio.co/img/openGraph/og-image.png",
-      "url": "https://77studio.co",
-      "telephone": "+573148490955",
-      "priceRange": "$$",
-      "address": [
-        {
-          "@type": "PostalAddress",
-          "addressLocality": "Armenia",
-          "addressCountry": "CO"
-        },
-        {
-          "@type": "PostalAddress",
-          "addressLocality": "Miami",
-          "addressCountry": "US"
-        }
-      ],
-      "description": currentLang === 'en' 
-        ? "Digital Studio + Creative Partner + Technology & AI Company in Colombia and the United States."
-        : "Digital Studio + Creative Partner + Technology & AI Company en Colombia y Estados Unidos.",
-      "sameAs": [
-        "https://www.instagram.com/77studio",
-        "https://www.linkedin.com/company/77studio"
-      ]
-    })} />
+    <!-- JSON-LD: Organization, ProfessionalService, WebSite y migas -->
+    <script type="application/ld+json" set:html={structuredData} />
   </head>
 
   <body class="min-h-screen flex flex-col bg-slate-50 text-background-13 antialiased selection:bg-opai-purple selection:text-white">
