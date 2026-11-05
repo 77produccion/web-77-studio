@@ -1,0 +1,35 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import BlogCard from '@/components/blog/BlogCard.astro';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+const title = 'Blog | 77 Studio';
+const description =
+  'Artículos prácticos sobre marketing, IA, automatización, WhatsApp, CRM y captación de clientes para empresas en Colombia, LatAm y USA.';
+---
+
+<BaseLayout title={title} description={description} whatsappContext="home" lang="es">
+  <section class="relative overflow-hidden pt-28 pb-10 md:pt-32 md:pb-14">
+    <div class="mx-auto max-w-6xl px-5 md:px-8">
+      <p class="font-mono text-xs uppercase tracking-[0.18em] text-white/50 mb-3">Blog</p>
+      <h1 class="font-display text-3xl md:text-5xl font-semibold text-white tracking-tight max-w-3xl">
+        Ideas claras para vender y operar mejor
+      </h1>
+      <p class="mt-4 max-w-2xl text-base md:text-lg text-white/70">
+        Marketing, IA aplicada, automatización y seguimiento comercial — sin relleno y con criterio de negocio.
+      </p>
+    </div>
+  </section>
+
+  <section class="pb-24">
+    <div class="mx-auto max-w-6xl px-5 md:px-8 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+      {posts.map((post) => (
+        <BlogCard post={post} />
+      ))}
+    </div>
+  </section>
+</BaseLayout>
