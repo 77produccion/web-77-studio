@@ -13,20 +13,20 @@ const description =
 ---
 
 <BaseLayout title={title} description={description} whatsappContext="home" lang="es">
-  <section class="relative overflow-hidden pt-28 pb-10 md:pt-32 md:pb-14">
+  <section class="pt-28 pb-8 md:pt-36 md:pb-12">
     <div class="mx-auto max-w-6xl px-5 md:px-8">
-      <p class="font-mono text-xs uppercase tracking-[0.18em] text-white/50 mb-3">Blog</p>
-      <h1 class="font-display text-3xl md:text-5xl font-semibold text-white tracking-tight max-w-3xl">
+      <p class="font-ibm-plex-mono text-[11px] uppercase tracking-[0.18em] text-background-13/50">Blog</p>
+      <h1 class="mt-3 max-w-3xl font-sora text-3xl font-semibold leading-[1.15] tracking-tight text-background-13 md:text-5xl">
         Ideas claras para vender y operar mejor
       </h1>
-      <p class="mt-4 max-w-2xl text-base md:text-lg text-white/70">
+      <p class="mt-4 max-w-2xl font-inter-tight text-base leading-relaxed text-background-13/60 md:text-lg">
         Marketing, IA aplicada, automatización y seguimiento comercial — sin relleno y con criterio de negocio.
       </p>
     </div>
   </section>
 
   <section class="pb-24">
-    <div class="mx-auto max-w-6xl px-5 md:px-8 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+    <div class="mx-auto grid max-w-6xl grid-cols-1 gap-6 px-5 sm:grid-cols-2 xl:grid-cols-3 md:px-8">
       {posts.map((post) => (
         <BlogCard post={post} />
       ))}
