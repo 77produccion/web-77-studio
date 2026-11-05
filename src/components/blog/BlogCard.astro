@@ -1,0 +1,39 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+const href = `/blog/${post.id}/`;
+const formattedDate = post.data.pubDate.toLocaleDateString('es-CO', {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric',
+});
+---
+
+<a
+  href={href}
+  class="group flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] hover:border-white/25 transition-colors"
+>
+  <div class="aspect-[16/9] overflow-hidden bg-white/5">
+    <img
+      src={post.data.heroImage}
+      alt={post.data.heroImageAlt}
+      width="1200"
+      height="675"
+      class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+      loading="lazy"
+      decoding="async"
+    />
+  </div>
+  <div class="flex flex-1 flex-col gap-3 p-5 md:p-6">
+    <p class="font-mono text-[11px] uppercase tracking-[0.16em] text-white/45">{formattedDate}</p>
+    <h2 class="font-display text-xl font-semibold text-white tracking-tight group-hover:text-white">
+      {post.data.title}
+    </h2>
+    <p class="text-sm text-white/60 line-clamp-3">{post.data.description}</p>
+  </div>
+</a>

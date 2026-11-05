@@ -43,6 +43,7 @@ const SECTION_LABELS: Record<SupportedLocale, Record<string, string>> = {
     'productos-digitales': uiTranslations.es.nav.productos,
     nosotros: uiTranslations.es.nav.nosotros,
     contacto: uiTranslations.es.nav.contacto,
+    blog: 'Blog',
   },
   en: {
     marketing: uiTranslations.en.nav.marketing,
@@ -51,6 +52,7 @@ const SECTION_LABELS: Record<SupportedLocale, Record<string, string>> = {
     'productos-digitales': uiTranslations.en.nav.productos,
     nosotros: uiTranslations.en.nav.nosotros,
     contacto: uiTranslations.en.nav.contacto,
+    blog: 'Blog',
   },
 };
 

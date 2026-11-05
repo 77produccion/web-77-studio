@@ -1,0 +1,94 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { getCollection, render } from 'astro:content';
+import { toPublicUrl, directoryPath } from '@/utils/seo';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const site = Astro.site ?? new URL('https://www.77studio.co');
+const canonical = toPublicUrl(site, directoryPath(`/blog/${post.id}/`));
+const ogImage = post.data.heroImage;
+const formattedDate = post.data.pubDate.toLocaleDateString('es-CO', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+const articleLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: post.data.title,
+  description: post.data.description,
+  datePublished: post.data.pubDate.toISOString(),
+  dateModified: (post.data.updatedDate ?? post.data.pubDate).toISOString(),
+  author: {
+    '@type': 'Organization',
+    name: post.data.author,
+    url: 'https://www.77studio.co/',
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: '77 Studio',
+    logo: {
+      '@type': 'ImageObject',
+      url: 'https://www.77studio.co/img/77studio.png',
+    },
+  },
+  image: toPublicUrl(site, post.data.heroImage),
+  mainEntityOfPage: canonical,
+  inLanguage: 'es-CO',
+}).replace(/</g, '\\u003c');
+---
+
+<BaseLayout
+  title={`${post.data.title} | 77 Studio`}
+  description={post.data.description}
+  ogImage={ogImage}
+  whatsappContext="home"
+  lang="es"
+  heroImage={post.data.heroImage}
+>
+  <script is:inline type="application/ld+json" set:html={articleLd} />
+
+  <article class="pt-28 pb-20 md:pt-32 md:pb-28">
+    <div class="mx-auto max-w-3xl px-5 md:px-8">
+      <p class="font-mono text-xs uppercase tracking-[0.18em] text-white/50 mb-4">
+        <a href="/blog/" class="hover:text-white/80">Blog</a>
+        <span class="mx-2">/</span>
+        {formattedDate}
+      </p>
+      <h1 class="font-display text-3xl md:text-5xl font-semibold text-white tracking-tight text-balance">
+        {post.data.title}
+      </h1>
+      <p class="mt-5 text-lg text-white/70">{post.data.description}</p>
+      <p class="mt-3 text-sm text-white/45">Por {post.data.author}</p>
+    </div>
+
+    <div class="mx-auto max-w-4xl px-5 md:px-8 mt-10">
+      <img
+        src={post.data.heroImage}
+        alt={post.data.heroImageAlt}
+        width="1200"
+        height="675"
+        class="w-full h-auto rounded-2xl border border-white/10 object-cover"
+        loading="eager"
+        decoding="async"
+        fetchpriority="high"
+      />
+    </div>
+
+    <div
+      class="mx-auto max-w-3xl px-5 md:px-8 mt-12 prose prose-invert prose-headings:font-display prose-headings:tracking-tight prose-a:text-teal-300 hover:prose-a:text-teal-200 prose-table:text-sm max-w-none"
+    >
+      <Content />
+    </div>
+  </article>
+</BaseLayout>
