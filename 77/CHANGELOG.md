@@ -14,6 +14,10 @@ El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1
   - Etiqueta de breadcrumb `Blog` en `src/utils/seo.ts`.
 
 ### Fixed
+- **Plantilla del blog (`src/pages/blog/`, `src/styles/blog.css`, `@tailwindcss/typography`)**:
+  - Hero del artículo y del índice en texto oscuro sobre el lienzo claro de la marca.
+  - Cuerpo MDX con ancho de lectura de 720px, prosa para títulos, párrafos, listas, citas, código e imágenes, y tabla con bordes, cabecera y scroll horizontal.
+  - Meta de fecha, autor y tiempo de lectura, bloque de contacto y artículos relacionados cuando hay más de un post.
 - **SEO canónico en `www.77studio.co` (`astro.config.mjs`, `BaseLayout.astro`, `src/utils/seo.ts`)**:
   - `site` pasa de `https://77studio.co` (308 hacia www) a `https://www.77studio.co`.
   - Canonical, hreflang (`es`, `en`, `x-default`) y Open Graph/Twitter se resuelven contra ese origen. Se eliminan los canonicals fijos a `https://77.studio`.

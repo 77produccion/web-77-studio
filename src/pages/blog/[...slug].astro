@@ -1,7 +1,10 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import { getCollection, render } from 'astro:content';
+import { getCollection, render, type CollectionEntry } from 'astro:content';
 import { toPublicUrl, directoryPath } from '@/utils/seo';
+import { readingMinutes } from '@/utils/reading-time';
+import BlogCard from '@/components/blog/BlogCard.astro';
+import ArticleCta from '@/components/blog/ArticleCta.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog', ({ data }) => !data.draft);
@@ -9,6 +12,10 @@ export async function getStaticPaths() {
     params: { slug: post.id },
     props: { post },
   }));
+}
+
+interface Props {
+  post: CollectionEntry<'blog'>;
 }
 
 const { post } = Astro.props;
@@ -21,6 +28,16 @@ const formattedDate = post.data.pubDate.toLocaleDateString('es-CO', {
   month: 'long',
   day: 'numeric',
 });
+const isoDate = post.data.pubDate.toISOString();
+const minutes = readingMinutes(post.body ?? post.data.description);
+
+const related = (await getCollection('blog', ({ data }) => !data.draft))
+  .filter((entry) => entry.id !== post.id)
+  .sort((a, b) => {
+    const pillarScore = Number(b.data.pillar === post.data.pillar) - Number(a.data.pillar === post.data.pillar);
+    return pillarScore || b.data.pubDate.valueOf() - a.data.pubDate.valueOf();
+  })
+  .slice(0, 3);
 
 const articleLd = JSON.stringify({
   '@context': 'https://schema.org',
@@ -29,6 +46,7 @@ const articleLd = JSON.stringify({
   description: post.data.description,
   datePublished: post.data.pubDate.toISOString(),
   dateModified: (post.data.updatedDate ?? post.data.pubDate).toISOString(),
+  timeRequired: `PT${minutes}M`,
   author: {
     '@type': 'Organization',
     name: post.data.author,
@@ -58,37 +76,60 @@ const articleLd = JSON.stringify({
 >
   <script is:inline type="application/ld+json" set:html={articleLd} />
 
-  <article class="pt-28 pb-20 md:pt-32 md:pb-28">
-    <div class="mx-auto max-w-3xl px-5 md:px-8">
-      <p class="font-mono text-xs uppercase tracking-[0.18em] text-white/50 mb-4">
-        <a href="/blog/" class="hover:text-white/80">Blog</a>
-        <span class="mx-2">/</span>
-        {formattedDate}
+  <article class="pt-28 pb-20 md:pt-36 md:pb-28">
+    <header class="mx-auto max-w-[720px] px-5">
+      <p class="font-ibm-plex-mono text-[11px] uppercase tracking-[0.18em] text-background-13/50">
+        <a href="/blog/" class="transition hover:text-opai-purple">Blog</a>
+        <span class="mx-2" aria-hidden="true">/</span>
+        <span>Artículo</span>
       </p>
-      <h1 class="font-display text-3xl md:text-5xl font-semibold text-white tracking-tight text-balance">
+      <h1 class="mt-4 font-sora text-[1.85rem] font-semibold leading-[1.18] tracking-tight text-background-13 text-balance md:text-[2.65rem]">
         {post.data.title}
       </h1>
-      <p class="mt-5 text-lg text-white/70">{post.data.description}</p>
-      <p class="mt-3 text-sm text-white/45">Por {post.data.author}</p>
-    </div>
+      <p class="mt-5 font-inter-tight text-lg leading-relaxed text-background-13/70">
+        {post.data.description}
+      </p>
+      <p class="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1 font-ibm-plex-mono text-[11px] uppercase tracking-[0.14em] text-background-13/50">
+        <time datetime={isoDate}>{formattedDate}</time>
+        <span aria-hidden="true">·</span>
+        <span>{post.data.author}</span>
+        <span aria-hidden="true">·</span>
+        <span>{minutes} min de lectura</span>
+      </p>
+    </header>
 
-    <div class="mx-auto max-w-4xl px-5 md:px-8 mt-10">
+    <figure class="mx-auto mt-8 max-w-[720px] px-5 md:mt-10">
       <img
         src={post.data.heroImage}
         alt={post.data.heroImageAlt}
         width="1200"
         height="675"
-        class="w-full h-auto rounded-2xl border border-white/10 object-cover"
+        class="aspect-[16/9] w-full rounded-[20px] border border-stroke-2 object-cover shadow-sm"
         loading="eager"
         decoding="async"
         fetchpriority="high"
       />
-    </div>
+    </figure>
 
-    <div
-      class="mx-auto max-w-3xl px-5 md:px-8 mt-12 prose prose-invert prose-headings:font-display prose-headings:tracking-tight prose-a:text-teal-300 hover:prose-a:text-teal-200 prose-table:text-sm max-w-none"
-    >
+    <div class="blog-prose prose mx-auto mt-10 max-w-[720px] px-5 md:mt-12">
       <Content />
     </div>
+
+    <div class="mx-auto mt-12 max-w-[720px] px-5 md:mt-16">
+      <ArticleCta title={post.data.title} />
+    </div>
+
+    {related.length > 0 && (
+      <section class="mx-auto mt-16 max-w-6xl px-5 md:mt-20 md:px-8" aria-labelledby="related-heading">
+        <h2 id="related-heading" class="font-sora text-2xl font-semibold tracking-tight text-background-13">
+          También te puede servir
+        </h2>
+        <div class="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
+          {related.map((entry) => (
+            <BlogCard post={entry} />
+          ))}
+        </div>
+      </section>
+    )}
   </article>
 </BaseLayout>

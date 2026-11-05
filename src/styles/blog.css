@@ -1,0 +1,194 @@
+/* Plantilla editorial del blog. El plugin de typography aporta la estructura;
+   estas reglas la alinean con el lienzo claro y la tipografía de 77 Studio. */
+
+.blog-prose.prose {
+  --tw-prose-body: #3d4753;
+  --tw-prose-headings: #0a0a0a;
+  --tw-prose-lead: #3d4753;
+  --tw-prose-links: #7c3aed;
+  --tw-prose-bold: #0a0a0a;
+  --tw-prose-counters: #7c3aed;
+  --tw-prose-bullets: #7c3aed;
+  --tw-prose-hr: rgba(10, 10, 10, 0.12);
+  --tw-prose-quotes: #252a32;
+  --tw-prose-quote-borders: #7c3aed;
+  --tw-prose-captions: #3d4753;
+  --tw-prose-code: #4c1d95;
+  --tw-prose-pre-code: #f8f9fa;
+  --tw-prose-pre-bg: #191d2a;
+  --tw-prose-th-borders: rgba(10, 10, 10, 0.12);
+  --tw-prose-td-borders: rgba(10, 10, 10, 0.12);
+  font-family: var(--font-inter-tight);
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: #3d4753;
+}
+
+.blog-prose.prose :where(h2) {
+  font-family: var(--font-sora);
+  font-size: 1.65rem;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.03em;
+  margin-top: 2.25em;
+  margin-bottom: 0.6em;
+  color: #0a0a0a;
+}
+
+.blog-prose.prose :where(h3) {
+  font-family: var(--font-sora);
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+  margin-top: 1.75em;
+  margin-bottom: 0.45em;
+  color: #0a0a0a;
+}
+
+.blog-prose.prose :where(p) {
+  margin-top: 1.15em;
+  margin-bottom: 1.15em;
+}
+
+.blog-prose.prose :where(a) {
+  color: #7c3aed;
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.blog-prose.prose :where(a):hover {
+  color: #6d28d9;
+}
+
+.blog-prose.prose :where(ul) {
+  list-style-type: disc;
+  list-style-position: outside;
+  margin-top: 1.1em;
+  margin-bottom: 1.1em;
+  padding-left: 1.35rem;
+}
+
+.blog-prose.prose :where(ol) {
+  list-style-type: decimal;
+  list-style-position: outside;
+  margin-top: 1.1em;
+  margin-bottom: 1.1em;
+  padding-left: 1.35rem;
+}
+
+.blog-prose.prose :where(li) {
+  margin-top: 0.4em;
+  margin-bottom: 0.4em;
+  padding-left: 0.25rem;
+}
+
+.blog-prose.prose :where(li)::marker {
+  color: #7c3aed;
+}
+
+.blog-prose.prose :where(blockquote) {
+  border-left: 3px solid #7c3aed;
+  padding-left: 1rem;
+  font-style: normal;
+  color: #252a32;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+
+.blog-prose.prose :where(code):not(:where(pre code)) {
+  font-family: var(--font-ibm-plex-mono);
+  font-size: 0.86em;
+  font-weight: 500;
+  color: #4c1d95;
+  background: #f1f4f6;
+  border: 1px solid rgba(10, 10, 10, 0.08);
+  border-radius: 0.35rem;
+  padding: 0.12em 0.35em;
+}
+
+.blog-prose.prose :where(code):not(:where(pre code))::before,
+.blog-prose.prose :where(code):not(:where(pre code))::after {
+  content: none;
+}
+
+.blog-prose.prose :where(pre) {
+  background: #191d2a;
+  color: #f8f9fa;
+  border-radius: 16px;
+  padding: 1rem 1.1rem;
+  overflow-x: auto;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+
+.blog-prose.prose :where(pre code) {
+  font-family: var(--font-ibm-plex-mono);
+  background: transparent;
+  border: 0;
+  padding: 0;
+  color: inherit;
+  font-size: 0.86em;
+}
+
+.blog-prose.prose :where(img) {
+  border-radius: 16px;
+  border: 1px solid rgba(10, 10, 10, 0.08);
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+
+.blog-prose .blog-table-scroll {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  margin: 1.75rem 0;
+  border: 1px solid rgba(10, 10, 10, 0.12);
+  border-radius: 12px;
+  background: #fff;
+  -webkit-overflow-scrolling: touch;
+}
+
+.blog-prose.prose .blog-table-scroll :where(table) {
+  width: 100%;
+  min-width: 36rem;
+  margin: 0;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.blog-prose.prose :where(th) {
+  background: #f1f4f6;
+  font-family: var(--font-sora);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-align: left;
+  color: #0a0a0a;
+  border: 1px solid rgba(10, 10, 10, 0.12);
+  padding: 0.7rem 0.85rem;
+}
+
+.blog-prose.prose :where(td) {
+  border: 1px solid rgba(10, 10, 10, 0.12);
+  padding: 0.7rem 0.85rem;
+  vertical-align: top;
+  color: #3d4753;
+}
+
+@media (max-width: 640px) {
+  .blog-prose.prose {
+    font-size: 1rem;
+  }
+
+  .blog-prose.prose :where(h2) {
+    font-size: 1.4rem;
+  }
+
+  .blog-prose.prose :where(h3) {
+    font-size: 1.125rem;
+  }
+}

@@ -12,13 +12,14 @@ const formattedDate = post.data.pubDate.toLocaleDateString('es-CO', {
   month: 'short',
   day: 'numeric',
 });
+const isoDate = post.data.pubDate.toISOString().slice(0, 10);
 ---
 
 <a
   href={href}
-  class="group flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] hover:border-white/25 transition-colors"
+  class="group flex h-full flex-col overflow-hidden rounded-[20px] border border-stroke-2 bg-white shadow-sm transition duration-300 hover:-translate-y-0.5 hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-opai-purple"
 >
-  <div class="aspect-[16/9] overflow-hidden bg-white/5">
+  <div class="aspect-[16/9] overflow-hidden bg-background-8">
     <img
       src={post.data.heroImage}
       alt={post.data.heroImageAlt}
@@ -30,10 +31,12 @@ const formattedDate = post.data.pubDate.toLocaleDateString('es-CO', {
     />
   </div>
   <div class="flex flex-1 flex-col gap-3 p-5 md:p-6">
-    <p class="font-mono text-[11px] uppercase tracking-[0.16em] text-white/45">{formattedDate}</p>
-    <h2 class="font-display text-xl font-semibold text-white tracking-tight group-hover:text-white">
+    <time datetime={isoDate} class="font-ibm-plex-mono text-[11px] uppercase tracking-[0.16em] text-background-13/50">
+      {formattedDate}
+    </time>
+    <h2 class="font-sora text-xl font-semibold leading-snug tracking-tight text-background-13/90 group-hover:text-opai-purple">
       {post.data.title}
     </h2>
-    <p class="text-sm text-white/60 line-clamp-3">{post.data.description}</p>
+    <p class="font-inter-tight text-sm leading-relaxed text-background-13/60 line-clamp-3">{post.data.description}</p>
   </div>
 </a>
