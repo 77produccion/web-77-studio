@@ -5,6 +5,16 @@ Todos los cambios notables en este proyecto serán documentados en este archivo.
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/), y este proyecto adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 
 ---
+## [Unreleased] - 2026-11-05
+
+### Fixed
+- **SEO canónico en `www.77studio.co` (`astro.config.mjs`, `BaseLayout.astro`, `src/utils/seo.ts`)**:
+  - `site` pasa de `https://77studio.co` (308 hacia www) a `https://www.77studio.co`.
+  - Canonical, hreflang (`es`, `en`, `x-default`) y Open Graph/Twitter se resuelven contra ese origen. Se eliminan los canonicals fijos a `https://77.studio`.
+  - Integración `@astrojs/sitemap`: `sitemap-index.xml` con las páginas en español e inglés, alternates hreflang y `x-default`. Quedan fuera `/404`, `/en/404` y `/api/`.
+  - `robots.txt` permite el rastreo, bloquea `/api/`, `/404` y `/en/404`, y declara el sitemap.
+  - JSON-LD conserva `ProfessionalService` y añade logo (`/img/77studio.png`), `Organization`, `WebSite` y `BreadcrumbList` en páginas interiores. Las 404 llevan `noindex`.
+
 ## [Unreleased] - 2026-09-17
 
 ### Performance & Asset Optimization

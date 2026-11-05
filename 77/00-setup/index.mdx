@@ -52,6 +52,7 @@ npm create astro@latest ./ -- --template empty --typescript strict
 # 2. Instalación de Integraciones Oficiales de Astro
 npx astro add mdx --yes
 npx astro add vercel --yes
+npx astro add sitemap --yes
 
 # 3. Comandos de Operación Diaria
 npm run dev      # Inicia el servidor de desarrollo local (http://localhost:4321)
@@ -72,6 +73,7 @@ El ecosistema de paquetes de **77 Studio** se mantiene liviano para asegurar tie
 | `astro` | `^5.x.x` | Core Framework (Islands Architecture, zero JS por defecto) |
 | `@astrojs/mdx` | `^4.x.x` | Renderizado de colecciones MDX con componentes inyectados |
 | `@astrojs/vercel` | `^8.x.x` | Adaptador SSR / Serverless para despliegue en Vercel |
+| `@astrojs/sitemap` | `^3.x.x` | Sitemap estático con hreflang ES/EN en el build |
 | `tailwindcss` | `^4.x.x` | Sistema de diseño de utilidad (Design Tokens de 77 Studio) |
 | `@tailwindcss/vite` | `^4.x.x` | Plugin de compilación rápida para Tailwind v4 |
 | `clsx` | `^2.1.x` | Construcción condicional de clases CSS en componentes UI |
@@ -128,8 +130,8 @@ Para trabajar de manera efectiva en el sitio de 77 Studio, el equipo o desarroll
 Crea un archivo `.env` en la raíz del proyecto para definir los parámetros operativos:
 
 ```env
-# URL oficial del sitio desplegado
-PUBLIC_SITE_URL=https://77.studio
+# URL oficial del sitio desplegado (el apex 77studio.co redirige 308 a www)
+PUBLIC_SITE_URL=https://www.77studio.co
 
 # Teléfono oficial de WhatsApp para links prellenados (sin + ni espacios)
 PUBLIC_WHATSAPP_NUMBER=573148490955
@@ -145,10 +147,18 @@ PUBLIC_GOOGLE_ADS_ID=AW-11397435689
 
 ---
 
-## 0.6 Verificación de Preparación (Checklist de Inicio)
+## 0.6 SEO técnico: dominio canónico, sitemap y robots
+
+El dominio que indexan los buscadores es **`https://www.77studio.co`**. `https://77studio.co` responde `308` hacia www, así que `site` en `astro.config.mjs` usa el destino con www. De ahí salen canonical, hreflang, Open Graph y las URLs del sitemap.
+
+En el build, `@astrojs/sitemap` escribe `sitemap-index.xml` y `sitemap-0.xml` con las páginas en español (sin prefijo) e inglés (`/en/`), más los alternates `es`, `en` y `x-default`. No entran `/404`, `/en/404` ni `/api/`. `src/pages/robots.txt.ts` publica un `robots.txt` que permite el rastreo, bloquea esas rutas y enlaza el sitemap.
+
+El JSON-LD del layout mantiene `ProfessionalService` y añade el logo, `Organization`, `WebSite` y migas de pan en las páginas interiores.
+
+## 0.7 Verificación de Preparación (Checklist de Inicio)
 
 - [ ] Node.js v18+ o v20+ verificado (`node -v`).
-- [ ] Proyecto Astro 5 inicializado con soporte MDX y Vercel.
+- [ ] Proyecto Astro 5 inicializado con soporte MDX, sitemap y Vercel.
 - [ ] Tailwind CSS v4 configurado con los design tokens de `77-design-system`.
 - [ ] Tipografías Sora, Inter Tight e IBM Plex Mono cargadas en `global.css` o `BaseLayout.astro`.
 - [ ] Contenedor `GTM-M6NH5PGW` visible en Tag Assistant y eventos de `dataLayer` validados sin PII.
