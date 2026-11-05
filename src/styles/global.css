@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@import "./blog.css";
 
 @theme {
   --color-slate-50: #F9FAFB;

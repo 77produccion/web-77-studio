@@ -4,6 +4,7 @@ import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import vercel from '@astrojs/vercel';
 import tailwindcss from '@tailwindcss/vite';
+import rehypeWrapTables from './src/utils/rehype-wrap-tables.mjs';
 
 /**
  * Excluye del sitemap rutas que no deben indexarse (API, 404 y archivos técnicos).
@@ -22,7 +23,9 @@ export default defineConfig({
   // El apex 77studio.co responde 308 hacia www. Canonical, hreflang, OG y sitemap usan el destino.
   site: 'https://www.77studio.co',
   integrations: [
-    mdx(),
+    mdx({
+      rehypePlugins: [rehypeWrapTables],
+    }),
     sitemap({
       filter: isIndexableSitemapPage,
       i18n: {
