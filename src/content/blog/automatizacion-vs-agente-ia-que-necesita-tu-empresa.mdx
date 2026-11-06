@@ -1,0 +1,110 @@
+---
+title: "Automatización vs agente de IA: qué necesita tu empresa primero"
+description: "No todo problema pide un agente. Criterios claros para elegir automatización, un flujo con IA o un agente, alineados a cómo opera tu negocio."
+pubDate: 2026-11-06
+author: "77 Studio"
+heroImage: "/img/blog/automatizacion-vs-agente-ia-que-necesita-tu-empresa.webp"
+heroImageAlt: "Escritorio de oficina con un diagrama de flujo impreso junto a un portátil, simbolizando automatización y decisiones con IA"
+draft: false
+pillar: ia-agentes
+objective: educar
+tags:
+  - inteligencia artificial
+  - automatización
+  - agentes de IA
+  - workflows
+  - empresas
+---
+
+Si tu equipo oye “pongamos un bot” cada semana, para un momento. La pregunta útil no es si la IA está de moda, sino **qué tipo de solución necesita el proceso real** que te está costando tiempo o dinero.
+
+Muchas empresas saltan directo a un “agente” cuando lo que hace falta es una automatización con reglas claras. Otras se quedan en scripts rígidos cuando el trabajo sí exige interpretar mensajes, documentos o excepciones. Ambas equivocaciones salen caras: la primera por complejidad y latencia innecesarias; la segunda porque el flujo se rompe en el primer caso raro.
+
+Este artículo te da un marco de decisión práctico —alineado con lo que ya explicamos en [IA + Automatización](/ia-automatizacion/)— para elegir entre automatización clásica, un flujo con IA y un agente, sin inventar promesas de ROI.
+
+## Tres niveles (no son lo mismo)
+
+Para hablar el mismo idioma, conviene separar tres cosas que a menudo se mezclan en reuniones:
+
+1. **Automatización por reglas.** Si ocurre A, ejecuta B. Ideal cuando el camino es estable: sincronizar un CRM, enviar una alerta, crear una tarea, mover un archivo.
+2. **Flujo (workflow) con IA.** El modelo interpreta texto o documentos, pero **el código o el orquestador fija los pasos**. Clasificar un mensaje, extraer campos y enrutar a un asesor es un ejemplo típico.
+3. **Agente.** El modelo **elige dinámicamente** qué hacer después, qué herramienta usar y en qué orden, dentro de límites que tú defines.
+
+Esa distinción no es marketing: Anthropic la documenta en su guía [Building effective agents](https://www.anthropic.com/engineering/building-effective-agents) (19 dic 2024). Allí llaman *workflows* a los sistemas con rutas predefinidas y *agents* a los que el modelo dirige su propio proceso. También recomiendan empezar por la solución más simple y subir complejidad solo cuando mejore el resultado de forma medible.
+
+En la práctica de 77 Studio lo resumimos así: la automatización ejecuta; la IA interpreta; juntas pueden operar mejor —pero **no todo necesita IA** y **no todo se resuelve con un flujo simple**.
+
+## Cómo decidir en cinco preguntas
+
+Antes de pedir cotización de “un agente”, responde esto con un proceso concreto (no con un deseo abstracto):
+
+| Pregunta | Si la respuesta es sí… | Inclínate hacia |
+| --- | --- | --- |
+| ¿Puedes dibujar el proceso de punta a punta con pocas excepciones? | El camino es predecible | Automatización por reglas |
+| ¿Hay texto o documentos variables, pero las etapas siguen siendo las mismas? | Hace falta interpretar, no inventar el plan | Workflow con IA |
+| ¿El orden de pasos depende de lo que encuentre el sistema en cada caso? | Necesitas flexibilidad controlada | Agente con herramientas limitadas |
+| ¿Una mala decisión puede enviar mensajes, cambiar datos o dinero? | El riesgo es alto | Revisión humana + permisos mínimos |
+| ¿Sabes qué significa “resuelto” (métrica observable)? | Puedes medir el piloto | Sigue; si no, reduce el alcance |
+
+Si no puedes describir entradas, sistemas consultados y resultado esperado, **no tienes un proyecto de IA**: tienes un proceso que aún hay que documentar.
+
+## Dónde encaja cada opción (ejemplos hipotéticos)
+
+Estos ejemplos son ilustrativos; no son casos medidos de un cliente concreto.
+
+### Automatización primero
+
+- Cuando un lead entra por formulario, crear el contacto en el CRM y avisar al comercial del turno.
+- Cuando una factura se marca como pagada, actualizar el estado y notificar a operaciones.
+- Cuando un ticket lleva X horas sin respuesta, escalar a un supervisor.
+
+Aquí un agente suele ser exceso: más costo, más latencia y más superficie de error para un “si → entonces” que ya conoces.
+
+### Workflow con IA
+
+- Clasificar mensajes de WhatsApp o correo (“precio”, “soporte”, “agendar”) y mandarlos a la cola correcta.
+- Extraer datos de un PDF o de un formulario largo y llenar campos del CRM.
+- Preparar un borrador de respuesta que un humano revisa antes de enviar.
+
+El modelo ayuda con lo no estructurado; **tú fijas** la secuencia y los puntos de control. Encaja bien con el seguimiento comercial que describimos en [Si te escriben por WhatsApp y nadie responde](/blog/seguimiento-whatsapp-despues-del-anuncio/).
+
+### Agente (cuando sí vale la pena)
+
+- Investigar un caso abierto: revisar historial, documentos y varias herramientas, y proponer el siguiente paso.
+- Resolver tickets donde el camino no se puede hardcodear porque depende de lo que encuentre en cada consulta.
+- Tareas internas con criterio de éxito verificable (por ejemplo, preparar un informe a partir de varias fuentes y dejar evidencia de lo que usó).
+
+Anthropic advierte que los agentes suelen intercambiar **más latencia y costo** a cambio de mejor desempeño en tareas abiertas, y que los errores pueden acumularse a lo largo del proceso. Por eso pide pruebas serias, condiciones de parada y supervisión humana en acciones sensibles.
+
+## Señales de que estás eligiendo mal
+
+- **Compras “agente” porque suena moderno**, pero el proceso cabe en una tabla de reglas.
+- **Automatizas sin dueño del proceso**: nadie mantiene el flujo cuando cambia el negocio.
+- **Das permisos de escritura desde el día uno** (enviar WhatsApp, editar CRM, publicar) sin registro ni aprobación.
+- **No defines éxito**: si no mides tiempo de respuesta, errores o casos resueltos sin retrabajo, no sabrás si el piloto sirvió.
+- **Saltas el CRM y el seguimiento humano**: la IA no arregla un canal sin responsable.
+
+## Un orden de implementación sensato
+
+1. **Mapea el proceso** una semana: volumen, tiempo, errores, sistemas involucrados.
+2. **Automatiza lo estable** (integraciones, alertas, asignación).
+3. **Añade IA donde el input es texto o documentos**, con pasos fijos y revisión humana en lo irreversible.
+4. **Evalúa un agente** solo si el camino no se puede predefinir y tienes límites, logs y una métrica de negocio.
+5. **Escala** cuando el piloto mejore un indicador real, no cuando la demo impresione en una reunión.
+
+Ese orden es el mismo espíritu de “simple primero” de la guía de Anthropic y el de nuestra página de servicio: identificar dónde la tecnología produce una mejora real, no decorar la operación con buzzwords.
+
+## Cómo encaja con 77 Studio
+
+En [IA + Automatización](/ia-automatizacion/) trabajamos justo en ese diagnóstico: automatizar procesos repetitivos, conectar CRM y mensajería, y aplicar agentes o asistentes cuando interpretar contexto aporta valor. También conectamos ese tramo con [marketing y captación](/marketing/) cuando el cuello de botella está entre el anuncio y la conversación comercial.
+
+No partimos de “hay que poner un agente”. Partimos de tu operación: qué se repite, qué se rompe y qué se puede medir.
+
+## Para seguir
+
+1. Elige **un** proceso doloroso (no cinco) y descríbelo en media página.
+2. Clasifícalo con la tabla de arriba.
+3. Define la métrica de éxito del piloto antes de construir.
+4. Si el primer paso es ordenar WhatsApp → CRM, empieza por ahí; la complejidad puede venir después.
+
+¿Quieres revisar si tu caso pide reglas, un flujo con IA o un agente con límites claros? Escríbenos desde [Contacto](/contacto/) y te orientamos con un diagnóstico inicial.
