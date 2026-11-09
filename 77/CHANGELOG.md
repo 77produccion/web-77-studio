@@ -5,6 +5,11 @@ Todos los cambios notables en este proyecto serán documentados en este archivo.
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/), y este proyecto adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 
 ---
+## [Unreleased] - 2026-11-09
+
+### Added
+- **Blog**: artículo `que-medir-en-meta-ads-antes-de-subir-presupuesto` (qué medir en Meta Ads antes de subir el presupuesto), con portada webp y Open Graph 1200×630. El pilar del frontmatter usa `ads-captacion`, el valor del esquema para Meta/Google Ads.
+
 ## [Unreleased] - 2026-11-06
 
 ### Added
