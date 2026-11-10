@@ -9,6 +9,7 @@ El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1
 
 ### Fixed
 - **Hreflang solo con URLs reales (`src/utils/public-routes.ts`, `BaseLayout.astro`, `astro.config.mjs`)**: el blog en español ya no declara `/en/blog/...` (404). Canonical, hreflang y sitemap se quedan con las rutas que el build genera. El selector ES/EN, si no hay traducción, lleva al inicio de ese idioma.
+- **Teléfono único (`GlobalPresenceSection.astro`, `77/07-contacto/index.mdx`)**: se retira el número de Estados Unidos. En todo el sitio queda solo `+57 314 849 0955`.
 - **Entidad (`src/utils/seo.ts`, `src/utils/nap.ts`)**: Organization y LocalBusiness usan el NAP confirmado (Cra 14 #35 Norte 18, Armenia, Quindío, Colombia, +57 314 849 0955). El mismo dato está en el footer y en Contacto. No hay LinkedIn en `sameAs`, footer ni enlaces. No se inventa la URL del Google Business Profile. Cada servicio real tiene un nodo `Service`. El blog usa `Article` + `BlogPosting` y migas de tres niveles. Contacto publica `FAQPage`.
 - **Enlazado interno**: Blog entra al menú y al footer. La portada enlaza el blog y los títulos de servicio. El índice y los artículos enlazan los servicios, sin reescribir el cuerpo de los posts.
 

@@ -102,10 +102,9 @@ Si tu componente está en `src/components/chat/ChatWidget.astro` o `WebChat.tsx`
 
 ## 📱 5. Enlaces de WhatsApp Directo en la Interfaz
 
-Para que el frontend soporte los dos mercados atendidos por 77 Studio:
+El único teléfono publicado es el de Colombia, también para clientes en Estados Unidos y el resto de mercados:
 
-* **Canal Colombia / Latam:** `https://wa.me/573148490955`
-* **Canal USA / Internacional:** `https://wa.me/12029337792`
+* **WhatsApp:** `https://wa.me/573148490955` (`+57 314 849 0955`)
 
 ---
 
