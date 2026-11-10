@@ -8,15 +8,16 @@ import PhilosophySection from '@/components/nosotros/PhilosophySection.astro';
 import TeamCapabilitiesGrid from '@/components/nosotros/TeamCapabilitiesGrid.astro';
 import GlobalPresenceSection from '@/components/nosotros/GlobalPresenceSection.astro';
 import NosotrosContactSection from '@/components/nosotros/NosotrosContactSection.astro';
+import { getNosotrosTranslations } from '@/lib/i18n/pages/nosotros';
 
-const pageTitle = "Acerca de Nosotros | 77 Studio Digital & AI Partner";
-const pageDescription = "Conoce al equipo detrás de 77 Studio. Operación en Colombia y Estados Unidos para proyectos de marketing, web, automatización e IA (Colombia ↔ USA).";
+const t = getNosotrosTranslations('es');
 ---
 
 <BaseLayout
-  title={pageTitle}
-  description={pageDescription}
+  title={t.meta.title}
+  description={t.meta.description}
   whatsappContext="nosotros"
+  heroImage="/img/bgs/full-team.webp"
 >
   <!-- 01. Hero Section con propuesta de valor institucional y modelo operativo -->
   <HeroNosotros />

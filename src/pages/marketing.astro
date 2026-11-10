@@ -8,15 +8,16 @@ import ChannelsComparison from '@/components/marketing/ChannelsComparison.astro'
 import CreativeShowcase from '@/components/marketing/CreativeShowcase.astro';
 import MarketingProcess from '@/components/marketing/MarketingProcess.astro';
 import MarketingContactSection from '@/components/marketing/MarketingContactSection.astro';
+import { getMarketingTranslations } from '@/lib/i18n/pages/marketing';
 
-const pageTitle = "Marketing Digital, Meta Ads & Google Ads | 77 Studio";
-const pageDescription = "Integramos estrategia, pauta digital, creatividad, contenido y automatización para captar clientes potenciales y generar demanda (Colombia ↔ USA).";
+const t = getMarketingTranslations('es');
 ---
 
 <BaseLayout
-  title={pageTitle}
-  description={pageDescription}
+  title={t.meta.title}
+  description={t.meta.description}
   whatsappContext="marketing"
+  heroImage="/img/bgs/tania-licxa-work.webp"
 >
   <!-- 01. Hero Section de Paid Media & CTAs Duales -->
   <HeroMarketing />

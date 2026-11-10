@@ -5,6 +5,19 @@ Todos los cambios notables en este proyecto serán documentados en este archivo.
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/), y este proyecto adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 
 ---
+## [Unreleased] - 2026-11-10
+
+### Fixed
+- **Hreflang solo con URLs reales (`src/utils/public-routes.ts`, `BaseLayout.astro`, `astro.config.mjs`)**: el blog en español ya no declara `/en/blog/...` (404). Canonical, hreflang y sitemap se quedan con las rutas que el build genera. El selector ES/EN, si no hay traducción, lleva al inicio de ese idioma.
+- **Entidad (`src/utils/seo.ts`, `src/utils/nap.ts`)**: Organization y LocalBusiness usan el NAP confirmado (Cra 14 #35 Norte 18, Armenia, Quindío, Colombia, +57 314 849 0955). El mismo dato está en el footer y en Contacto. No hay LinkedIn en `sameAs`, footer ni enlaces. No se inventa la URL del Google Business Profile. Cada servicio real tiene un nodo `Service`. El blog usa `Article` + `BlogPosting` y migas de tres niveles. Contacto publica `FAQPage`.
+- **Enlazado interno**: Blog entra al menú y al footer. La portada enlaza el blog y los títulos de servicio. El índice y los artículos enlazan los servicios, sin reescribir el cuerpo de los posts.
+
+### Added
+- **Visibilidad para IA (`/llms.txt`, `/llms-full.txt`, `robots.txt`)**: resumen de la empresa, servicios, mercados y enlaces. `robots.txt` permite de forma explícita GPTBot, OAI-SearchBot, ClaudeBot, PerplexityBot y Google-Extended, y sigue enlazando el sitemap.
+
+### Performance
+- **LCP de la portada**: variantes WebP del cerebro (540, 840 y 1280) con `srcset`, preload de la marca de agua que Lighthouse marca como LCP en móvil, secciones bajo el hero con `content-visibility`, y Google Tag Manager diferido hasta después de la carga o el primer gesto. `dataLayer` sigue en cola para no perder la analítica.
+
 ## [Unreleased] - 2026-11-09
 
 ### Added

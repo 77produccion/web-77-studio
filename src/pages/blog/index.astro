@@ -7,9 +7,16 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
 
-const title = 'Blog | 77 Studio';
+const title = 'Blog de marketing, IA y automatización | 77 Studio';
 const description =
-  'Artículos prácticos sobre marketing, IA, automatización, WhatsApp, CRM y captación de clientes para empresas en Colombia, LatAm y USA.';
+  'Artículos sobre marketing con IA, automatización, desarrollo web, WhatsApp y captación de clientes para empresas en Colombia, LatAm y EE. UU.';
+
+const serviceLinks = [
+  { href: '/marketing/', label: 'Marketing con IA' },
+  { href: '/web/', label: 'Desarrollo web' },
+  { href: '/ia-automatizacion/', label: 'IA y automatización' },
+  { href: '/productos-digitales/', label: 'Productos digitales' },
+];
 ---
 
 <BaseLayout title={title} description={description} whatsappContext="home" lang="es">
@@ -22,6 +29,13 @@ const description =
       <p class="mt-4 max-w-2xl font-inter-tight text-base leading-relaxed text-background-13/60 md:text-lg">
         Marketing, IA aplicada, automatización y seguimiento comercial — sin relleno y con criterio de negocio.
       </p>
+      <nav class="mt-6 flex flex-wrap gap-x-4 gap-y-2" aria-label="Servicios">
+        {serviceLinks.map((link) => (
+          <a href={link.href} class="font-inter-tight text-sm text-background-13/70 underline decoration-black/20 underline-offset-4 transition hover:text-opai-purple">
+            {link.label}
+          </a>
+        ))}
+      </nav>
     </div>
   </section>
 

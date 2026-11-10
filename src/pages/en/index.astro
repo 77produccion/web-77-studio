@@ -12,6 +12,7 @@ import TestimonialsSection from '@/components/home/TestimonialsSection.astro';
 import ProcessSection from '@/components/home/ProcessSection.astro';
 import ContactSection from '@/components/home/ContactSection.astro';
 import { getHomeTranslations } from '@/lib/i18n/pages/home';
+import { homeHeroPreload } from '@/utils/home-hero';
 
 const lang = 'en';
 const t = getHomeTranslations(lang);
@@ -22,10 +23,12 @@ const t = getHomeTranslations(lang);
   description={t.meta.description}
   whatsappContext="home"
   lang={lang}
+  heroPreload={homeHeroPreload}
 >
   <!-- 01. Hero Section with Live Metrics and Dual CTAs -->
   <HeroHome lang={lang} />
 
+  <div class="home-below-fold">
   <!-- Metrics and Integrations Section -->
   <MetricsAndIntegrations lang={lang} />
 
@@ -52,4 +55,5 @@ const t = getHomeTranslations(lang);
 
   <!-- 08. Direct Commercial Contact (WhatsApp + Consultation Form) -->
   <ContactSection lang={lang} />
+  </div>
 </BaseLayout>

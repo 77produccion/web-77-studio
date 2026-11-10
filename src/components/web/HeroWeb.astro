@@ -18,7 +18,7 @@ const t = getWebTranslations(currentLang);
 >
   <img 
     src="/img/web-hero.webp" 
-    alt="" 
+    alt={currentLang === 'en' ? 'Browser address bar illustrating a website' : 'Barra de direcciones de un navegador que ilustra un sitio web'} 
     class="absolute inset-0 w-full h-full object-cover object-center pointer-events-none -z-10" 
     loading="eager" 
     fetchpriority="high" 

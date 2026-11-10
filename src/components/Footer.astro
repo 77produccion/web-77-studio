@@ -1,6 +1,7 @@
 ---
 // src/components/Footer.astro
 import { uiTranslations, type SupportedLocale } from '@/lib/i18n/ui';
+import { ADDRESS_LINE, PHONE_DISPLAY, PHONE_E164, STREET_ADDRESS } from '@/utils/nap';
 
 interface Props {
   lang?: SupportedLocale;
@@ -80,7 +81,9 @@ const homeUrl = currentLang === 'en' ? '/en' : '/';
               />
               <span class="font-semibold block text-background-13 text-xs font-ibm-plex-mono">COLOMBIA</span>
             </div>
-            <span class="text-xs text-background-13/60">Armenia, Quindío · LatAm Hub</span>
+            <span class="text-xs text-background-13/60 block">{STREET_ADDRESS}</span>
+            <span class="text-xs text-background-13/60 block">Armenia, Quindío, Colombia</span>
+            <a href={`tel:${PHONE_E164}`} class="mt-1 inline-block text-xs font-semibold text-background-13">{PHONE_DISPLAY}</a>
           </div>
           <div class="rounded-xl border border-black/5 bg-slate-50 p-3 hover:border-black/10 transition-colors">
             <div class="flex items-center gap-2 mb-1">
@@ -104,7 +107,7 @@ const homeUrl = currentLang === 'en' ? '/en' : '/';
       <p>© {currentYear} 77 Studio. {t.footer.rights}</p>
       
       <div class="flex items-center gap-6 font-ibm-plex-mono text-xs text-background-13/60">
-        <span>{t.footer.presence}</span>
+        <span>{ADDRESS_LINE} · {PHONE_DISPLAY}</span>
       </div>
     </div>
   </div>

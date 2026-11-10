@@ -4,8 +4,8 @@ import type { SupportedLocale } from '../../ui';
 export const webTranslations = {
   es: {
     meta: {
-      title: "Desarrollo Web & Landing Pages de Alta Conversión | 77 Studio",
-      description: "Diseñamos y desarrollamos sitios web corporativos y landing pages con Astro, enfocados en velocidad ultra-rápida, confianza de marca y máxima conversión (Colombia ↔ USA)."
+      title: "Desarrollo web y landing pages | 77 Studio",
+      description: "Desarrollo web y landing pages rápidas, pensadas para conversión y SEO, para empresas en Colombia, LatAm y Estados Unidos."
     },
     hero: {
       badge: "Ingeniería Web & Conversión",
@@ -42,8 +42,8 @@ export const webTranslations = {
   },
   en: {
     meta: {
-      title: "Web Development & High-Converting Landing Pages | 77 Studio",
-      description: "We design and build ultra-fast corporate websites and high-converting landing pages using Astro, engineered for speed, authority, and sales (Colombia ↔ USA)."
+      title: "Web Development and Landing Pages | 77 Studio",
+      description: "Fast websites and landing pages built for conversion and SEO, for companies in Colombia, Latin America, and the United States."
     },
     hero: {
       badge: "Web Engineering & CRO",
