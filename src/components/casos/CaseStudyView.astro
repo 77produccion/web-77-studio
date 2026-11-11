@@ -1,0 +1,372 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import DualCTA from '@/components/DualCTA.astro';
+import { PHONE_DISPLAY } from '@/utils/nap';
+import { directoryPath, toPublicUrl } from '@/utils/seo';
+
+interface Props {
+  entry: CollectionEntry<'casos'>;
+}
+
+const { entry } = Astro.props;
+const data = entry.data;
+const site = Astro.site ?? new URL('https://www.77studio.co');
+const canonical = toPublicUrl(site, directoryPath(`/casos/${entry.id}/`));
+const origin = site.origin;
+const serviceId = `${origin}/ia-automatizacion/#service`;
+const published = data.pubDate.toISOString();
+const modified = (data.updatedDate ?? data.pubDate).toISOString();
+
+// TODO(casa-tuning): capturas del sistema. No renderizar mockups ni pantallas con datos de prueba.
+// TODO(casa-tuning): no publicar el nombre de Stevan Arango hasta tener una cita autorizada a su nombre.
+// TODO(casa-tuning): no agregar cifras distintas al 100% de registro fotográfico sin un dato verificado.
+// Review sin reviewRating: en schema.org la calificación no es obligatoria. No hay aggregateRating.
+
+const service = {
+  '@type': 'Service',
+  '@id': serviceId,
+  name: 'IA y automatización',
+  serviceType: 'Automatización de procesos y agentes de IA',
+  url: `${origin}/ia-automatizacion/`,
+  provider: { '@id': `${origin}/#organization` },
+};
+
+const casaTuning = {
+  '@type': 'Organization',
+  '@id': `${canonical}#casa-tuning`,
+  name: data.legalName ?? data.client,
+  description: data.clientSummary ?? data.excerpt,
+  ...(data.instagram ? { sameAs: data.instagram } : {}),
+};
+
+const review = data.testimonial
+  ? {
+      '@type': 'Review',
+      '@id': `${canonical}#review`,
+      reviewBody: data.testimonial.quote,
+      inLanguage: 'es-CO',
+      author: {
+        '@type': 'Organization',
+        name: data.testimonial.attribution,
+        ...(data.instagram ? { sameAs: data.instagram } : {}),
+      },
+      itemReviewed: { '@id': serviceId },
+    }
+  : null;
+
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Article',
+      '@id': `${canonical}#article`,
+      headline: data.seoTitle,
+      description: data.description,
+      inLanguage: 'es-CO',
+      datePublished: published,
+      dateModified: modified,
+      keywords: data.keywords.join(', '),
+      author: { '@id': `${origin}/#organization` },
+      publisher: { '@id': `${origin}/#organization` },
+      mainEntityOfPage: canonical,
+      about: { '@id': serviceId },
+      mentions: { '@id': casaTuning['@id'] },
+      ...(review ? { review: { '@id': review['@id'] } } : {}),
+    },
+    service,
+    casaTuning,
+    review,
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${canonical}#breadcrumb`,
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: '77 Studio', item: `${origin}/` },
+        { '@type': 'ListItem', position: 2, name: 'Casos de éxito', item: `${origin}/casos/` },
+        { '@type': 'ListItem', position: 3, name: data.client, item: canonical },
+      ],
+    },
+  ].filter(Boolean),
+};
+
+const structuredData = JSON.stringify(graph).replace(/</g, '\\u003c');
+const flowSteps = data.flow?.steps ?? [];
+---
+
+<script is:inline type="application/ld+json" set:html={structuredData} />
+
+<article class="pb-20 pt-28 md:pb-28 md:pt-36">
+  <header class="mx-auto max-w-[1290px] px-4 sm:px-6">
+    <nav aria-label="Miga de pan" class="font-ibm-plex-mono text-[11px] uppercase tracking-[0.16em] text-background-13/70">
+      <ol class="flex flex-wrap items-center gap-x-2 gap-y-1">
+        <li><a href="/" class="transition hover:text-opai-purple">Inicio</a></li>
+        <li aria-hidden="true">/</li>
+        <li><a href="/casos/" class="transition hover:text-opai-purple">Casos de éxito</a></li>
+        <li aria-hidden="true">/</li>
+        <li class="text-background-13/80">{data.client}</li>
+      </ol>
+    </nav>
+
+    <p class="mt-6 font-ibm-plex-mono text-[11px] uppercase tracking-[0.18em] text-opai-purple">
+      Caso de éxito · {data.industry} · {data.location}
+    </p>
+    <h1 class="mt-3 max-w-4xl font-sora text-3xl font-semibold leading-[1.15] tracking-tight text-background-13/90 md:text-5xl">
+      {data.title}
+    </h1>
+    <p class="mt-5 max-w-3xl font-inter-tight text-base leading-relaxed text-background-13/70 md:text-lg">
+      {data.lead}
+    </p>
+    <p class="mt-4 font-ibm-plex-mono text-[11px] uppercase tracking-[0.14em] text-background-13/70">
+      <time datetime={published.slice(0, 10)}>
+        {data.pubDate.toLocaleDateString('es-CO', { year: 'numeric', month: 'long', day: 'numeric' })}
+      </time>
+      <span aria-hidden="true"> · </span>
+      <span>77 Studio</span>
+    </p>
+  </header>
+
+  <div class="mx-auto mt-10 grid max-w-[1290px] gap-6 px-4 sm:px-6 lg:grid-cols-[minmax(0,1.4fr)_minmax(280px,0.8fr)]">
+    <section class="rounded-[20px] border border-stroke-2/60 bg-white p-6 md:p-8" aria-labelledby="cliente-heading">
+      <h2 id="cliente-heading" class="font-sora text-xl font-semibold tracking-tight text-background-13/90">
+        {data.legalName ?? data.client}
+      </h2>
+      {data.clientSummary && (
+        <p class="mt-2 font-inter-tight text-sm leading-relaxed text-background-13/60">
+          {data.clientSummary}
+        </p>
+      )}
+      {data.services.length > 0 && (
+        <ul class="mt-5 flex flex-wrap gap-2">
+          {data.services.map((serviceName) => (
+            <li class="rounded-full border border-stroke-2/60 bg-background-8 px-3 py-1 font-inter-tight text-xs text-background-13/70">
+              {serviceName}
+            </li>
+          ))}
+        </ul>
+      )}
+      <dl class="mt-6 space-y-3 font-inter-tight text-sm leading-relaxed text-background-13/70">
+        {data.distributor && (
+          <div>
+            <dt class="font-ibm-plex-mono text-[11px] uppercase tracking-[0.14em] text-background-13/70">Distribución</dt>
+            <dd class="mt-1">{data.distributor}</dd>
+          </div>
+        )}
+        {data.relationship && (
+          <div>
+            <dt class="font-ibm-plex-mono text-[11px] uppercase tracking-[0.14em] text-background-13/70">Relación con 77 Studio</dt>
+            <dd class="mt-1">{data.relationship}</dd>
+          </div>
+        )}
+        {data.instagram && data.instagramHandle && (
+          <div>
+            <dt class="font-ibm-plex-mono text-[11px] uppercase tracking-[0.14em] text-background-13/70">Instagram</dt>
+            <dd class="mt-1">
+              <a href={data.instagram} class="text-background-13 underline decoration-black/20 underline-offset-4 transition hover:text-opai-purple" target="_blank" rel="noopener noreferrer">
+                {data.instagramHandle}
+              </a>
+            </dd>
+          </div>
+        )}
+      </dl>
+    </section>
+
+    {data.timeline.length > 0 && (
+      <section class="rounded-[20px] border border-stroke-2/60 bg-white p-6 md:p-8" aria-labelledby="cronologia-heading">
+        <h2 id="cronologia-heading" class="font-sora text-xl font-semibold tracking-tight text-background-13/90">
+          Cronología
+        </h2>
+        <ol class="mt-5 space-y-4">
+          {data.timeline.map((item) => (
+            <li class="grid grid-cols-[auto_1fr] gap-x-3">
+              <span class="mt-1 size-2 rounded-full bg-opai-purple" aria-hidden="true"></span>
+              <div>
+                <time datetime={item.iso} class="font-ibm-plex-mono text-[11px] uppercase tracking-[0.14em] text-background-13/70">{item.when}</time>
+                <p class="mt-1 font-inter-tight text-sm leading-relaxed text-background-13/70">{item.text}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </section>
+    )}
+  </div>
+
+  {flowSteps.length > 0 && data.flow && (
+    <section class="mx-auto mt-14 max-w-[1290px] px-4 sm:px-6" aria-labelledby="flujo-heading">
+      <h2 id="flujo-heading" class="max-w-3xl font-sora text-2xl font-semibold tracking-tight text-background-13/90 md:text-3xl">
+        {data.flow.heading}
+      </h2>
+      <p class="mt-4 max-w-3xl font-inter-tight text-base leading-relaxed text-background-13/70">
+        {data.flow.answer}
+      </p>
+      <ol class="mt-8 grid gap-3 sm:grid-cols-2 xl:grid-cols-5">
+        {flowSteps.map((step, index) => (
+          <li class="flex h-full flex-col rounded-[20px] border border-stroke-2/60 bg-white p-5">
+            <span class="font-ibm-plex-mono text-[11px] uppercase tracking-[0.16em] text-opai-purple">
+              {String(index + 1).padStart(2, '0')}
+            </span>
+            <h3 class="mt-3 font-sora text-lg font-semibold text-background-13/90">{step.label}</h3>
+            <p class="mt-2 font-inter-tight text-sm leading-relaxed text-background-13/60">{step.text}</p>
+          </li>
+        ))}
+      </ol>
+      <p class="mt-4 font-inter-tight text-xs leading-relaxed text-background-13/70">
+        Recorrido del taller, de la recepción a la entrega.
+      </p>
+    </section>
+  )}
+
+  <div class="mx-auto mt-14 max-w-3xl space-y-12 px-4 sm:px-6">
+    {data.problem && (
+      <section aria-labelledby="problema-heading">
+        <h2 id="problema-heading" class="font-sora text-2xl font-semibold tracking-tight text-background-13/90 md:text-3xl">
+          {data.problem.heading}
+        </h2>
+        <p class="mt-4 font-inter-tight text-base leading-relaxed text-background-13/70">{data.problem.answer}</p>
+        {data.problem.detail && (
+          <p class="mt-3 font-inter-tight text-base leading-relaxed text-background-13/60">{data.problem.detail}</p>
+        )}
+      </section>
+    )}
+
+    {data.solution && (
+      <section aria-labelledby="solucion-heading">
+        <h2 id="solucion-heading" class="font-sora text-2xl font-semibold tracking-tight text-background-13/90 md:text-3xl">
+          {data.solution.heading}
+        </h2>
+        <p class="mt-4 font-inter-tight text-base leading-relaxed text-background-13/70">{data.solution.answer}</p>
+        {data.solution.detail && (
+          <p class="mt-3 font-inter-tight text-base leading-relaxed text-background-13/60">{data.solution.detail}</p>
+        )}
+      </section>
+    )}
+  </div>
+
+  {data.modules.length > 0 && (
+    <section class="mx-auto mt-10 max-w-[1290px] px-4 sm:px-6" aria-label="Módulos del portal">
+      <ol class="grid gap-4 md:grid-cols-2">
+        {data.modules.map((module, index) => (
+          <li class="rounded-[20px] border border-stroke-2/60 bg-white p-6">
+            <p class="font-ibm-plex-mono text-[11px] uppercase tracking-[0.16em] text-background-13/70">
+              Módulo {String(index + 1).padStart(2, '0')}
+            </p>
+            <h3 class="mt-2 font-sora text-xl font-semibold text-background-13/90">{module.title}</h3>
+            <p class="mt-3 font-inter-tight text-sm leading-relaxed text-background-13/60">{module.body}</p>
+          </li>
+        ))}
+      </ol>
+      {data.roles.length > 0 && (
+        <p class="mt-4 font-inter-tight text-sm text-background-13/60">
+          Roles en el portal: {data.roles.join(' y ')}.
+        </p>
+      )}
+    </section>
+  )}
+
+  {data.whatsapp && (
+    <section class="mx-auto mt-14 max-w-[1290px] px-4 sm:px-6" aria-labelledby="whatsapp-heading">
+      <div class="rounded-[24px] bg-background-5 px-6 py-8 text-white md:px-10 md:py-12">
+        <h2 id="whatsapp-heading" class="max-w-3xl font-sora text-2xl font-semibold tracking-tight text-white/90 md:text-3xl">
+          {data.whatsapp.heading}
+        </h2>
+        <p class="mt-4 max-w-3xl font-inter-tight text-base leading-relaxed text-white/70">{data.whatsapp.answer}</p>
+        {data.whatsapp.detail && (
+          <p class="mt-3 max-w-3xl font-inter-tight text-base leading-relaxed text-white/60">{data.whatsapp.detail}</p>
+        )}
+        {data.whatsapp.points.length > 0 && (
+          <ul class="mt-6 grid gap-3 md:grid-cols-2">
+            {data.whatsapp.points.map((point) => (
+              <li class="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 font-inter-tight text-sm leading-relaxed text-white/80">
+                {point}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </section>
+  )}
+
+  {data.results && (
+    <section class="mx-auto mt-14 max-w-[1290px] px-4 sm:px-6" aria-labelledby="resultados-heading">
+      <div class="max-w-3xl">
+        <h2 id="resultados-heading" class="font-sora text-2xl font-semibold tracking-tight text-background-13/90 md:text-3xl">
+          {data.results.heading}
+        </h2>
+        <p class="mt-4 font-inter-tight text-base leading-relaxed text-background-13/70">{data.results.answer}</p>
+      </div>
+      {data.results.points.length > 0 && (
+        <ul class="mt-8 grid gap-3 md:grid-cols-2">
+          {data.results.points.map((point) => (
+            <li class="rounded-[20px] border border-stroke-2/60 bg-white px-5 py-4 font-inter-tight text-sm leading-relaxed text-background-13/70">
+              {point}
+            </li>
+          ))}
+        </ul>
+      )}
+    </section>
+  )}
+
+  {data.testimonial && (
+    <section class="mx-auto mt-14 max-w-3xl px-4 sm:px-6" aria-labelledby="testimonio-heading">
+      <h2 id="testimonio-heading" class="font-sora text-2xl font-semibold tracking-tight text-background-13/90">
+        Lo que dice el taller
+      </h2>
+      <figure class="mt-5 rounded-[20px] border border-stroke-2/60 bg-white p-6 md:p-8">
+        <blockquote>
+          <p class="font-sora text-2xl font-medium leading-snug tracking-tight text-background-13/90">
+            “{data.testimonial.quote}”
+          </p>
+        </blockquote>
+        <figcaption class="mt-4 font-ibm-plex-mono text-[11px] uppercase tracking-[0.16em] text-background-13/70">
+          {data.testimonial.attribution}
+        </figcaption>
+      </figure>
+    </section>
+  )}
+
+  {data.stack.length > 0 && (
+    <section class="mx-auto mt-14 max-w-[1290px] px-4 sm:px-6" aria-labelledby="stack-heading">
+      <h2 id="stack-heading" class="font-sora text-xl font-semibold text-background-13/90">Stack</h2>
+      <ul class="mt-4 flex flex-wrap gap-2">
+        {data.stack.map((item) => (
+          <li class="rounded-full bg-background-3 px-3 py-1 font-ibm-plex-mono text-xs text-white/80">{item}</li>
+        ))}
+      </ul>
+    </section>
+  )}
+
+  <section class="mx-auto mt-16 max-w-[1290px] px-4 sm:px-6" aria-labelledby="cta-heading">
+    <div class="rounded-[24px] border border-stroke-2/60 bg-white px-6 py-8 md:px-10 md:py-12">
+      <h2 id="cta-heading" class="max-w-2xl font-sora text-2xl font-semibold tracking-tight text-background-13/90 md:text-4xl">
+        ¿Tu negocio tiene un proceso así? Automátizalo
+      </h2>
+      <p class="mt-4 max-w-2xl font-inter-tight text-base leading-relaxed text-background-13/60">
+        Cuéntanos cómo entra y sale el trabajo en tu operación. Te respondemos por WhatsApp al {PHONE_DISPLAY}.
+      </p>
+      <DualCTA
+        className="mt-8"
+        centered={false}
+        whatsappMessage="Hola 77 Studio 👋 Vi el caso de Casa Tuning y quiero automatizar un proceso parecido en mi negocio."
+        whatsappText="Automátizalo por WhatsApp"
+        emailText="Ir a contacto"
+        emailHref="/contacto/"
+      />
+    </div>
+  </section>
+
+  <nav class="mx-auto mt-10 max-w-[1290px] px-4 sm:px-6" aria-label="Servicios relacionados">
+    <p class="font-ibm-plex-mono text-[11px] uppercase tracking-[0.16em] text-background-13/70">Sigue por aquí</p>
+    <ul class="mt-3 flex flex-wrap gap-x-4 gap-y-2">
+      <li>
+        <a href="/casos/" class="font-inter-tight text-sm text-background-13/70 underline decoration-black/20 underline-offset-4 transition hover:text-opai-purple">Casos de éxito</a>
+      </li>
+      <li>
+        <a href="/ia-automatizacion/" class="font-inter-tight text-sm text-background-13/70 underline decoration-black/20 underline-offset-4 transition hover:text-opai-purple">IA y automatización</a>
+      </li>
+      <li>
+        <a href="/productos-digitales/" class="font-inter-tight text-sm text-background-13/70 underline decoration-black/20 underline-offset-4 transition hover:text-opai-purple">Productos digitales</a>
+      </li>
+      <li>
+        <a href="/contacto/" class="font-inter-tight text-sm text-background-13/70 underline decoration-black/20 underline-offset-4 transition hover:text-opai-purple">Contacto</a>
+      </li>
+    </ul>
+  </nav>
+</article>

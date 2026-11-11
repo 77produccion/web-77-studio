@@ -2,6 +2,7 @@
 // src/pages/index.astro
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import HeroHome from '@/components/home/HeroHome.astro';
+import CaseSpotlight from '@/components/casos/CaseSpotlight.astro';
 import MetricsAndIntegrations from '@/components/home/MetricsAndIntegrations.astro';
 import InternationalPresence from '@/components/home/InternationalPresence.astro';
 import TeamRosterSection from '@/components/nosotros/TeamRosterSection.astro';
@@ -47,6 +48,8 @@ const t = getHomeTranslations('es');
 
   <!-- 06b. Prueba Social & Testimonios Reales -->
   <TestimonialsSection />
+
+  <CaseSpotlight variant="home" />
 
   <!-- 07. Proceso de Trabajo en 4 Pasos -->
   <ProcessSection />
