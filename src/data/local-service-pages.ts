@@ -45,7 +45,7 @@ export const SERVICE_CITY_PAGES: ServiceCityPage[] = [
     faqs: [
       { question: '¿77 Studio hace pauta para empresas de Armenia?', answer: 'Sí. Meta Ads, Google Ads, piezas y la conexión con la web y el WhatsApp. La sede está en Armenia, Cra. 14 #35 Norte-18, Oficina 405.' },
       { question: '¿Manejan las redes sociales?', answer: 'No como servicio de publicación diaria. El contenido existe para las campañas y para explicar la oferta. Si solo necesitas un community manager, no somos ese proveedor.' },
-      { question: '¿Atienden también Calarcá y Salento?', answer: 'Sí, desde Armenia. La campaña puede nombrar el municipio cuando la empresa de verdad vende ahí.' },
+      { question: '¿Atienden también Calarcá y Salento?', answer: 'Sí. Acompañamos empresas de Calarcá y Salento desde la sede de Armenia, con reuniones presenciales y trabajo remoto. La campaña nombra el municipio cuando la empresa de verdad vende ahí.' },
       { question: '¿Cuánto hay que invertir en anuncios?', answer: 'El presupuesto de medios lo pone la empresa y se define según el costo real de una conversación útil, no según un paquete. El honorario de 77 Studio es aparte y depende del alcance.' },
       { question: '¿En cuánto tiempo se ve algo?', answer: 'Las primeras lecturas de una campaña salen en días, no en un trimestre. Decidir si se escala depende de si los mensajes se responden y si la página convierte. No hay un plazo mágico igual para todos.' },
     ],
@@ -177,7 +177,7 @@ export const SERVICE_CITY_PAGES: ServiceCityPage[] = [
     situations: [
       { title: 'El negocio solo tiene Instagram', text: 'Hace falta una URL que se pueda anunciar y que Google entienda. El perfil se queda como canal, no como única vitrina.' },
       { title: 'El sitio carga lento', text: 'En turismo, la persona compara tres hoteles en el bus. El que tarda, pierde. Recortamos peso y dejamos el mensaje arriba.' },
-      { title: 'Varios municipios', text: 'Una finca en Montenegro o un hotel en Filandia administrados desde Armenia necesitan decir las dos cosas sin parecer una sede falsa en cada pueblo.' },
+      { title: 'Varios municipios', text: 'Una finca en Montenegro o un hotel en Filandia administrados desde Armenia necesitan decir las dos cosas: dónde está la operación y desde dónde se administra.' },
       { title: 'Landing de una campaña', text: 'Una sola oferta, una prueba clara y un botón. Sirve para una matrícula, una temporada o un servicio nuevo.' },
     ],
     faqs: [
@@ -194,7 +194,7 @@ export const SERVICE_CITY_PAGES: ServiceCityPage[] = [
     service: 'marketing-digital',
     title: 'Agencia de marketing digital en Pereira | 77 Studio',
     description:
-      'Meta Ads y Google Ads para empresas de Pereira, Dosquebradas y La Virginia. Sin oficina en la ciudad: se trabaja desde Armenia, con medición.',
+      'Meta Ads y Google Ads para empresas de Pereira, Dosquebradas y La Virginia. Sede en Armenia, cobertura nacional y medición en cada cuenta.',
     keywords: [
       'agencia de marketing digital en Pereira',
       'Google Ads Pereira',
@@ -204,7 +204,7 @@ export const SERVICE_CITY_PAGES: ServiceCityPage[] = [
     h1: 'Agencia de marketing digital en Pereira',
     lead: [
       'Pereira tiene más competencia en los anuncios que un municipio pequeño. Una clínica, una universidad o un distribuidor no ganan por publicar más: ganan cuando la búsqueda correcta cae en una página clara y el mensaje no se pierde.',
-      '77 Studio no tiene oficina en Pereira. La cuenta se lleva desde Armenia y la reunión es por videollamada. Cubrimos el área metropolitana —Pereira, Dosquebradas y La Virginia—, Santa Rosa de Cabal y Cartago cuando la empresa de verdad vende ahí.',
+      'La sede de 77 Studio está en Armenia y la cobertura es nacional. En Pereira llevamos la cuenta con reuniones presenciales y videollamada. Cubrimos el área metropolitana —Pereira, Dosquebradas y La Virginia—, Santa Rosa de Cabal y Cartago cuando la empresa de verdad vende ahí.',
     ],
     sections: [
       {
@@ -228,7 +228,7 @@ export const SERVICE_CITY_PAGES: ServiceCityPage[] = [
       { title: 'Hoteles de paso', text: 'Quien vuela a Matecaña o va a Santa Rosa busca la noche anterior. Importa aparecer en esa búsqueda y mostrar cómo reservar.' },
     ],
     faqs: [
-      { question: '¿Tienen oficina en Pereira?', answer: 'No. Atendemos Pereira desde la sede de Armenia. El teléfono es +57 314 849 0955.' },
+      { question: '¿Tienen oficina en Pereira?', answer: 'Nuestra sede está en Armenia y atendemos empresas de Pereira con reuniones presenciales y trabajo remoto. El teléfono es +57 314 849 0955.' },
       { question: '¿La campaña puede incluir Dosquebradas?', answer: 'Sí, si operas allá. Nombrar el municipio en el anuncio y en la página evita que el clic se sienta engañado.' },
       { question: '¿Garantizan clientes?', answer: 'No. Garantizamos un sistema medible: anuncio, página y respuesta. El resultado depende de la oferta, el presupuesto y la capacidad de atender.' },
       { question: '¿Hacen solo el diseño de las piezas?', answer: 'Podemos hacer las piezas dentro de la campaña. Piezas sueltas, sin medio ni destino, no son el servicio.' },
@@ -250,7 +250,7 @@ export const SERVICE_CITY_PAGES: ServiceCityPage[] = [
     h1: 'Automatización de procesos con IA en Pereira',
     lead: [
       'En el área metropolitana el equipo comercial suele cubrir Pereira y Dosquebradas con el mismo celular. La cotización sale, el cliente pide un cambio, y a los tres días nadie sabe en qué quedó. Automatizar ese tramo es el trabajo, más que instalar un software nuevo con otro login.',
-      'Lo implementamos en remoto desde Armenia. Nos sentamos —por videollamada— sobre el proceso real: quién cotiza, dónde queda el dato y qué pasa si nadie contesta.',
+      'Lo implementamos desde la sede en Armenia, con cobertura nacional. La sesión de arranque es presencial en Pereira o por videollamada: vemos quién cotiza, dónde queda el dato y qué pasa si nadie contesta.',
     ],
     sections: [
       {
@@ -274,7 +274,7 @@ export const SERVICE_CITY_PAGES: ServiceCityPage[] = [
       { title: 'Operación interna', text: 'Aprobaciones simples, alertas de un pedido quieto y un reporte que alguien sí lee el lunes.' },
     ],
     faqs: [
-      { question: '¿Pueden automatizar mi empresa si estoy en Pereira?', answer: 'Sí, en remoto desde Armenia. Hace falta una sesión para ver el proceso y accesos a las herramientas que ya usas.' },
+      { question: '¿Pueden automatizar mi empresa si estoy en Pereira?', answer: 'Sí. La sede está en Armenia y la cobertura es nacional. Hace falta una sesión —presencial o por videollamada— para ver el proceso y accesos a las herramientas que ya usas.' },
       { question: '¿Reemplaza al CRM?', answer: 'Si ya tienes CRM, lo conectamos. Si no, no empezamos por comprar la plataforma más grande: empezamos por no perder el dato.' },
       { question: '¿Sirve para varias sedes?', answer: 'Sí. Pereira, Dosquebradas o La Virginia pueden ser un campo del flujo, no tres sistemas distintos, salvo que la operación de verdad esté separada.' },
       { question: '¿Cuánto se demora?', answer: 'Un flujo acotado —entrada de WhatsApp, ficha y recordatorio— se prueba en semanas, no en un proyecto abierto de un año. El plazo exacto sale del mapa del proceso.' },
@@ -333,7 +333,7 @@ export const SERVICE_CITY_PAGES: ServiceCityPage[] = [
     service: 'paginas-web',
     title: 'Diseño de páginas web en Pereira | 77 Studio',
     description:
-      'Sitios y landing pages para empresas de Pereira y el área metropolitana. Claros, rápidos y listos para pauta. Se desarrollan desde Armenia.',
+      'Sitios y landing pages para empresas de Pereira y el área metropolitana. Claros, rápidos y listos para pauta. Sede en Armenia y cobertura nacional.',
     keywords: [
       'diseño de páginas web en Pereira',
       'creación de páginas web Pereira',
@@ -342,7 +342,7 @@ export const SERVICE_CITY_PAGES: ServiceCityPage[] = [
     h1: 'Diseño de páginas web en Pereira',
     lead: [
       'En Pereira el clic de Google es más disputado. Si la página tarda o no dice en qué sede atienden, ese clic ya se pagó y no vuelve. Diseñamos sitios y landings para que la oferta se entienda en el celular y el siguiente paso sea escribir o agendar.',
-      'No tenemos oficina en la ciudad. El proyecto se lleva desde Armenia, con revisiones por videollamada. La página puede hablar de Pereira, Dosquebradas, La Virginia o Cartago sin inventar locales que no existen.',
+      'El proyecto se lleva desde la sede en Armenia, con cobertura nacional: revisiones por videollamada y reuniones presenciales en Pereira cuando el trabajo lo pide. La página habla de Pereira, Dosquebradas, La Virginia o Cartago con los locales reales de la empresa.',
     ],
     sections: [
       {
@@ -366,7 +366,7 @@ export const SERVICE_CITY_PAGES: ServiceCityPage[] = [
       { title: 'Varias líneas de negocio', text: 'Se separan en páginas distintas para no mezclar, por ejemplo, una línea industrial con una de consumo.' },
     ],
     faqs: [
-      { question: '¿Desarrollan páginas para empresas de Pereira?', answer: 'Sí, en remoto desde Armenia. El resultado es un sitio de la empresa, no una sede nuestra en Risaralda.' },
+      { question: '¿Desarrollan páginas para empresas de Pereira?', answer: 'Sí. Desarrollamos el sitio desde la sede en Armenia, con cobertura nacional. El resultado es la página de tu empresa en Pereira.' },
       { question: '¿Pueden migrar el sitio que ya tengo?', answer: 'Si conviene conservarlo, se migra el contenido útil. Si la base está frenada por plugins, suele ser más sano reconstruir las páginas que importan.' },
       { question: '¿Incluyen textos?', answer: 'Sí, a partir de lo que la empresa sabe de su oferta. No inventamos casos de éxito ni cifras de pacientes o de ventas.' },
       { question: '¿Queda lista para Google Ads?', answer: 'Ese es el punto de una landing: una promesa, coincidencia con el anuncio y una conversión medible. La campaña en sí es el servicio de marketing.' },
@@ -379,7 +379,7 @@ export const SERVICE_CITY_PAGES: ServiceCityPage[] = [
     service: 'marketing-digital',
     title: 'Agencia de marketing digital en Manizales | 77 Studio',
     description:
-      'Pauta y estrategia para empresas de Manizales, Villamaría y Chinchiná. Google Ads y Meta Ads conectados a la página y a WhatsApp. Desde Armenia.',
+      'Pauta y estrategia para empresas de Manizales, Villamaría y Chinchiná. Google Ads y Meta Ads conectados a la página y a WhatsApp. Sede en Armenia y cobertura nacional.',
     keywords: [
       'agencia de marketing digital en Manizales',
       'Google Ads Manizales',
@@ -389,7 +389,7 @@ export const SERVICE_CITY_PAGES: ServiceCityPage[] = [
     h1: 'Agencia de marketing digital en Manizales',
     lead: [
       'Manizales es un mercado más pequeño y más estacional que Pereira. La matrícula, el calendario académico y los ritmos del café mueven la demanda por semanas, no por un goteo parejo. Una campaña que dice lo mismo todo el año se gasta el público rápido.',
-      'La llevamos desde Armenia. No hay oficina en Manizales ni en Villamaría. Sí nombramos esos lugares en el anuncio cuando la empresa atiende allá, porque la gente busca así.',
+      'La campaña de Manizales se lleva desde la sede en Armenia, con cobertura nacional. En el anuncio nombramos Manizales, Villamaría o Chinchiná cuando la empresa atiende allá, porque la gente busca así. Las reuniones pueden ser presenciales o por videollamada.',
     ],
     sections: [
       {
@@ -413,7 +413,7 @@ export const SERVICE_CITY_PAGES: ServiceCityPage[] = [
       { title: 'Firmas profesionales', text: 'Poca pauta, muy específica, hacia quien ya tiene el problema. No hace falta “llenar el feed”.' },
     ],
     faqs: [
-      { question: '¿Hay agencia de 77 Studio en Manizales?', answer: 'No hay oficina. Atendemos Manizales desde Armenia, Cra. 14 #35 Norte-18, Oficina 405. Teléfono +57 314 849 0955.' },
+      { question: '¿Hay agencia de 77 Studio en Manizales?', answer: 'Nuestra sede está en Armenia y atendemos empresas de Manizales con reuniones presenciales y trabajo remoto. La dirección de la sede es Cra. 14 #35 Norte-18, Oficina 405. Teléfono +57 314 849 0955.' },
       { question: '¿La pauta cubre Chinchiná?', answer: 'Sí, cuando el negocio vende ahí. Chinchiná no se anuncia igual que el centro de Manizales: la intención y la competencia son otras.' },
       { question: '¿Me ayudan a vender más café?', answer: 'Ayudamos a que la oferta se encuentre y a que la cotización no se pierda. El resultado comercial depende del producto, el precio y la capacidad de despacho. No prometemos un volumen.' },
       { question: '¿Publican en redes por mí?', answer: 'No es el servicio. Producimos las piezas que la pauta necesita y el sistema para responder.' },
@@ -426,7 +426,7 @@ export const SERVICE_CITY_PAGES: ServiceCityPage[] = [
     service: 'automatizacion',
     title: 'Automatización de procesos con IA en Manizales | 77 Studio',
     description:
-      'Automatización para equipos pequeños en Manizales y Chinchiná: seguimiento de cotizaciones, admisiones y recordatorios. Desde la sede en Armenia.',
+      'Automatización para equipos pequeños en Manizales y Chinchiná: seguimiento de cotizaciones, admisiones y recordatorios. Sede en Armenia y cobertura nacional.',
     keywords: [
       'automatización de procesos en Manizales',
       'automatización con IA Caldas',
@@ -435,7 +435,7 @@ export const SERVICE_CITY_PAGES: ServiceCityPage[] = [
     h1: 'Automatización de procesos con IA en Manizales',
     lead: [
       'En Manizales muchas empresas operan con un equipo corto: la misma persona vende, responde y arma el reporte. Automatizar no es ponerle un robot a la marca. Es que el recordatorio, el paso de la cotización y la lista de pendientes ocurran aunque esa persona esté en una visita a Chinchiná.',
-      'El trabajo es remoto, desde Armenia. Nos interesa el proceso escrito, no una demo de IA que no toque el WhatsApp real.',
+      'El trabajo sale de la sede en Armenia, con cobertura nacional: reuniones presenciales en Manizales y sesiones remotas. Nos interesa el proceso escrito, no una demo de IA que no toque el WhatsApp real.',
     ],
     sections: [
       {
@@ -459,7 +459,7 @@ export const SERVICE_CITY_PAGES: ServiceCityPage[] = [
       { title: 'Reporte semanal', text: 'Un resumen de conversaciones abiertas que el dueño puede leer sin pedir capturas.' },
     ],
     faqs: [
-      { question: '¿Atienden empresas de Manizales sin oficina allá?', answer: 'Sí. La sede está en Armenia y el proyecto se hace por videollamada y accesos remotos.' },
+      { question: '¿Atienden empresas de Manizales?', answer: 'Sí. Nuestra sede está en Armenia y atendemos empresas de Manizales con reuniones presenciales y trabajo remoto. El proyecto avanza por videollamada y accesos, y la visita se coordina cuando hace falta.' },
       { question: '¿Sirve si somos un equipo de tres personas?', answer: 'Justamente. El flujo reemplaza la tarea repetida, no a la gente. En equipos grandes a veces el problema es otro.' },
       { question: '¿Tienen que usar la herramienta que ustedes digan?', answer: 'Preferimos las que ya pagas y usas. Una herramienta nueva solo entra si la actual no puede hacer el paso.' },
       { question: '¿Se puede ampliar después?', answer: 'Sí. El primer flujo queda documentado para que el segundo no empiece de cero.' },
@@ -472,7 +472,7 @@ export const SERVICE_CITY_PAGES: ServiceCityPage[] = [
     service: 'agentes-ia',
     title: 'Chatbots y agentes de IA para empresas en Manizales | 77 Studio',
     description:
-      'Agentes de WhatsApp para empresas de Manizales: admisiones, café y servicios locales. Filtran la solicitud y la entregan a una persona. Desde Armenia.',
+      'Agentes de WhatsApp para empresas de Manizales: admisiones, café y servicios locales. Filtran la solicitud y la entregan a una persona. Sede en Armenia y cobertura nacional.',
     keywords: [
       'chatbot Manizales',
       'agentes de IA para empresas en Manizales',
@@ -519,7 +519,7 @@ export const SERVICE_CITY_PAGES: ServiceCityPage[] = [
     service: 'paginas-web',
     title: 'Diseño de páginas web en Manizales | 77 Studio',
     description:
-      'Páginas web rápidas para empresas de Manizales, Villamaría y Chinchiná. Claras en el celular y listas para que las encuentren. Se hacen desde Armenia.',
+      'Páginas web rápidas para empresas de Manizales, Villamaría y Chinchiná. Claras en el celular y listas para que las encuentren. Sede en Armenia y cobertura nacional.',
     keywords: [
       'diseño de páginas web en Manizales',
       'creación de sitios web Manizales',
@@ -528,7 +528,7 @@ export const SERVICE_CITY_PAGES: ServiceCityPage[] = [
     h1: 'Diseño de páginas web en Manizales',
     lead: [
       'En Manizales la página se juzga en el teléfono, entre una clase, una visita y la ladera. Si tarda o esconde el servicio, la persona vuelve a la búsqueda. Diseñamos sitios sobrios, rápidos y concretos para empresas de la ciudad, de Villamaría y de Chinchiná.',
-      'El proyecto se hace desde Armenia. No montamos una oficina ficticia en Caldas dentro del sitio: la página es de tu empresa, con tus datos.',
+      'El proyecto se hace desde la sede en Armenia, con cobertura nacional. La página es de tu empresa, con tus datos y tus locales.',
     ],
     sections: [
       {
@@ -552,7 +552,7 @@ export const SERVICE_CITY_PAGES: ServiceCityPage[] = [
       { title: 'Cobertura Villamaría', text: 'La página dice las dos ciudades si el desplazamiento es real. Eso también ayuda a la búsqueda local.' },
     ],
     faqs: [
-      { question: '¿Hacen páginas web en Manizales?', answer: 'Sí, para empresas de Manizales y alrededores, trabajando desde la sede de Armenia.' },
+      { question: '¿Hacen páginas web en Manizales?', answer: 'Sí. Hacemos páginas para empresas de Manizales y alrededores, desde la sede en Armenia y con cobertura nacional.' },
       { question: '¿La página va a cargar en datos móviles?', answer: 'Ese es el requisito. Recortamos peso, imágenes y scripts que no aportan al mensaje.' },
       { question: '¿Puedo tener solo una landing?', answer: 'Sí. Si hoy solo necesitas una campaña o una oferta, no hace falta un sitio de doce páginas.' },
       { question: '¿Posiciona para “Manizales”?', answer: 'La página queda preparada para que Google entienda el servicio y la ciudad. El puesto depende de la competencia y del tiempo. No lo prometemos.' },

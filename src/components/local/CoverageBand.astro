@@ -10,22 +10,58 @@ interface Props {
 const { service, lang = 'es' } = Astro.props;
 const isEn = lang === 'en';
 const serviceMeta = LOCAL_SERVICES.find((item) => item.slug === service);
+
+const SERVICE_EN: Record<ServiceSlug, string> = {
+  'marketing-digital': 'Digital marketing',
+  automatizacion: 'Process automation',
+  'agentes-ia': 'AI agents',
+  'paginas-web': 'Websites',
+};
+
+function cardText(slug: string, department: string, hasOffice: boolean): string {
+  if (hasOffice) {
+    if (serviceMeta) {
+      return isEn
+        ? `Quindío. ${SERVICE_EN[serviceMeta.slug]} for companies in Armenia. Office at Cra. 14 #35 Norte-18.`
+        : `Quindío. ${serviceMeta.short} para empresas de Armenia. Oficina en la Cra. 14 #35 Norte-18.`;
+    }
+    return isEn
+      ? 'Quindío. Office at Cra. 14 #35 Norte-18.'
+      : 'Quindío. Oficina en la Cra. 14 #35 Norte-18.';
+  }
+  if (serviceMeta) {
+    const place = slug === 'pereira'
+      ? (isEn ? 'Pereira and Dosquebradas' : 'Pereira y Dosquebradas')
+      : (isEn ? 'Manizales and Villamaría' : 'Manizales y Villamaría');
+    return isEn
+      ? `${department}. ${SERVICE_EN[serviceMeta.slug]} for companies in ${place}.`
+      : `${department}. ${serviceMeta.short} para empresas de ${place}.`;
+  }
+  if (slug === 'pereira') {
+    return isEn
+      ? 'Risaralda. Strategy, automation, and AI for companies in Pereira and Dosquebradas.'
+      : 'Risaralda. Estrategia, automatización e IA para empresas de Pereira y Dosquebradas.';
+  }
+  return isEn
+    ? 'Caldas. Strategy, automation, and AI for companies in Manizales and Villamaría.'
+    : 'Caldas. Estrategia, automatización e IA para empresas de Manizales y Villamaría.';
+}
 ---
 
 <section class="bg-background-8 py-16 sm:py-20" aria-labelledby="eje-cafetero-band">
   <div class="mx-auto max-w-[1290px] px-5 sm:px-6">
     <p class="font-ibm-plex-mono text-xs font-medium uppercase tracking-[0.18em] text-opai-purple">
-      {isEn ? 'Coffee Axis' : 'Eje Cafetero'}
+      {isEn ? 'National coverage' : 'Cobertura nacional'}
     </p>
     <h2 id="eje-cafetero-band" class="mt-3 max-w-3xl font-sora text-3xl font-semibold tracking-tight text-background-13 sm:text-4xl">
       {isEn
-        ? 'Based in Armenia. Pereira and Manizales are served from there.'
-        : 'Sede en Armenia. Pereira y Manizales se atienden desde ahí.'}
+        ? 'Headquarters in Armenia, with coverage across Colombia.'
+        : 'Sede en Armenia, cobertura en toda Colombia.'}
     </h2>
     <p class="mt-4 max-w-2xl font-inter-tight leading-relaxed text-background-13/70">
       {isEn
-        ? 'Marketing, automation, AI agents, and websites for companies in the Coffee Axis. These pages are in Spanish.'
-        : 'Marketing digital, automatización, agentes de IA y páginas web para empresas de Armenia, Pereira, Manizales y los municipios cercanos.'}
+        ? 'Digital marketing, automation, AI agents, and websites for companies across the country, with a strong focus on Armenia, Pereira, and Manizales. These pages are in Spanish.'
+        : 'Marketing digital, automatización, agentes de IA y páginas web para empresas de todo el país, con foco en Armenia, Pereira, Manizales y los municipios cercanos.'}
     </p>
     <div class="mt-8 grid gap-4 md:grid-cols-3">
       {CITIES.map((city) => (
@@ -34,20 +70,18 @@ const serviceMeta = LOCAL_SERVICES.find((item) => item.slug === service);
           class="rounded-3xl border border-stroke-2 bg-white p-6 transition hover:border-opai-purple/40"
         >
           <p class="font-ibm-plex-mono text-[11px] uppercase tracking-[0.14em] text-background-13/50">
-            {city.hasOffice ? (isEn ? 'Office' : 'Sede') : (isEn ? 'No office' : 'Sin oficina')}
+            {city.hasOffice ? (isEn ? 'Headquarters' : 'Sede principal') : (isEn ? 'National coverage' : 'Cobertura nacional')}
           </p>
           <h3 class="mt-2 font-sora text-xl font-semibold text-background-13">{city.name}</h3>
           <p class="mt-2 font-inter-tight text-sm leading-relaxed text-background-13/65">
-            {serviceMeta
-              ? (isEn ? `${serviceMeta.name} for ${city.name}.` : `${serviceMeta.name} en ${city.name}.`)
-              : (isEn ? city.department : `${city.department}. ${city.hasOffice ? 'Oficina en la carrera 14.' : 'Cobertura desde Armenia.'}`)}
+            {cardText(city.slug, city.department, city.hasOffice)}
           </p>
         </a>
       ))}
     </div>
     <p class="mt-6 font-inter-tight text-sm">
       <a href={HUB_PATH} class="text-background-13/80 underline decoration-black/20 underline-offset-4 hover:text-opai-purple">
-        {isEn ? 'See the full Coffee Axis coverage' : 'Ver toda la cobertura del Eje Cafetero'}
+        {isEn ? 'See Coffee Axis coverage' : 'Ver la cobertura del Eje Cafetero'}
       </a>
     </p>
   </div>

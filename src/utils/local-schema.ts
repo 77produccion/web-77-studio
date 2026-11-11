@@ -33,6 +33,7 @@ function faqNode(url: string, faqs: Faq[]) {
 
 function areaForCity(city: CityPage) {
   return [
+    { '@type': 'Country', name: 'Colombia' },
     {
       '@type': 'City',
       name: city.name,
@@ -63,7 +64,7 @@ export function hubJsonLd(faqs: Faq[]) {
       name: 'Marketing digital, automatización e IA en el Eje Cafetero',
       serviceType: 'Marketing, automatización, agentes de IA y páginas web',
       description:
-        'Cobertura de 77 Studio en Armenia, Pereira, Manizales y municipios cercanos. La sede física está en Armenia.',
+        'Cobertura de 77 Studio en Armenia, Pereira, Manizales, los municipios cercanos y el resto de Colombia. La sede física está en Armenia.',
       url,
       provider: { '@id': `${ORIGIN}/#organization` },
       areaServed: AREA_SERVED,
