@@ -80,6 +80,18 @@ const casos = defineCollection({
         attribution: z.string(),
       })
       .optional(),
+    ogImage: z.string().optional(),
+    screenshots: z
+      .array(
+        z.object({
+          src: z.string(),
+          width: z.number(),
+          height: z.number(),
+          alt: z.string(),
+          caption: z.string(),
+        })
+      )
+      .default([]),
     keywords: z.array(z.string()).default([]),
   }),
 });

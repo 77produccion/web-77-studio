@@ -17,7 +17,6 @@ const serviceId = `${origin}/ia-automatizacion/#service`;
 const published = data.pubDate.toISOString();
 const modified = (data.updatedDate ?? data.pubDate).toISOString();
 
-// TODO(casa-tuning): capturas del sistema. No renderizar mockups ni pantallas con datos de prueba.
 // TODO(casa-tuning): no publicar el nombre de Stevan Arango hasta tener una cita autorizada a su nombre.
 // TODO(casa-tuning): no agregar cifras distintas al 100% de registro fotográfico sin un dato verificado.
 // Review sin reviewRating: en schema.org la calificación no es obligatoria. No hay aggregateRating.
@@ -69,6 +68,7 @@ const graph = {
       author: { '@id': `${origin}/#organization` },
       publisher: { '@id': `${origin}/#organization` },
       mainEntityOfPage: canonical,
+      ...(data.ogImage ? { image: toPublicUrl(site, data.ogImage) } : {}),
       about: { '@id': serviceId },
       mentions: { '@id': casaTuning['@id'] },
       ...(review ? { review: { '@id': review['@id'] } } : {}),
@@ -188,6 +188,35 @@ const flowSteps = data.flow?.steps ?? [];
       </section>
     )}
   </div>
+
+  {data.screenshots.length > 0 && (
+    <section class="mx-auto mt-14 max-w-[1290px] px-4 sm:px-6" aria-labelledby="portal-heading">
+      <h2 id="portal-heading" class="max-w-3xl font-sora text-2xl font-semibold tracking-tight text-background-13/90 md:text-3xl">
+        ¿Cómo se ve el portal?
+      </h2>
+      <p class="mt-4 max-w-3xl font-inter-tight text-base leading-relaxed text-background-13/70">
+        Son capturas del portal en operación. Los datos de clientes y las placas quedan fuera de esta página.
+      </p>
+      <div class="mt-8 space-y-6">
+        {data.screenshots.map((shot) => (
+          <figure class="overflow-hidden rounded-[20px] border border-stroke-2/60 bg-white shadow-sm">
+            <img
+              src={shot.src}
+              alt={shot.alt}
+              width={shot.width}
+              height={shot.height}
+              loading="lazy"
+              decoding="async"
+              class="h-auto w-full"
+            />
+            <figcaption class="px-5 py-4 font-inter-tight text-sm leading-relaxed text-background-13/70">
+              {shot.caption}
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    </section>
+  )}
 
   {flowSteps.length > 0 && data.flow && (
     <section class="mx-auto mt-14 max-w-[1290px] px-4 sm:px-6" aria-labelledby="flujo-heading">

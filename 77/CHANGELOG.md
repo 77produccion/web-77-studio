@@ -23,7 +23,8 @@ El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1
 
 ### Added
 - **Casos de éxito (`/casos/`, `/casos/casa-tuning/`)**: colección `casos` en MDX y ficha de Casa Tuning S.A.S. (taller en Armenia). CRM para talleres, automatización de WhatsApp en vivo, registro fotográfico de cada vehículo que ingresa y testimonio atribuido al taller, sin nombre de persona. Schema `Article`, `Review` sin calificación y `BreadcrumbList`. Enlaces desde la portada, IA y automatización, productos digitales y una línea del footer. `llms.txt` y `llms-full.txt` describen el caso. El sitemap lo toma la integración de Astro.
-- **Pendiente, fuera de la página**: capturas reales del portal. No hay mockups. El nombre de una persona del cliente no se publica hasta tener una cita autorizada a su nombre. No hay otras cifras además del 100% de registro fotográfico.
+- **Capturas del portal de Casa Tuning**: tres pantallas reales (acceso, tablero y órdenes), en WebP, con placas y datos de cliente pixelados en el archivo. Una de ellas es la imagen Open Graph del caso. El diagrama del flujo se mantiene.
+- **Pendiente, fuera de la página**: el nombre de una persona del cliente no se publica hasta tener una cita autorizada a su nombre. No hay otras cifras además del 100% de registro fotográfico.
 
 ## [Unreleased] - 2026-11-09
 
