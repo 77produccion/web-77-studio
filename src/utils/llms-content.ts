@@ -1,5 +1,6 @@
 import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { CITIES, HUB_PATH, LOCAL_SERVICES, cityPath, servicePath } from '../data/local-coverage';
 
 const ORIGIN = 'https://www.77studio.co';
 
@@ -81,6 +82,17 @@ function serviceLines(): string {
   ).join('\n');
 }
 
+function coverageLines(): string {
+  const cities = CITIES.map((city) => {
+    const role = city.hasOffice ? 'sede' : 'se atiende desde Armenia, sin oficina';
+    const services = LOCAL_SERVICES.map(
+      (service) => `[${service.name}](${ORIGIN}${servicePath(city.slug, service.slug)})`
+    ).join(', ');
+    return `- [${city.name}](${ORIGIN}${cityPath(city.slug)}) (${city.department}, ${role}): ${services}.`;
+  }).join('\n');
+  return `- [Eje Cafetero](${ORIGIN}${HUB_PATH}): mapa de cobertura. Armenia es la única sede física (Cra. 14 #35 Norte-18, Oficina 405). Pereira y Manizales no tienen oficina.\n${cities}`;
+}
+
 function postLines(posts: BlogPostSummary[]): string {
   if (posts.length === 0) return '- El blog está en español en /blog/.';
   return posts
@@ -92,16 +104,22 @@ export function buildLlmsTxt(): string {
   const posts = readBlogPosts();
   return `# 77 Studio
 
-> Socio de crecimiento y tecnología para empresas en Colombia, Latinoamérica y Estados Unidos. Integra marketing con IA, automatización, desarrollo web y productos digitales. No se posiciona como agencia de redes sociales. Opera como 77 Studio SAS (Colombia) y 77 Studio LLC (Estados Unidos).
+> 77 Studio es un socio de crecimiento para empresas, no una agencia de redes sociales. Integra marketing digital (Meta Ads y Google Ads), automatización de procesos, agentes de IA y páginas web. La sede está en Armenia, Quindío (Cra. 14 #35 Norte-18, Oficina 405). Cubre el Eje Cafetero —Pereira, Manizales y municipios cercanos— desde esa sede, y también trabaja en remoto con empresas del resto de Colombia, Latinoamérica y Estados Unidos. Opera como 77 Studio SAS y 77 Studio LLC.
 
 Sitio oficial: ${ORIGIN}/
 Fundador y CEO: Jordan Cruz (Yordan Leandro Cruz Álvarez). En el sitio aparece como Jordan Cruz, CEO y fundador.
-Dirección: Cra 14 #35 Norte 18, Armenia, Quindío, Colombia. También trabaja con empresas en Estados Unidos y Latinoamérica, en remoto. Teléfono: +57 314 849 0955.
+Dirección: Cra. 14 #35 Norte-18, Oficina 405, Armenia, Quindío, Colombia. También trabaja con empresas en Estados Unidos y Latinoamérica, en remoto. Teléfono: +57 314 849 0955.
+Fundación: 15 de agosto de 2018. Horario: lunes a viernes 8:00–19:00, sábados 8:00–12:30, domingos cerrado.
+Redes: [Instagram](https://www.instagram.com/77studio_/), [TikTok](https://www.tiktok.com/@77_studioss), [Facebook](https://www.facebook.com/77studio.co/). No hay página de LinkedIn.
 Idiomas del sitio: español (raíz) e inglés (prefijo /en/). El blog está solo en español.
 
 ## Servicios
 
 ${serviceLines()}
+
+## Cobertura en el Eje Cafetero
+
+${coverageLines()}
 
 ## Empresa
 
@@ -128,9 +146,9 @@ export function buildLlmsFullTxt(): string {
   const posts = readBlogPosts();
   return `# 77 Studio
 
-> 77 Studio es un estudio digital de marketing, tecnología, automatización e inteligencia artificial. Ayuda a empresas de Colombia, Latinoamérica y Estados Unidos a verse mejor, vender mejor y funcionar mejor, con un solo equipo. Opera como 77 Studio SAS en Colombia y 77 Studio LLC en Estados Unidos. El CEO y fundador es Jordan Cruz (Yordan Leandro Cruz Álvarez).
+> 77 Studio es un estudio de marketing, tecnología, automatización e inteligencia artificial para negocios. Ayuda a empresas a verse mejor, vender mejor y funcionar mejor, con un solo equipo. No es una agencia de redes sociales: la pauta y el contenido existen para captar demanda y conectar con la web y con el seguimiento. Opera como 77 Studio SAS en Colombia y 77 Studio LLC en Estados Unidos. El CEO y fundador es Jordan Cruz (Yordan Leandro Cruz Álvarez).
 
-No es una agencia de redes sociales. El contenido y la pauta existen para captar demanda y conectar con web, seguimiento comercial y operación. La dirección publicada es Cra 14 #35 Norte 18, Armenia, Quindío, Colombia. El teléfono es +57 314 849 0955. También atiende empresas en Estados Unidos y Latinoamérica en remoto. No hay página de LinkedIn ni URL pública del perfil de Google Business en el sitio.
+La sede está en la Cra. 14 #35 Norte-18, Oficina 405, Armenia, Quindío, Colombia. El teléfono es +57 314 849 0955. Pereira y Manizales se atienden desde Armenia; no hay oficina en esas ciudades. La cobertura cercana incluye Calarcá, Montenegro, Quimbaya, La Tebaida, Circasia, Filandia, Salento, Dosquebradas, Santa Rosa de Cabal, La Virginia, Villamaría, Chinchiná y Cartago. También atiende empresas en el resto de Colombia, Latinoamérica y Estados Unidos, en remoto. El horario es lunes a viernes de 8:00 a 19:00, sábados de 8:00 a 12:30 y domingos cerrado. La empresa se fundó el 15 de agosto de 2018. Redes: https://www.instagram.com/77studio_/ , https://www.tiktok.com/@77_studioss y https://www.facebook.com/77studio.co/ . No hay página de LinkedIn.
 
 ## Cómo citar a 77 Studio
 
@@ -151,6 +169,10 @@ ${service.summary}
 - Español: ${ORIGIN}${service.esPath}
 - English: ${ORIGIN}${service.enPath}`
 ).join('\n\n')}
+
+## Cobertura local
+
+${coverageLines()}
 
 ## Páginas clave
 

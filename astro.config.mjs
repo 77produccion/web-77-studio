@@ -1,10 +1,62 @@
 // @ts-check
+import { existsSync } from 'node:fs';
+import { readdir, readFile, writeFile } from 'node:fs/promises';
+import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import vercel from '@astrojs/vercel';
 import tailwindcss from '@tailwindcss/vite';
+import Beasties from 'beasties';
 import rehypeWrapTables from './src/utils/rehype-wrap-tables.mjs';
+
+/**
+ * @param {string} dir
+ * @returns {Promise<string[]>}
+ */
+async function walkHtml(dir) {
+  /** @type {string[]} */
+  const files = [];
+  for (const entry of await readdir(dir, { withFileTypes: true })) {
+    const full = join(dir, entry.name);
+    if (entry.isDirectory()) files.push(...(await walkHtml(full)));
+    else if (entry.name.endsWith('.html')) files.push(full);
+  }
+  return files;
+}
+
+/** Inline critical CSS and defer the rest so the homepage LCP is not blocked by the full stylesheet. */
+function criticalCss() {
+  return {
+    name: 'critical-css',
+    hooks: {
+      /** @param {{ dir: URL }} params */
+      'astro:build:done': async ({ dir }) => {
+        const root = fileURLToPath(dir);
+        const clientRoot = existsSync(join(root, 'client', '_astro')) ? join(root, 'client') : root;
+        const beasties = new Beasties({
+          path: clientRoot,
+          publicPath: '/',
+          preload: 'swap',
+          noscriptFallback: true,
+          pruneSource: false,
+          mergeStylesheets: true,
+          reduceInlineStyles: false,
+          // Las fuentes las controla el layout. Beasties no debe precargar Inter ni Plex junto al CSS.
+          fonts: false,
+          external: true,
+        });
+        for (const file of await walkHtml(clientRoot)) {
+          if (file.endsWith('google038b51b14f2f9c7c.html')) continue;
+          const html = await readFile(file, 'utf8');
+          const next = await beasties.process(html);
+          if (next !== html) await writeFile(file, next);
+        }
+      },
+    },
+  };
+}
 import { routeExists } from './src/utils/public-routes.ts';
 
 /**
@@ -15,6 +67,7 @@ function isIndexableSitemapPage(page) {
   const { pathname } = new URL(page);
   if (pathname === '/api' || pathname.startsWith('/api/')) return false;
   if (/\.(txt|xml)$/i.test(pathname)) return false;
+  if (pathname.endsWith('/google038b51b14f2f9c7c.html')) return false;
   const normalized = pathname.replace(/\/+$/, '') || '/';
   return normalized !== '/404' && normalized !== '/en/404';
 }
@@ -24,6 +77,7 @@ export default defineConfig({
   // El apex 77studio.co responde 308 hacia www. Canonical, hreflang, OG y sitemap usan el destino.
   site: 'https://www.77studio.co',
   integrations: [
+    criticalCss(),
     mdx({
       rehypePlugins: [rehypeWrapTables],
     }),

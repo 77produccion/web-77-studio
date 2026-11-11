@@ -1,0 +1,47 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import LocalCoverageView from '@/components/local/LocalCoverageView.astro';
+import { CITIES, HUB_PATH, cityPath, type CityPage } from '@/data/local-coverage';
+import { cityJsonLd, jsonLdScript } from '@/utils/local-schema';
+
+export function getStaticPaths() {
+  return CITIES.map((city) => ({
+    params: { city: city.slug },
+    props: { city },
+  }));
+}
+
+interface Props {
+  city: CityPage;
+}
+
+const { city } = Astro.props;
+const path = cityPath(city.slug);
+const crumbs = [
+  { name: '77 Studio', path: '/' },
+  { name: 'Eje Cafetero', path: HUB_PATH },
+  { name: city.name, path },
+];
+const ld = jsonLdScript(cityJsonLd(city));
+---
+
+<BaseLayout
+  title={city.title}
+  description={city.description}
+  whatsappContext="home"
+  lang="es"
+  breadcrumbTrail={crumbs}
+  mainEntityId={`https://www.77studio.co${path}#service`}
+>
+  <script is:inline type="application/ld+json" set:html={ld} />
+  <LocalCoverageView
+    kind="city"
+    city={city}
+    crumbs={crumbs}
+    eyebrow={city.eyebrow}
+    h1={city.h1}
+    lead={city.lead}
+    whatsappMessage={city.whatsappMessage}
+    faqs={city.faqs}
+  />
+</BaseLayout>

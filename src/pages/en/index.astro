@@ -11,8 +11,8 @@ import PhilosophySection from '@/components/nosotros/PhilosophySection.astro';
 import TestimonialsSection from '@/components/home/TestimonialsSection.astro';
 import ProcessSection from '@/components/home/ProcessSection.astro';
 import ContactSection from '@/components/home/ContactSection.astro';
+import CoverageBand from '@/components/local/CoverageBand.astro';
 import { getHomeTranslations } from '@/lib/i18n/pages/home';
-import { homeHeroPreload } from '@/utils/home-hero';
 
 const lang = 'en';
 const t = getHomeTranslations(lang);
@@ -23,7 +23,6 @@ const t = getHomeTranslations(lang);
   description={t.meta.description}
   whatsappContext="home"
   lang={lang}
-  heroPreload={homeHeroPreload}
 >
   <!-- 01. Hero Section with Live Metrics and Dual CTAs -->
   <HeroHome lang={lang} />
@@ -34,6 +33,8 @@ const t = getHomeTranslations(lang);
 
   <!-- 02. International Presence Colombia ↔ USA -->
   <InternationalPresence lang={lang} />
+
+  <CoverageBand lang={lang} />
 
   <!-- Team Roster Stage (Fighter Selection) -->
   <TeamRosterSection lang={lang} />

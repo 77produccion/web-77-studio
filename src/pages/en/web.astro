@@ -7,6 +7,7 @@ import WebPainPointsSection from '@/components/web/WebPainPointsSection.astro';
 import WebDesignPillars from '@/components/web/WebDesignPillars.astro';
 import WebProcessSection from '@/components/web/WebProcessSection.astro';
 import WebContactSection from '@/components/web/WebContactSection.astro';
+import CoverageBand from '@/components/local/CoverageBand.astro';
 import { getWebTranslations } from '@/lib/i18n/pages/web';
 
 const lang = 'en';
@@ -34,6 +35,8 @@ const t = getWebTranslations(lang);
 
   <!-- 05. 5-Step Web Development Process -->
   <WebProcessSection lang={lang} />
+
+  <CoverageBand service="paginas-web" lang={lang} />
 
   <!-- 06. Commercial Closing Block with WhatsApp & Lead Form -->
   <WebContactSection lang={lang} />

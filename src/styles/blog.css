@@ -1,3 +1,6 @@
+/* Solo entra en las páginas del blog, para no mandar .prose en la portada. */
+@plugin "@tailwindcss/typography";
+
 /* Plantilla editorial del blog. El plugin de typography aporta la estructura;
    estas reglas la alinean con el lienzo claro y la tipografía de 77 Studio. */
 

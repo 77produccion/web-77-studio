@@ -5,7 +5,7 @@ export const productosTranslations = {
   es: {
     meta: {
       title: "Productos digitales, software a medida y SaaS | 77 Studio",
-      description: "MVPs, plataformas SaaS, portales y dashboards a medida cuando la herramienta aún no existe. Para empresas en Colombia, LatAm y Estados Unidos."
+      description: "Software, SaaS y tableros a medida, desde Armenia, para empresas del Eje Cafetero, Colombia y Estados Unidos."
     },
     hero: {
       badge: "Product Studio & Software Engineering",

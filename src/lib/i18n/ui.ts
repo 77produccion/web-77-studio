@@ -39,6 +39,7 @@ export const uiTranslations = {
         { label: 'Casos de Negocio', href: '/#casos' },
         { label: 'Metodología en 4 Pasos', href: '/#proceso' },
         { label: 'Contacto & Diagnóstico', href: '/contacto' },
+        { label: 'Eje Cafetero', href: '/eje-cafetero/' },
       ]
     },
     cta: {
@@ -152,6 +153,7 @@ export const uiTranslations = {
         { label: 'Case Studies', href: '/en#casos' },
         { label: '4-Step Methodology', href: '/en#proceso' },
         { label: 'Contact & Diagnostic', href: '/en/contacto' },
+        { label: 'Coffee Axis', href: '/eje-cafetero/' },
       ]
     },
     cta: {
@@ -172,7 +174,7 @@ export const uiTranslations = {
       emailLabel: 'Work Email',
       emailPlaceholder: 'michael@company.com',
       phoneLabel: 'Phone / WhatsApp',
-      phonePlaceholder: '+1 305 123 4567',
+      phonePlaceholder: '+57 300 123 4567',
       serviceLabel: 'What service or solution are you primarily looking for?',
       serviceSelectPlaceholder: 'Select an area of interest...',
       servicesOptions: [

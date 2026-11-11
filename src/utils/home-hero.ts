@@ -1,4 +1,4 @@
-/** Imagen LCP de la portada. El preload usa el mismo srcset para no bajar 1418px en móvil. */
+/** Cerebro del hero en pantallas sm+. En móvil queda oculto para que el H1 sea el LCP. */
 export const HOME_HERO_IMAGE = {
   src: '/images/opai-img-300-840.webp',
   srcset:
@@ -8,11 +8,3 @@ export const HOME_HERO_IMAGE = {
   height: 1418,
 } as const;
 
-/**
- * En el laboratorio móvil el elemento LCP es la marca de agua del hero (750px),
- * no el cerebro. Se descubre primero. El cerebro sigue con srcset y prioridad alta.
- */
-export const homeHeroPreload = {
-  href: '/img/logo-variaciones/negro2.webp',
-  type: 'image/webp',
-};

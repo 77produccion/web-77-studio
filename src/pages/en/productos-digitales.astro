@@ -7,6 +7,7 @@ import ProductProcessSection from '@/components/productos/ProductProcessSection.
 import ProductCasesSection from '@/components/productos/ProductCasesSection.astro';
 import ProductWhyUsSection from '@/components/productos/ProductWhyUsSection.astro';
 import ProductContactSection from '@/components/productos/ProductContactSection.astro';
+import CoverageBand from '@/components/local/CoverageBand.astro';
 import { getProductosTranslations } from '@/lib/i18n/pages/productos-digitales';
 
 const lang = 'en';
@@ -33,6 +34,8 @@ const t = getProductosTranslations(lang);
 
   <!-- 05. Why 77 Studio: End-to-End Strategic Partner -->
   <ProductWhyUsSection lang={lang} />
+
+  <CoverageBand lang={lang} />
 
   <!-- 06. Commercial Closing Block with WhatsApp & Lead Form -->
   <ProductContactSection lang={lang} />
