@@ -4,8 +4,8 @@ import type { SupportedLocale } from '../../ui';
 export const marketingTranslations = {
   es: {
     meta: {
-      title: "Marketing Digital, Meta Ads & Google Ads | 77 Studio",
-      description: "Integramos estrategia, pauta digital, creatividad, contenido y automatización para captar clientes potenciales y generar demanda (Colombia ↔ USA)."
+      title: "Marketing con IA, Meta Ads y Google Ads | 77 Studio",
+      description: "Estrategia, Meta Ads, Google Ads, contenido y automatización para captar clientes. Marketing con IA para empresas en Colombia, LatAm y EE. UU."
     },
     hero: {
       badge: "Performance & Creative Marketing",
@@ -68,8 +68,8 @@ export const marketingTranslations = {
   },
   en: {
     meta: {
-      title: "Digital Marketing, Meta Ads & Google Ads | 77 Studio",
-      description: "We integrate paid media strategy, Meta Ads, Google Ads, creative production, and marketing automation to acquire high-intent clients (Colombia ↔ USA)."
+      title: "AI Marketing, Meta Ads and Google Ads | 77 Studio",
+      description: "Strategy, Meta Ads, Google Ads, creative, and automation to capture qualified demand. AI marketing for companies in Colombia, Latin America, and the US."
     },
     hero: {
       badge: "Performance & Creative Marketing",

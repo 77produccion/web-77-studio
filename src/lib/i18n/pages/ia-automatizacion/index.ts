@@ -4,8 +4,8 @@ import type { SupportedLocale } from '../../ui';
 export const iaTranslations = {
   es: {
     meta: {
-      title: "Inteligencia Artificial y Automatización para Empresas | 77 Studio",
-      description: "Implementa inteligencia artificial donde realmente puede generar valor. Automatización de procesos, conexión de herramientas y agentes de IA para operar mejor."
+      title: "Automatización e inteligencia artificial para empresas | 77 Studio",
+      description: "Automatización de procesos, conexión de herramientas y agentes de IA para operar mejor. Para empresas en Colombia, LatAm y Estados Unidos."
     },
     hero: {
       badge: "IA + Automatización",
@@ -122,8 +122,8 @@ export const iaTranslations = {
   },
   en: {
     meta: {
-      title: "AI & Business Process Automation | 77 Studio",
-      description: "Deploy artificial intelligence where it actually generates value. Workflow automation, tool integrations, and AI assistants to operate better."
+      title: "AI Automation for Businesses | 77 Studio",
+      description: "Process automation, tool integrations, and AI agents that save real time. For companies in Colombia, Latin America, and the United States."
     },
     hero: {
       badge: "AI + Automation",

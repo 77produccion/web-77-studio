@@ -1,4 +1,5 @@
 import { uiTranslations, type SupportedLocale } from '@/lib/i18n/ui';
+import { BUSINESS_NAME, PHONE_E164, POSTAL_ADDRESS } from '@/utils/nap';
 
 export interface SEOMetadata {
   title: string;
@@ -13,8 +14,8 @@ export interface SEOMetadata {
 export const SITE_ORIGIN = 'https://www.77studio.co';
 
 export const DEFAULT_SEO: SEOMetadata = {
-  title: "77 Studio | Digital Studio + Creative Partner + AI Company",
-  description: "Un solo equipo para hacer que tu empresa se vea mejor, venda mejor y funcione mejor. Marketing, Web, IA + Automatización y Productos Digitales (Colombia + USA).",
+  title: "77 Studio | Marketing con IA, automatización y desarrollo web",
+  description: "Socio de crecimiento y tecnología para empresas en Colombia, LatAm y Estados Unidos. Marketing con IA, automatización, desarrollo web y productos digitales.",
   canonical: `${SITE_ORIGIN}/`,
   ogImage: `${SITE_ORIGIN}/img/openGraph/og-image.png`,
   ogType: "website",
@@ -31,8 +32,65 @@ export const DEFAULT_SEO: SEOMetadata = {
 };
 
 const ORGANIZATION_DESCRIPTION: Record<SupportedLocale, string> = {
-  es: "Digital Studio + Creative Partner + Technology & AI Company en Colombia y Estados Unidos.",
-  en: "Digital Studio + Creative Partner + Technology & AI Company in Colombia and the United States.",
+  es: "77 Studio es un socio de crecimiento y tecnología para empresas en Colombia, Latinoamérica y Estados Unidos. Opera como 77 Studio SAS y 77 Studio LLC. Marketing con IA, automatización, desarrollo web y productos digitales.",
+  en: "77 Studio is a growth and technology partner for companies in Colombia, Latin America, and the United States. It operates as 77 Studio SAS and 77 Studio LLC. AI marketing, automation, web development, and digital products.",
+};
+
+const AREA_SERVED = [
+  { '@type': 'Country', name: 'Colombia' },
+  { '@type': 'Country', name: 'United States' },
+  { '@type': 'Place', name: 'Latin America' },
+];
+
+const SERVICES: Record<string, Record<SupportedLocale, { name: string; serviceType: string; description: string }>> = {
+  marketing: {
+    es: {
+      name: 'Marketing con IA',
+      serviceType: 'Marketing digital, Meta Ads y Google Ads',
+      description: 'Estrategia, Meta Ads, Google Ads, contenido y automatización para captar clientes en Colombia, Latinoamérica y Estados Unidos.',
+    },
+    en: {
+      name: 'AI marketing',
+      serviceType: 'Digital marketing, Meta Ads and Google Ads',
+      description: 'Strategy, Meta Ads, Google Ads, creative, and automation to capture qualified demand in Colombia, Latin America, and the United States.',
+    },
+  },
+  web: {
+    es: {
+      name: 'Desarrollo web',
+      serviceType: 'Sitios web y landing pages',
+      description: 'Sitios corporativos y landing pages rápidas, con enfoque de conversión y SEO, para empresas en Colombia, Latinoamérica y Estados Unidos.',
+    },
+    en: {
+      name: 'Web development',
+      serviceType: 'Websites and landing pages',
+      description: 'Fast corporate websites and landing pages built for conversion and SEO, for companies in Colombia, Latin America, and the United States.',
+    },
+  },
+  'ia-automatizacion': {
+    es: {
+      name: 'IA y automatización',
+      serviceType: 'Automatización de procesos y agentes de IA',
+      description: 'Automatización de procesos, conexión de herramientas y agentes de IA para empresas en Colombia, Latinoamérica y Estados Unidos.',
+    },
+    en: {
+      name: 'AI and automation',
+      serviceType: 'Process automation and AI agents',
+      description: 'Workflow automation, tool integrations, and AI agents for companies in Colombia, Latin America, and the United States.',
+    },
+  },
+  'productos-digitales': {
+    es: {
+      name: 'Productos digitales',
+      serviceType: 'Software a medida, SaaS y dashboards',
+      description: 'MVPs, plataformas SaaS, portales y dashboards a medida para empresas en Colombia, Latinoamérica y Estados Unidos.',
+    },
+    en: {
+      name: 'Digital products',
+      serviceType: 'Custom software, SaaS and dashboards',
+      description: 'MVPs, SaaS platforms, portals, and dashboards for companies in Colombia, Latin America, and the United States.',
+    },
+  },
 };
 
 const SECTION_LABELS: Record<SupportedLocale, Record<string, string>> = {
@@ -84,6 +142,8 @@ interface StructuredDataInput {
   title: string;
   description: string;
   noindex?: boolean;
+  /** Nombre visible de la última miga cuando la URL tiene más de un nivel (artículos). */
+  breadcrumbLabel?: string;
 }
 
 /**
@@ -98,6 +158,7 @@ export function buildStructuredData({
   title,
   description,
   noindex = false,
+  breadcrumbLabel,
 }: StructuredDataInput) {
   const origin = site.origin;
   const orgId = `${origin}/#organization`;
@@ -117,47 +178,70 @@ export function buildStructuredData({
     caption: '77 Studio',
   };
 
-  const address = [
-    {
-      '@type': 'PostalAddress',
-      addressLocality: 'Armenia',
-      addressCountry: 'CO',
-    },
-    {
-      '@type': 'PostalAddress',
-      addressLocality: 'Miami',
-      addressCountry: 'US',
-    },
-  ];
+  const address = POSTAL_ADDRESS;
 
-  const sameAs = [
-    'https://www.instagram.com/77studio',
-    'https://www.linkedin.com/company/77studio',
-  ];
+  // No hay página de LinkedIn ni URL del Google Business Profile: no se inventan.
+  const sameAs = ['https://www.instagram.com/77studio'];
+
+  const serviceNodes = Object.entries(SERVICES).map(([slug, copy]) => {
+    const url = `${origin}/${slug}/`;
+    const localized = copy[lang];
+    return {
+      '@type': 'Service',
+      '@id': `${url}#service`,
+      name: localized.name,
+      serviceType: localized.serviceType,
+      description: localized.description,
+      url,
+      provider: { '@id': orgId },
+      areaServed: AREA_SERVED,
+      availableLanguage: ['es', 'en'],
+    };
+  });
 
   const organization = {
-    '@type': 'Organization',
+    '@type': ['Organization', 'LocalBusiness'],
     '@id': orgId,
-    name: '77 Studio',
+    name: BUSINESS_NAME,
+    legalName: '77 Studio SAS',
+    alternateName: ['77 Studio LLC'],
     url: `${origin}/`,
     logo: { '@id': logoId },
     image: ogImage,
-    telephone: '+573148490955',
+    description: ORGANIZATION_DESCRIPTION[lang],
+    telephone: PHONE_E164,
     address,
+    areaServed: AREA_SERVED,
+    founder: {
+      '@type': 'Person',
+      name: 'Jordan Cruz',
+      alternateName: 'Yordan Leandro Cruz Álvarez',
+      jobTitle: 'CEO & Fundador',
+    },
     sameAs,
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: lang === 'en' ? 'Services' : 'Servicios',
+      itemListElement: serviceNodes.map((service) => ({
+        '@type': 'Offer',
+        itemOffered: { '@id': service['@id'] },
+      })),
+    },
   };
 
   const professionalService = {
-    '@type': 'ProfessionalService',
+    '@type': ['ProfessionalService', 'LocalBusiness'],
     '@id': `${origin}/#business`,
-    name: '77 Studio',
+    name: BUSINESS_NAME,
     image: ogImage,
     logo: { '@id': logoId },
     url: `${origin}/`,
-    telephone: '+573148490955',
+    telephone: PHONE_E164,
     priceRange: '$$',
     address,
     description: ORGANIZATION_DESCRIPTION[lang],
+    areaServed: AREA_SERVED,
+    founder: { '@type': 'Person', name: 'Jordan Cruz' },
     sameAs,
     parentOrganization: { '@id': orgId },
   };
@@ -175,24 +259,48 @@ export function buildStructuredData({
   const segments = pathname.split('/').filter((segment) => segment && segment !== 'en');
   const section = segments[0];
   const sectionLabel = section ? SECTION_LABELS[lang][section] : undefined;
-  const breadcrumb = !noindex && sectionLabel
+  const serviceSlug = section && SERVICES[section] ? section : undefined;
+  const currentService = serviceSlug ? serviceNodes.find((service) => service.url.endsWith(`/${serviceSlug}/`)) : undefined;
+
+  const breadcrumbItems = !noindex && sectionLabel
+    ? [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: '77 Studio',
+          item: homeUrl,
+        },
+        ...(segments[0] === 'blog' && segments.length > 1
+          ? [
+              {
+                '@type': 'ListItem',
+                position: 2,
+                name: 'Blog',
+                item: toPublicUrl(site, '/blog/'),
+              },
+              {
+                '@type': 'ListItem',
+                position: 3,
+                name: breadcrumbLabel || title,
+                item: canonical,
+              },
+            ]
+          : [
+              {
+                '@type': 'ListItem',
+                position: 2,
+                name: sectionLabel,
+                item: canonical,
+              },
+            ]),
+      ]
+    : [];
+
+  const breadcrumb = breadcrumbItems.length
     ? {
         '@type': 'BreadcrumbList',
         '@id': `${canonical}#breadcrumb`,
-        itemListElement: [
-          {
-            '@type': 'ListItem',
-            position: 1,
-            name: '77 Studio',
-            item: homeUrl,
-          },
-          {
-            '@type': 'ListItem',
-            position: 2,
-            name: sectionLabel,
-            item: canonical,
-          },
-        ],
+        itemListElement: breadcrumbItems,
       }
     : null;
 
@@ -208,11 +316,12 @@ export function buildStructuredData({
         isPartOf: { '@id': websiteId },
         about: { '@id': orgId },
         publisher: { '@id': orgId },
+        ...(currentService ? { mainEntity: { '@id': currentService['@id'] } } : {}),
         ...(breadcrumb ? { breadcrumb: { '@id': breadcrumb['@id'] } } : {}),
       };
 
   return {
     '@context': 'https://schema.org',
-    '@graph': [organization, logo, professionalService, website, webPage, breadcrumb].filter(Boolean),
+    '@graph': [organization, logo, professionalService, website, ...serviceNodes, webPage, breadcrumb].filter(Boolean),
   };
 }

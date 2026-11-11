@@ -7,14 +7,14 @@ import WebPainPointsSection from '@/components/web/WebPainPointsSection.astro';
 import WebDesignPillars from '@/components/web/WebDesignPillars.astro';
 import WebProcessSection from '@/components/web/WebProcessSection.astro';
 import WebContactSection from '@/components/web/WebContactSection.astro';
+import { getWebTranslations } from '@/lib/i18n/pages/web';
 
-const pageTitle = "Desarrollo Web & Landing Pages de Alta Conversión | 77 Studio";
-const pageDescription = "Diseñamos experiencias digitales rápidas, claras y optimizadas para CRO, SEO, integración con CRM y experiencia mobile first (Colombia ↔ USA).";
+const t = getWebTranslations('es');
 ---
 
 <BaseLayout
-  title={pageTitle}
-  description={pageDescription}
+  title={t.meta.title}
+  description={t.meta.description}
   whatsappContext="web"
   heroImage="/img/web-hero.webp"
 >

@@ -128,6 +128,11 @@ const pillars = currentLang === 'en' ? [
       <p class="font-inter-tight text-base sm:text-lg text-white/90 font-medium leading-relaxed max-w-2xl mx-auto drop-shadow-[0_2px_4px_rgba(0,0,0,0.25)]">
         {t.ecosystem.description}
       </p>
+      <p class="font-inter-tight text-sm sm:text-base">
+        <a href="/blog/" class="text-white/90 underline decoration-white/40 underline-offset-4 transition hover:text-white hover:decoration-white">
+          {currentLang === 'en' ? 'Marketing, AI and automation notes on the blog' : 'Ideas de marketing, IA y automatización en el blog'}
+        </a>
+      </p>
     </div>
 
     <!-- 4 Staggered vertical capability cards in a grid (Image 3 / Pricing inspired style) -->
@@ -145,8 +150,10 @@ const pillars = currentLang === 'en' ? [
               </span>
             </div>
 
-            <h3 class="font-sora text-xl sm:text-2xl font-bold text-background-13 mb-4 group-hover:text-opai-purple transition-colors">
-              {pillar.name}
+            <h3 class="font-sora text-xl sm:text-2xl font-bold text-background-13 mb-4">
+              <a href={pillar.href} class="no-underline transition-colors group-hover:text-opai-purple">
+                {pillar.name}
+              </a>
             </h3>
 
             <p class="font-inter-tight text-xs sm:text-sm text-background-13/70 leading-relaxed mb-6">

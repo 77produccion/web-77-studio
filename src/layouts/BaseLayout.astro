@@ -7,17 +7,28 @@ import MobileStickyBar from '@/components/MobileStickyBar.astro';
 import AIChatWidget from '@/components/chat/AIChatWidget.astro';
 import WhatsAppFloating from '@/components/WhatsAppFloating.astro';
 import { DEFAULT_SEO, buildStructuredData, directoryPath, toPublicUrl } from '@/utils/seo';
+import { alternatePathMap } from '@/utils/public-routes';
 import type { WhatsAppContext } from '@/utils/whatsapp';
 import type { SupportedLocale } from '@/lib/i18n/ui';
-import { getLangFromUrl, getAlternateLocaleUrl } from '@/lib/i18n/utils';
+import { getLangFromUrl } from '@/lib/i18n/utils';
+
+interface HeroPreload {
+  href: string;
+  srcset?: string;
+  sizes?: string;
+  type?: string;
+}
 
 interface Props {
   title?: string;
   description?: string;
   ogImage?: string;
+  ogType?: 'website' | 'article';
   whatsappContext?: WhatsAppContext;
   lang?: SupportedLocale;
   heroImage?: string;
+  heroPreload?: HeroPreload;
+  breadcrumbLabel?: string;
   hideNav?: boolean;
   hideFooter?: boolean;
   hideMobileBar?: boolean;
@@ -30,11 +41,14 @@ const {
   title = DEFAULT_SEO.title,
   description = DEFAULT_SEO.description,
   ogImage = DEFAULT_SEO.ogImage,
+  ogType = 'website',
   whatsappContext = 'home',
   hideNav = false,
   hideFooter = false,
   hideMobileBar = true,
   heroImage,
+  heroPreload,
+  breadcrumbLabel,
   noindex = false,
 } = Astro.props;
 
@@ -44,8 +58,16 @@ const canonicalUrl = toPublicUrl(site, directoryPath(Astro.url.pathname));
 const resolvedOgImage = ogImage
   ? toPublicUrl(site, ogImage)
   : toPublicUrl(site, DEFAULT_SEO.ogImage ?? '/img/openGraph/og-image.png');
-const esUrl = toPublicUrl(site, directoryPath(getAlternateLocaleUrl(Astro.url, 'es')));
-const enUrl = toPublicUrl(site, directoryPath(getAlternateLocaleUrl(Astro.url, 'en')));
+const alternates = alternatePathMap(Astro.url.pathname);
+const esUrl = alternates.es ? toPublicUrl(site, alternates.es) : undefined;
+const enUrl = alternates.en ? toPublicUrl(site, alternates.en) : undefined;
+const xDefaultUrl = esUrl ?? enUrl;
+const imagePreload = heroPreload ?? (heroImage ? { href: heroImage, type: 'image/webp' } : undefined);
+const ogImageType = resolvedOgImage.endsWith('.webp')
+  ? 'image/webp'
+  : resolvedOgImage.endsWith('.jpg') || resolvedOgImage.endsWith('.jpeg')
+    ? 'image/jpeg'
+    : 'image/png';
 const structuredData = JSON.stringify(buildStructuredData({
   site,
   canonical: canonicalUrl,
@@ -54,6 +76,7 @@ const structuredData = JSON.stringify(buildStructuredData({
   title,
   description,
   noindex,
+  breadcrumbLabel,
 })).replace(/</g, '\\u003c');
 const gtmId = import.meta.env.PUBLIC_GTM_ID || 'GTM-M6NH5PGW';
 ---
@@ -61,13 +84,41 @@ const gtmId = import.meta.env.PUBLIC_GTM_ID || 'GTM-M6NH5PGW';
 <!DOCTYPE html>
 <html lang={currentLang} class="scroll-smooth">
   <head>
-    <!-- Google Tag Manager -->
+    <!--
+      Google Tag Manager se carga después del load (o al primer gesto) para no competir con el LCP.
+      dataLayer sigue recibiendo eventos antes: GTM los procesa al arrancar.
+    -->
     <script is:inline define:vars={{ gtmId }}>
-      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-      })(window,document,'script','dataLayer',gtmId);
+      window.dataLayer = window.dataLayer || [];
+      (function () {
+        var loaded = false;
+        function loadGtm() {
+          if (loaded) return;
+          loaded = true;
+          (function (w, d, s, l, i) {
+            w[l] = w[l] || [];
+            w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+            var f = d.getElementsByTagName(s)[0],
+              j = d.createElement(s),
+              dl = l != 'dataLayer' ? '&l=' + l : '';
+            j.async = true;
+            j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+            f.parentNode.insertBefore(j, f);
+          })(window, document, 'script', 'dataLayer', gtmId);
+        }
+        function schedule() {
+          if ('requestIdleCallback' in window) requestIdleCallback(loadGtm, { timeout: 2000 });
+          else setTimeout(loadGtm, 1);
+        }
+        function arm() {
+          setTimeout(schedule, 1200);
+        }
+        if (document.readyState === 'complete') arm();
+        else window.addEventListener('load', arm);
+        ['pointerdown', 'keydown', 'touchstart'].forEach(function (eventName) {
+          window.addEventListener(eventName, schedule, { once: true, passive: true });
+        });
+      })();
     </script>
     <!-- End Google Tag Manager -->
 
@@ -77,14 +128,10 @@ const gtmId = import.meta.env.PUBLIC_GTM_ID || 'GTM-M6NH5PGW';
     <link rel="canonical" href={canonicalUrl} />
     {noindex && <meta name="robots" content="noindex, follow" />}
 
-    <!-- Hreflang SEO multi-idioma -->
-    {!noindex && (
-      <>
-        <link rel="alternate" hreflang="es" href={esUrl} />
-        <link rel="alternate" hreflang="en" href={enUrl} />
-        <link rel="alternate" hreflang="x-default" href={esUrl} />
-      </>
-    )}
+    <!-- Hreflang solo hacia URLs que el build realmente genera -->
+    {!noindex && esUrl && <link rel="alternate" hreflang="es" href={esUrl} />}
+    {!noindex && enUrl && <link rel="alternate" hreflang="en" href={enUrl} />}
+    {!noindex && xDefaultUrl && <link rel="alternate" hreflang="x-default" href={xDefaultUrl} />}
     <link rel="sitemap" href="/sitemap-index.xml" />
 
     <!-- DNS Prefetch & Preconnect for External Resources -->
@@ -93,8 +140,17 @@ const gtmId = import.meta.env.PUBLIC_GTM_ID || 'GTM-M6NH5PGW';
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-    <!-- LCP Hero Image Preload for Instant First Paint -->
-    <link rel="preload" as="image" href={heroImage || "/images/opai-img-300.webp"} type="image/webp" fetchpriority="high" />
+    {imagePreload && (
+      <link
+        rel="preload"
+        as="image"
+        href={imagePreload.href}
+        imagesrcset={imagePreload.srcset}
+        imagesizes={imagePreload.sizes}
+        type={imagePreload.type || 'image/webp'}
+        fetchpriority="high"
+      />
+    )}
 
     <!-- Google Fonts: Sora, Inter Tight, IBM Plex Mono, Poppins (Non-blocking async load) -->
     <link
@@ -127,7 +183,7 @@ const gtmId = import.meta.env.PUBLIC_GTM_ID || 'GTM-M6NH5PGW';
     <meta name="generator" content={Astro.generator} />
 
     <!-- Open Graph / Facebook / WhatsApp -->
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -135,7 +191,7 @@ const gtmId = import.meta.env.PUBLIC_GTM_ID || 'GTM-M6NH5PGW';
     <meta property="og:image:secure_url" content={resolvedOgImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:type" content={ogImageType} />
     <meta property="og:image:alt" content={title} />
     <meta property="og:locale" content={currentLang === 'en' ? 'en_US' : 'es_CO'} />
     <meta property="og:site_name" content="77 Studio" />

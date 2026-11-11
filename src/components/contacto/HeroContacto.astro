@@ -3,6 +3,7 @@
 import ContactForm from '@/components/ContactForm.astro';
 import { getWhatsAppUrl } from '@/utils/whatsapp';
 import { getContactoTranslations } from '@/lib/i18n/pages/contacto';
+import { ADDRESS_COUNTRY_NAME, ADDRESS_LOCALITY, ADDRESS_REGION, BUSINESS_NAME, PHONE_DISPLAY, PHONE_E164, STREET_ADDRESS } from '@/utils/nap';
 import type { SupportedLocale } from '@/lib/i18n/ui';
 
 interface Props {
@@ -78,6 +79,13 @@ const isEn = currentLang === 'en';
             <span>{isEn ? "Chat directly on WhatsApp" : "Chatea con nosotros"}</span>
           </a>
         </div>
+
+        <address class="not-italic font-inter-tight text-sm leading-relaxed text-white/80">
+          <span class="block font-semibold text-white">{BUSINESS_NAME}</span>
+          <span class="block">{STREET_ADDRESS}</span>
+          <span class="block">{ADDRESS_LOCALITY}, {ADDRESS_REGION}, {ADDRESS_COUNTRY_NAME}</span>
+          <a href={`tel:${PHONE_E164}`} class="mt-1 inline-block text-white underline decoration-white/30 underline-offset-4">{PHONE_DISPLAY}</a>
+        </address>
 
       </div>
 

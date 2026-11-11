@@ -4,8 +4,8 @@ import type { SupportedLocale } from '../../ui';
 export const nosotrosTranslations = {
   es: {
     meta: {
-      title: "Acerca de Nosotros | 77 Studio Digital & AI Partner",
-      description: "Conoce al equipo detrás de 77 Studio. Operación en Colombia y Estados Unidos para proyectos de marketing, web, automatización e IA (Colombia ↔ USA)."
+      title: "Nosotros | 77 Studio, socio de crecimiento y tecnología",
+      description: "Equipo de 77 Studio SAS y 77 Studio LLC. Marketing, desarrollo web, automatización e IA para empresas en Colombia, LatAm y Estados Unidos."
     },
     hero: {
       badge: "Quiénes Somos",
@@ -35,8 +35,8 @@ export const nosotrosTranslations = {
   },
   en: {
     meta: {
-      title: "About Us | 77 Studio Digital & AI Growth Partner",
-      description: "Meet the team behind 77 Studio. Operating across Colombia and the United States for marketing, web development, automation, and applied AI (Colombia ↔ USA)."
+      title: "About 77 Studio | Growth and Technology Partner",
+      description: "The team behind 77 Studio SAS and 77 Studio LLC. Marketing, web development, automation, and AI for companies in Colombia, Latin America, and the United States."
     },
     hero: {
       badge: "Who We Are",

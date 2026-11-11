@@ -3,15 +3,16 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import HeroContacto from '@/components/contacto/HeroContacto.astro';
 import FAQContacto from '@/components/contacto/FAQContacto.astro';
+import { getContactoTranslations } from '@/lib/i18n/pages/contacto';
 
-const pageTitle = "Contacto Directo | Hablemos de tu Proyecto | 77 Studio";
-const pageDescription = "Ponte en contacto con 77 Studio para proyectos de marketing, desarrollo web, automatización e IA. Atención en Colombia, USA e internacional.";
+const t = getContactoTranslations('es');
 ---
 
 <BaseLayout
-  title={pageTitle}
-  description={pageDescription}
+  title={t.meta.title}
+  description={t.meta.description}
   whatsappContext="contacto"
+  heroImage="/img/backgorund-contacto.webp"
 >
   <!-- 01. Hero Section con Layout de 2 Columnas de Alta Conversión (WhatsApp + Formulario) -->
   <HeroContacto />

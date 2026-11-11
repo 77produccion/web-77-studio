@@ -2,7 +2,7 @@
 // src/components/Header.astro
 import { getWhatsAppUrl, type WhatsAppContext } from '@/utils/whatsapp';
 import { uiTranslations, type SupportedLocale } from '@/lib/i18n/ui';
-import { getAlternateLocaleUrl } from '@/lib/i18n/utils';
+import { alternatePathMap } from '@/utils/public-routes';
 
 interface Props {
   currentPath?: string;
@@ -16,8 +16,9 @@ const { currentPath = '/', whatsappContext = 'home' } = Astro.props;
 const t = uiTranslations[currentLang];
 const whatsappUrl = getWhatsAppUrl(whatsappContext, undefined, currentLang);
 
-const esUrl = getAlternateLocaleUrl(Astro.url, 'es');
-const enUrl = getAlternateLocaleUrl(Astro.url, 'en');
+const alternates = alternatePathMap(Astro.url.pathname);
+const esUrl = alternates.es ?? '/';
+const enUrl = alternates.en ?? '/en/';
 
 const langPrefix = currentLang === 'en' ? '/en' : '';
 const homeUrl = currentLang === 'en' ? '/en' : '/';
@@ -27,6 +28,7 @@ const navItems = [
   { label: t.nav.web, href: `${langPrefix}/web` },
   { label: t.nav.ia, href: `${langPrefix}/ia-automatizacion` },
   { label: t.nav.productos, href: `${langPrefix}/productos-digitales` },
+  { label: 'Blog', href: '/blog' },
   { label: t.nav.nosotros, href: `${langPrefix}/nosotros` },
   { label: t.nav.contacto, href: `${langPrefix}/contacto` },
 ];

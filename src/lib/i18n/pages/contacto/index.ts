@@ -4,8 +4,8 @@ import type { SupportedLocale } from '../../ui';
 export const contactoTranslations = {
   es: {
     meta: {
-      title: "Contacto Directo | Hablemos de tu Proyecto | 77 Studio",
-      description: "Ponte en contacto con 77 Studio para proyectos de marketing, desarrollo web, automatización e IA. Atención en Colombia, USA e internacional."
+      title: "Contacto | Marketing, web, automatización e IA | 77 Studio",
+      description: "Habla con 77 Studio sobre marketing con IA, desarrollo web, automatización y productos digitales. Atención en Colombia, LatAm y Estados Unidos."
     },
     hero: {
       badge: "Inicia la Conversación",
@@ -18,7 +18,7 @@ export const contactoTranslations = {
     directChannels: {
       title: "Canales de Atención Directa",
       colombiaLabel: "Sede Colombia / LATAM",
-      colombiaLocation: "Armenia, Quindío",
+      colombiaLocation: "Cra 14 #35 Norte 18, Armenia, Quindío, Colombia",
       usaLabel: "Sede USA / Global",
       usaLocation: "Miami, Florida",
       scheduleLabel: "Horario de Atención",
@@ -49,8 +49,8 @@ export const contactoTranslations = {
   },
   en: {
     meta: {
-      title: "Direct Contact | Let's Discuss Your Project | 77 Studio",
-      description: "Get in touch with 77 Studio for marketing, web development, process automation, and applied AI. Serving companies in Colombia, the US, and globally."
+      title: "Contact | AI Marketing, Web and Automation | 77 Studio",
+      description: "Talk with 77 Studio about AI marketing, web development, automation, and digital products. Serving companies in Colombia, Latin America, and the United States."
     },
     hero: {
       badge: "Start The Conversation",
@@ -63,7 +63,7 @@ export const contactoTranslations = {
     directChannels: {
       title: "Direct Communication Channels",
       colombiaLabel: "Colombia & LATAM Operations",
-      colombiaLocation: "Armenia, Colombia",
+      colombiaLocation: "Cra 14 #35 Norte 18, Armenia, Quindío, Colombia",
       usaLabel: "USA & Global Operations",
       usaLocation: "Miami, Florida",
       scheduleLabel: "Business Hours",

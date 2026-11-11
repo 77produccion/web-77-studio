@@ -35,6 +35,7 @@ export const uiTranslations = {
       ],
       companyLinks: [
         { label: 'Acerca de Nosotros', href: '/nosotros' },
+        { label: 'Blog', href: '/blog' },
         { label: 'Casos de Negocio', href: '/#casos' },
         { label: 'Metodología en 4 Pasos', href: '/#proceso' },
         { label: 'Contacto & Diagnóstico', href: '/contacto' },
@@ -147,6 +148,7 @@ export const uiTranslations = {
       ],
       companyLinks: [
         { label: 'About Us', href: '/en/nosotros' },
+        { label: 'Blog', href: '/blog' },
         { label: 'Case Studies', href: '/en#casos' },
         { label: '4-Step Methodology', href: '/en#proceso' },
         { label: 'Contact & Diagnostic', href: '/en/contacto' },

@@ -4,8 +4,8 @@ import type { SupportedLocale } from '../../ui';
 export const productosTranslations = {
   es: {
     meta: {
-      title: "Productos Digitales, Software a Medida & SaaS | 77 Studio",
-      description: "Construimos herramientas digitales, MVPs, plataformas SaaS y dashboards a medida cuando la solución que tu empresa necesita todavía no existe (Colombia ↔ USA)."
+      title: "Productos digitales, software a medida y SaaS | 77 Studio",
+      description: "MVPs, plataformas SaaS, portales y dashboards a medida cuando la herramienta aún no existe. Para empresas en Colombia, LatAm y Estados Unidos."
     },
     hero: {
       badge: "Product Studio & Software Engineering",
@@ -29,8 +29,8 @@ export const productosTranslations = {
   },
   en: {
     meta: {
-      title: "Digital Products, Custom Software & SaaS Engineering | 77 Studio",
-      description: "We build custom digital tools, MVPs, SaaS platforms, and operational dashboards when the software your business needs doesn't exist yet (Colombia ↔ USA)."
+      title: "Digital Products, Custom Software and SaaS | 77 Studio",
+      description: "MVPs, SaaS platforms, portals, and dashboards when the tool does not exist yet. For companies in Colombia, Latin America, and the United States."
     },
     hero: {
       badge: "Product Studio & Software Engineering",
