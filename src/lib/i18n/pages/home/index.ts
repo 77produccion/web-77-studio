@@ -4,22 +4,22 @@ import type { SupportedLocale } from '../../ui';
 export const homeTranslations = {
   es: {
     meta: {
-      title: "77 Studio | Marketing con IA, automatización y desarrollo web",
-      description: "Socio de crecimiento y tecnología para empresas en Colombia, LatAm y Estados Unidos. Marketing con IA, automatización, desarrollo web y productos digitales."
+      title: "77 Studio en Armenia | Marketing, automatización e IA para el Eje Cafetero",
+      description: "Socio de crecimiento en Armenia, Quindío. Marketing digital, automatización, agentes de IA y páginas web para empresas del Eje Cafetero, Colombia y Estados Unidos."
     },
     hero: {
       badge: "Digital Studio · Colombia + USA",
       headlinePrefix: "Un solo equipo para que tu empresa se vea, ",
       headlineGradient: "venda y funcione mejor.",
-      subheadline: "Marketing, tecnología e IA integrados para acelerar tu crecimiento en Colombia, USA y mercados globales.",
+      subheadline: "Marketing, automatización e inteligencia artificial para empresas de Armenia, el Eje Cafetero, Colombia y Estados Unidos.",
       whatsappCta: "Hablemos de tu proyecto",
       emailCta: "Quiero que me contacten"
     },
     international: {
       badge: "Presencia Internacional",
-      title: "Desde Colombia y Estados Unidos, colaborando con empresas sin fronteras",
-      description: "Combinamos talento creativo, visión de negocio y tecnología avanzada para trabajar de forma remota y sincronizada con compañías en múltiples industrias y husos horarios.",
-      tag1: "Medellín ↔ Miami",
+      title: "Sede en Armenia, para el Eje Cafetero y más allá",
+      description: "La oficina está en Armenia, Quindío. Desde ahí acompañamos empresas de Pereira, Manizales y los municipios cercanos, y también equipos en el resto de Colombia y en Estados Unidos, en remoto.",
+      tag1: "Armenia, Quindío",
       tag2: "Remoto Global",
       tag3: "Equipos Bilingües"
     },
@@ -122,22 +122,22 @@ export const homeTranslations = {
   },
   en: {
     meta: {
-      title: "77 Studio | AI Marketing, Automation and Web Development",
-      description: "Growth and technology partner for companies in Colombia, Latin America, and the United States. AI marketing, automation, web development, and digital products."
+      title: "77 Studio in Armenia | Marketing, automation and AI for the Coffee Axis",
+      description: "Growth partner based in Armenia, Colombia. Digital marketing, automation, AI agents, and websites for the Coffee Axis, Colombia, and the United States."
     },
     hero: {
       badge: "Digital Studio · Colombia + USA",
       headlinePrefix: "One single team to make your business look, ",
       headlineGradient: "sell, and operate better.",
-      subheadline: "Integrated marketing, software engineering, and AI automation to accelerate your growth in the US, Colombia, and global markets.",
+      subheadline: "Marketing, automation, and AI for companies in Armenia, the Coffee Axis, Colombia, and the United States.",
       whatsappCta: "Let's discuss your project",
       emailCta: "Request a callback"
     },
     international: {
       badge: "International Presence",
-      title: "Operating across Colombia and the United States, working with borderless companies",
-      description: "We combine top-tier creative talent, strategic business insight, and modern engineering to collaborate seamlessly and remotely with companies worldwide.",
-      tag1: "Medellin ↔ Miami",
+      title: "Based in Armenia, for the Coffee Axis and beyond",
+      description: "The office is in Armenia, Quindío. From there we work with companies in Pereira, Manizales, and nearby towns, and with teams across Colombia and the United States.",
+      tag1: "Armenia, Colombia",
       tag2: "Global Remote",
       tag3: "Bilingual Teams"
     },

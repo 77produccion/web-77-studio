@@ -18,7 +18,7 @@ export const contactoTranslations = {
     directChannels: {
       title: "Canales de Atención Directa",
       colombiaLabel: "Sede Colombia / LATAM",
-      colombiaLocation: "Cra 14 #35 Norte 18, Armenia, Quindío, Colombia",
+      colombiaLocation: "Cra. 14 #35 Norte-18, Oficina 405, Armenia, Quindío, Colombia",
       usaLabel: "Sede USA / Global",
       usaLocation: "Miami, Florida",
       scheduleLabel: "Horario de Atención",
@@ -63,7 +63,7 @@ export const contactoTranslations = {
     directChannels: {
       title: "Direct Communication Channels",
       colombiaLabel: "Colombia & LATAM Operations",
-      colombiaLocation: "Cra 14 #35 Norte 18, Armenia, Quindío, Colombia",
+      colombiaLocation: "Cra. 14 #35 Norte-18, Oficina 405, Armenia, Quindío, Colombia",
       usaLabel: "USA & Global Operations",
       usaLocation: "Miami, Florida",
       scheduleLabel: "Business Hours",

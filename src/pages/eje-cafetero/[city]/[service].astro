@@ -1,0 +1,57 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import LocalCoverageView from '@/components/local/LocalCoverageView.astro';
+import { CITIES, HUB_PATH, cityPath, getLocalService, servicePath, type CityPage } from '@/data/local-coverage';
+import { getServiceCityPage } from '@/data/local-service-pages';
+import type { ServiceCityPage } from '@/data/local-coverage';
+import { jsonLdScript, serviceCityJsonLd } from '@/utils/local-schema';
+
+export function getStaticPaths() {
+  return CITIES.flatMap((city) => {
+    const services = ['marketing-digital', 'automatizacion', 'agentes-ia', 'paginas-web'] as const;
+    return services.flatMap((service) => {
+      const page = getServiceCityPage(city.slug, service);
+      if (!page) return [];
+      return [{ params: { city: city.slug, service }, props: { city, page } }];
+    });
+  });
+}
+
+interface Props {
+  city: CityPage;
+  page: ServiceCityPage;
+}
+
+const { city, page } = Astro.props;
+const path = servicePath(city.slug, page.service);
+const service = getLocalService(page.service);
+const crumbs = [
+  { name: '77 Studio', path: '/' },
+  { name: 'Eje Cafetero', path: HUB_PATH },
+  { name: city.name, path: cityPath(city.slug) },
+  { name: service?.short ?? page.h1, path },
+];
+const ld = jsonLdScript(serviceCityJsonLd(city, page));
+---
+
+<BaseLayout
+  title={page.title}
+  description={page.description}
+  whatsappContext={page.service === 'paginas-web' ? 'web' : page.service === 'marketing-digital' ? 'marketing' : 'ia'}
+  lang="es"
+  breadcrumbTrail={crumbs}
+  mainEntityId={`https://www.77studio.co${path}#service`}
+>
+  <script is:inline type="application/ld+json" set:html={ld} />
+  <LocalCoverageView
+    kind="service"
+    city={city}
+    servicePage={page}
+    crumbs={crumbs}
+    eyebrow={`${city.name} · ${city.hasOffice ? 'sede' : 'desde Armenia'}`}
+    h1={page.h1}
+    lead={page.lead}
+    whatsappMessage={page.whatsappMessage}
+    faqs={page.faqs}
+  />
+</BaseLayout>

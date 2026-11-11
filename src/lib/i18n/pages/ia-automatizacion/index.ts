@@ -5,7 +5,7 @@ export const iaTranslations = {
   es: {
     meta: {
       title: "Automatización e inteligencia artificial para empresas | 77 Studio",
-      description: "Automatización de procesos, conexión de herramientas y agentes de IA para operar mejor. Para empresas en Colombia, LatAm y Estados Unidos."
+      description: "Automatización de procesos y agentes de IA para empresas de Armenia, el Eje Cafetero, Colombia y Estados Unidos."
     },
     hero: {
       badge: "IA + Automatización",

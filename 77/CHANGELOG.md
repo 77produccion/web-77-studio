@@ -5,6 +5,21 @@ Todos los cambios notables en este proyecto serán documentados en este archivo.
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/), y este proyecto adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 
 ---
+## [Unreleased] - 2026-11-11
+
+### Fixed
+- **Favicon visible en Google (`BaseLayout.astro`, `public/favicon.ico`, `public/site.webmanifest`, `src/utils/seo.ts`)**: el head deja de apuntar al WebP blanco sobre transparente declarado como PNG. Se sirven `favicon.ico` (16/32/48), PNG 96/192/512 y `apple-touch-icon` 180, con el 77 blanco sobre negro sólido, más `theme-color` `#000000`. `robots.txt` sigue permitiendo esas rutas (`Allow: /`; solo bloquea `/api/`, `/404` y `/en/404`). El logo de Organization y ProfessionalService pasa de `/img/77studio.png` a `/icon-512.png`. El logo blanco transparente del header y del chat no cambia.
+
+### Changed
+- **NAP del Google Business Profile**: dirección `Cra. 14 #35 Norte-18, Oficina 405`, horario lunes a viernes 08:00–19:00, sábado 08:00–12:30 y domingo cerrado, fundación 2018-08-15. `sameAs` y el footer usan Instagram `77studio_`, TikTok `@77_studioss` y Facebook `77studio.co`.
+
+### Added
+- **Verificación de Google Search Console**: meta `google-site-verification` en el head de todas las páginas y archivo `google038b51b14f2f9c7c.html` en la raíz, fuera del sitemap. Respaldo de la verificación que hoy depende de Google Tag Manager.
+- **Cobertura del Eje Cafetero**: hub en `/eje-cafetero/`, páginas de Armenia (sede), Pereira y Manizales (sin oficina) y una página por servicio principal en cada ciudad (marketing digital, automatización, agentes de IA y páginas web). No hay URL por municipio: Calarcá, Salento, Dosquebradas, Cartago y el resto quedan como área de cobertura. Schema con `areaServed`, geo del edificio que publica la dirección, horario de referencia pendiente de confirmar, `Service`, `FAQPage` y migas. `llms.txt` describe la cobertura.
+
+### Performance
+- **LCP móvil de la portada**: la marca de agua y el arte del hero dejan de ser el elemento LCP en pantallas pequeñas; el titular pinta sin esperar al JavaScript. Fuentes autohospedadas con `font-display: swap`. El CSS de `.prose` sale de la portada. Beasties inlinea el CSS crítico y difiere el resto.
+
 ## [Unreleased] - 2026-11-10
 
 ### Fixed

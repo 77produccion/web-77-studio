@@ -1,7 +1,7 @@
 ---
 // src/components/Footer.astro
 import { uiTranslations, type SupportedLocale } from '@/lib/i18n/ui';
-import { ADDRESS_LINE, PHONE_DISPLAY, PHONE_E164, STREET_ADDRESS } from '@/utils/nap';
+import { ADDRESS_LINE, PHONE_DISPLAY, PHONE_E164, SOCIAL_PROFILES, STREET_ADDRESS } from '@/utils/nap';
 
 interface Props {
   lang?: SupportedLocale;
@@ -84,6 +84,13 @@ const homeUrl = currentLang === 'en' ? '/en' : '/';
             <span class="text-xs text-background-13/60 block">{STREET_ADDRESS}</span>
             <span class="text-xs text-background-13/60 block">Armenia, Quindío, Colombia</span>
             <a href={`tel:${PHONE_E164}`} class="mt-1 inline-block text-xs font-semibold text-background-13">{PHONE_DISPLAY}</a>
+            <nav class="mt-2 flex flex-wrap gap-x-3 gap-y-1" aria-label={currentLang === 'en' ? 'Social profiles' : 'Redes'}>
+              {SOCIAL_PROFILES.map((profile) => (
+                <a href={profile.href} target="_blank" rel="noopener noreferrer" class="text-xs font-semibold text-background-13 hover:text-opai-purple">
+                  {profile.label}
+                </a>
+              ))}
+            </nav>
           </div>
           <div class="rounded-xl border border-black/5 bg-slate-50 p-3 hover:border-black/10 transition-colors">
             <div class="flex items-center gap-2 mb-1">

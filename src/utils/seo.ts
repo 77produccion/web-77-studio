@@ -1,5 +1,14 @@
 import { uiTranslations, type SupportedLocale } from '@/lib/i18n/ui';
-import { BUSINESS_NAME, PHONE_E164, POSTAL_ADDRESS } from '@/utils/nap';
+import { AREA_SERVED } from '@/data/local-coverage';
+import {
+  BUSINESS_NAME,
+  FOUNDING_DATE,
+  GEO_COORDINATES,
+  OPENING_HOURS_SPEC,
+  PHONE_E164,
+  POSTAL_ADDRESS,
+  SAME_AS,
+} from '@/utils/nap';
 
 export interface SEOMetadata {
   title: string;
@@ -14,8 +23,8 @@ export interface SEOMetadata {
 export const SITE_ORIGIN = 'https://www.77studio.co';
 
 export const DEFAULT_SEO: SEOMetadata = {
-  title: "77 Studio | Marketing con IA, automatización y desarrollo web",
-  description: "Socio de crecimiento y tecnología para empresas en Colombia, LatAm y Estados Unidos. Marketing con IA, automatización, desarrollo web y productos digitales.",
+  title: "77 Studio en Armenia | Marketing, automatización e IA para el Eje Cafetero",
+  description: "Socio de crecimiento en Armenia, Quindío. Marketing digital, automatización, agentes de IA y páginas web para empresas del Eje Cafetero, Colombia y Estados Unidos.",
   canonical: `${SITE_ORIGIN}/`,
   ogImage: `${SITE_ORIGIN}/img/openGraph/og-image.png`,
   ogType: "website",
@@ -32,15 +41,9 @@ export const DEFAULT_SEO: SEOMetadata = {
 };
 
 const ORGANIZATION_DESCRIPTION: Record<SupportedLocale, string> = {
-  es: "77 Studio es un socio de crecimiento y tecnología para empresas en Colombia, Latinoamérica y Estados Unidos. Opera como 77 Studio SAS y 77 Studio LLC. Marketing con IA, automatización, desarrollo web y productos digitales.",
+  es: "77 Studio es un socio de crecimiento con sede en Armenia, Quindío. Marketing digital, automatización, agentes de IA y páginas web para el Eje Cafetero, Colombia y Estados Unidos. Opera como 77 Studio SAS y 77 Studio LLC.",
   en: "77 Studio is a growth and technology partner for companies in Colombia, Latin America, and the United States. It operates as 77 Studio SAS and 77 Studio LLC. AI marketing, automation, web development, and digital products.",
 };
-
-const AREA_SERVED = [
-  { '@type': 'Country', name: 'Colombia' },
-  { '@type': 'Country', name: 'United States' },
-  { '@type': 'Place', name: 'Latin America' },
-];
 
 const SERVICES: Record<string, Record<SupportedLocale, { name: string; serviceType: string; description: string }>> = {
   marketing: {
@@ -102,6 +105,7 @@ const SECTION_LABELS: Record<SupportedLocale, Record<string, string>> = {
     nosotros: uiTranslations.es.nav.nosotros,
     contacto: uiTranslations.es.nav.contacto,
     blog: 'Blog',
+    'eje-cafetero': 'Eje Cafetero',
   },
   en: {
     marketing: uiTranslations.en.nav.marketing,
@@ -111,6 +115,7 @@ const SECTION_LABELS: Record<SupportedLocale, Record<string, string>> = {
     nosotros: uiTranslations.en.nav.nosotros,
     contacto: uiTranslations.en.nav.contacto,
     blog: 'Blog',
+    'eje-cafetero': 'Coffee Axis',
   },
 };
 
@@ -144,6 +149,10 @@ interface StructuredDataInput {
   noindex?: boolean;
   /** Nombre visible de la última miga cuando la URL tiene más de un nivel (artículos). */
   breadcrumbLabel?: string;
+  /** Si viene, reemplaza el cálculo automático de migas. */
+  breadcrumbTrail?: { name: string; path: string }[];
+  /** @id schema de la entidad principal de esta URL. */
+  mainEntityId?: string;
 }
 
 /**
@@ -159,6 +168,8 @@ export function buildStructuredData({
   description,
   noindex = false,
   breadcrumbLabel,
+  breadcrumbTrail,
+  mainEntityId,
 }: StructuredDataInput) {
   const origin = site.origin;
   const orgId = `${origin}/#organization`;
@@ -166,22 +177,24 @@ export function buildStructuredData({
   const websiteId = `${origin}/#website`;
   const homeUrl = toPublicUrl(site, lang === 'en' ? '/en/' : '/');
   const ogImage = toPublicUrl(site, DEFAULT_SEO.ogImage ?? '/img/openGraph/og-image.png');
-  const logoUrl = `${origin}/img/77studio.png`;
+  // Cuadrado con fondo negro sólido. /img/77studio.png es el 77 blanco sobre
+  // transparente (1920) y en Google se ve como un punto blanco.
+  const logoUrl = `${origin}/icon-512.png`;
 
   const logo = {
     '@type': 'ImageObject',
     '@id': logoId,
     url: logoUrl,
     contentUrl: logoUrl,
-    width: 1920,
-    height: 1920,
+    width: 512,
+    height: 512,
     caption: '77 Studio',
   };
 
   const address = POSTAL_ADDRESS;
 
-  // No hay página de LinkedIn ni URL del Google Business Profile: no se inventan.
-  const sameAs = ['https://www.instagram.com/77studio'];
+  // Perfiles del Google Business Profile. No hay LinkedIn ni URL pública del perfil de Google.
+  const sameAs = SAME_AS;
 
   const serviceNodes = Object.entries(SERVICES).map(([slug, copy]) => {
     const url = `${origin}/${slug}/`;
@@ -211,6 +224,9 @@ export function buildStructuredData({
     description: ORGANIZATION_DESCRIPTION[lang],
     telephone: PHONE_E164,
     address,
+    geo: GEO_COORDINATES,
+    foundingDate: FOUNDING_DATE,
+    openingHoursSpecification: OPENING_HOURS_SPEC,
     areaServed: AREA_SERVED,
     founder: {
       '@type': 'Person',
@@ -239,6 +255,9 @@ export function buildStructuredData({
     telephone: PHONE_E164,
     priceRange: '$$',
     address,
+    geo: GEO_COORDINATES,
+    foundingDate: FOUNDING_DATE,
+    openingHoursSpecification: OPENING_HOURS_SPEC,
     description: ORGANIZATION_DESCRIPTION[lang],
     areaServed: AREA_SERVED,
     founder: { '@type': 'Person', name: 'Jordan Cruz' },
@@ -262,39 +281,49 @@ export function buildStructuredData({
   const serviceSlug = section && SERVICES[section] ? section : undefined;
   const currentService = serviceSlug ? serviceNodes.find((service) => service.url.endsWith(`/${serviceSlug}/`)) : undefined;
 
-  const breadcrumbItems = !noindex && sectionLabel
-    ? [
-        {
-          '@type': 'ListItem',
-          position: 1,
-          name: '77 Studio',
-          item: homeUrl,
-        },
-        ...(segments[0] === 'blog' && segments.length > 1
-          ? [
-              {
-                '@type': 'ListItem',
-                position: 2,
-                name: 'Blog',
-                item: toPublicUrl(site, '/blog/'),
-              },
-              {
-                '@type': 'ListItem',
-                position: 3,
-                name: breadcrumbLabel || title,
-                item: canonical,
-              },
-            ]
-          : [
-              {
-                '@type': 'ListItem',
-                position: 2,
-                name: sectionLabel,
-                item: canonical,
-              },
-            ]),
-      ]
-    : [];
+  const explicitCrumbs = !noindex && breadcrumbTrail?.length
+    ? breadcrumbTrail.map((crumb, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        name: crumb.name,
+        item: toPublicUrl(site, crumb.path),
+      }))
+    : null;
+
+  const breadcrumbItems = explicitCrumbs
+    ?? (!noindex && sectionLabel
+      ? [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: '77 Studio',
+            item: homeUrl,
+          },
+          ...(segments[0] === 'blog' && segments.length > 1
+            ? [
+                {
+                  '@type': 'ListItem',
+                  position: 2,
+                  name: 'Blog',
+                  item: toPublicUrl(site, '/blog/'),
+                },
+                {
+                  '@type': 'ListItem',
+                  position: 3,
+                  name: breadcrumbLabel || title,
+                  item: canonical,
+                },
+              ]
+            : [
+                {
+                  '@type': 'ListItem',
+                  position: 2,
+                  name: sectionLabel,
+                  item: canonical,
+                },
+              ]),
+        ]
+      : []);
 
   const breadcrumb = breadcrumbItems.length
     ? {
@@ -316,7 +345,11 @@ export function buildStructuredData({
         isPartOf: { '@id': websiteId },
         about: { '@id': orgId },
         publisher: { '@id': orgId },
-        ...(currentService ? { mainEntity: { '@id': currentService['@id'] } } : {}),
+        ...(mainEntityId
+          ? { mainEntity: { '@id': mainEntityId } }
+          : currentService
+            ? { mainEntity: { '@id': currentService['@id'] } }
+            : {}),
         ...(breadcrumb ? { breadcrumb: { '@id': breadcrumb['@id'] } } : {}),
       };
 
