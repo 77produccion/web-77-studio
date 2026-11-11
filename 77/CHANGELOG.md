@@ -7,6 +7,9 @@ El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1
 ---
 ## [Unreleased] - 2026-11-11
 
+### Changed
+- **NAP del Google Business Profile**: dirección `Cra. 14 #35 Norte-18, Oficina 405`, horario lunes a viernes 08:00–19:00, sábado 08:00–12:30 y domingo cerrado, fundación 2018-08-15. `sameAs` y el footer usan Instagram `77studio_`, TikTok `@77_studioss` y Facebook `77studio.co`.
+
 ### Added
 - **Verificación de Google Search Console**: meta `google-site-verification` en el head de todas las páginas y archivo `google038b51b14f2f9c7c.html` en la raíz, fuera del sitemap. Respaldo de la verificación que hoy depende de Google Tag Manager.
 - **Cobertura del Eje Cafetero**: hub en `/eje-cafetero/`, páginas de Armenia (sede), Pereira y Manizales (sin oficina) y una página por servicio principal en cada ciudad (marketing digital, automatización, agentes de IA y páginas web). No hay URL por municipio: Calarcá, Salento, Dosquebradas, Cartago y el resto quedan como área de cobertura. Schema con `areaServed`, geo del edificio que publica la dirección, horario de referencia pendiente de confirmar, `Service`, `FAQPage` y migas. `llms.txt` describe la cobertura.

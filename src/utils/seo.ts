@@ -2,10 +2,12 @@ import { uiTranslations, type SupportedLocale } from '@/lib/i18n/ui';
 import { AREA_SERVED } from '@/data/local-coverage';
 import {
   BUSINESS_NAME,
+  FOUNDING_DATE,
   GEO_COORDINATES,
   OPENING_HOURS_SPEC,
   PHONE_E164,
   POSTAL_ADDRESS,
+  SAME_AS,
 } from '@/utils/nap';
 
 export interface SEOMetadata {
@@ -189,8 +191,8 @@ export function buildStructuredData({
 
   const address = POSTAL_ADDRESS;
 
-  // No hay página de LinkedIn ni URL del Google Business Profile: no se inventan.
-  const sameAs = ['https://www.instagram.com/77studio'];
+  // Perfiles del Google Business Profile. No hay LinkedIn ni URL pública del perfil de Google.
+  const sameAs = SAME_AS;
 
   const serviceNodes = Object.entries(SERVICES).map(([slug, copy]) => {
     const url = `${origin}/${slug}/`;
@@ -221,6 +223,7 @@ export function buildStructuredData({
     telephone: PHONE_E164,
     address,
     geo: GEO_COORDINATES,
+    foundingDate: FOUNDING_DATE,
     openingHoursSpecification: OPENING_HOURS_SPEC,
     areaServed: AREA_SERVED,
     founder: {
@@ -251,6 +254,7 @@ export function buildStructuredData({
     priceRange: '$$',
     address,
     geo: GEO_COORDINATES,
+    foundingDate: FOUNDING_DATE,
     openingHoursSpecification: OPENING_HOURS_SPEC,
     description: ORGANIZATION_DESCRIPTION[lang],
     areaServed: AREA_SERVED,

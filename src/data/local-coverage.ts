@@ -192,7 +192,7 @@ export const CITIES: CityPage[] = [
     h1: 'Agencia de marketing digital, automatización e IA en Armenia',
     eyebrow: 'Sede en Armenia, Quindío',
     lead: [
-      '77 Studio trabaja desde Armenia. La sede está en la carrera 14 #35 Norte 18, al norte de la ciudad. Desde ahí acompañamos empresas que venden en Armenia y en los municipios cercanos del Quindío, y también equipos en Pereira, Manizales y por fuera de la región.',
+      '77 Studio trabaja desde Armenia. La sede está en la Cra. 14 #35 Norte-18, Oficina 405, al norte de la ciudad. Desde ahí acompañamos empresas que venden en Armenia y en los municipios cercanos del Quindío, y también equipos en Pereira, Manizales y por fuera de la región.',
       'Somos un socio de crecimiento: marketing, páginas web, automatización e inteligencia artificial en un solo equipo. No administramos redes sociales como servicio suelto. Si el anuncio, el sitio y el WhatsApp no conversan, el presupuesto se va en conversaciones que nadie cierra.',
     ],
     economyTitle: 'Cómo se mueve el negocio en Armenia',
@@ -249,7 +249,7 @@ export const CITIES: CityPage[] = [
     faqs: [
       {
         question: '¿77 Studio tiene oficina en Armenia?',
-        answer: 'Sí. La sede está en la carrera 14 #35 Norte 18, Armenia, Quindío, Colombia. Es la única sede física en el Eje Cafetero. El teléfono es +57 314 849 0955.',
+        answer: 'Sí. La sede está en la Cra. 14 #35 Norte-18, Oficina 405, Armenia, Quindío, Colombia. Es la única sede física en el Eje Cafetero. El teléfono es +57 314 849 0955.',
       },
       {
         question: '¿Son una agencia de redes sociales en Armenia?',
@@ -269,7 +269,7 @@ export const CITIES: CityPage[] = [
       },
       {
         question: '¿Cuál es el horario?',
-        answer: 'El horario de referencia, pendiente de confirmar con el equipo, es de lunes a viernes de 8:00 a. m. a 6:00 p. m. y sábados de 9:00 a. m. a 1:00 p. m. WhatsApp y el formulario quedan abiertos fuera de ese rango; la respuesta es en horario de trabajo.',
+        answer: 'Lunes a viernes de 8:00 a. m. a 7:00 p. m. Sábados de 8:00 a. m. a 12:30 p. m. Domingos cerrado. WhatsApp y el formulario quedan abiertos fuera de ese rango; la respuesta es en horario de trabajo.',
       },
       {
         question: '¿También trabajan con empresas por fuera del Quindío?',
@@ -297,7 +297,7 @@ export const CITIES: CityPage[] = [
     h1: 'Agencia de marketing digital, automatización e IA en Pereira',
     eyebrow: 'Pereira y el área metropolitana, desde Armenia',
     lead: [
-      'No tenemos oficina en Pereira. Las empresas de Pereira, Dosquebradas, La Virginia, Santa Rosa de Cabal y Cartago se atienden desde la sede de Armenia, en la carrera 14 #35 Norte 18. El teléfono es el mismo: +57 314 849 0955.',
+      'No tenemos oficina en Pereira. Las empresas de Pereira, Dosquebradas, La Virginia, Santa Rosa de Cabal y Cartago se atienden desde la sede de Armenia, en la Cra. 14 #35 Norte-18, Oficina 405. El teléfono es el mismo: +57 314 849 0955.',
       'Pereira es un mercado más grande y más competido que el de un pueblo del Quindío. Aquí una empresa le vende al área metropolitana, no a una sola calle. Por eso el trabajo no es “estar en redes”: es captar una búsqueda con intención, tener una página que explique la oferta y no perder el mensaje que llega después del anuncio.',
     ],
     economyTitle: 'Pereira no es una versión grande de Armenia',
@@ -351,7 +351,7 @@ export const CITIES: CityPage[] = [
     faqs: [
       {
         question: '¿77 Studio tiene oficina en Pereira?',
-        answer: 'No. Pereira se atiende desde la sede de Armenia, carrera 14 #35 Norte 18. Las reuniones arrancan por videollamada. El teléfono es +57 314 849 0955.',
+        answer: 'No. Pereira se atiende desde la sede de Armenia, Cra. 14 #35 Norte-18, Oficina 405. Las reuniones arrancan por videollamada. El teléfono es +57 314 849 0955.',
       },
       {
         question: '¿Trabajan con empresas de Dosquebradas y La Virginia?',
@@ -447,7 +447,7 @@ export const CITIES: CityPage[] = [
     faqs: [
       {
         question: '¿77 Studio tiene oficina en Manizales?',
-        answer: 'No. Manizales se atiende desde la sede de Armenia, carrera 14 #35 Norte 18. El teléfono es +57 314 849 0955.',
+        answer: 'No. Manizales se atiende desde la sede de Armenia, Cra. 14 #35 Norte-18, Oficina 405. El teléfono es +57 314 849 0955.',
       },
       {
         question: '¿Atienden empresas de Villamaría y Chinchiná?',
@@ -495,13 +495,13 @@ export const HUB = {
   ],
   h1: 'Marketing digital, automatización e IA en el Eje Cafetero',
   lead: [
-    '77 Studio es un socio de crecimiento para empresas: marketing con pauta, páginas web, automatización e inteligencia artificial. La sede está en Armenia, Quindío, en la carrera 14 #35 Norte 18. Pereira y Manizales no tienen oficina propia. Se atienden desde Armenia, igual que los municipios de alrededor.',
+    '77 Studio es un socio de crecimiento para empresas: marketing con pauta, páginas web, automatización e inteligencia artificial. La sede está en Armenia, Quindío, en la Cra. 14 #35 Norte-18, Oficina 405. Pereira y Manizales no tienen oficina propia. Se atienden desde Armenia, igual que los municipios de alrededor.',
     'Esta página junta esa cobertura. Si buscas el detalle de una ciudad o de un servicio en esa ciudad, entra a la página correspondiente. No abrimos una URL por cada pueblo: ahí no habría nada distinto que decir y solo diluiría lo que sí somos.',
   ],
   faqs: [
     {
       question: '¿Dónde está la sede de 77 Studio?',
-      answer: 'En la carrera 14 #35 Norte 18, Armenia, Quindío, Colombia. Teléfono y WhatsApp: +57 314 849 0955. La empresa opera como 77 Studio SAS en Colombia y 77 Studio LLC en Estados Unidos.',
+      answer: 'En la Cra. 14 #35 Norte-18, Oficina 405, Armenia, Quindío, Colombia. Teléfono y WhatsApp: +57 314 849 0955. La empresa opera como 77 Studio SAS en Colombia y 77 Studio LLC en Estados Unidos.',
     },
     {
       question: '¿Tienen oficinas en Pereira o Manizales?',
@@ -517,7 +517,7 @@ export const HUB = {
     },
     {
       question: '¿Cuál es el horario de atención?',
-      answer: 'Horario de referencia, pendiente de confirmar: lunes a viernes de 8:00 a. m. a 6:00 p. m. y sábados de 9:00 a. m. a 1:00 p. m. Es el mismo para toda la cobertura.',
+      answer: 'Lunes a viernes de 8:00 a. m. a 7:00 p. m. Sábados de 8:00 a. m. a 12:30 p. m. Domingos cerrado. Es el mismo horario para toda la cobertura.',
     },
   ] satisfies Faq[],
 };

@@ -43,7 +43,7 @@ export const SERVICE_CITY_PAGES: ServiceCityPage[] = [
       { title: 'Marcas de café', text: 'Pauta que explique producto o visita a alguien fuera del Quindío, con una página que aguante el clic y no mande todo al perfil.' },
     ],
     faqs: [
-      { question: '¿77 Studio hace pauta para empresas de Armenia?', answer: 'Sí. Meta Ads, Google Ads, piezas y la conexión con la web y el WhatsApp. La sede está en Armenia, carrera 14 #35 Norte 18.' },
+      { question: '¿77 Studio hace pauta para empresas de Armenia?', answer: 'Sí. Meta Ads, Google Ads, piezas y la conexión con la web y el WhatsApp. La sede está en Armenia, Cra. 14 #35 Norte-18, Oficina 405.' },
       { question: '¿Manejan las redes sociales?', answer: 'No como servicio de publicación diaria. El contenido existe para las campañas y para explicar la oferta. Si solo necesitas un community manager, no somos ese proveedor.' },
       { question: '¿Atienden también Calarcá y Salento?', answer: 'Sí, desde Armenia. La campaña puede nombrar el municipio cuando la empresa de verdad vende ahí.' },
       { question: '¿Cuánto hay que invertir en anuncios?', answer: 'El presupuesto de medios lo pone la empresa y se define según el costo real de una conversación útil, no según un paquete. El honorario de 77 Studio es aparte y depende del alcance.' },
@@ -413,7 +413,7 @@ export const SERVICE_CITY_PAGES: ServiceCityPage[] = [
       { title: 'Firmas profesionales', text: 'Poca pauta, muy específica, hacia quien ya tiene el problema. No hace falta “llenar el feed”.' },
     ],
     faqs: [
-      { question: '¿Hay agencia de 77 Studio en Manizales?', answer: 'No hay oficina. Atendemos Manizales desde Armenia, carrera 14 #35 Norte 18. Teléfono +57 314 849 0955.' },
+      { question: '¿Hay agencia de 77 Studio en Manizales?', answer: 'No hay oficina. Atendemos Manizales desde Armenia, Cra. 14 #35 Norte-18, Oficina 405. Teléfono +57 314 849 0955.' },
       { question: '¿La pauta cubre Chinchiná?', answer: 'Sí, cuando el negocio vende ahí. Chinchiná no se anuncia igual que el centro de Manizales: la intención y la competencia son otras.' },
       { question: '¿Me ayudan a vender más café?', answer: 'Ayudamos a que la oferta se encuentre y a que la cotización no se pierda. El resultado comercial depende del producto, el precio y la capacidad de despacho. No prometemos un volumen.' },
       { question: '¿Publican en redes por mí?', answer: 'No es el servicio. Producimos las piezas que la pauta necesita y el sistema para responder.' },
