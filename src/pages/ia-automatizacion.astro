@@ -2,6 +2,7 @@
 // src/pages/ia-automatizacion.astro
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import HeroIA from '@/components/ia/HeroIA.astro';
+import CaseSpotlight from '@/components/casos/CaseSpotlight.astro';
 import IACapabilitiesGrid from '@/components/ia/IACapabilitiesGrid.astro';
 import IAProblemSection from '@/components/ia/IAProblemSection.astro';
 import AutomationVsAISection from '@/components/ia/AutomationVsAISection.astro';
@@ -29,6 +30,8 @@ const t = getIaTranslations(lang);
 
   <!-- 03. El problema: Muchas empresas tienen tecnología, pero siguen trabajando manualmente -->
   <IAProblemSection lang={lang} />
+
+  <CaseSpotlight variant="service" />
 
   <!-- 04. IA + Automatización: No todo necesita IA. No todo se resuelve con una automatización simple -->
   <AutomationVsAISection lang={lang} />

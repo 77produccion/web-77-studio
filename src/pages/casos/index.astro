@@ -1,0 +1,92 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { directoryPath, toPublicUrl } from '@/utils/seo';
+
+const cases = (await getCollection('casos', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+const title = 'Casos de éxito de automatización y software | 77 Studio';
+const description =
+  'Proyectos reales de 77 Studio en automatización de procesos y software a medida. El primero es Casa Tuning, taller automotriz en Armenia, Quindío.';
+
+const site = Astro.site ?? new URL('https://www.77studio.co');
+const canonical = toPublicUrl(site, directoryPath('/casos/'));
+const origin = site.origin;
+
+const structuredData = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'CollectionPage',
+      '@id': `${canonical}#collection`,
+      url: canonical,
+      name: title,
+      description,
+      inLanguage: 'es-CO',
+      isPartOf: { '@id': `${origin}/#website` },
+      about: { '@id': `${origin}/ia-automatizacion/#service` },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${canonical}#breadcrumb`,
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: '77 Studio', item: `${origin}/` },
+        { '@type': 'ListItem', position: 2, name: 'Casos de éxito', item: canonical },
+      ],
+    },
+    {
+      '@type': 'ItemList',
+      itemListElement: cases.map((entry, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        name: entry.data.client,
+        url: toPublicUrl(site, directoryPath(`/casos/${entry.id}/`)),
+      })),
+    },
+  ],
+}).replace(/</g, '\\u003c');
+---
+
+<BaseLayout title={title} description={description} whatsappContext="ia" lang="es">
+  <script is:inline type="application/ld+json" set:html={structuredData} />
+
+  <section class="pb-8 pt-28 md:pb-12 md:pt-36">
+    <div class="mx-auto max-w-[1290px] px-4 sm:px-6">
+      <nav aria-label="Miga de pan" class="font-ibm-plex-mono text-[11px] uppercase tracking-[0.16em] text-background-13/70">
+        <ol class="flex flex-wrap items-center gap-x-2 gap-y-1">
+          <li><a href="/" class="transition hover:text-opai-purple">Inicio</a></li>
+          <li aria-hidden="true">/</li>
+          <li class="text-background-13/80">Casos de éxito</li>
+        </ol>
+      </nav>
+      <h1 class="mt-6 max-w-3xl font-sora text-3xl font-semibold leading-[1.15] tracking-tight text-background-13/90 md:text-5xl">
+        Casos de éxito
+      </h1>
+      <p class="mt-4 max-w-2xl font-inter-tight text-base leading-relaxed text-background-13/60 md:text-lg">
+        Proyectos que ya están en operación. Este índice queda listo para sumar más casos, con el mismo criterio: solo lo que el cliente confirmó.
+      </p>
+    </div>
+  </section>
+
+  <section class="pb-24" aria-label="Listado de casos">
+    <div class="mx-auto grid max-w-[1290px] gap-6 px-4 sm:px-6 md:grid-cols-2">
+      {cases.map((entry) => (
+        <a
+          href={`/casos/${entry.id}/`}
+          class="group flex h-full flex-col rounded-[20px] border border-stroke-2/60 bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-opai-purple md:p-8"
+        >
+          <p class="font-ibm-plex-mono text-[11px] uppercase tracking-[0.16em] text-opai-purple">
+            {entry.data.industry} · {entry.data.location}
+          </p>
+          <h2 class="mt-3 font-sora text-2xl font-semibold tracking-tight text-background-13/90 group-hover:text-opai-purple">
+            {entry.data.client}
+          </h2>
+          <p class="mt-3 font-inter-tight text-sm leading-relaxed text-background-13/60">{entry.data.excerpt}</p>
+          <p class="mt-6 font-ibm-plex-mono text-xs text-background-13/70">Ver el caso</p>
+        </a>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

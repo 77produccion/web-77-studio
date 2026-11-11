@@ -2,6 +2,7 @@
 // src/pages/productos-digitales.astro
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import HeroProductos from '@/components/productos/HeroProductos.astro';
+import CaseSpotlight from '@/components/casos/CaseSpotlight.astro';
 import ProductSolutionsGrid from '@/components/productos/ProductSolutionsGrid.astro';
 import ProductProcessSection from '@/components/productos/ProductProcessSection.astro';
 import ProductCasesSection from '@/components/productos/ProductCasesSection.astro';
@@ -23,6 +24,8 @@ const t = getProductosTranslations('es');
 
   <!-- 02. Catálogo de las 5 Soluciones Digitales a la Medida + CTA integrado -->
   <ProductSolutionsGrid />
+
+  <CaseSpotlight variant="service" />
 
   <!-- 03. Metodología de Desarrollo de Producto en 5 Pasos -->
   <ProductProcessSection />

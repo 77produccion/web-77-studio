@@ -34,6 +34,13 @@ El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1
 ### Performance
 - **LCP de la portada**: variantes WebP del cerebro (540, 840 y 1280) con `srcset`, preload de la marca de agua que Lighthouse marca como LCP en móvil, secciones bajo el hero con `content-visibility`, y Google Tag Manager diferido hasta después de la carga o el primer gesto. `dataLayer` sigue en cola para no perder la analítica.
 
+## [Unreleased] - 2026-11-11
+
+### Added
+- **Casos de éxito (`/casos/`, `/casos/casa-tuning/`)**: colección `casos` en MDX y ficha de Casa Tuning S.A.S. (taller en Armenia). CRM para talleres, automatización de WhatsApp en vivo, registro fotográfico de cada vehículo que ingresa y testimonio atribuido al taller, sin nombre de persona. Schema `Article`, `Review` sin calificación y `BreadcrumbList`. Enlaces desde la portada, IA y automatización, productos digitales y una línea del footer. `llms.txt` y `llms-full.txt` describen el caso. El sitemap lo toma la integración de Astro.
+- **Capturas del portal de Casa Tuning**: tres pantallas reales (acceso, tablero y órdenes), en WebP, con placas y datos de cliente pixelados en el archivo. Una de ellas es la imagen Open Graph del caso. El diagrama del flujo se mantiene.
+- **Pendiente, fuera de la página**: el nombre de una persona del cliente no se publica hasta tener una cita autorizada a su nombre. No hay otras cifras además del 100% de registro fotográfico.
+
 ## [Unreleased] - 2026-11-09
 
 ### Added
