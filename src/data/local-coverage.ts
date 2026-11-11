@@ -1,6 +1,6 @@
 /**
  * Cobertura local del Eje Cafetero.
- * La sede física es Armenia. Pereira y Manizales se atienden desde ahí.
+ * La sede física es Armenia. La cobertura es nacional, con foco en Pereira, Manizales y el Eje Cafetero.
  * No hay páginas por municipio: el contenido distinto vive en la ciudad y en el servicio.
  */
 
@@ -181,7 +181,7 @@ export const CITIES: CityPage[] = [
     hasOffice: true,
     title: 'Agencia de marketing digital, automatización e IA en Armenia | 77 Studio',
     description:
-      'Sede en Armenia, Quindío. Marketing digital, automatización, agentes de IA y páginas web para empresas de la ciudad y del norte del departamento.',
+      'Sede principal en Armenia, Quindío. Marketing digital, automatización, agentes de IA y páginas web para empresas de la ciudad, del Quindío y de toda Colombia.',
     keywords: [
       'agencia de marketing digital en Armenia',
       'automatización de procesos con IA en Armenia',
@@ -190,9 +190,9 @@ export const CITIES: CityPage[] = [
       'agencia de marketing Armenia Quindío',
     ],
     h1: 'Agencia de marketing digital, automatización e IA en Armenia',
-    eyebrow: 'Sede en Armenia, Quindío',
+    eyebrow: 'Sede principal · Armenia, Quindío',
     lead: [
-      '77 Studio trabaja desde Armenia. La sede está en la Cra. 14 #35 Norte-18, Oficina 405, al norte de la ciudad. Desde ahí acompañamos empresas que venden en Armenia y en los municipios cercanos del Quindío, y también equipos en Pereira, Manizales y por fuera de la región.',
+      '77 Studio tiene la sede principal en Armenia, en la Cra. 14 #35 Norte-18, Oficina 405, al norte de la ciudad. Desde esa sede acompañamos empresas de Armenia y del Quindío, y también de Pereira, Manizales y el resto de Colombia, con reuniones presenciales y trabajo remoto.',
       'Somos un socio de crecimiento: marketing, páginas web, automatización e inteligencia artificial en un solo equipo. No administramos redes sociales como servicio suelto. Si el anuncio, el sitio y el WhatsApp no conversan, el presupuesto se va en conversaciones que nadie cierra.',
     ],
     economyTitle: 'Cómo se mueve el negocio en Armenia',
@@ -236,7 +236,7 @@ export const CITIES: CityPage[] = [
     processNote:
       'Las reuniones de arranque pueden ser en la sede del norte de Armenia o por videollamada. El teléfono de contacto es el de Colombia, +57 314 849 0955.',
     municipalitiesIntro:
-      'Desde Armenia acompañamos empresas de estos municipios. No tenemos oficina en cada pueblo: el trabajo es remoto y, cuando hace falta ver la operación, se acuerda una visita desde la sede.',
+      'Desde la sede de Armenia acompañamos empresas de estos municipios del Quindío, con trabajo remoto y visitas cuando el proyecto lo pide.',
     municipalities: [
       { name: 'Calarcá', department: 'Quindío', note: 'Va con Armenia en el día a día comercial. Muchos negocios atienden las dos ciudades y necesitan decirlo en la web y en la pauta.' },
       { name: 'Circasia', department: 'Quindío', note: 'Municipio pegado al norte, cerca de la sede. Comercio, fincas y servicios que a veces se anuncian solo como “Armenia” y pierden a quien busca Circasia.' },
@@ -257,7 +257,7 @@ export const CITIES: CityPage[] = [
       },
       {
         question: '¿Atienden empresas de Salento, Filandia y Calarcá?',
-        answer: 'Sí. Esos municipios, junto con Montenegro, Quimbaya, La Tebaida y Circasia, hacen parte de la cobertura desde la sede de Armenia. No hay una oficina en cada uno.',
+        answer: 'Sí. Acompañamos empresas de Salento, Filandia, Calarcá, Montenegro, Quimbaya, La Tebaida y Circasia desde la sede de Armenia, con reuniones presenciales y trabajo remoto.',
       },
       {
         question: '¿Cuánto cuesta el marketing o una página web en Armenia?',
@@ -273,7 +273,7 @@ export const CITIES: CityPage[] = [
       },
       {
         question: '¿También trabajan con empresas por fuera del Quindío?',
-        answer: 'Sí. Pereira y Manizales se atienden desde Armenia, igual que equipos en otras ciudades de Colombia y en Estados Unidos, en remoto. 77 Studio opera como 77 Studio SAS en Colombia y 77 Studio LLC en Estados Unidos.',
+        answer: 'Sí. La sede está en Armenia y la cobertura es nacional. Acompañamos empresas de Pereira, Manizales y de otras ciudades de Colombia, y también equipos en Estados Unidos, con reuniones presenciales y trabajo remoto. 77 Studio opera como 77 Studio SAS en Colombia y 77 Studio LLC en Estados Unidos.',
       },
     ],
     whatsappMessage:
@@ -286,7 +286,7 @@ export const CITIES: CityPage[] = [
     hasOffice: false,
     title: 'Agencia de marketing digital, automatización e IA en Pereira | 77 Studio',
     description:
-      'Marketing digital, automatización, agentes de IA y páginas web para empresas de Pereira, Dosquebradas y La Virginia. Se atiende desde la sede en Armenia.',
+      'Marketing digital, automatización, agentes de IA y páginas web para empresas de Pereira, Dosquebradas y La Virginia. Sede en Armenia y cobertura en toda Colombia.',
     keywords: [
       'agencia de marketing digital en Pereira',
       'automatización de procesos en Pereira',
@@ -295,9 +295,9 @@ export const CITIES: CityPage[] = [
       'marketing digital Dosquebradas',
     ],
     h1: 'Agencia de marketing digital, automatización e IA en Pereira',
-    eyebrow: 'Pereira y el área metropolitana, desde Armenia',
+    eyebrow: 'Pereira · Cobertura nacional',
     lead: [
-      'No tenemos oficina en Pereira. Las empresas de Pereira, Dosquebradas, La Virginia, Santa Rosa de Cabal y Cartago se atienden desde la sede de Armenia, en la Cra. 14 #35 Norte-18, Oficina 405. El teléfono es el mismo: +57 314 849 0955.',
+      'La sede de 77 Studio está en Armenia, en la Cra. 14 #35 Norte-18, Oficina 405, y la cobertura es nacional. En Pereira acompañamos empresas de la ciudad, Dosquebradas, La Virginia, Santa Rosa de Cabal y Cartago con reuniones presenciales y trabajo remoto. El teléfono es +57 314 849 0955.',
       'Pereira es un mercado más grande y más competido que el de un pueblo del Quindío. Aquí una empresa le vende al área metropolitana, no a una sola calle. Por eso el trabajo no es “estar en redes”: es captar una búsqueda con intención, tener una página que explique la oferta y no perder el mensaje que llega después del anuncio.',
     ],
     economyTitle: 'Pereira no es una versión grande de Armenia',
@@ -339,19 +339,19 @@ export const CITIES: CityPage[] = [
         'Hace falta una web que cargue rápido en el celular y diga cobertura, servicios y el siguiente paso. En una subasta de Google más competida, una página lenta o confusa se come el clic.',
     },
     processNote:
-      'La reunión de diagnóstico es por videollamada. Si el proyecto necesita ver la operación en Pereira o Dosquebradas, la visita se coordina desde Armenia. No hay sede en Risaralda.',
+      'En Pereira la reunión de diagnóstico puede ser presencial o por videollamada. El equipo sale de la sede en Armenia cuando el proyecto pide ver la operación en Pereira o Dosquebradas.',
     municipalitiesIntro:
       'Estos son los municipios que cubrimos junto con Pereira. Cartago queda en el Valle; lo atendemos desde la misma operación porque comercialmente mira hacia Pereira.',
     municipalities: [
       { name: 'Dosquebradas', department: 'Risaralda', note: 'Hace parte del área metropolitana. Muchas empresas dicen “Pereira” y se olvidan de quien busca el servicio con el nombre de Dosquebradas.' },
       { name: 'La Virginia', department: 'Risaralda', note: 'Tercer municipio del área. Comercio y empresas que cruzan el río todos los días y no siempre aparecen en la pauta de la capital.' },
       { name: 'Santa Rosa de Cabal', department: 'Risaralda', note: 'Termales, hotel y la vía a Manizales. La demanda mezcla turismo y servicios para quien vive en el municipio.' },
-      { name: 'Cartago', department: 'Valle del Cauca', note: 'Norte del Valle, a una distancia corta de Pereira. Lo cubrimos desde esta operación, no con una oficina propia.' },
+      { name: 'Cartago', department: 'Valle del Cauca', note: 'Norte del Valle, a una distancia corta de Pereira. Lo cubrimos en la misma operación nacional, con reuniones presenciales y trabajo remoto.' },
     ],
     faqs: [
       {
         question: '¿77 Studio tiene oficina en Pereira?',
-        answer: 'No. Pereira se atiende desde la sede de Armenia, Cra. 14 #35 Norte-18, Oficina 405. Las reuniones arrancan por videollamada. El teléfono es +57 314 849 0955.',
+        answer: 'Nuestra sede está en Armenia y atendemos empresas de Pereira con reuniones presenciales y trabajo remoto. La dirección de la sede es Cra. 14 #35 Norte-18, Oficina 405. El teléfono es +57 314 849 0955.',
       },
       {
         question: '¿Trabajan con empresas de Dosquebradas y La Virginia?',
@@ -367,7 +367,7 @@ export const CITIES: CityPage[] = [
       },
       {
         question: '¿Pueden ir a una reunión presencial en Pereira?',
-        answer: 'El día a día es remoto. Si el proyecto justifica ver el local o al equipo, coordinamos la visita desde Armenia. No prometemos una presencia semanal en la ciudad.',
+        answer: 'Sí. Combinamos reuniones presenciales en Pereira con trabajo remoto. Coordinamos la visita según el proyecto, desde la sede de Armenia.',
       },
       {
         question: '¿Hacen manejo de redes sociales en Pereira?',
@@ -384,7 +384,7 @@ export const CITIES: CityPage[] = [
     hasOffice: false,
     title: 'Agencia de marketing digital, automatización e IA en Manizales | 77 Studio',
     description:
-      'Marketing digital, automatización, agentes de IA y páginas web para empresas de Manizales, Villamaría y Chinchiná. Se atiende desde la sede en Armenia.',
+      'Marketing digital, automatización, agentes de IA y páginas web para empresas de Manizales, Villamaría y Chinchiná. Sede en Armenia y cobertura en toda Colombia.',
     keywords: [
       'agencia de marketing digital en Manizales',
       'automatización con IA en Manizales',
@@ -393,9 +393,9 @@ export const CITIES: CityPage[] = [
       'marketing digital Villamaría Chinchiná',
     ],
     h1: 'Agencia de marketing digital, automatización e IA en Manizales',
-    eyebrow: 'Manizales y Caldas, desde Armenia',
+    eyebrow: 'Manizales · Cobertura nacional',
     lead: [
-      'No tenemos oficina en Manizales. La sede está en Armenia y desde ahí trabajamos con empresas de Manizales, Villamaría y Chinchiná. El contacto es +57 314 849 0955, por WhatsApp o por el formulario.',
+      'La sede de 77 Studio está en Armenia, en la Cra. 14 #35 Norte-18, Oficina 405, y la cobertura es nacional. En Manizales acompañamos empresas de la ciudad, Villamaría y Chinchiná con reuniones presenciales y trabajo remoto. El contacto es +57 314 849 0955, por WhatsApp o por el formulario.',
       'Manizales es una ciudad universitaria, cafetera y de ladera. El cliente suele estar en el celular, entre el campus, el centro y Villamaría, que en la práctica funciona como la misma ciudad. Una página pesada o un anuncio que no dice para quién es se caen rápido en ese contexto.',
     ],
     economyTitle: 'Qué pide el mercado de Manizales',
@@ -437,7 +437,7 @@ export const CITIES: CityPage[] = [
         'La página tiene que cargar bien en móvil, porque así llega la mayoría. Y tiene que verse a la altura de una firma o una marca de café que compite con empresas de otras ciudades.',
     },
     processNote:
-      'El diagnóstico es por videollamada. Una visita a Manizales o Chinchiná se acuerda desde Armenia cuando el proyecto lo necesita. No hay sede en Caldas.',
+      'En Manizales el diagnóstico puede ser presencial o por videollamada. El equipo sale de la sede en Armenia cuando el proyecto pide ver la operación en Manizales o Chinchiná.',
     municipalitiesIntro:
       'Además de Manizales, esta es la cobertura cercana que declaramos. Chinchiná queda en el corredor hacia Pereira; Villamaría es contigua a la ciudad.',
     municipalities: [
@@ -447,7 +447,7 @@ export const CITIES: CityPage[] = [
     faqs: [
       {
         question: '¿77 Studio tiene oficina en Manizales?',
-        answer: 'No. Manizales se atiende desde la sede de Armenia, Cra. 14 #35 Norte-18, Oficina 405. El teléfono es +57 314 849 0955.',
+        answer: 'Nuestra sede está en Armenia y atendemos empresas de Manizales con reuniones presenciales y trabajo remoto. La dirección de la sede es Cra. 14 #35 Norte-18, Oficina 405. El teléfono es +57 314 849 0955.',
       },
       {
         question: '¿Atienden empresas de Villamaría y Chinchiná?',
@@ -486,7 +486,7 @@ export function getLocalService(slug: string): LocalService | undefined {
 export const HUB = {
   title: 'Marketing, automatización e IA en el Eje Cafetero | 77 Studio',
   description:
-    'Cobertura de 77 Studio en Armenia, Pereira, Manizales y municipios cercanos. La sede está en Armenia. Marketing, automatización, agentes de IA y páginas web.',
+    'Cobertura de 77 Studio en Armenia, Pereira, Manizales y municipios cercanos, dentro de una cobertura nacional. La sede está en Armenia. Marketing, automatización, agentes de IA y páginas web.',
   keywords: [
     'marketing digital Eje Cafetero',
     'agencia de marketing Armenia Pereira Manizales',
@@ -495,8 +495,8 @@ export const HUB = {
   ],
   h1: 'Marketing digital, automatización e IA en el Eje Cafetero',
   lead: [
-    '77 Studio es un socio de crecimiento para empresas: marketing con pauta, páginas web, automatización e inteligencia artificial. La sede está en Armenia, Quindío, en la Cra. 14 #35 Norte-18, Oficina 405. Pereira y Manizales no tienen oficina propia. Se atienden desde Armenia, igual que los municipios de alrededor.',
-    'Esta página junta esa cobertura. Si buscas el detalle de una ciudad o de un servicio en esa ciudad, entra a la página correspondiente. No abrimos una URL por cada pueblo: ahí no habría nada distinto que decir y solo diluiría lo que sí somos.',
+    '77 Studio es un socio de crecimiento para empresas: marketing con pauta, páginas web, automatización e inteligencia artificial. La sede está en Armenia, Quindío, en la Cra. 14 #35 Norte-18, Oficina 405, y la cobertura es nacional. En el Eje Cafetero acompañamos de cerca a empresas de Pereira, Manizales y los municipios de alrededor, con reuniones presenciales y trabajo remoto.',
+    'Esta página reúne ese foco regional. Si buscas el detalle de una ciudad o de un servicio en esa ciudad, entra a la página correspondiente. Los municipios cercanos se nombran dentro de la cobertura de su ciudad.',
   ],
   faqs: [
     {
@@ -505,7 +505,7 @@ export const HUB = {
     },
     {
       question: '¿Tienen oficinas en Pereira o Manizales?',
-      answer: 'No. Esas ciudades, y los municipios cercanos, se atienden desde Armenia. La reunión inicial es por videollamada. Una visita se coordina si el proyecto la necesita.',
+      answer: 'Nuestra sede está en Armenia, en la Cra. 14 #35 Norte-18, Oficina 405, y la cobertura es nacional. Atendemos empresas de Pereira y Manizales con reuniones presenciales y trabajo remoto. El teléfono es +57 314 849 0955.',
     },
     {
       question: '¿Qué municipios cubren?',

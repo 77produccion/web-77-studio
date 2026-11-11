@@ -17,8 +17,8 @@ export const homeTranslations = {
     },
     international: {
       badge: "Presencia Internacional",
-      title: "Sede en Armenia, para el Eje Cafetero y más allá",
-      description: "La oficina está en Armenia, Quindío. Desde ahí acompañamos empresas de Pereira, Manizales y los municipios cercanos, y también equipos en el resto de Colombia y en Estados Unidos, en remoto.",
+      title: "Sede en Armenia, cobertura en toda Colombia",
+      description: "La oficina está en Armenia, Quindío. Acompañamos empresas en todo el país, con foco en el Eje Cafetero, y equipos en Estados Unidos, con reuniones presenciales y trabajo remoto.",
       tag1: "Armenia, Quindío",
       tag2: "Remoto Global",
       tag3: "Equipos Bilingües"
@@ -135,8 +135,8 @@ export const homeTranslations = {
     },
     international: {
       badge: "International Presence",
-      title: "Based in Armenia, for the Coffee Axis and beyond",
-      description: "The office is in Armenia, Quindío. From there we work with companies in Pereira, Manizales, and nearby towns, and with teams across Colombia and the United States.",
+      title: "Based in Armenia, with coverage across Colombia",
+      description: "The office is in Armenia, Quindío. We work with companies across the country, with a focus on the Coffee Axis, and with teams in the United States, in person and remotely.",
       tag1: "Armenia, Colombia",
       tag2: "Global Remote",
       tag3: "Bilingual Teams"
