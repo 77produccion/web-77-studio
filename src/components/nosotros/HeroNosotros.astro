@@ -12,11 +12,12 @@ interface Props {
 const currentLang = (Astro.props.lang || (Astro.currentLocale as SupportedLocale) || 'es') as SupportedLocale;
 const t = getNosotrosTranslations(currentLang);
 
+const isEn = currentLang === 'en';
 const heroImages = [
-  "/img/bgs/full-team.webp",
-  "/img/bgs/edificio-77.webp",
-  "/img/bgs/Sala-de-juntas.webp",
-  "/img/bgs/tania-licxa-work.webp"
+  { src: "/img/bgs/full-team.webp", alt: isEn ? "77 Studio team" : "Equipo de 77 Studio" },
+  { src: "/img/bgs/edificio-77.webp", alt: isEn ? "77 Studio office building" : "Edificio de la sede de 77 Studio" },
+  { src: "/img/bgs/Sala-de-juntas.webp", alt: isEn ? "77 Studio meeting room" : "Sala de juntas de 77 Studio" },
+  { src: "/img/bgs/tania-licxa-work.webp", alt: isEn ? "Working session at 77 Studio" : "Sesión de trabajo en 77 Studio" },
 ];
 ---
 
@@ -24,10 +25,10 @@ const heroImages = [
   
   <!-- DYNAMIC BACKGROUND SLIDESHOW (4 Authentic Studio Photos with <img> tags) -->
   <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none" id="nosotros-bg-slideshow">
-    {heroImages.map((imgUrl, index) => (
+    {heroImages.map((image, index) => (
       <img 
-        src={imgUrl}
-        alt={`77 Studio Ambiente ${index + 1}`}
+        src={image.src}
+        alt={image.alt}
         class={`nosotros-hero-slide absolute inset-0 w-full h-full object-cover object-center transition-all duration-1000 ease-out transform ${index === 0 ? 'opacity-100 scale-100' : 'opacity-0 scale-105'}`}
         data-slide-index={index}
         width="1920"

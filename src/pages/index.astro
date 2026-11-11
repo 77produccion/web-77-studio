@@ -11,19 +11,22 @@ import PhilosophySection from '@/components/nosotros/PhilosophySection.astro';
 import TestimonialsSection from '@/components/home/TestimonialsSection.astro';
 import ProcessSection from '@/components/home/ProcessSection.astro';
 import ContactSection from '@/components/home/ContactSection.astro';
+import { getHomeTranslations } from '@/lib/i18n/pages/home';
+import { homeHeroPreload } from '@/utils/home-hero';
 
-const pageTitle = "77 Studio | Marketing, Web, IA + Automatización & Productos Digitales";
-const pageDescription = "Digital Studio + Creative Partner + Technology & AI Company. Un solo equipo para hacer que tu empresa se vea mejor, venda mejor y funcione mejor (Colombia ↔ USA).";
+const t = getHomeTranslations('es');
 ---
 
 <BaseLayout
-  title={pageTitle}
-  description={pageDescription}
+  title={t.meta.title}
+  description={t.meta.description}
   whatsappContext="home"
+  heroPreload={homeHeroPreload}
 >
   <!-- 01. Hero Section con métricas en vivo y CTAs duales -->
   <HeroHome />
 
+  <div class="home-below-fold">
   <!-- Metrics and Integrations Section (Light-Adapted) -->
   <MetricsAndIntegrations />
 
@@ -50,4 +53,5 @@ const pageDescription = "Digital Studio + Creative Partner + Technology & AI Com
 
   <!-- 08. Sección de Contacto Dual (WhatsApp + Formulario Comercial) -->
   <ContactSection />
+  </div>
 </BaseLayout>

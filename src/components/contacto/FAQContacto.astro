@@ -11,7 +11,21 @@ interface Props {
 const currentLang = (Astro.props.lang || (Astro.currentLocale as SupportedLocale) || 'es') as SupportedLocale;
 const t = getContactoTranslations(currentLang);
 const faqs = t.faq.items;
+const faqLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.q,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: faq.a,
+    },
+  })),
+}).replace(/</g, '\\u003c');
 ---
+
+<script is:inline type="application/ld+json" set:html={faqLd} />
 
 <section class="py-16 sm:py-24 bg-white border-t border-black/5" id="faqs-contacto">
   <div class="mx-auto max-w-[1290px] px-4 sm:px-6">

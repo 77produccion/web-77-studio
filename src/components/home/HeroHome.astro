@@ -3,6 +3,7 @@
 import DualCTA from '@/components/DualCTA.astro';
 import { getHomeTranslations } from '@/lib/i18n/pages/home';
 import type { SupportedLocale } from '@/lib/i18n/ui';
+import { HOME_HERO_IMAGE } from '@/utils/home-hero';
 
 interface Props {
   lang?: SupportedLocale;
@@ -10,6 +11,20 @@ interface Props {
 
 const currentLang = (Astro.props.lang || (Astro.currentLocale as SupportedLocale) || 'es') as SupportedLocale;
 const t = getHomeTranslations(currentLang);
+const brainAlt = currentLang === 'en'
+  ? 'Brain illustration representing artificial intelligence applied to business'
+  : 'Ilustración de un cerebro que representa la inteligencia artificial aplicada al negocio';
+const cardAlts = currentLang === 'en'
+  ? {
+      film: 'Film and audiovisual production',
+      dev: 'Software development and engineering',
+      marketing: 'Digital marketing strategy',
+    }
+  : {
+      film: 'Producción audiovisual y filmmaking',
+      dev: 'Desarrollo e ingeniería de software',
+      marketing: 'Estrategia y marketing digital',
+    };
 ---
 
 <section class="relative pt-32 pb-16 sm:pt-40 sm:pb-24 overflow-hidden bg-white">
@@ -19,7 +34,10 @@ const t = getHomeTranslations(currentLang);
       src="/img/logo-variaciones/negro2.webp"
       alt=""
       class="w-[750px] sm:w-[950px] md:w-[1150px] lg:w-[1350px] max-w-none opacity-[0.08] object-contain transform -translate-y-4"
-      loading="lazy"
+      width="800"
+      height="799"
+      loading="eager"
+      fetchpriority="high"
       decoding="async"
     />
   </div>
@@ -64,8 +82,12 @@ const t = getHomeTranslations(currentLang);
       <!-- Central Brain Image (with Floating Bounce Animation - LCP Priority) -->
       <figure data-opai-animate data-delay="0.4" data-instant class="mx-auto size-[270px] sm:size-[420px] md:size-[640px] lg:size-[709px] animate-float-brain">
         <img
-          src="/images/opai-img-300.webp"
-          alt="Inteligencia Artificial para potenciar negocios"
+          src={HOME_HERO_IMAGE.src}
+          srcset={HOME_HERO_IMAGE.srcset}
+          sizes={HOME_HERO_IMAGE.sizes}
+          alt={brainAlt}
+          width={HOME_HERO_IMAGE.width}
+          height={HOME_HERO_IMAGE.height}
           class="size-full object-cover"
           loading="eager"
           fetchpriority="high"
@@ -82,9 +104,10 @@ const t = getHomeTranslations(currentLang);
       >
         <img
           src="/img/hero/filmmaking.webp"
-          alt="Producción audiovisual y filmmaking"
+          alt={cardAlts.film}
           class="size-full object-cover origin-center"
           loading="lazy"
+          fetchpriority="low"
           decoding="async"
         />
       </figure>
@@ -98,9 +121,10 @@ const t = getHomeTranslations(currentLang);
       >
         <img
           src="/img/hero/desarrollo.webp"
-          alt="Desarrollo e ingeniería de software"
+          alt={cardAlts.dev}
           class="size-full object-cover scale-[1.65] origin-center"
           loading="lazy"
+          fetchpriority="low"
           decoding="async"
         />
       </figure>
@@ -114,9 +138,10 @@ const t = getHomeTranslations(currentLang);
       >
         <img
           src="/img/hero/marketing.webp"
-          alt="Estrategia y marketing digital"
+          alt={cardAlts.marketing}
           class="size-full object-cover origin-center"
           loading="lazy"
+          fetchpriority="low"
           decoding="async"
         />
       </figure>

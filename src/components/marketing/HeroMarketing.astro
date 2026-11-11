@@ -16,7 +16,7 @@ const t = getMarketingTranslations(currentLang);
   <!-- Background Photographic Image shifted down for optimal framing -->
   <img 
     src="/img/bgs/tania-licxa-work.webp" 
-    alt="77 Studio Marketing" 
+    alt={currentLang === 'en' ? 'Two teammates reviewing a laptop together' : 'Dos personas del equipo revisando un computador portátil'} 
     loading="eager" 
     decoding="async" 
     class="absolute inset-0 w-full h-full object-cover object-[center_35%] pointer-events-none"

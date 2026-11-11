@@ -151,9 +151,11 @@ PUBLIC_GOOGLE_ADS_ID=AW-11397435689
 
 El dominio que indexan los buscadores es **`https://www.77studio.co`**. `https://77studio.co` responde `308` hacia www, así que `site` en `astro.config.mjs` usa el destino con www. De ahí salen canonical, hreflang, Open Graph y las URLs del sitemap.
 
-En el build, `@astrojs/sitemap` escribe `sitemap-index.xml` y `sitemap-0.xml` con las páginas en español (sin prefijo) e inglés (`/en/`), más los alternates `es`, `en` y `x-default`. No entran `/404`, `/en/404` ni `/api/`. `src/pages/robots.txt.ts` publica un `robots.txt` que permite el rastreo, bloquea esas rutas y enlaza el sitemap.
+En el build, `@astrojs/sitemap` escribe `sitemap-index.xml` y `sitemap-0.xml` con las páginas en español (sin prefijo) e inglés (`/en/`). Los alternates `es`, `en` y `x-default` solo se publican si esa URL existe: el blog está solo en español y no apunta a `/en/blog/`. No entran `/404`, `/en/404`, `/api/` ni los `.txt`.
 
-El JSON-LD del layout mantiene `ProfessionalService` y añade el logo, `Organization`, `WebSite` y migas de pan en las páginas interiores.
+`src/pages/robots.txt.ts` permite el rastreo —incluido GPTBot, OAI-SearchBot, ClaudeBot, PerplexityBot y Google-Extended—, bloquea `/api/`, `/404` y `/en/404`, enlaza el sitemap y menciona `/llms.txt`. `/llms-full.txt` amplía el mismo resumen.
+
+El JSON-LD del layout mantiene `ProfessionalService` y publica `Organization` + `LocalBusiness` con el NAP confirmado: 77 Studio, Cra 14 #35 Norte 18, Armenia, Quindío, Colombia, teléfono +57 314 849 0955. Ese mismo dato está en el footer y en Contacto. También van logo, 77 Studio SAS / 77 Studio LLC, fundador, áreas atendidas, `Service` por cada servicio, `WebSite` y migas de pan. Los artículos añaden `Article` / `BlogPosting`. Contacto añade `FAQPage`. No hay LinkedIn ni URL del Google Business Profile en `sameAs`.
 
 ## 0.7 Verificación de Preparación (Checklist de Inicio)
 

@@ -4,8 +4,8 @@ import type { SupportedLocale } from '../../ui';
 export const homeTranslations = {
   es: {
     meta: {
-      title: "77 Studio | Marketing, Web, IA + Automatización & Productos Digitales",
-      description: "Digital Studio + Creative Partner + Technology & AI Company. Un solo equipo para hacer que tu empresa se vea mejor, venda mejor y funcione mejor (Colombia ↔ USA)."
+      title: "77 Studio | Marketing con IA, automatización y desarrollo web",
+      description: "Socio de crecimiento y tecnología para empresas en Colombia, LatAm y Estados Unidos. Marketing con IA, automatización, desarrollo web y productos digitales."
     },
     hero: {
       badge: "Digital Studio · Colombia + USA",
@@ -122,8 +122,8 @@ export const homeTranslations = {
   },
   en: {
     meta: {
-      title: "77 Studio | Marketing, Web Development, AI Automation & Digital Products",
-      description: "Digital Studio + Creative Partner + Technology & AI Company. One single team to make your business look better, sell better, and run better (Colombia ↔ USA)."
+      title: "77 Studio | AI Marketing, Automation and Web Development",
+      description: "Growth and technology partner for companies in Colombia, Latin America, and the United States. AI marketing, automation, web development, and digital products."
     },
     hero: {
       badge: "Digital Studio · Colombia + USA",

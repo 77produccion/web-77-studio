@@ -5,6 +5,7 @@ import sitemap from '@astrojs/sitemap';
 import vercel from '@astrojs/vercel';
 import tailwindcss from '@tailwindcss/vite';
 import rehypeWrapTables from './src/utils/rehype-wrap-tables.mjs';
+import { routeExists } from './src/utils/public-routes.ts';
 
 /**
  * Excluye del sitemap rutas que no deben indexarse (API, 404 y archivos técnicos).
@@ -42,10 +43,20 @@ export default defineConfig({
         video: false,
       },
       serialize(item) {
-        const links = item.links ?? [];
-        const spanish = links.find((link) => link.lang === 'es');
-        if (spanish && !links.some((link) => link.lang === 'x-default')) {
-          item.links = [...links, { lang: 'x-default', url: spanish.url }];
+        const existing = (item.links ?? []).filter((link) => {
+          try {
+            return routeExists(new URL(link.url).pathname);
+          } catch {
+            return false;
+          }
+        });
+        const withoutDefault = existing.filter((link) => link.lang !== 'x-default');
+        const spanish = withoutDefault.find((link) => link.lang === 'es');
+        const preferred = spanish ?? withoutDefault[0];
+        if (preferred && withoutDefault.length > 1) {
+          item.links = [...withoutDefault, { lang: 'x-default', url: preferred.url }];
+        } else {
+          delete item.links;
         }
         return item;
       },
