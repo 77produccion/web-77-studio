@@ -7,6 +7,7 @@ import ProductProcessSection from '@/components/productos/ProductProcessSection.
 import ProductCasesSection from '@/components/productos/ProductCasesSection.astro';
 import ProductWhyUsSection from '@/components/productos/ProductWhyUsSection.astro';
 import ProductContactSection from '@/components/productos/ProductContactSection.astro';
+import CoverageBand from '@/components/local/CoverageBand.astro';
 import { getProductosTranslations } from '@/lib/i18n/pages/productos-digitales';
 
 const t = getProductosTranslations('es');
@@ -31,6 +32,8 @@ const t = getProductosTranslations('es');
 
   <!-- 05. Por qué 77 Studio: Visión de Negocio Integral -->
   <ProductWhyUsSection />
+
+  <CoverageBand />
 
   <!-- 06. Bloque de Cierre Comercial con WhatsApp Productos y Formulario -->
   <ProductContactSection />

@@ -7,6 +7,7 @@ import WebPainPointsSection from '@/components/web/WebPainPointsSection.astro';
 import WebDesignPillars from '@/components/web/WebDesignPillars.astro';
 import WebProcessSection from '@/components/web/WebProcessSection.astro';
 import WebContactSection from '@/components/web/WebContactSection.astro';
+import CoverageBand from '@/components/local/CoverageBand.astro';
 import { getWebTranslations } from '@/lib/i18n/pages/web';
 
 const t = getWebTranslations('es');
@@ -32,6 +33,8 @@ const t = getWebTranslations('es');
 
   <!-- 05. Metodología de Desarrollo en 5 Pasos -->
   <WebProcessSection />
+
+  <CoverageBand service="paginas-web" />
 
   <!-- 06. Bloque de Conversión Comercial con WhatsApp Web y Formulario -->
   <WebContactSection />

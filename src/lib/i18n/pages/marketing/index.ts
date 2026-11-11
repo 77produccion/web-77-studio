@@ -5,7 +5,7 @@ export const marketingTranslations = {
   es: {
     meta: {
       title: "Marketing con IA, Meta Ads y Google Ads | 77 Studio",
-      description: "Estrategia, Meta Ads, Google Ads, contenido y automatización para captar clientes. Marketing con IA para empresas en Colombia, LatAm y EE. UU."
+      description: "Estrategia, Meta Ads y Google Ads para captar clientes en Armenia, el Eje Cafetero, Colombia y Estados Unidos."
     },
     hero: {
       badge: "Performance & Creative Marketing",

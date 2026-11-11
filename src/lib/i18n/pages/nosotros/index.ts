@@ -28,7 +28,7 @@ export const nosotrosTranslations = {
       items: [
         { title: "Un Solo Equipo Integral", desc: "Eliminamos la fricción de gestionar múltiples agencias inconexas. Todo tu ecosistema digital bajo una misma dirección." },
         { title: "Tecnología con Sentido de Negocio", desc: "No adoptamos modas pasajeras. Implementamos IA y software para resolver problemas operativos reales y generar rentabilidad." },
-        { title: "Mentalidad Sin Fronteras", desc: "Colaboración remota fluida entre Medellín y Miami con estándares internacionales de entrega y soporte." },
+        { title: "Mentalidad Sin Fronteras", desc: "La sede está en Armenia y el trabajo con otras ciudades de Colombia y con Estados Unidos es remoto, con el mismo estándar de entrega." },
         { title: "Transparencia Absoluta", desc: "Métricas honestas, comunicación directa y relaciones comerciales a largo plazo basadas en resultados." }
       ]
     }
@@ -59,7 +59,7 @@ export const nosotrosTranslations = {
       items: [
         { title: "One Unified Strategic Partner", desc: "We eliminate the chaos of managing disconnected vendors. Your marketing, web, and AI under single-threaded leadership." },
         { title: "Technology Rooted in Revenue", desc: "We don't chase hype. We engineer software and applied AI to eliminate bottlenecks and generate tangible ROI." },
-        { title: "Borderless Remote Execution", desc: "Seamless cross-border collaboration between Medellin and Miami with global enterprise delivery standards." },
+        { title: "Borderless Remote Execution", desc: "The office is in Armenia. Work with other Colombian cities and with the United States is remote, at the same delivery standard." },
         { title: "Radical Transparency", desc: "Honest data, proactive communication, and enduring client partnerships built on verified business results." }
       ]
     }

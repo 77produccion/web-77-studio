@@ -29,6 +29,10 @@ interface Props {
   heroImage?: string;
   heroPreload?: HeroPreload;
   breadcrumbLabel?: string;
+  /** Migas explícitas (nombre + ruta). Si vienen, reemplazan las automáticas. */
+  breadcrumbTrail?: { name: string; path: string }[];
+  /** @id de la entidad principal de esta URL (un Service local, por ejemplo). */
+  mainEntityId?: string;
   hideNav?: boolean;
   hideFooter?: boolean;
   hideMobileBar?: boolean;
@@ -49,10 +53,13 @@ const {
   heroImage,
   heroPreload,
   breadcrumbLabel,
+  breadcrumbTrail,
+  mainEntityId,
   noindex = false,
 } = Astro.props;
 
 const currentPath = Astro.url.pathname;
+const isHome = currentPath === '/' || currentPath === '/en' || currentPath === '/en/';
 const site = Astro.site ?? new URL('https://www.77studio.co');
 const canonicalUrl = toPublicUrl(site, directoryPath(Astro.url.pathname));
 const resolvedOgImage = ogImage
@@ -77,6 +84,8 @@ const structuredData = JSON.stringify(buildStructuredData({
   description,
   noindex,
   breadcrumbLabel,
+  breadcrumbTrail,
+  mainEntityId,
 })).replace(/</g, '\\u003c');
 const gtmId = import.meta.env.PUBLIC_GTM_ID || 'GTM-M6NH5PGW';
 ---
@@ -124,6 +133,7 @@ const gtmId = import.meta.env.PUBLIC_GTM_ID || 'GTM-M6NH5PGW';
 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google-site-verification" content="kuBqafhHLCare1JW_D2JEEbT5_DBAWgaF-wnG4qadkI" />
     <link rel="icon" type="image/png" href="/img/77studio.webp" />
     <link rel="canonical" href={canonicalUrl} />
     {noindex && <meta name="robots" content="noindex, follow" />}
@@ -134,11 +144,8 @@ const gtmId = import.meta.env.PUBLIC_GTM_ID || 'GTM-M6NH5PGW';
     {!noindex && xDefaultUrl && <link rel="alternate" hreflang="x-default" href={xDefaultUrl} />}
     <link rel="sitemap" href="/sitemap-index.xml" />
 
-    <!-- DNS Prefetch & Preconnect for External Resources -->
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Sora es la fuente del H1. Swap en @font-face: el texto pinta con la de sistema y luego cambia. -->
+    <link rel="preload" href="/fonts/sora-latin.woff2" as="font" type="font/woff2" crossorigin />
 
     {imagePreload && (
       <link
@@ -152,24 +159,32 @@ const gtmId = import.meta.env.PUBLIC_GTM_ID || 'GTM-M6NH5PGW';
       />
     )}
 
-    <!-- Google Fonts: Sora, Inter Tight, IBM Plex Mono, Poppins (Non-blocking async load) -->
-    <link
-      rel="preload"
-      as="style"
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter+Tight:wght@300;400;500;600;700&family=Poppins:wght@700;800;900&family=Sora:wght@400;500;600;700;800&display=swap"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter+Tight:wght@300;400;500;600;700&family=Poppins:wght@700;800;900&family=Sora:wght@400;500;600;700;800&display=swap"
-      media="print"
-      onload="this.media='all'"
-    />
-    <noscript>
-      <link
-        rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter+Tight:wght@300;400;500;600;700&family=Poppins:wght@700;800;900&family=Sora:wght@400;500;600;700;800&display=swap"
-      />
-    </noscript>
+    <!--
+      Crítico e independiente del CSS grande: en móvil la decoración del hero no puede ser el LCP,
+      y el titular no puede quedar en opacity 0 hasta que corra el JS.
+    -->
+    <style>
+      @font-face {
+        font-family: Sora;
+        font-style: normal;
+        font-weight: 600 700;
+        font-display: optional;
+        src: url("/fonts/sora-latin.woff2") format("woff2");
+      }
+      html, body { background: #f9fafb; color: #0a0a0a; }
+      body { margin: 0; font-family: "Inter Tight", system-ui, sans-serif; }
+      h1 { font-family: Sora, system-ui, sans-serif; font-size: 2.25rem; font-weight: 700; line-height: 1.12; letter-spacing: -0.025em; }
+      .hero-static,
+      .hero-static [data-text-reveal],
+      .hero-static [data-opai-animate] {
+        opacity: 1 !important;
+        transform: none !important;
+        filter: none !important;
+      }
+      @media (max-width: 639px) {
+        .hero-deco { display: none !important; }
+      }
+    </style>
 
     <!-- Google Tag Manager & Analytics DataLayer Setup -->
     <script is:inline>
@@ -227,7 +242,12 @@ const gtmId = import.meta.env.PUBLIC_GTM_ID || 'GTM-M6NH5PGW';
     </noscript>
     <!-- End Google Tag Manager (noscript) -->
     
-    {!hideNav && <Header currentPath={currentPath} whatsappContext={whatsappContext} lang={currentLang} />}
+    {isHome && !hideNav && (
+      <div data-beasties-container>
+        <Header currentPath={currentPath} whatsappContext={whatsappContext} lang={currentLang} />
+      </div>
+    )}
+    {!isHome && !hideNav && <Header currentPath={currentPath} whatsappContext={whatsappContext} lang={currentLang} />}
 
     <main class="flex-1">
       <slot />

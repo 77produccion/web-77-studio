@@ -7,6 +7,7 @@ import IAProblemSection from '@/components/ia/IAProblemSection.astro';
 import AutomationVsAISection from '@/components/ia/AutomationVsAISection.astro';
 import IADepartmentsSection from '@/components/ia/IADepartmentsSection.astro';
 import IAContactSection from '@/components/ia/IAContactSection.astro';
+import CoverageBand from '@/components/local/CoverageBand.astro';
 import { getIaTranslations } from '@/lib/i18n/pages/ia-automatizacion';
 
 const lang = 'en';
@@ -34,6 +35,8 @@ const t = getIaTranslations(lang);
 
   <!-- 05. Where We Can Apply It: AI can be integrated across multiple areas of your company -->
   <IADepartmentsSection lang={lang} />
+
+  <CoverageBand lang={lang} />
 
   <!-- 06. Closing: Which process in your company could run better? -->
   <IAContactSection lang={lang} />

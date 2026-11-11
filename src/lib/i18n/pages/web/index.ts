@@ -5,7 +5,7 @@ export const webTranslations = {
   es: {
     meta: {
       title: "Desarrollo web y landing pages | 77 Studio",
-      description: "Desarrollo web y landing pages rápidas, pensadas para conversión y SEO, para empresas en Colombia, LatAm y Estados Unidos."
+      description: "Páginas web y landing pages para empresas de Armenia, el Eje Cafetero, Colombia y Estados Unidos."
     },
     hero: {
       badge: "Ingeniería Web & Conversión",

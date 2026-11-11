@@ -21,3 +21,36 @@ export const POSTAL_ADDRESS = {
   addressRegion: ADDRESS_REGION,
   addressCountry: ADDRESS_COUNTRY_CODE,
 };
+
+/**
+ * Pin público del edificio que anuncia esta misma dirección
+ * (Icono Centro Empresarial, Cra. 14 #35 norte-18, Armenia).
+ * No es un levantamiento topográfico del local. Pendiente de confirmar el punto exacto.
+ */
+export const GEO_LATITUDE = 4.565182;
+export const GEO_LONGITUDE = -75.650015;
+
+export const GEO_COORDINATES = {
+  '@type': 'GeoCoordinates' as const,
+  latitude: GEO_LATITUDE,
+  longitude: GEO_LONGITUDE,
+};
+
+/** Horario de referencia. Pendiente de confirmar con el equipo. */
+export const OPENING_HOURS_NOTE =
+  'Horario de referencia, pendiente de confirmar: lunes a viernes de 8:00 a. m. a 6:00 p. m. y sábados de 9:00 a. m. a 1:00 p. m.';
+
+export const OPENING_HOURS_SPEC = [
+  {
+    '@type': 'OpeningHoursSpecification' as const,
+    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+    opens: '08:00',
+    closes: '18:00',
+  },
+  {
+    '@type': 'OpeningHoursSpecification' as const,
+    dayOfWeek: 'Saturday',
+    opens: '09:00',
+    closes: '13:00',
+  },
+];

@@ -5,6 +5,8 @@ import { toPublicUrl, directoryPath } from '@/utils/seo';
 import { readingMinutes } from '@/utils/reading-time';
 import BlogCard from '@/components/blog/BlogCard.astro';
 import ArticleCta from '@/components/blog/ArticleCta.astro';
+import '@/styles/blog.css';
+import { CITIES, servicePath, type ServiceSlug } from '@/data/local-coverage';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog', ({ data }) => !data.draft);
@@ -58,6 +60,19 @@ const pillarServices: Record<string, (keyof typeof serviceCatalog)[]> = {
 };
 
 const relatedServices = (pillarServices[post.data.pillar] ?? ['marketing']).map((key) => serviceCatalog[key]);
+
+const localServiceByPillar: Record<string, ServiceSlug> = {
+  'automatizacion-marketing': 'automatizacion',
+  'ia-agentes': 'agentes-ia',
+  'ads-captacion': 'marketing-digital',
+  'web-conversion': 'paginas-web',
+  'crm-whatsapp': 'agentes-ia',
+  'productos-digitales': 'paginas-web',
+  'contenido-ia': 'marketing-digital',
+  'noticias-ia': 'agentes-ia',
+};
+
+const localService = localServiceByPillar[post.data.pillar] ?? 'marketing-digital';
 
 const articleLd = JSON.stringify({
   '@context': 'https://schema.org',
@@ -142,6 +157,21 @@ const articleLd = JSON.stringify({
 
     <div class="mx-auto mt-12 max-w-[720px] px-5 md:mt-16">
       <ArticleCta title={post.data.title} />
+      <nav class="mt-8" aria-label="Cobertura en el Eje Cafetero">
+        <p class="font-ibm-plex-mono text-[11px] uppercase tracking-[0.16em] text-background-13/50">También en el Eje Cafetero</p>
+        <ul class="mt-3 flex flex-wrap gap-x-4 gap-y-2">
+          <li>
+            <a href="/eje-cafetero/" class="font-inter-tight text-sm text-background-13/70 underline decoration-black/20 underline-offset-4 transition hover:text-opai-purple">Cobertura</a>
+          </li>
+          {CITIES.map((city) => (
+            <li>
+              <a href={servicePath(city.slug, localService)} class="font-inter-tight text-sm text-background-13/70 underline decoration-black/20 underline-offset-4 transition hover:text-opai-purple">
+                {city.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
       <nav class="mt-8" aria-label="Servicios relacionados">
         <p class="font-ibm-plex-mono text-[11px] uppercase tracking-[0.16em] text-background-13/50">Servicios relacionados</p>
         <ul class="mt-3 flex flex-wrap gap-x-4 gap-y-2">

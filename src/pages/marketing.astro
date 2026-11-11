@@ -8,6 +8,7 @@ import ChannelsComparison from '@/components/marketing/ChannelsComparison.astro'
 import CreativeShowcase from '@/components/marketing/CreativeShowcase.astro';
 import MarketingProcess from '@/components/marketing/MarketingProcess.astro';
 import MarketingContactSection from '@/components/marketing/MarketingContactSection.astro';
+import CoverageBand from '@/components/local/CoverageBand.astro';
 import { getMarketingTranslations } from '@/lib/i18n/pages/marketing';
 
 const t = getMarketingTranslations('es');
@@ -36,6 +37,8 @@ const t = getMarketingTranslations('es');
 
   <!-- 06. Metodología de Marketing en 4 Pasos -->
   <MarketingProcess />
+
+  <CoverageBand service="marketing-digital" />
 
   <!-- 07. Bloque de Cierre Comercial con WhatsApp Marketing & Formulario -->
   <MarketingContactSection />

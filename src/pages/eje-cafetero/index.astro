@@ -1,0 +1,32 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import LocalCoverageView from '@/components/local/LocalCoverageView.astro';
+import { HUB, HUB_PATH } from '@/data/local-coverage';
+import { hubJsonLd, jsonLdScript } from '@/utils/local-schema';
+
+const crumbs = [
+  { name: '77 Studio', path: '/' },
+  { name: 'Eje Cafetero', path: HUB_PATH },
+];
+const ld = jsonLdScript(hubJsonLd(HUB.faqs));
+---
+
+<BaseLayout
+  title={HUB.title}
+  description={HUB.description}
+  whatsappContext="home"
+  lang="es"
+  breadcrumbTrail={crumbs}
+  mainEntityId="https://www.77studio.co/eje-cafetero/#service"
+>
+  <script is:inline type="application/ld+json" set:html={ld} />
+  <LocalCoverageView
+    kind="hub"
+    crumbs={crumbs}
+    eyebrow="Cobertura local"
+    h1={HUB.h1}
+    lead={HUB.lead}
+    whatsappMessage="Hola 77 Studio 👋 Vi la página del Eje Cafetero y quisiera conversar sobre un proyecto para mi empresa."
+    faqs={HUB.faqs}
+  />
+</BaseLayout>

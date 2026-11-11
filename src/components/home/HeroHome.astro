@@ -27,17 +27,17 @@ const cardAlts = currentLang === 'en'
     };
 ---
 
-<section class="relative pt-32 pb-16 sm:pt-40 sm:pb-24 overflow-hidden bg-white">
+<section data-beasties-container class="hero-static relative pt-32 pb-16 sm:pt-40 sm:pb-24 overflow-hidden bg-white">
   <!-- Giant Background Watermark Logo (negro2.png) -->
   <div class="pointer-events-none select-none absolute inset-0 z-0 flex items-center justify-center overflow-hidden">
     <img
       src="/img/logo-variaciones/negro2.webp"
       alt=""
-      class="w-[750px] sm:w-[950px] md:w-[1150px] lg:w-[1350px] max-w-none opacity-[0.08] object-contain transform -translate-y-4"
+      class="hero-deco w-[750px] sm:w-[950px] md:w-[1150px] lg:w-[1350px] max-w-none opacity-[0.08] object-contain transform -translate-y-4"
       width="800"
       height="799"
-      loading="eager"
-      fetchpriority="high"
+      loading="lazy"
+      fetchpriority="low"
       decoding="async"
     />
   </div>
@@ -53,17 +53,17 @@ const cardAlts = currentLang === 'en'
     <div class="text-center max-w-4xl mx-auto">
       
       <!-- Main Headline -->
-      <h1 data-text-reveal data-delay="0.2" class="font-sora text-4xl sm:text-6xl lg:text-[64px] font-bold tracking-tight text-background-13 leading-[1.12] mb-6">
+      <h1 class="font-sora text-4xl sm:text-6xl lg:text-[64px] font-bold tracking-tight text-background-13 leading-[1.12] mb-6">
         {t.hero.headlinePrefix}<span class="bg-gradient-to-r from-background-13 via-opai-purple to-background-13 bg-clip-text text-transparent">{t.hero.headlineGradient}</span>
       </h1>
 
       <!-- Subheadline -->
-      <p data-opai-animate data-delay="0.3" class="font-inter-tight text-lg sm:text-xl text-background-13/75 max-w-3xl mx-auto mb-9 leading-relaxed">
+      <p class="font-inter-tight text-lg sm:text-xl text-background-13/75 max-w-3xl mx-auto mb-9 leading-relaxed">
         {t.hero.subheadline}
       </p>
 
       <!-- Dual Commercial CTA -->
-      <div data-opai-animate data-delay="0.4" class="mb-14">
+      <div class="mb-14">
         <DualCTA
           whatsappContext="home"
           whatsappText={t.hero.whatsappCta}
@@ -80,7 +80,7 @@ const cardAlts = currentLang === 'en'
     <div class="mt-8 sm:mt-14 relative mx-auto max-w-5xl xl:max-w-6xl">
       
       <!-- Central Brain Image (with Floating Bounce Animation - LCP Priority) -->
-      <figure data-opai-animate data-delay="0.4" data-instant class="mx-auto size-[270px] sm:size-[420px] md:size-[640px] lg:size-[709px] animate-float-brain">
+      <figure data-opai-animate data-delay="0.4" data-instant class="hero-deco mx-auto size-[270px] sm:size-[420px] md:size-[640px] lg:size-[709px] animate-float-brain">
         <img
           src={HOME_HERO_IMAGE.src}
           srcset={HOME_HERO_IMAGE.srcset}
@@ -100,7 +100,7 @@ const cardAlts = currentLang === 'en'
         data-opai-animate
         data-delay="0.5"
         data-instant
-        class="absolute top-[4%] sm:top-[6%] lg:top-[8%] xl:top-[10%] left-[0%] sm:left-[1%] md:left-[-4%] lg:left-[-8%] xl:left-[-12%] 2xl:left-[-16%] inline-block w-[95px] sm:w-[160px] md:w-[230px] lg:w-[265px] xl:w-[280px] aspect-[4/5] rounded-xl sm:rounded-2xl md:rounded-3xl overflow-hidden shadow-[0_8px_25px_-8px_rgba(0,0,0,0.12)] md:shadow-[0_12px_40px_-10px_rgba(0,0,0,0.08)] border border-stroke-2 transition-transform duration-500 hover:scale-105 z-10"
+        class="hero-deco absolute top-[4%] sm:top-[6%] lg:top-[8%] xl:top-[10%] left-[0%] sm:left-[1%] md:left-[-4%] lg:left-[-8%] xl:left-[-12%] 2xl:left-[-16%] inline-block w-[95px] sm:w-[160px] md:w-[230px] lg:w-[265px] xl:w-[280px] aspect-[4/5] rounded-xl sm:rounded-2xl md:rounded-3xl overflow-hidden shadow-[0_8px_25px_-8px_rgba(0,0,0,0.12)] md:shadow-[0_12px_40px_-10px_rgba(0,0,0,0.08)] border border-stroke-2 transition-transform duration-500 hover:scale-105 z-10"
       >
         <img
           src="/img/hero/filmmaking.webp"
@@ -117,7 +117,7 @@ const cardAlts = currentLang === 'en'
         data-opai-animate
         data-delay="0.6"
         data-instant
-        class="absolute top-[22%] sm:top-[26%] md:top-[28%] lg:top-[26%] xl:top-[28%] right-[0%] sm:right-[1%] md:right-[-3%] lg:right-[-6%] xl:right-[-10%] 2xl:right-[-14%] inline-block w-[110px] sm:w-[185px] md:w-[260px] lg:w-[310px] xl:w-[330px] aspect-[16/11] rounded-xl sm:rounded-2xl md:rounded-3xl overflow-hidden shadow-[0_8px_25px_-8px_rgba(0,0,0,0.12)] md:shadow-[0_12px_40px_-10px_rgba(0,0,0,0.08)] border border-stroke-2 transition-transform duration-500 hover:scale-105 z-10"
+        class="hero-deco absolute top-[22%] sm:top-[26%] md:top-[28%] lg:top-[26%] xl:top-[28%] right-[0%] sm:right-[1%] md:right-[-3%] lg:right-[-6%] xl:right-[-10%] 2xl:right-[-14%] inline-block w-[110px] sm:w-[185px] md:w-[260px] lg:w-[310px] xl:w-[330px] aspect-[16/11] rounded-xl sm:rounded-2xl md:rounded-3xl overflow-hidden shadow-[0_8px_25px_-8px_rgba(0,0,0,0.12)] md:shadow-[0_12px_40px_-10px_rgba(0,0,0,0.08)] border border-stroke-2 transition-transform duration-500 hover:scale-105 z-10"
       >
         <img
           src="/img/hero/desarrollo.webp"
@@ -134,7 +134,7 @@ const cardAlts = currentLang === 'en'
         data-opai-animate
         data-delay="0.7"
         data-instant
-        class="absolute top-[58%] sm:top-[58%] md:top-[58%] lg:top-[56%] xl:top-[58%] left-[2%] sm:left-[3%] md:left-[4%] lg:left-[2%] xl:left-[0%] 2xl:left-[-2%] inline-block w-[95px] sm:w-[160px] md:w-[230px] lg:w-[265px] xl:w-[280px] aspect-[4/5] rounded-xl sm:rounded-2xl md:rounded-3xl overflow-hidden shadow-[0_10px_30px_-10px_rgba(0,0,0,0.15)] md:shadow-[0_16px_45px_-12px_rgba(0,0,0,0.12)] border border-stroke-2 transition-transform duration-500 hover:scale-105 z-20"
+        class="hero-deco absolute top-[58%] sm:top-[58%] md:top-[58%] lg:top-[56%] xl:top-[58%] left-[2%] sm:left-[3%] md:left-[4%] lg:left-[2%] xl:left-[0%] 2xl:left-[-2%] inline-block w-[95px] sm:w-[160px] md:w-[230px] lg:w-[265px] xl:w-[280px] aspect-[4/5] rounded-xl sm:rounded-2xl md:rounded-3xl overflow-hidden shadow-[0_10px_30px_-10px_rgba(0,0,0,0.15)] md:shadow-[0_16px_45px_-12px_rgba(0,0,0,0.12)] border border-stroke-2 transition-transform duration-500 hover:scale-105 z-20"
       >
         <img
           src="/img/hero/marketing.webp"

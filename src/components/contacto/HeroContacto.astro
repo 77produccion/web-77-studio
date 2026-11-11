@@ -3,7 +3,7 @@
 import ContactForm from '@/components/ContactForm.astro';
 import { getWhatsAppUrl } from '@/utils/whatsapp';
 import { getContactoTranslations } from '@/lib/i18n/pages/contacto';
-import { ADDRESS_COUNTRY_NAME, ADDRESS_LOCALITY, ADDRESS_REGION, BUSINESS_NAME, PHONE_DISPLAY, PHONE_E164, STREET_ADDRESS } from '@/utils/nap';
+import { ADDRESS_COUNTRY_NAME, ADDRESS_LOCALITY, ADDRESS_REGION, BUSINESS_NAME, OPENING_HOURS_NOTE, PHONE_DISPLAY, PHONE_E164, STREET_ADDRESS } from '@/utils/nap';
 import type { SupportedLocale } from '@/lib/i18n/ui';
 
 interface Props {
@@ -85,6 +85,8 @@ const isEn = currentLang === 'en';
           <span class="block">{STREET_ADDRESS}</span>
           <span class="block">{ADDRESS_LOCALITY}, {ADDRESS_REGION}, {ADDRESS_COUNTRY_NAME}</span>
           <a href={`tel:${PHONE_E164}`} class="mt-1 inline-block text-white underline decoration-white/30 underline-offset-4">{PHONE_DISPLAY}</a>
+          {!isEn && <span class="mt-3 block text-white/70">{OPENING_HOURS_NOTE}</span>}
+          {isEn && <span class="mt-3 block text-white/70">Reference hours, pending confirmation: Monday to Friday 8:00 a.m. to 6:00 p.m. and Saturday 9:00 a.m. to 1:00 p.m. Colombia time.</span>}
         </address>
 
       </div>
