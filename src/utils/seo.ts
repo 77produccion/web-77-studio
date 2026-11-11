@@ -177,15 +177,17 @@ export function buildStructuredData({
   const websiteId = `${origin}/#website`;
   const homeUrl = toPublicUrl(site, lang === 'en' ? '/en/' : '/');
   const ogImage = toPublicUrl(site, DEFAULT_SEO.ogImage ?? '/img/openGraph/og-image.png');
-  const logoUrl = `${origin}/img/77studio.png`;
+  // Cuadrado con fondo negro sólido. /img/77studio.png es el 77 blanco sobre
+  // transparente (1920) y en Google se ve como un punto blanco.
+  const logoUrl = `${origin}/icon-512.png`;
 
   const logo = {
     '@type': 'ImageObject',
     '@id': logoId,
     url: logoUrl,
     contentUrl: logoUrl,
-    width: 1920,
-    height: 1920,
+    width: 512,
+    height: 512,
     caption: '77 Studio',
   };
 

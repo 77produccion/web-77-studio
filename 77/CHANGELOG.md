@@ -7,6 +7,9 @@ El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1
 ---
 ## [Unreleased] - 2026-11-11
 
+### Fixed
+- **Favicon visible en Google (`BaseLayout.astro`, `public/favicon.ico`, `public/site.webmanifest`, `src/utils/seo.ts`)**: el head deja de apuntar al WebP blanco sobre transparente declarado como PNG. Se sirven `favicon.ico` (16/32/48), PNG 96/192/512 y `apple-touch-icon` 180, con el 77 blanco sobre negro sólido, más `theme-color` `#000000`. `robots.txt` sigue permitiendo esas rutas (`Allow: /`; solo bloquea `/api/`, `/404` y `/en/404`). El logo de Organization y ProfessionalService pasa de `/img/77studio.png` a `/icon-512.png`. El logo blanco transparente del header y del chat no cambia.
+
 ### Changed
 - **NAP del Google Business Profile**: dirección `Cra. 14 #35 Norte-18, Oficina 405`, horario lunes a viernes 08:00–19:00, sábado 08:00–12:30 y domingo cerrado, fundación 2018-08-15. `sameAs` y el footer usan Instagram `77studio_`, TikTok `@77_studioss` y Facebook `77studio.co`.
 
