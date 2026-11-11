@@ -135,6 +135,10 @@ ${coverageLines()}
 
 ${postLines(posts)}
 
+## Casos de éxito
+
+${caseLines()}
+
 ## Optional
 
 - [Resumen extendido](${ORIGIN}/llms-full.txt)
@@ -185,8 +189,53 @@ ${coverageLines()}
 
 ${postLines(posts)}
 
+## Casos de éxito
+
+${caseLines()}
+
 ## Rastreo
 
 Los crawlers de búsqueda y de IA pueden leer el sitio. El sitemap está en ${ORIGIN}/sitemap-index.xml. Este resumen corto también está en ${ORIGIN}/llms.txt.
 `;
+}
+
+function readCaseStudies(): BlogPostSummary[] {
+  const dir = join(process.cwd(), 'src/content/casos');
+  const cases: BlogPostSummary[] = [];
+
+  let files: string[] = [];
+  try {
+    files = readdirSync(dir);
+  } catch {
+    return cases;
+  }
+
+  for (const file of files) {
+    if (!/\.mdx?$/.test(file)) continue;
+    const raw = readFileSync(join(dir, file), 'utf8');
+    const frontmatter = raw.match(/^---\n([\s\S]*?)\n---/);
+    if (!frontmatter) continue;
+    const block = frontmatter[1];
+    if (/^draft:\s*true\s*$/m.test(block)) continue;
+    const title = readFrontmatterValue(block, 'title');
+    const description = readFrontmatterValue(block, 'description');
+    if (!title || !description) continue;
+    cases.push({
+      slug: file.replace(/\.mdx?$/, ''),
+      title,
+      description,
+    });
+  }
+
+  return cases.sort((a, b) => a.slug.localeCompare(b.slug));
+}
+
+function caseLines(): string {
+  const cases = readCaseStudies();
+  if (cases.length === 0) {
+    return `- [Casos de éxito](${ORIGIN}/casos/): proyectos documentados de automatización y software.`;
+  }
+  return cases
+    .map((item) => `- [${item.title}](${ORIGIN}/casos/${item.slug}/): ${item.description}`)
+    .join('\n');
 }
