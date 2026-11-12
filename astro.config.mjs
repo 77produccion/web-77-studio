@@ -76,6 +76,9 @@ function isIndexableSitemapPage(page) {
 export default defineConfig({
   // El apex 77studio.co responde 308 hacia www. Canonical, hreflang, OG y sitemap usan el destino.
   site: 'https://www.77studio.co',
+  // El adapter fija build.format "directory". Vercel (trailingSlash: true) responde 308
+  // hacia la barra final. Los archivos (txt, xml, assets) no entran en esa redirección.
+  trailingSlash: 'always',
   integrations: [
     criticalCss(),
     mdx({

@@ -19,25 +19,25 @@ export const notFoundTranslations = {
       {
         title: "Marketing & Growth",
         desc: "Meta Ads, Google Ads, estrategia omnicanal y pauta de alto rendimiento.",
-        href: "/marketing",
+        href: "/marketing/",
         icon: "marketing"
       },
       {
         title: "Desarrollo Web",
         desc: "Sitios corporativos ultrarrápidos en Astro 5, diseño UX/UI y plataformas.",
-        href: "/web",
+        href: "/web/",
         icon: "web"
       },
       {
         title: "IA & Automatización",
         desc: "Agentes inteligentes para WhatsApp, automatización de CRM y flujos autónomos.",
-        href: "/ia-automatizacion",
+        href: "/ia-automatizacion/",
         icon: "ia"
       },
       {
         title: "Productos Digitales",
         desc: "SaaS, herramientas a medida, MVPs y aplicaciones web escalables.",
-        href: "/productos-digitales",
+        href: "/productos-digitales/",
         icon: "productos"
       }
     ],
@@ -64,25 +64,25 @@ export const notFoundTranslations = {
       {
         title: "Marketing & Growth",
         desc: "Meta Ads, Google Ads, omnichannel growth, and high-performance campaigns.",
-        href: "/en/marketing",
+        href: "/en/marketing/",
         icon: "marketing"
       },
       {
         title: "Web Development",
         desc: "Ultra-fast Astro 5 corporate websites, UX/UI design, and high-converting platforms.",
-        href: "/en/web",
+        href: "/en/web/",
         icon: "web"
       },
       {
         title: "AI & Automation",
         desc: "Intelligent WhatsApp AI agents, CRM workflows, and autonomous business processes.",
-        href: "/en/ia-automatizacion",
+        href: "/en/ia-automatizacion/",
         icon: "ia"
       },
       {
         title: "Digital Products",
         desc: "SaaS platforms, bespoke tools, scalable MVPs, and modern web applications.",
-        href: "/en/productos-digitales",
+        href: "/en/productos-digitales/",
         icon: "productos"
       }
     ],

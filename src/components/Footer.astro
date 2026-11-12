@@ -10,7 +10,7 @@ interface Props {
 const currentLang = (Astro.props.lang || (Astro.currentLocale as SupportedLocale) || 'es') as SupportedLocale;
 const t = uiTranslations[currentLang];
 const currentYear = new Date().getFullYear();
-const homeUrl = currentLang === 'en' ? '/en' : '/';
+const homeUrl = currentLang === 'en' ? '/en/' : '/';
 ---
 
 <footer class="border-t border-black/10 bg-white pt-16 pb-24 sm:pb-12 text-background-13">
