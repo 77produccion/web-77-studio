@@ -14,12 +14,32 @@ export function getLangFromUrl(url: URL | string): SupportedLocale {
 }
 
 /**
- * Genera la ruta equivalente en el idioma destino preservando la página actual
+ * Las páginas viven con barra final. Un archivo (último segmento con punto) se deja igual.
+ */
+function withDirectorySlash(value: string): string {
+  const hashAt = value.indexOf('#');
+  const hash = hashAt >= 0 ? value.slice(hashAt) : '';
+  const beforeHash = hashAt >= 0 ? value.slice(0, hashAt) : value;
+  const queryAt = beforeHash.indexOf('?');
+  const query = queryAt >= 0 ? beforeHash.slice(queryAt) : '';
+  const pathname = queryAt >= 0 ? beforeHash.slice(0, queryAt) : beforeHash;
+
+  if (!pathname || pathname === '/') return `/${query}${hash}`;
+
+  const segment = pathname.split('/').filter(Boolean).pop() ?? '';
+  if (segment.includes('.')) return `${pathname}${query}${hash}`;
+
+  const slashed = pathname.endsWith('/') ? pathname : `${pathname}/`;
+  return `${slashed}${query}${hash}`;
+}
+
+/**
+ * Genera la ruta equivalente en el idioma destino preservando la página actual.
  * Ej:
- *  - currentUrl: '/marketing', targetLang: 'en' => '/en/marketing'
- *  - currentUrl: '/en/marketing', targetLang: 'es' => '/marketing'
- *  - currentUrl: '/', targetLang: 'en' => '/en'
- *  - currentUrl: '/en', targetLang: 'es' => '/'
+ *  - currentUrl: '/marketing/', targetLang: 'en' => '/en/marketing/'
+ *  - currentUrl: '/en/marketing/', targetLang: 'es' => '/marketing/'
+ *  - currentUrl: '/', targetLang: 'en' => '/en/'
+ *  - currentUrl: '/en/', targetLang: 'es' => '/'
  */
 export function getAlternateLocaleUrl(url: URL | string, targetLang: SupportedLocale): string {
   const pathname = typeof url === 'string' ? url : url.pathname;
@@ -28,33 +48,34 @@ export function getAlternateLocaleUrl(url: URL | string, targetLang: SupportedLo
 
   const currentLang = getLangFromUrl(url);
 
-  if (currentLang === targetLang) {
-    return `${pathname}${search}${hash}`;
+  let basePath = pathname;
+  if (pathname === '/en' || pathname.startsWith('/en/')) {
+    basePath = pathname.replace(/^\/en\/?/, '') || '/';
+    if (!basePath.startsWith('/')) basePath = `/${basePath}`;
   }
 
-  let basePath = pathname;
-  if (pathname.startsWith('/en')) {
-    basePath = pathname.replace(/^\/en/, '') || '/';
+  if (currentLang === targetLang) {
+    return withDirectorySlash(`${pathname}${search}${hash}`);
   }
 
   if (targetLang === 'en') {
-    const localized = basePath === '/' ? '/en' : `/en${basePath}`;
-    return `${localized}${search}${hash}`;
-  } else {
-    // targetLang === 'es' (default without prefix)
-    return `${basePath}${search}${hash}`;
+    const localized = basePath === '/' ? '/en/' : `/en${basePath}`;
+    return withDirectorySlash(`${localized}${search}${hash}`);
   }
+
+  return withDirectorySlash(`${basePath}${search}${hash}`);
 }
 
 /**
- * Genera un enlace prefijado con el idioma activo
+ * Genera un enlace prefijado con el idioma activo, con barra final en páginas.
  */
 export function getLocalizedPath(path: string, lang: SupportedLocale = DEFAULT_LOCALE): string {
+  const cleanPath = path.startsWith('/') ? path : `/${path}`;
   if (lang === 'en') {
-    const cleanPath = path.startsWith('/') ? path : `/${path}`;
-    return cleanPath === '/' ? '/en' : `/en${cleanPath}`;
+    const localized = cleanPath === '/' ? '/en/' : `/en${cleanPath}`;
+    return withDirectorySlash(localized);
   }
-  return path.startsWith('/') ? path : `/${path}`;
+  return withDirectorySlash(cleanPath);
 }
 
 /**

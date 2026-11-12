@@ -44,7 +44,7 @@ export function init77ChatWidget() {
   if (widgetEl.dataset.initialized === 'true') return;
   widgetEl.dataset.initialized = 'true';
 
-  const apiEndpoint = widgetEl.dataset.apiEndpoint || '/api/chat';
+  const apiEndpoint = widgetEl.dataset.apiEndpoint || '/api/chat/';
   const whatsappUrl = widgetEl.dataset.whatsappUrl || 'https://api.whatsapp.com/send?phone=573148490955';
 
   const chatTriggerBtn = document.getElementById('chatTriggerBtn');

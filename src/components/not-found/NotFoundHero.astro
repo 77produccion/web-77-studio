@@ -10,7 +10,7 @@ interface Props {
 
 const currentLang = (Astro.props.lang || (Astro.currentLocale as SupportedLocale) || 'es') as SupportedLocale;
 const t = getNotFoundTranslations(currentLang);
-const homeUrl = currentLang === 'en' ? '/en' : '/';
+const homeUrl = currentLang === 'en' ? '/en/' : '/';
 const whatsappUrl = getWhatsAppUrl('notFound', undefined, currentLang);
 ---
 

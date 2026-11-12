@@ -63,25 +63,25 @@ export const homeTranslations = {
         {
           title: "Marketing & Growth",
           description: "Estrategia integral, Meta Ads, Google Ads y producción de contenido de alto impacto para captar demanda.",
-          href: "/marketing",
+          href: "/marketing/",
           cta: "Explorar Marketing"
         },
         {
           title: "Desarrollo Web & CRO",
           description: "Sitios corporativos y landing pages ultrarrápidas creadas en Astro para generar máxima confianza y conversión.",
-          href: "/web",
+          href: "/web/",
           cta: "Explorar Web"
         },
         {
           title: "IA + Automatización",
           description: "Agentes comerciales inteligentes, integraciones de WhatsApp y workflows para optimizar ventas y soporte.",
-          href: "/ia-automatizacion",
+          href: "/ia-automatizacion/",
           cta: "Explorar IA"
         },
         {
           title: "Productos Digitales",
           description: "Plataformas SaaS, MVPs, portales web y dashboards a medida cuando tu solución aún no existe en el mercado.",
-          href: "/productos-digitales",
+          href: "/productos-digitales/",
           cta: "Explorar Productos"
         }
       ]
@@ -181,25 +181,25 @@ export const homeTranslations = {
         {
           title: "Marketing & Paid Growth",
           description: "Full-funnel strategy, Meta Ads, Google Ads, and high-converting creative assets to drive customer demand.",
-          href: "/en/marketing",
+          href: "/en/marketing/",
           cta: "Explore Marketing"
         },
         {
           title: "Web Development & CRO",
           description: "Ultra-fast corporate websites and conversion landing pages engineered with Astro for high performance.",
-          href: "/en/web",
+          href: "/en/web/",
           cta: "Explore Web"
         },
         {
           title: "AI + Process Automation",
           description: "Intelligent commercial assistants, WhatsApp automations, and streamlined workflows to optimize sales operations.",
-          href: "/en/ia-automatizacion",
+          href: "/en/ia-automatizacion/",
           cta: "Explore AI"
         },
         {
           title: "Digital Products & SaaS",
           description: "Custom SaaS platforms, MVPs, client portals, and dashboards when your ideal software doesn't exist yet.",
-          href: "/en/productos-digitales",
+          href: "/en/productos-digitales/",
           cta: "Explore Products"
         }
       ]

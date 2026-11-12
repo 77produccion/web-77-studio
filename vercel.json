@@ -1,4 +1,5 @@
 {
+  "trailingSlash": true,
   "redirects": [
     {
       "source": "/:year(2024|2025|2026)/:slug(automatizacion-vs-agente-ia-que-necesita-tu-empresa|pagina-web-pereira-desperdicia-clics-de-anuncios|que-medir-en-meta-ads-antes-de-subir-presupuesto|seguimiento-whatsapp-despues-del-anuncio)",

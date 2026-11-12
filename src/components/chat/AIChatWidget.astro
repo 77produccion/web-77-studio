@@ -13,7 +13,7 @@ interface Props {
 const currentLang = (Astro.props.lang || (Astro.currentLocale as SupportedLocale) || 'es') as SupportedLocale;
 const {
   whatsappContext = 'home',
-  apiEndpoint = '/api/chat'
+  apiEndpoint = '/api/chat/'
 } = Astro.props;
 
 const t = uiTranslations[currentLang].chat;
