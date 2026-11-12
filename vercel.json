@@ -6,7 +6,17 @@
       "statusCode": 301
     },
     {
+      "source": "/:year(2024|2025|2026)/:slug(automatizacion-vs-agente-ia-que-necesita-tu-empresa|pagina-web-pereira-desperdicia-clics-de-anuncios|que-medir-en-meta-ads-antes-de-subir-presupuesto|seguimiento-whatsapp-despues-del-anuncio)/",
+      "destination": "/blog/:slug/",
+      "statusCode": 301
+    },
+    {
       "source": "/:year(2024|2025|2026)/:month/:slug(automatizacion-vs-agente-ia-que-necesita-tu-empresa|pagina-web-pereira-desperdicia-clics-de-anuncios|que-medir-en-meta-ads-antes-de-subir-presupuesto|seguimiento-whatsapp-despues-del-anuncio)",
+      "destination": "/blog/:slug/",
+      "statusCode": 301
+    },
+    {
+      "source": "/:year(2024|2025|2026)/:month/:slug(automatizacion-vs-agente-ia-que-necesita-tu-empresa|pagina-web-pereira-desperdicia-clics-de-anuncios|que-medir-en-meta-ads-antes-de-subir-presupuesto|seguimiento-whatsapp-despues-del-anuncio)/",
       "destination": "/blog/:slug/",
       "statusCode": 301
     },
@@ -16,7 +26,17 @@
       "statusCode": 301
     },
     {
+      "source": "/:year(2024|2025|2026)/:month/:day/:slug(automatizacion-vs-agente-ia-que-necesita-tu-empresa|pagina-web-pereira-desperdicia-clics-de-anuncios|que-medir-en-meta-ads-antes-de-subir-presupuesto|seguimiento-whatsapp-despues-del-anuncio)/",
+      "destination": "/blog/:slug/",
+      "statusCode": 301
+    },
+    {
       "source": "/:year(2024|2025|2026)",
+      "destination": "/blog/",
+      "statusCode": 301
+    },
+    {
+      "source": "/:year(2024|2025|2026)/",
       "destination": "/blog/",
       "statusCode": 301
     },
@@ -26,7 +46,17 @@
       "statusCode": 301
     },
     {
+      "source": "/:year(2024|2025|2026)/:path*/",
+      "destination": "/blog/",
+      "statusCode": 301
+    },
+    {
       "source": "/casos-de-exito",
+      "destination": "/casos/",
+      "statusCode": 301
+    },
+    {
+      "source": "/casos-de-exito/",
       "destination": "/casos/",
       "statusCode": 301
     },
@@ -36,7 +66,17 @@
       "statusCode": 301
     },
     {
+      "source": "/casos-de-exito/:path*/",
+      "destination": "/casos/",
+      "statusCode": 301
+    },
+    {
       "source": "/category",
+      "destination": "/blog/",
+      "statusCode": 301
+    },
+    {
+      "source": "/category/",
       "destination": "/blog/",
       "statusCode": 301
     },
@@ -46,7 +86,17 @@
       "statusCode": 301
     },
     {
+      "source": "/category/:path*/",
+      "destination": "/blog/",
+      "statusCode": 301
+    },
+    {
       "source": "/tag",
+      "destination": "/blog/",
+      "statusCode": 301
+    },
+    {
+      "source": "/tag/",
       "destination": "/blog/",
       "statusCode": 301
     },
@@ -56,7 +106,17 @@
       "statusCode": 301
     },
     {
+      "source": "/tag/:path*/",
+      "destination": "/blog/",
+      "statusCode": 301
+    },
+    {
       "source": "/author",
+      "destination": "/blog/",
+      "statusCode": 301
+    },
+    {
+      "source": "/author/",
       "destination": "/blog/",
       "statusCode": 301
     },
@@ -66,12 +126,27 @@
       "statusCode": 301
     },
     {
+      "source": "/author/:path*/",
+      "destination": "/blog/",
+      "statusCode": 301
+    },
+    {
       "source": "/wp-admin",
       "destination": "/",
       "statusCode": 301
     },
     {
+      "source": "/wp-admin/",
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
       "source": "/wp-admin/:path*",
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
+      "source": "/wp-admin/:path*/",
       "destination": "/",
       "statusCode": 301
     },

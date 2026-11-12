@@ -8,7 +8,7 @@ El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1
 ## [Unreleased] - 2026-11-12
 
 ### Fixed
-- **Redirecciones 301 de WordPress (`vercel.json`)**: `/2024/`, `/2025/` y `/2026/` van a `/blog/`. Si el slug final es uno de los cuatro posts publicados, el destino es `/blog/<slug>/`. `/casos-de-exito` y sus subrutas van a `/casos/`. `/category/`, `/tag/` y `/author/` van a `/blog/`. `/wp-admin` y `/wp-login.php` van a `/`. `/sitemap.xml` va a `/sitemap-index.xml`. No hay `/rss.xml`, así que `/feed/` se queda sin redirección. Las rutas que ya responden 200 no cambian.
+- **Redirecciones 301 de WordPress (`vercel.json`)**: `/2024`, `/2025` y `/2026` van a `/blog/`, con o sin barra final. Si el slug final es uno de los cuatro posts publicados, el destino es `/blog/<slug>/`. `/casos-de-exito` y sus subrutas van a `/casos/`. `/category`, `/tag` y `/author` van a `/blog/`. `/wp-admin` y `/wp-login.php` van a `/`. `/sitemap.xml` va a `/sitemap-index.xml`. No hay `/rss.xml`, así que `/feed/` se queda sin redirección. Las rutas que ya responden 200 no cambian.
 
 ## [Unreleased] - 2026-11-11
 
