@@ -29,6 +29,11 @@ const serviceByPath: Record<string, string> = {
   '/productos-digitales': 'productos_digitales',
 };
 
+function pagePathname(path: string): string {
+  if (path.length > 1 && path.endsWith('/')) return path.slice(0, -1);
+  return path || '/';
+}
+
 const safeValue = (value: string | null | undefined, maxLength = 120) =>
   value?.trim().slice(0, maxLength) || undefined;
 
@@ -75,7 +80,7 @@ const attribution = captureAttribution();
 function getPageContext(): DataLayerEntry {
   const pagePath = window.location.pathname || '/';
   const language = document.documentElement.lang === 'en' ? 'en' : 'es';
-  const localizedPath = pagePath.replace(/^\/en(?=\/|$)/, '') || '/';
+  const localizedPath = pagePathname(pagePath.replace(/^\/en(?=\/|$)/, '') || '/');
   const serviceName = serviceByPath[localizedPath];
 
   return {
@@ -253,7 +258,7 @@ document.addEventListener(
       return;
     }
 
-    const localizedDestination = url.pathname.replace(/^\/en(?=\/|$)/, '') || '/';
+    const localizedDestination = pagePathname(url.pathname.replace(/^\/en(?=\/|$)/, '') || '/');
     if (
       url.origin === window.location.origin &&
       (url.hash === '#contacto' || localizedDestination === '/contacto')
@@ -294,7 +299,7 @@ window.addEventListener('77:lead-success', ((event: CustomEvent) => {
   });
 }) as EventListener);
 
-const normalizedPath = window.location.pathname.replace(/^\/en(?=\/|$)/, '') || '/';
+const normalizedPath = pagePathname(window.location.pathname.replace(/^\/en(?=\/|$)/, '') || '/');
 if (serviceByPath[normalizedPath]) {
   pushEvent('view_service', { service_name: serviceByPath[normalizedPath] });
 }

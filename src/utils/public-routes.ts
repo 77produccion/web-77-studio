@@ -77,7 +77,8 @@ export function routeExists(pathname: string): boolean {
 }
 
 function publicPath(locale: Locale, base: string): string {
-  if (base === '/404') return locale === 'en' ? '/en/404' : '/404';
+  // /404.html es la página de error de la raíz. /en/404.astro sí sale como directorio.
+  if (base === '/404') return locale === 'en' ? '/en/404/' : '/404';
   if (base === '/') return locale === 'en' ? '/en/' : '/';
   const localized = locale === 'en' ? `/en${base}` : base;
   return `${localized}/`;

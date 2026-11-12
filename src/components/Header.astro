@@ -21,17 +21,25 @@ const esUrl = alternates.es ?? '/';
 const enUrl = alternates.en ?? '/en/';
 
 const langPrefix = currentLang === 'en' ? '/en' : '';
-const homeUrl = currentLang === 'en' ? '/en' : '/';
+const homeUrl = currentLang === 'en' ? '/en/' : '/';
 
 const navItems = [
-  { label: t.nav.marketing, href: `${langPrefix}/marketing` },
-  { label: t.nav.web, href: `${langPrefix}/web` },
-  { label: t.nav.ia, href: `${langPrefix}/ia-automatizacion` },
-  { label: t.nav.productos, href: `${langPrefix}/productos-digitales` },
-  { label: 'Blog', href: '/blog' },
-  { label: t.nav.nosotros, href: `${langPrefix}/nosotros` },
-  { label: t.nav.contacto, href: `${langPrefix}/contacto` },
+  { label: t.nav.marketing, href: `${langPrefix}/marketing/` },
+  { label: t.nav.web, href: `${langPrefix}/web/` },
+  { label: t.nav.ia, href: `${langPrefix}/ia-automatizacion/` },
+  { label: t.nav.productos, href: `${langPrefix}/productos-digitales/` },
+  { label: 'Blog', href: '/blog/' },
+  { label: t.nav.nosotros, href: `${langPrefix}/nosotros/` },
+  { label: t.nav.contacto, href: `${langPrefix}/contacto/` },
 ];
+
+function isNavActive(pathname: string, href: string): boolean {
+  const normalize = (value: string) => (value.length > 1 && value.endsWith('/') ? value.slice(0, -1) : value);
+  const current = normalize(pathname);
+  const target = normalize(href);
+  if (target === '/' || target === '/en') return current === target;
+  return current === target || current.startsWith(`${target}/`);
+}
 ---
 
 <header id="main-header" class="fixed top-5 left-1/2 -translate-x-1/2 z-50 mx-auto w-[94%] max-w-[1290px] transition-all duration-300">
@@ -50,7 +58,7 @@ const navItems = [
     <!-- Desktop Navigation Menu -->
     <nav class="hidden lg:flex items-center gap-1.5" aria-label={t.nav.menuAria}>
       {navItems.map((item) => {
-        const isActive = currentPath === item.href || (item.href !== '/' && item.href !== '/en' && currentPath.startsWith(item.href));
+        const isActive = isNavActive(currentPath, item.href);
         return (
           <a
             href={item.href}
@@ -162,7 +170,7 @@ const navItems = [
   >
     <nav class="flex flex-col gap-2">
       {navItems.map((item) => {
-        const isActive = currentPath === item.href;
+        const isActive = isNavActive(currentPath, item.href);
         return (
           <a
             href={item.href}
