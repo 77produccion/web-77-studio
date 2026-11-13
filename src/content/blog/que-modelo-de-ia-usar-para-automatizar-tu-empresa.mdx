@@ -1,0 +1,71 @@
+---
+title: "¿Qué modelo de IA conviene para automatizar tu empresa? Lo que dejan los lanzamientos de noviembre"
+description: "Meta, Google y Anthropic lanzaron esta semana modelos muy distintos. La lección para una empresa: no uses el modelo más potente para todo. Así se reparte el trabajo entre modelos grandes y pequeños."
+pubDate: 2026-11-13
+author: "77 Studio"
+heroImage: "/img/blog/que-modelo-de-ia-usar-para-automatizar-tu-empresa.webp"
+heroImageAlt: "Bloques de madera de distintos tamaños ordenados de menor a mayor sobre un escritorio claro, entre dos libretas y un lápiz, como metáfora de elegir la herramienta según la tarea"
+draft: false
+pillar: noticias-ia
+objective: informar
+tags:
+  - noticias de IA
+  - modelos de IA
+  - automatización
+  - agentes de IA
+  - Gemini
+  - Claude
+  - Meta
+---
+
+Depende de la tarea, y casi nunca conviene usar un solo modelo para todo. Los lanzamientos de esta semana lo dejan claro: Meta presentó Muse Ember, un modelo pequeño y barato para el trabajo repetitivo; Google lanzó la Gemini Decisions API, que no escribe texto sino que elige entre opciones; y Anthropic actualizó Claude Fable 5.2, su modelo más potente para problemas técnicos difíciles. Para una empresa, la idea práctica es repartir: un modelo económico para clasificar y ejecutar en volumen, y uno grande solo para lo que de verdad lo necesita.
+
+## ¿Qué se anunció exactamente?
+
+Estos son los tres anuncios, con fecha y precio según las fuentes oficiales. Los precios son en dólares por millón de tokens (un token equivale más o menos a un pedazo de palabra) y pueden cambiar.
+
+| Lanzamiento | Fecha | Para qué está pensado | Precio publicado |
+|---|---|---|---|
+| [Muse Ember (Meta)](https://research.meta.ai/blog/muse-ember) | 9 nov 2026 | Tareas que un agente repite todo el día: llamar herramientas, extraer datos, enrutar, leer documentos largos | USD 0,10 de entrada y USD 0,50 de salida |
+| [Gemini Decisions API (Google)](https://blog.google/innovation-and-ai/technology/developers-tools/gemini-decisions-api/) | 11 nov 2026 | Decisiones cerradas: sí/no, escoger entre opciones o calificar con una escala | USD 0,10 de entrada; la salida no se cobra |
+| [Claude Fable 5.2 (Anthropic)](https://www.anthropic.com/claude-fable-and-mythos-5-2) | 9 nov 2026 | Trabajo técnico muy exigente y tareas largas de agentes | USD 8 de entrada y USD 40 de salida |
+
+Algunos detalles que importan:
+
+- **Muse Ember** está disponible en la API de modelos de Meta y en Muse Code con el nombre `muse-ember-1.0`. Acepta texto, imágenes, audio y video, y tiene una ventana de contexto de 1 millón de tokens. Meta dice que iguala a Claude Haiku 5.5 a cerca de un tercio del costo por tarea; esa comparación es de Meta, apoyada en el índice de Artificial Analysis, no una prueba independiente nuestra. Por encima de 200.000 tokens de entrada el precio sube.
+- **Gemini Decisions API** usa el modelo `gemini-decision-1` y, según Google, puede evaluar hasta 1.000 preguntas sobre un mismo contenido (texto, imágenes, audio, video o PDF) en una sola llamada, con una latencia de 150 a 250 milisegundos. Cada respuesta trae una probabilidad y un nivel de confianza. Hoy está en la versión beta (`v1beta`) de la API de Gemini en Google AI Studio; Google indica que el soporte en Google Cloud llegará más adelante. La [documentación oficial](https://aistudio.google.com/docs/decisions-api) explica los tres tipos de pregunta.
+- **Claude Fable 5.2** baja de precio frente a Fable 5.1 (que costaba USD 10 y USD 50, según las [notas de versión de Anthropic](https://platform.claude.com/docs/en/release-notes/overview)). Su gemelo, Claude Mythos 5.2, es el mismo modelo pero solo para organizaciones verificadas en programas de ciberseguridad y ciencias de la vida. Y algo que pocos mencionan: la propia Anthropic recomienda empezar la mayoría de tareas con Claude Opus 5.5 y subir a Fable solo cuando el problema lo exige.
+
+## ¿Por qué esto le importa a una empresa que no programa modelos?
+
+Porque cambia la forma de calcular cuánto cuesta automatizar. Hasta hace poco, muchas empresas conectaban todo a un solo modelo "bueno" y pagaban tarifa alta incluso para preguntas simples como "¿este mensaje es una queja o una cotización?".
+
+Los tres anuncios apuntan en la misma dirección. Meta lo resume así en su anuncio: el modelo grande planea y Muse Ember se encarga del volumen. Google muestra que usa la Decisions API para mandar cada consulta al modelo adecuado. Anthropic propone que Fable actúe como "asesor" u "orquestador" que delega lo sencillo a modelos más pequeños.
+
+Si ya leíste nuestra guía sobre [cuándo usar automatización y cuándo un agente de IA](/blog/automatizacion-vs-agente-ia-que-necesita-tu-empresa/), esto es el siguiente paso: incluso dentro de un agente, no todas las piezas necesitan el mismo nivel de inteligencia.
+
+## ¿Cómo se ve en un caso real del día a día?
+
+Toma un ejemplo hipotético: una clínica odontológica en Pereira que recibe 1.000 mensajes al mes por WhatsApp. Un flujo razonable sería:
+
+1. **Clasificar cada mensaje** (cita nueva, reprogramación, precio, queja, otro). Es una decisión cerrada: aquí encaja un modelo tipo Decisions API o un modelo pequeño.
+2. **Extraer datos** (nombre, servicio de interés, ciudad, horario preferido) y guardarlos en el CRM. Trabajo repetitivo y estructurado: un modelo pequeño como Muse Ember está pensado para esto.
+3. **Responder casos delicados**, como una queja o una pregunta clínica, con revisión de una persona. Ahí sí vale la pena un modelo más capaz, o mejor aún, un humano.
+
+Para dimensionar la diferencia, una cuenta rápida e ilustrativa: si cada mensaje con sus instrucciones ocupa unos 500 tokens, 1.000 mensajes suman 500.000 tokens de entrada. Clasificarlos con Gemini Decision 1 costaría unos USD 0,05 a precio de lista. Mandar esa misma entrada a Claude Fable 5.2 costaría unos USD 4, sin contar la respuesta escrita, que se cobra aparte. Los números reales dependen del tamaño de tus mensajes y de cómo esté armado el flujo, pero la diferencia de escala es la lección.
+
+## ¿Qué limitaciones hay que tener en cuenta?
+
+- **Los benchmarks los publica cada empresa.** Las tablas de Meta, Google y Anthropic comparan con sus propias pruebas o con índices que ellas eligen. Antes de cambiar de modelo, prueba con tus propios mensajes y documentos.
+- **Disponibilidad no es lo mismo que madurez.** La Decisions API está en beta y algunas integraciones apenas se están desplegando. Para un proceso crítico, planea una alternativa.
+- **Datos y privacidad.** Anthropic indica que Fable 5.2 requiere retención de datos por 30 días. Revisa las condiciones de cada proveedor antes de enviar información de clientes o de salud.
+- **Precio en dólares.** Para una empresa en Colombia, el costo real también se mueve con la tasa de cambio.
+- **No todo necesita IA generativa.** Muchas automatizaciones útiles funcionan con reglas simples. En el [caso de Casa Tuning](/casos/casa-tuning/), un taller automotriz en Armenia, el cliente recibe avisos por WhatsApp cuando su carro entra, avanza y queda listo, a partir de los estados de cada orden.
+
+## ¿Por dónde empezar si quieres aplicarlo?
+
+Haz una lista de las tareas repetitivas de tu equipo y márcalas en tres grupos: decisiones cerradas (clasificar, aprobar, priorizar), extracción o resumen, y casos que requieren criterio. Las dos primeras suelen ser las más fáciles y baratas de automatizar. La tercera es donde vale la pena gastar en un modelo potente o dejar a una persona.
+
+Si quieres ayuda para armar ese mapa, en 77 Studio trabajamos [automatización con IA para empresas en Pereira](/eje-cafetero/pereira/automatizacion/) y en el resto del país. Puedes escribirnos al +57 314 849 0955 o desde [Contacto](/contacto/).
+
+*Fuentes: Meta, ["Introducing Our Smallest, Most Efficient Model: Muse Ember"](https://research.meta.ai/blog/muse-ember) (9 de noviembre de 2026); Google, ["Gemini Decisions API: Fast, calibrated multimodal decisions"](https://blog.google/innovation-and-ai/technology/developers-tools/gemini-decisions-api/) (11 de noviembre de 2026) y [documentación de la Decisions API](https://aistudio.google.com/docs/decisions-api); Anthropic, ["Claude Fable 5.2 and Mythos 5.2"](https://www.anthropic.com/claude-fable-and-mythos-5-2) (9 de noviembre de 2026) y [notas de versión de Claude Platform](https://platform.claude.com/docs/en/release-notes/overview). Precios consultados el 13 de noviembre de 2026. El ejemplo de la clínica y el cálculo de costos son ilustrativos y no corresponden a un cliente real.*
