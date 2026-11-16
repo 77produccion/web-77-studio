@@ -157,6 +157,306 @@
       "statusCode": 301
     },
     {
+      "source": "/servicio",
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
+      "source": "/servicio/",
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
+      "source": "/servicio/:path*",
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
+      "source": "/servicio/:path*/",
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
+      "source": "/servicios",
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
+      "source": "/servicios/",
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
+      "source": "/servicios/:path*",
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
+      "source": "/servicios/:path*/",
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
+      "source": "/home",
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
+      "source": "/home/",
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
+      "source": "/home/:path*",
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
+      "source": "/home/:path*/",
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
+      "source": "/shop",
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
+      "source": "/shop/",
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
+      "source": "/shop/:path*",
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
+      "source": "/shop/:path*/",
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
+      "source": "/portafolio",
+      "destination": "/casos/",
+      "statusCode": 301
+    },
+    {
+      "source": "/portafolio/",
+      "destination": "/casos/",
+      "statusCode": 301
+    },
+    {
+      "source": "/portafolio/:path*",
+      "destination": "/casos/",
+      "statusCode": 301
+    },
+    {
+      "source": "/portafolio/:path*/",
+      "destination": "/casos/",
+      "statusCode": 301
+    },
+    {
+      "source": "/proyectos",
+      "destination": "/casos/",
+      "statusCode": 301
+    },
+    {
+      "source": "/proyectos/",
+      "destination": "/casos/",
+      "statusCode": 301
+    },
+    {
+      "source": "/proyectos/:path*",
+      "destination": "/casos/",
+      "statusCode": 301
+    },
+    {
+      "source": "/proyectos/:path*/",
+      "destination": "/casos/",
+      "statusCode": 301
+    },
+    {
+      "source": "/quienes-somos",
+      "destination": "/nosotros/",
+      "statusCode": 301
+    },
+    {
+      "source": "/quienes-somos/",
+      "destination": "/nosotros/",
+      "statusCode": 301
+    },
+    {
+      "source": "/quienes-somos/:path*",
+      "destination": "/nosotros/",
+      "statusCode": 301
+    },
+    {
+      "source": "/quienes-somos/:path*/",
+      "destination": "/nosotros/",
+      "statusCode": 301
+    },
+    {
+      "source": "/about",
+      "destination": "/nosotros/",
+      "statusCode": 301
+    },
+    {
+      "source": "/about/",
+      "destination": "/nosotros/",
+      "statusCode": 301
+    },
+    {
+      "source": "/about/:path*",
+      "destination": "/nosotros/",
+      "statusCode": 301
+    },
+    {
+      "source": "/about/:path*/",
+      "destination": "/nosotros/",
+      "statusCode": 301
+    },
+    {
+      "source": "/contact",
+      "destination": "/contacto/",
+      "statusCode": 301
+    },
+    {
+      "source": "/contact/",
+      "destination": "/contacto/",
+      "statusCode": 301
+    },
+    {
+      "source": "/contact/:path*",
+      "destination": "/contacto/",
+      "statusCode": 301
+    },
+    {
+      "source": "/contact/:path*/",
+      "destination": "/contacto/",
+      "statusCode": 301
+    },
+    {
+      "source": "/contactanos",
+      "destination": "/contacto/",
+      "statusCode": 301
+    },
+    {
+      "source": "/contactanos/",
+      "destination": "/contacto/",
+      "statusCode": 301
+    },
+    {
+      "source": "/contactanos/:path*",
+      "destination": "/contacto/",
+      "statusCode": 301
+    },
+    {
+      "source": "/contactanos/:path*/",
+      "destination": "/contacto/",
+      "statusCode": 301
+    },
+    {
+      "source": "/feed",
+      "destination": "/blog/",
+      "statusCode": 301
+    },
+    {
+      "source": "/feed/",
+      "destination": "/blog/",
+      "statusCode": 301
+    },
+    {
+      "source": "/feed/:path*",
+      "destination": "/blog/",
+      "statusCode": 301
+    },
+    {
+      "source": "/feed/:path*/",
+      "destination": "/blog/",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/feed",
+      "destination": "/blog/",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/feed/",
+      "destination": "/blog/",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/feed/:path*",
+      "destination": "/blog/",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/feed/:path*/",
+      "destination": "/blog/",
+      "statusCode": 301
+    },
+    {
+      "source": "/comments/feed",
+      "destination": "/blog/",
+      "statusCode": 301
+    },
+    {
+      "source": "/comments/feed/",
+      "destination": "/blog/",
+      "statusCode": 301
+    },
+    {
+      "source": "/comments/feed/:path*",
+      "destination": "/blog/",
+      "statusCode": 301
+    },
+    {
+      "source": "/comments/feed/:path*/",
+      "destination": "/blog/",
+      "statusCode": 301
+    },
+    {
+      "source": "/en/feed",
+      "destination": "/blog/",
+      "statusCode": 301
+    },
+    {
+      "source": "/en/feed/",
+      "destination": "/blog/",
+      "statusCode": 301
+    },
+    {
+      "source": "/en/feed/:path*",
+      "destination": "/blog/",
+      "statusCode": 301
+    },
+    {
+      "source": "/en/feed/:path*/",
+      "destination": "/blog/",
+      "statusCode": 301
+    },
+    {
+      "source": "/privacy-policy",
+      "destination": "/politica-de-privacidad/",
+      "statusCode": 301
+    },
+    {
+      "source": "/privacy-policy/",
+      "destination": "/politica-de-privacidad/",
+      "statusCode": 301
+    },
+    {
+      "source": "/privacy-policy/:path*",
+      "destination": "/politica-de-privacidad/",
+      "statusCode": 301
+    },
+    {
+      "source": "/privacy-policy/:path*/",
+      "destination": "/politica-de-privacidad/",
+      "statusCode": 301
+    },
+    {
       "source": "/sitemap.xml",
       "destination": "/sitemap-index.xml",
       "statusCode": 301
