@@ -106,6 +106,7 @@ const SECTION_LABELS: Record<SupportedLocale, Record<string, string>> = {
     contacto: uiTranslations.es.nav.contacto,
     blog: 'Blog',
     'eje-cafetero': 'Eje Cafetero',
+    'politica-de-privacidad': 'Política de privacidad',
   },
   en: {
     marketing: uiTranslations.en.nav.marketing,

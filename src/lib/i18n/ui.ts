@@ -40,6 +40,7 @@ export const uiTranslations = {
         { label: 'Metodología en 4 Pasos', href: '/#proceso' },
         { label: 'Contacto & Diagnóstico', href: '/contacto/' },
         { label: 'Eje Cafetero', href: '/eje-cafetero/' },
+        { label: 'Política de privacidad', href: '/politica-de-privacidad/' },
       ]
     },
     cta: {
@@ -154,6 +155,7 @@ export const uiTranslations = {
         { label: '4-Step Methodology', href: '/en/#proceso' },
         { label: 'Contact & Diagnostic', href: '/en/contacto/' },
         { label: 'Coffee Axis', href: '/eje-cafetero/' },
+        { label: 'Privacy policy', href: '/politica-de-privacidad/' },
       ]
     },
     cta: {

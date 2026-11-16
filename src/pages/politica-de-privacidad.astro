@@ -1,0 +1,166 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { ADDRESS_LINE, PHONE_DISPLAY, PHONE_E164 } from '@/utils/nap';
+
+const title = 'Política de privacidad | 77 Studio';
+const description =
+  'Tratamiento de datos personales de 77 Studio SAS, con sede en Armenia, Quindío, conforme a la Ley 1581 de 2012. Contacto: gerencia@77studio.co y +57 314 849 0955.';
+const email = 'gerencia@77studio.co';
+const updated = '16 de noviembre de 2026';
+---
+
+<BaseLayout title={title} description={description} whatsappContext="contacto" lang="es">
+  <article class="pt-28 pb-24 md:pt-36">
+    <div class="mx-auto max-w-3xl px-5 md:px-8">
+      <header data-opai-animate data-instant data-direction="up" data-duration="0.5">
+        <p class="font-ibm-plex-mono text-[11px] uppercase tracking-[0.18em] text-background-13/50">
+          Ley 1581 de 2012 · Habeas data
+        </p>
+        <h1 class="mt-3 font-sora text-3xl font-semibold leading-[1.15] tracking-tight text-background-13/90 md:text-5xl">
+          Política de privacidad
+        </h1>
+        <p class="mt-4 font-inter-tight text-base leading-relaxed text-background-13/60 md:text-lg">
+          77 Studio SAS trata datos personales de acuerdo con la Ley 1581 de 2012 y las normas que la reglamentan.
+          Esta página indica qué datos podemos recibir, para qué los usamos y cómo ejercer tus derechos.
+        </p>
+        <p class="mt-3 font-inter-tight text-sm text-background-13/50">Última actualización: {updated}</p>
+      </header>
+
+      <div class="mt-10 space-y-8 rounded-3xl border border-black/10 bg-white p-6 shadow-sm sm:p-10">
+        <section class="space-y-3" aria-labelledby="responsable">
+          <h2 id="responsable" class="font-sora text-xl font-semibold tracking-tight text-background-13/80 md:text-2xl">
+            Responsable del tratamiento
+          </h2>
+          <p class="font-inter-tight text-base leading-relaxed text-background-13/60">
+            El responsable es <strong class="font-semibold text-background-13/80">77 Studio SAS</strong>, con sede en {ADDRESS_LINE}.
+            El sitio al que aplica esta política es www.77studio.co.
+          </p>
+          <p class="font-inter-tight text-base leading-relaxed text-background-13/60">
+            Las solicitudes sobre datos personales se atienden solo por estos dos canales:
+          </p>
+          <ul class="space-y-2 font-inter-tight text-base leading-relaxed text-background-13/60">
+            <li>
+              Correo: <a class="font-semibold text-background-13 underline decoration-black/20 underline-offset-4 hover:text-opai-purple" href={`mailto:${email}`}>{email}</a>
+            </li>
+            <li>
+              Teléfono: <a class="font-semibold text-background-13 underline decoration-black/20 underline-offset-4 hover:text-opai-purple" href={`tel:${PHONE_E164}`}>{PHONE_DISPLAY}</a>
+            </li>
+          </ul>
+        </section>
+
+        <section class="space-y-3 border-t border-black/10 pt-8" aria-labelledby="datos">
+          <h2 id="datos" class="font-sora text-xl font-semibold tracking-tight text-background-13/80 md:text-2xl">
+            Datos que podemos tratar
+          </h2>
+          <p class="font-inter-tight text-base leading-relaxed text-background-13/60">
+            Si escribes por el formulario de contacto, por correo o por teléfono, podemos recibir tu nombre, la empresa o el proyecto,
+            el correo, el teléfono, el servicio de interés y el mensaje. El formulario también registra la página desde la que se envió.
+          </p>
+          <p class="font-inter-tight text-base leading-relaxed text-background-13/60">
+            Al navegar el sitio, el navegador puede enviar datos técnicos de la visita, como la dirección IP, el tipo de navegador y las páginas vistas.
+            Esa información se usa para medir el uso del sitio mediante Google Tag Manager.
+          </p>
+          <p class="font-inter-tight text-base leading-relaxed text-background-13/60">
+            No pedimos datos sensibles ni datos de niños, niñas o adolescentes. Este sitio está dirigido a empresas.
+          </p>
+        </section>
+
+        <section class="space-y-3 border-t border-black/10 pt-8" aria-labelledby="finalidades">
+          <h2 id="finalidades" class="font-sora text-xl font-semibold tracking-tight text-background-13/80 md:text-2xl">
+            Finalidades
+          </h2>
+          <ul class="list-disc space-y-2 pl-5 font-inter-tight text-base leading-relaxed text-background-13/60">
+            <li>Responder consultas y preparar una propuesta.</li>
+            <li>Prestar el servicio contratado y llevar la relación comercial.</li>
+            <li>Medir el uso del sitio y mantenerlo seguro.</li>
+            <li>Cumplir deberes legales.</li>
+          </ul>
+          <p class="font-inter-tight text-base leading-relaxed text-background-13/60">
+            No vendemos datos personales ni los cedemos para publicidad de terceros.
+          </p>
+        </section>
+
+        <section class="space-y-3 border-t border-black/10 pt-8" aria-labelledby="autorizacion">
+          <h2 id="autorizacion" class="font-sora text-xl font-semibold tracking-tight text-background-13/80 md:text-2xl">
+            Autorización
+          </h2>
+          <p class="font-inter-tight text-base leading-relaxed text-background-13/60">
+            Al enviar el formulario, o al escribirnos o llamarnos para una consulta, autorizas el tratamiento de esos datos
+            para las finalidades de esta política. Puedes revocar la autorización en cualquier momento, salvo que exista un deber
+            legal o contractual de conservar la información.
+          </p>
+        </section>
+
+        <section class="space-y-3 border-t border-black/10 pt-8" aria-labelledby="derechos">
+          <h2 id="derechos" class="font-sora text-xl font-semibold tracking-tight text-background-13/80 md:text-2xl">
+            Derechos de los titulares
+          </h2>
+          <ul class="list-disc space-y-2 pl-5 font-inter-tight text-base leading-relaxed text-background-13/60">
+            <li>Conocer, actualizar y rectificar tus datos.</li>
+            <li>Solicitar prueba de la autorización.</li>
+            <li>Ser informado sobre el uso que les hemos dado.</li>
+            <li>Revocar la autorización y pedir la supresión cuando no haya un deber legal de conservarlos.</li>
+            <li>Acceder a tus datos de forma gratuita.</li>
+            <li>
+              Presentar una queja ante la Superintendencia de Industria y Comercio
+              (<a class="underline decoration-black/20 underline-offset-4 hover:text-opai-purple" href="https://www.sic.gov.co/" target="_blank" rel="noopener noreferrer">sic.gov.co</a>).
+            </li>
+          </ul>
+        </section>
+
+        <section class="space-y-3 border-t border-black/10 pt-8" aria-labelledby="reclamos">
+          <h2 id="reclamos" class="font-sora text-xl font-semibold tracking-tight text-background-13/80 md:text-2xl">
+            Consultas y reclamos
+          </h2>
+          <p class="font-inter-tight text-base leading-relaxed text-background-13/60">
+            Escribe a <a class="font-semibold text-background-13 underline decoration-black/20 underline-offset-4 hover:text-opai-purple" href={`mailto:${email}`}>{email}</a>
+            o llama al <a class="font-semibold text-background-13 underline decoration-black/20 underline-offset-4 hover:text-opai-purple" href={`tel:${PHONE_E164}`}>{PHONE_DISPLAY}</a>.
+            Indica tu nombre, el derecho que quieres ejercer y una descripción clara de la solicitud.
+          </p>
+          <p class="font-inter-tight text-base leading-relaxed text-background-13/60">
+            Las consultas se responden en un plazo máximo de diez (10) días hábiles y los reclamos en quince (15) días hábiles,
+            conforme a la Ley 1581 de 2012. Si no es posible responder dentro de ese plazo, te informaremos el motivo y la fecha de respuesta.
+          </p>
+        </section>
+
+        <section class="space-y-3 border-t border-black/10 pt-8" aria-labelledby="conservacion">
+          <h2 id="conservacion" class="font-sora text-xl font-semibold tracking-tight text-background-13/80 md:text-2xl">
+            Conservación
+          </h2>
+          <p class="font-inter-tight text-base leading-relaxed text-background-13/60">
+            Conservamos los datos durante el tiempo necesario para la finalidad por la que los recibimos y para los deberes legales de conservación.
+            Cuando dejan de hacer falta, se eliminan o se anonimizan.
+          </p>
+        </section>
+
+        <section class="space-y-3 border-t border-black/10 pt-8" aria-labelledby="encargados">
+          <h2 id="encargados" class="font-sora text-xl font-semibold tracking-tight text-background-13/80 md:text-2xl">
+            Encargados
+          </h2>
+          <p class="font-inter-tight text-base leading-relaxed text-background-13/60">
+            El sitio se aloja en Vercel. La medición de audiencia usa Google Tag Manager. Esos proveedores pueden tratar datos técnicos
+            por cuenta de 77 Studio SAS y, en algunos casos, fuera de Colombia. No les entregamos la información para que la vendan.
+          </p>
+        </section>
+
+        <section class="space-y-3 border-t border-black/10 pt-8" aria-labelledby="cookies">
+          <h2 id="cookies" class="font-sora text-xl font-semibold tracking-tight text-background-13/80 md:text-2xl">
+            Cookies y medición
+          </h2>
+          <p class="font-inter-tight text-base leading-relaxed text-background-13/60">
+            El sitio puede almacenar cookies de medición. Puedes bloquearlas o borrarlas desde el navegador. Las páginas siguen pudiéndose leer.
+          </p>
+        </section>
+
+        <section class="space-y-3 border-t border-black/10 pt-8" aria-labelledby="cambios">
+          <h2 id="cambios" class="font-sora text-xl font-semibold tracking-tight text-background-13/80 md:text-2xl">
+            Seguridad y cambios
+          </h2>
+          <p class="font-inter-tight text-base leading-relaxed text-background-13/60">
+            Aplicamos medidas razonables para proteger la información. Si esta política cambia, la versión vigente quedará publicada en esta misma dirección.
+          </p>
+        </section>
+      </div>
+    </div>
+  </article>
+</BaseLayout>
