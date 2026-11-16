@@ -143,7 +143,10 @@ const t = uiTranslations[currentLang].contactForm;
     </div>
 
     <p class="font-inter-tight text-[11px] text-background-13/50 text-center">
-      {t.privacyNote}
+      {t.privacyNote}{' '}
+      <a href="/politica-de-privacidad/" class="underline decoration-black/20 underline-offset-2 hover:text-background-13">
+        {currentLang === 'en' ? 'Privacy policy' : 'Política de privacidad'}
+      </a>
     </p>
 
   </form>

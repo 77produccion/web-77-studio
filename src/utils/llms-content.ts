@@ -129,6 +129,7 @@ ${coverageLines()}
 - [About](${ORIGIN}/en/nosotros/)
 - [Contacto](${ORIGIN}/contacto/): WhatsApp, formulario y preguntas frecuentes.
 - [Contact](${ORIGIN}/en/contacto/)
+- [Política de privacidad](${ORIGIN}/politica-de-privacidad/): tratamiento de datos de 77 Studio SAS (Ley 1581 de 2012). Sede en Armenia, Quindío. Canales: gerencia@77studio.co y +57 314 849 0955.
 - [Blog](${ORIGIN}/blog/): notas prácticas de marketing, IA, automatización, WhatsApp y captación.
 
 ## Artículos
@@ -183,6 +184,7 @@ ${coverageLines()}
 - Inicio: ${ORIGIN}/ y ${ORIGIN}/en/
 - Nosotros: ${ORIGIN}/nosotros/ y ${ORIGIN}/en/nosotros/
 - Contacto y preguntas frecuentes: ${ORIGIN}/contacto/ y ${ORIGIN}/en/contacto/
+- Política de privacidad (solo español): ${ORIGIN}/politica-de-privacidad/
 - Blog (solo español): ${ORIGIN}/blog/
 
 ## Artículos del blog

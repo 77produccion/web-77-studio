@@ -5,11 +5,19 @@ Todos los cambios notables en este proyecto serán documentados en este archivo.
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/), y este proyecto adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 
 ---
+## [Unreleased] - 2026-11-16
+
+### Added
+- **Política de privacidad (`/politica-de-privacidad/`)**: página en español para 77 Studio SAS, sede en Armenia, Quindío, conforme a la Ley 1581 de 2012. Los canales para ejercer habeas data son gerencia@77studio.co y +57 314 849 0955. Entra al footer (español e inglés), al formulario de contacto y al sitemap. `/privacy-policy` redirige ahí con 301.
+
+### Fixed
+- **404 de WordPress (`vercel.json`)**: `/servicio` y `/servicios` van a `/`. `/portafolio` y `/proyectos` van a `/casos/`. `/quienes-somos` y `/about` van a `/nosotros/`. `/contact` y `/contactanos` van a `/contacto/`. `/home` y `/shop` van a `/`. `/feed`, `/blog/feed`, `/comments/feed` y `/en/feed` van a `/blog/`. Cada patrón está con y sin barra, y con subrutas, y el destino ya trae la barra final. No se crea `/rss.xml`. Las páginas que ya responden 200 no entran en estas reglas.
+
 ## [Unreleased] - 2026-11-12
 
 ### Fixed
 - **Barra final canónica (`vercel.json`, `astro.config.mjs`)**: una página sin barra responde `308` hacia la versión con barra (`/eje-cafetero/armenia` → `/eje-cafetero/armenia/`). `/llms.txt`, `/llms-full.txt`, `/robots.txt`, `/sitemap-index.xml` y el resto de archivos no se redirigen. `/sitemap.xml` sigue a `/sitemap-index.xml` y `/2024`–`/2026` siguen a `/blog/`. Menú, footer, portada, 404 y el endpoint del chat (`/api/chat/`) enlazan la URL con barra.
-- **Redirecciones 301 de WordPress (`vercel.json`)**: `/2024`, `/2025` y `/2026` van a `/blog/`, con o sin barra final. Si el slug final es uno de los cuatro posts publicados, el destino es `/blog/<slug>/`. `/casos-de-exito` y sus subrutas van a `/casos/`. `/category`, `/tag` y `/author` van a `/blog/`. `/wp-admin` y `/wp-login.php` van a `/`. `/sitemap.xml` va a `/sitemap-index.xml`. No hay `/rss.xml`, así que `/feed/` se queda sin redirección. Las rutas que ya responden 200 no cambian.
+- **Redirecciones 301 de WordPress (`vercel.json`)**: `/2024`, `/2025` y `/2026` van a `/blog/`, con o sin barra final. Si el slug final es uno de los cuatro posts publicados, el destino es `/blog/<slug>/`. `/casos-de-exito` y sus subrutas van a `/casos/`. `/category`, `/tag` y `/author` van a `/blog/`. `/wp-admin` y `/wp-login.php` van a `/`. `/sitemap.xml` va a `/sitemap-index.xml`. Las rutas que ya responden 200 no cambian.
 
 ## [Unreleased] - 2026-11-11
 
