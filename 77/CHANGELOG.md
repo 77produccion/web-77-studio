@@ -10,6 +10,9 @@ El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1
 ### Added
 - **Agentes de IA para WhatsApp en Colombia (`/agentes-ia-whatsapp-colombia/`)**: página de servicio nacional, indexable, con canonical en www. El texto, las 7 preguntas y el JSON-LD Service + FAQPage salen del copy aprobado. El grafo global de Organization no se duplica y no incluye código postal. El WhatsApp precargado es el de `/ia-automatizacion/`. `/ia-automatizacion/` enlaza esta URL. Entra al sitemap por la integración de Astro.
 
+### Changed
+- **WhatsApp comercial (`src/utils/nap.ts`, `src/utils/whatsapp.ts`)**: botones, botón flotante y enlaces `wa.me` / `api.whatsapp.com` usan el canal de ventas de Sofía `+1 202-933-7792` (`12029337792`). Se conserva el texto precargado de cada enlace. El `tel:` y el `telephone` de Organization/LocalBusiness siguen en `+57 314 849 0955`. Los atributos y el evento `click_whatsapp` de GTM no cambian.
+
 ## [Unreleased] - 2026-11-16
 
 ### Added

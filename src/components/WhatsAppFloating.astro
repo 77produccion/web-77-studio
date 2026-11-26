@@ -104,6 +104,7 @@ const whatsappUrl = getWhatsAppUrl(customMessage || whatsappContext, cleanPhone,
 
 <script>
   import { dispatchWhatsAppClick, dispatchWhatsAppTooltipState } from '@/utils/analytics';
+  import { WHATSAPP_CONFIG } from '@/utils/whatsapp';
 
   function initWhatsAppFloating() {
     const widget = document.getElementById('whatsappFloatingWidget');
@@ -114,7 +115,7 @@ const whatsappUrl = getWhatsAppUrl(customMessage || whatsappContext, cleanPhone,
     const closeBtn = document.getElementById('whatsappTooltipClose');
     const actionBtn = document.getElementById('whatsappTooltipAction');
 
-    const phone = widget.dataset.phone || '573148490955';
+    const phone = widget.dataset.phone || WHATSAPP_CONFIG.defaultPhone;
     const targetUrl = widget.dataset.url || triggerBtn?.href || `https://api.whatsapp.com/send?phone=${phone}`;
     const autoDelay = parseInt(widget.dataset.autoDelay || '3500', 10);
 
