@@ -116,6 +116,7 @@ Idiomas del sitio: español (raíz) e inglés (prefijo /en/). El blog está solo
 ## Servicios
 
 ${serviceLines()}
+- [Agentes de IA para WhatsApp en Colombia](${ORIGIN}/agentes-ia-whatsapp-colombia/): agentes de IA y automatización de WhatsApp para empresas en Colombia. Atención 24/7, calificación de leads, agendamiento y CRM. Sede en Armenia. Solo en español.
 
 ## Cobertura en el Eje Cafetero
 
@@ -174,6 +175,12 @@ ${service.summary}
 - Español: ${ORIGIN}${service.esPath}
 - English: ${ORIGIN}${service.enPath}`
 ).join('\n\n')}
+
+### Agentes de IA para WhatsApp en Colombia
+
+Agentes de IA y automatización de WhatsApp para empresas en Colombia: atención 24/7, calificación de leads, agendamiento, recordatorios y conexión con CRM. Sede en Armenia, Quindío. Solo en español.
+
+- Español: ${ORIGIN}/agentes-ia-whatsapp-colombia/
 
 ## Cobertura local
 

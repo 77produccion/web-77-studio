@@ -154,6 +154,8 @@ interface StructuredDataInput {
   breadcrumbTrail?: { name: string; path: string }[];
   /** @id schema de la entidad principal de esta URL. */
   mainEntityId?: string;
+  /** La página imprime su propio WebPage (mismo @id) y no debe duplicarlo. */
+  suppressWebPage?: boolean;
 }
 
 /**
@@ -171,6 +173,7 @@ export function buildStructuredData({
   breadcrumbLabel,
   breadcrumbTrail,
   mainEntityId,
+  suppressWebPage = false,
 }: StructuredDataInput) {
   const origin = site.origin;
   const orgId = `${origin}/#organization`;
@@ -334,7 +337,7 @@ export function buildStructuredData({
       }
     : null;
 
-  const webPage = noindex
+  const webPage = noindex || suppressWebPage
     ? null
     : {
         '@type': 'WebPage',
