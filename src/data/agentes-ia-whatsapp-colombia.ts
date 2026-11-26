@@ -4,6 +4,8 @@
  * Aquí solo van WebPage, Service y FAQPage, para no duplicar esa ficha.
  */
 
+import { PHONE_WHATSAPP } from '@/utils/nap';
+
 export const PAGE_PATH = '/agentes-ia-whatsapp-colombia/';
 export const PAGE_URL = 'https://www.77studio.co/agentes-ia-whatsapp-colombia/';
 export const PAGE_TITLE = 'Agentes de IA para WhatsApp en Colombia | 77 Studio';
@@ -107,10 +109,10 @@ const pageJsonLd = {
       },
       availableChannel: {
         '@type': 'ServiceChannel',
-        serviceUrl: 'https://api.whatsapp.com/send?phone=573148490955',
+        serviceUrl: `https://api.whatsapp.com/send?phone=${PHONE_WHATSAPP}`,
         servicePhone: {
           '@type': 'ContactPoint',
-          telephone: '+573148490955',
+          telephone: `+${PHONE_WHATSAPP}`,
           contactType: 'sales',
           areaServed: ['CO', 'US'],
           availableLanguage: ['es', 'en'],

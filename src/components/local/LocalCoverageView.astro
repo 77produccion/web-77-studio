@@ -12,7 +12,7 @@ import {
   type Faq,
   type ServiceCityPage,
 } from '@/data/local-coverage';
-import { OPENING_HOURS_NOTE, PHONE_DISPLAY, PHONE_E164 } from '@/utils/nap';
+import { OPENING_HOURS_NOTE, PHONE_DISPLAY, PHONE_E164, PHONE_WHATSAPP_DISPLAY } from '@/utils/nap';
 
 interface Crumb {
   name: string;
@@ -246,7 +246,7 @@ const showHours = kind === 'hub' || city?.hasOffice;
     <section class="rounded-3xl bg-background-13 px-6 py-8 text-white">
       <h2 class="font-sora text-2xl font-semibold">Cuéntanos qué se está atorantando</h2>
       <p class="mt-3 max-w-xl font-inter-tight text-sm leading-relaxed text-white/70">
-        Escribe por WhatsApp al {PHONE_DISPLAY} o deja los datos en el formulario. Revisamos el caso y te decimos si tiene sentido trabajarlo.
+        Escribe por WhatsApp al {PHONE_WHATSAPP_DISPLAY} o deja los datos en el formulario. Revisamos el caso y te decimos si tiene sentido trabajarlo.
       </p>
       <div class="mt-6">
         <DualCTA

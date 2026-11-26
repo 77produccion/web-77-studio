@@ -2,6 +2,8 @@
 // src/components/nosotros/GlobalPresenceSection.astro
 import { MapPin, ExternalLink } from 'lucide-astro';
 import type { SupportedLocale } from '@/lib/i18n/ui';
+import { PHONE_WHATSAPP_DISPLAY } from '@/utils/nap';
+import { getWhatsAppPhone } from '@/utils/whatsapp';
 
 interface Props {
   lang?: SupportedLocale;
@@ -9,6 +11,7 @@ interface Props {
 
 const currentLang = (Astro.props.lang || (Astro.currentLocale as SupportedLocale) || 'es') as SupportedLocale;
 const isEn = currentLang === 'en';
+const whatsappPhone = getWhatsAppPhone();
 ---
 
 <section class="py-20 sm:py-28 bg-slate-50 border-t border-black/5 relative overflow-hidden">
@@ -62,12 +65,12 @@ const isEn = currentLang === 'en';
               </div>
 
               <a 
-                href="https://api.whatsapp.com/send?phone=573148490955&text=Hola%2077%20Studio%20%F0%9F%91%8B%20Quisiera%20conversar%20sobre%20un%20proyecto." 
+                href={`https://api.whatsapp.com/send?phone=${whatsappPhone}&text=Hola%2077%20Studio%20%F0%9F%91%8B%20Quisiera%20conversar%20sobre%20un%20proyecto.`} 
                 target="_blank" 
                 rel="noopener noreferrer"
                 class="font-sora text-base sm:text-lg font-bold text-background-13 group-hover/item:text-opai-purple transition-colors tracking-tight mt-1"
               >
-                +57 314 849 0955
+                {PHONE_WHATSAPP_DISPLAY}
               </a>
             </div>
 
@@ -171,7 +174,7 @@ const isEn = currentLang === 'en';
       <!-- Action Button -->
       <div class="shrink-0 flex items-center gap-3 w-full sm:w-auto">
         <a
-          href="https://api.whatsapp.com/send?phone=573148490955&text=Hola%2077%20Studio%20%F0%9F%91%8B%20Quisiera%20conversar%20sobre%20un%20proyecto%20para%20mi%20empresa."
+          href={`https://api.whatsapp.com/send?phone=${whatsappPhone}&text=Hola%2077%20Studio%20%F0%9F%91%8B%20Quisiera%20conversar%20sobre%20un%20proyecto%20para%20mi%20empresa.`}
           target="_blank"
           rel="noopener noreferrer"
           class="w-full sm:w-auto font-ibm-plex-mono text-xs sm:text-sm font-semibold text-white bg-background-13 hover:bg-opai-purple px-6 py-3.5 rounded-xl transition-all duration-300 shadow-sm hover:shadow-md cursor-pointer flex items-center justify-center gap-2.5 group"

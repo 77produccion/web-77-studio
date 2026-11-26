@@ -102,9 +102,9 @@ Si tu componente está en `src/components/chat/ChatWidget.astro` o `WebChat.tsx`
 
 ## 📱 5. Enlaces de WhatsApp Directo en la Interfaz
 
-El único teléfono publicado es el de Colombia, también para clientes en Estados Unidos y el resto de mercados:
+El canal de WhatsApp publicado es el de ventas de Sofía, también para clientes en Colombia, Estados Unidos y el resto de mercados:
 
-* **WhatsApp:** `https://wa.me/573148490955` (`+57 314 849 0955`)
+* **WhatsApp:** `https://wa.me/12029337792` (`+1 202-933-7792`)
 
 ---
 
