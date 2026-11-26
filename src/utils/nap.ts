@@ -4,7 +4,9 @@ export const BUSINESS_NAME = '77 Studio';
 
 export const PHONE_E164 = '+573148490955';
 export const PHONE_DISPLAY = '+57 314 849 0955';
-export const PHONE_WHATSAPP = '573148490955';
+/** Canal de ventas de Sofía. Los enlaces wa.me y api.whatsapp.com salen de aquí. */
+export const PHONE_WHATSAPP = '12029337792';
+export const PHONE_WHATSAPP_DISPLAY = '+1 202-933-7792';
 
 export const FOUNDING_DATE = '2018-08-15';
 

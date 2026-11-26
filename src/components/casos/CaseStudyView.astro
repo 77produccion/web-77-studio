@@ -1,7 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import DualCTA from '@/components/DualCTA.astro';
-import { PHONE_DISPLAY } from '@/utils/nap';
+import { PHONE_WHATSAPP_DISPLAY } from '@/utils/nap';
 import { directoryPath, toPublicUrl } from '@/utils/seo';
 
 interface Props {
@@ -368,7 +368,7 @@ const flowSteps = data.flow?.steps ?? [];
         ¿Tu negocio tiene un proceso así? Automátizalo
       </h2>
       <p class="mt-4 max-w-2xl font-inter-tight text-base leading-relaxed text-background-13/60">
-        Cuéntanos cómo entra y sale el trabajo en tu operación. Te respondemos por WhatsApp al {PHONE_DISPLAY}.
+        Cuéntanos cómo entra y sale el trabajo en tu operación. Te respondemos por WhatsApp al {PHONE_WHATSAPP_DISPLAY}.
       </p>
       <DualCTA
         className="mt-8"
