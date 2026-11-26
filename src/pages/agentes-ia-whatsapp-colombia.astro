@@ -1,0 +1,311 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import DualCTA from '@/components/DualCTA.astro';
+import { WHATSAPP_CONFIG } from '@/utils/whatsapp';
+import { PHONE_DISPLAY, PHONE_E164 } from '@/utils/nap';
+import {
+  FAQ_ITEMS,
+  PAGE_DESCRIPTION,
+  PAGE_H1,
+  PAGE_PATH,
+  PAGE_TITLE,
+  agentesWhatsappJsonLd,
+} from '@/data/agentes-ia-whatsapp-colombia';
+
+const whatsappMessage = WHATSAPP_CONFIG.messages.es.ia;
+const ld = agentesWhatsappJsonLd();
+const crumbs = [
+  { name: '77 Studio', path: '/' },
+  { name: 'IA y automatización', path: '/ia-automatizacion/' },
+  { name: 'Agentes de IA para WhatsApp', path: PAGE_PATH },
+];
+
+const useCases = [
+  {
+    title: 'Atención 24/7',
+    text: 'El primer mensaje no tiene que esperar al día siguiente. El agente cubre horarios, servicios, cómo llegar y preguntas frecuentes a cualquier hora, y deja la conversación lista para que tu equipo cierre en horario laboral.',
+  },
+  {
+    title: 'Calificación de leads',
+    text: 'Cuando el lead llega desde un anuncio, la web o Instagram, el agente hace las preguntas mínimas —qué necesita, para cuándo, en qué ciudad— y prioriza a quien sí está listo para hablar con ventas.',
+  },
+  {
+    title: 'Agendamiento',
+    text: 'El agente ofrece horarios, reserva el espacio y deja el compromiso en el calendario o en el CRM. No opina sobre el caso: pide el motivo en una frase y agenda. Si hay que mover una cita, escala o sigue la regla que hayas definido.',
+  },
+  {
+    title: 'Recordatorios',
+    text: 'Confirmaciones, recordatorios de cita, avisos de un pedido o de un servicio en proceso, y un seguimiento cuando el prospecto no responde. Fuera de la ventana de 24 horas de WhatsApp Business se usan plantillas aprobadas, no un texto improvisado.',
+  },
+  {
+    title: 'Cobranza',
+    text: 'También puede incluir alertas de cobro, recordatorios de pago y el escalamiento a una persona cuando el caso se complica, si ese es un flujo de tu operación.',
+  },
+  {
+    title: 'CRM conectado',
+    text: 'Cada conversación debe crear o actualizar un contacto: nombre, origen, estado y responsable. El mensaje no puede vivir solo en el celular. Conectamos WhatsApp con HubSpot y con otros CRM, o con un portal a la medida cuando la operación lo pide, como en el caso de Casa Tuning.',
+  },
+];
+
+const steps = [
+  {
+    name: 'Entendemos',
+    text: 'Revisamos tu modelo de negocio, por dónde llegan los mensajes, qué se responde hoy a mano y dónde se atasca el seguimiento. Sin ese mapa no proponemos un agente ni una automatización.',
+  },
+  {
+    name: 'Proponemos',
+    text: 'Armamos un plan concreto: qué se automatiza con reglas, dónde entra la IA, qué se le permite hacer al agente, con qué sistemas se conecta y qué se mide (primera respuesta, citas, cotizaciones, conversaciones escaladas). El alcance cabe en una conversación, no en un documento eterno.',
+  },
+  {
+    name: 'Creamos',
+    text: 'Montamos el flujo en WhatsApp Business API, entrenamos al agente con la información de tu empresa, conectamos el CRM y las herramientas que ya uses, y lo probamos con casos reales antes de salir en vivo. Marketing, web e IA salen del mismo equipo, no de tres proveedores que no se hablan. Cada implementación se arma a la medida: el tiempo se define en el diagnóstico, según el alcance.',
+  },
+  {
+    name: 'Optimizamos',
+    text: 'Monitoreamos el rendimiento con métricas reales de negocio y ajustamos instrucciones, plantillas y enrutamiento. Tus cuentas, accesos y bases de datos siguen siendo 100% de tu empresa.',
+  },
+];
+
+const linkClass = 'underline decoration-black/20 underline-offset-4 hover:text-opai-purple';
+---
+
+<BaseLayout
+  title={PAGE_TITLE}
+  description={PAGE_DESCRIPTION}
+  whatsappContext="ia"
+  lang="es"
+  breadcrumbTrail={crumbs}
+  suppressWebPage
+>
+  <script is:inline type="application/ld+json" set:html={ld} />
+  <article class="bg-background-8">
+    <header class="bg-white pt-28 pb-14 sm:pt-36 sm:pb-16">
+      <div class="mx-auto max-w-3xl px-5">
+        <nav aria-label="Miga de pan" class="font-ibm-plex-mono text-[11px] uppercase tracking-[0.16em] text-background-13/50">
+          <ol class="flex flex-wrap gap-x-2 gap-y-1">
+            {crumbs.map((crumb, index) => (
+              <li class="flex items-center gap-2">
+                {index > 0 && <span aria-hidden="true">/</span>}
+                {index === crumbs.length - 1 ? (
+                  <span class="text-background-13/80">{crumb.name}</span>
+                ) : (
+                  <a href={crumb.path} class="hover:text-opai-purple">{crumb.name}</a>
+                )}
+              </li>
+            ))}
+          </ol>
+        </nav>
+        <p class="mt-6 font-ibm-plex-mono text-xs font-medium uppercase tracking-[0.18em] text-opai-purple">
+          77 Studio · Armenia, Quindío · Cobertura en Colombia y Estados Unidos
+        </p>
+        <h1 class="mt-3 font-sora text-4xl font-bold leading-[1.12] tracking-tight text-background-13 sm:text-5xl">{PAGE_H1}</h1>
+        <p class="mt-5 font-inter-tight text-lg leading-relaxed text-background-13/70">
+          Implementamos automatización con IA y WhatsApp para que tu empresa responda, califique, agende y deje cada conversación registrada en el CRM. Un solo equipo, con sede en Armenia y trabajo en todo el país.
+        </p>
+        <p class="mt-5 font-inter-tight text-lg leading-relaxed text-background-13/70">
+          Somos expertos escuchando las necesidades de cada negocio y damos soluciones personalizadas, porque todos los negocios son diferentes.
+        </p>
+        <div class="mt-8">
+          <DualCTA
+            whatsappMessage={whatsappMessage}
+            whatsappText="Hablar por WhatsApp"
+            emailText="Contacto"
+            emailHref="/contacto/"
+            centered={false}
+          />
+        </div>
+      </div>
+    </header>
+
+    <div class="mx-auto max-w-3xl space-y-8 px-5 py-12">
+      <section aria-labelledby="que-es">
+        <h2 id="que-es" class="font-sora text-2xl font-semibold tracking-tight text-background-13">Qué es un agente de IA para WhatsApp</h2>
+        <p class="mt-4 font-inter-tight leading-relaxed text-background-13/75">
+          Un agente de IA para WhatsApp atiende el canal por el que ya te escriben tus clientes. Lee el mensaje como lo escribió la persona —no solo un menú de botones—, consulta la información de tu empresa, responde lo que sí puede resolver y le pasa el caso a un asesor cuando hace falta, con el historial a la vista.
+        </p>
+        <p class="mt-4 font-inter-tight leading-relaxed text-background-13/75">
+          En 77 Studio no partimos de «hay que poner un bot». Separamos tres capas, porque no todo problema pide un agente:
+        </p>
+        <ul class="mt-4 space-y-3">
+          <li class="rounded-[20px] border border-stroke-2 bg-white p-5">
+            <h3 class="font-sora text-lg font-semibold text-background-13/90">Automatización por reglas.</h3>
+            <p class="mt-2 font-inter-tight text-sm leading-relaxed text-background-13/70">Si ocurre A, se ejecuta B: un aviso, una tarea en el CRM, un recordatorio.</p>
+          </li>
+          <li class="rounded-[20px] border border-stroke-2 bg-white p-5">
+            <h3 class="font-sora text-lg font-semibold text-background-13/90">Flujo con IA.</h3>
+            <p class="mt-2 font-inter-tight text-sm leading-relaxed text-background-13/70">El modelo interpreta un texto o un audio, pero los pasos están definidos: clasificar, extraer datos, enrutar.</p>
+          </li>
+          <li class="rounded-[20px] border border-stroke-2 bg-white p-5">
+            <h3 class="font-sora text-lg font-semibold text-background-13/90">Agente.</h3>
+            <p class="mt-2 font-inter-tight text-sm leading-relaxed text-background-13/70">El modelo elige qué hacer después, dentro de límites que tú defines: qué consultar, cuándo pedir un dato y cuándo escalar a una persona.</p>
+          </li>
+        </ul>
+        <p class="mt-4 font-inter-tight leading-relaxed text-background-13/75">
+          Esa distinción la usamos en nuestra página de <a class={linkClass} href="/ia-automatizacion/">IA y automatización</a> y en el artículo <a class={linkClass} href="/blog/automatizacion-vs-agente-ia-que-necesita-tu-empresa/">Automatización vs agente de IA</a>. El canal de partida es el WhatsApp Business que ya usa tu empresa. El agente no obliga a tus clientes a escribirte en otra aplicación.
+        </p>
+        <p class="mt-4 font-inter-tight leading-relaxed text-background-13/75">
+          El agente no diagnostica, no inventa precios que no estén escritos y no discute con un cliente molesto. Esos casos saltan a un humano.
+        </p>
+      </section>
+
+      <section aria-labelledby="casos-de-uso">
+        <h2 id="casos-de-uso" class="font-sora text-2xl font-semibold tracking-tight text-background-13">Casos de uso</h2>
+        <div class="mt-4 grid gap-3">
+          {useCases.map((item) => (
+            <div class="rounded-[20px] border border-stroke-2 bg-white p-5">
+              <h3 class="font-sora text-lg font-semibold text-background-13/90">{item.title}</h3>
+              <p class="mt-2 font-inter-tight text-sm leading-relaxed text-background-13/70">
+                {item.title === 'CRM conectado' ? (
+                  <>
+                    Cada conversación debe crear o actualizar un contacto: nombre, origen, estado y responsable. El mensaje no puede vivir solo en el celular. Conectamos WhatsApp con HubSpot y con otros CRM, o con un portal a la medida cuando la operación lo pide, como en el caso de <a class={linkClass} href="/casos/casa-tuning/">Casa Tuning</a>.
+                  </>
+                ) : (
+                  item.text
+                )}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section aria-labelledby="como-funciona">
+        <h2 id="como-funciona" class="font-sora text-2xl font-semibold tracking-tight text-background-13">Cómo funciona, en 4 pasos</h2>
+        <p class="mt-4 font-inter-tight leading-relaxed text-background-13/75">
+          Es el mismo proceso estructurado que ya usamos en 77 Studio: sin burocracia innecesaria, con entregas iterativas y foco en mover la aguja comercial.
+        </p>
+        <ol class="mt-4 grid gap-3 sm:grid-cols-2">
+          {steps.map((step, index) => (
+            <li class="rounded-[20px] border border-stroke-2 bg-white p-5">
+              <p class="font-ibm-plex-mono text-xs text-opai-purple">0{index + 1}</p>
+              <h3 class="mt-1 font-sora text-lg font-semibold text-background-13">{step.name}</h3>
+              <p class="mt-2 font-inter-tight text-sm leading-relaxed text-background-13/70">{step.text}</p>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <section aria-labelledby="integraciones">
+        <h2 id="integraciones" class="font-sora text-2xl font-semibold tracking-tight text-background-13">Integraciones</h2>
+        <p class="mt-4 font-inter-tight leading-relaxed text-background-13/75">
+          Partimos de las herramientas que ya usas. En 77 Studio usamos Kapso para automatizar procesos de empresas; cada implementación se arma a la medida de la operación, no como un paquete fijo.
+        </p>
+        <p class="mt-4 font-inter-tight leading-relaxed text-background-13/75">
+          También trabajamos con este ecosistema, publicado en 77studio.co:
+        </p>
+        <ul class="mt-4 space-y-3 font-inter-tight text-sm leading-relaxed text-background-13/75">
+          <li class="rounded-[20px] border border-stroke-2 bg-white px-5 py-4"><strong class="font-sora text-background-13">WhatsApp Business API</strong> y secuencias de WhatsApp Business</li>
+          <li class="rounded-[20px] border border-stroke-2 bg-white px-5 py-4"><strong class="font-sora text-background-13">Make</strong> (Make Automation Expert) y <strong class="font-sora text-background-13">Zapier</strong> (Zapier Certified Systems)</li>
+          <li class="rounded-[20px] border border-stroke-2 bg-white px-5 py-4"><strong class="font-sora text-background-13">n8n</strong>, para flujos y conexión con bases de datos</li>
+          <li class="rounded-[20px] border border-stroke-2 bg-white px-5 py-4"><strong class="font-sora text-background-13">HubSpot</strong>, y también Zoho o ActiveCampaign cuando el CRM ya está ahí</li>
+          <li class="rounded-[20px] border border-stroke-2 bg-white px-5 py-4"><strong class="font-sora text-background-13">OpenAI</strong>, <strong class="font-sora text-background-13">Claude</strong> y <strong class="font-sora text-background-13">Gemini</strong>, según la tarea (clasificar, responder, consultar una base de conocimiento)</li>
+          <li class="rounded-[20px] border border-stroke-2 bg-white px-5 py-4">Formularios y eventos del sitio web, con doble canal de conversión (WhatsApp y formulario)</li>
+        </ul>
+        <p class="mt-4 font-inter-tight leading-relaxed text-background-13/75">
+          También construimos portales e integraciones a la medida cuando una herramienta estándar no alcanza.
+        </p>
+      </section>
+
+      <section aria-labelledby="casa-tuning">
+        <h2 id="casa-tuning" class="font-sora text-2xl font-semibold tracking-tight text-background-13">Caso: Casa Tuning, Armenia</h2>
+        <p class="mt-4 font-inter-tight leading-relaxed text-background-13/75">
+          <a class={linkClass} href="/casos/casa-tuning/">Casa Tuning</a> es un taller automotriz premium en el barrio Granada, en Armenia, Quindío. Era cliente de 77 Studio en contenido desde 2025. En 2026 diseñamos y desarrollamos un portal interno de gestión operativa, pensado para que el operario lo use desde una tablet.
+        </p>
+        <p class="mt-4 font-inter-tight leading-relaxed text-background-13/75">
+          Antes, la recepción y la entrega eran verbales: no quedaba registro de los daños que el carro ya traía, no había historial de clientes ni de vehículos, y el cliente no recibía avisos automáticos.
+        </p>
+        <p class="mt-4 font-inter-tight leading-relaxed text-background-13/75">Hoy el flujo es este:</p>
+        <ol class="mt-4 list-decimal space-y-2 pl-5 font-inter-tight leading-relaxed text-background-13/75">
+          <li>El operario recibe el carro en la tablet (datos del cliente y del vehículo).</li>
+          <li>Deja la inspección con checklist, fotos, daños sobre el esquema, firma digital y acta con código de orden y QR.</li>
+          <li>La orden avanza por Recibido, En proceso, Listo y Entregado.</li>
+          <li>El cliente recibe un WhatsApp al dar entrada, en cada cambio de estado y cuando el carro está listo.</li>
+          <li>El historial queda por carro, cliente y marca, listo para garantía y posventa.</li>
+        </ol>
+        <p class="mt-4 font-inter-tight leading-relaxed text-background-13/75">
+          Desde el mismo portal se pueden disparar campañas de WhatsApp, segmentadas por marca y modelo, para marketing y posventa. El 100% de los vehículos que ingresan queda con registro fotográfico. El taller lo resume así: «Nos mejoró notablemente el servicio al cliente».
+        </p>
+        <p class="mt-4 font-inter-tight leading-relaxed text-background-13/75">
+          No publicamos en ese caso un porcentaje de ventas ni un tiempo de respuesta. El valor medible que sí está documentado es operativo: registro fotográfico de cada ingreso, avisos automáticos por WhatsApp y un historial usable.
+        </p>
+      </section>
+
+      <section aria-labelledby="para-quien">
+        <h2 id="para-quien" class="font-sora text-2xl font-semibold tracking-tight text-background-13">Para quién es este servicio</h2>
+        <p class="mt-4 font-inter-tight leading-relaxed text-background-13/75">
+          Sirve si tu empresa en Colombia (o con equipo en Estados Unidos) ya recibe demanda por WhatsApp y el seguimiento se queda corto:
+        </p>
+        <ul class="mt-4 list-disc space-y-2 pl-5 font-inter-tight leading-relaxed text-background-13/75">
+          <li>Te escriben por un anuncio, la web o Instagram y el chat se enfría porque nadie responde a tiempo.</li>
+          <li>Varias personas atienden el mismo número y no hay un responsable claro ni un registro en CRM.</li>
+          <li>Quieres atención 24/7 para lo repetitivo, sin reemplazar a quien cierra la venta o la reserva.</li>
+          <li>Tu operación (taller, hotel, consultorio, comercio, servicios profesionales) necesita avisos automáticos: entrada, avances, cita, entrega o cobro.</li>
+          <li>Ya pautas en Meta o Google y el cuello de botella está entre el clic y la conversación comercial.</li>
+        </ul>
+        <p class="mt-4 font-inter-tight leading-relaxed text-background-13/75">
+          No es el primer paso si todavía no puedes describir el proceso, las excepciones y qué significa «resuelto». En esos casos empezamos por ordenar el flujo y el CRM, y el agente llega después.
+        </p>
+      </section>
+
+      <section aria-labelledby="cobertura">
+        <h2 id="cobertura" class="font-sora text-2xl font-semibold tracking-tight text-background-13">Cobertura: Armenia, Eje Cafetero, Colombia y Estados Unidos</h2>
+        <p class="mt-4 font-inter-tight leading-relaxed text-background-13/75">
+          La oficina está en <strong class="font-semibold text-background-13">Cra. 14 #35 Norte-18, Oficina 405, Armenia, Quindío, Colombia</strong>. El teléfono y WhatsApp es <a class={`${linkClass} font-semibold`} href={`tel:${PHONE_E164}`}>{PHONE_DISPLAY}</a>.
+        </p>
+        <p class="mt-4 font-inter-tight leading-relaxed text-background-13/75">
+          Acompañamos empresas en todo el país, con foco en el Eje Cafetero —Armenia, Pereira, Dosquebradas, Manizales y Villamaría— y trabajamos con equipos en Estados Unidos, con reuniones presenciales y trabajo remoto.
+        </p>
+        <p class="mt-4 font-inter-tight leading-relaxed text-background-13/75">
+          Horario de atención del estudio (hora Colombia): lunes a viernes de 8:00 a. m. a 7:00 p. m.; sábados de 8:00 a. m. a 12:30 p. m.; domingos cerrado. El agente de un cliente puede atender su WhatsApp las 24 horas; el equipo de 77 Studio responde en este horario, y los formularios del sitio quedan con orientación inicial en menos de 24 horas hábiles.
+        </p>
+        <p class="mt-4 font-inter-tight leading-relaxed text-background-13/75">Páginas locales del mismo servicio:</p>
+        <ul class="mt-3 space-y-2 font-inter-tight text-sm">
+          <li><a class={linkClass} href="/eje-cafetero/armenia/agentes-ia/">Agentes de IA en Armenia</a></li>
+          <li><a class={linkClass} href="/eje-cafetero/pereira/agentes-ia/">Agentes de IA en Pereira</a></li>
+          <li><a class={linkClass} href="/eje-cafetero/manizales/agentes-ia/">Agentes de IA en Manizales</a></li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="faq">
+        <h2 id="faq" class="font-sora text-2xl font-semibold tracking-tight text-background-13">Preguntas frecuentes</h2>
+        <p class="mt-3 font-inter-tight text-sm leading-relaxed text-background-13/60">
+          Las preguntas están redactadas como las formula un comprador a ChatGPT, Gemini o Grok.
+        </p>
+        <div class="mt-4 divide-y divide-black/10 rounded-3xl border border-stroke-2 bg-white px-5">
+          {FAQ_ITEMS.map((faq) => (
+            <details class="group py-4">
+              <summary class="cursor-pointer list-none font-sora text-base font-semibold text-background-13/90 marker:content-none">
+                {faq.question}
+              </summary>
+              <p class="mt-2 font-inter-tight text-sm leading-relaxed text-background-13/70">{faq.answer}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+
+      <section class="rounded-3xl bg-background-13 px-6 py-8 text-white" aria-labelledby="cta-final">
+        <h2 id="cta-final" class="font-sora text-2xl font-semibold">Hablemos de tu WhatsApp de empresa</h2>
+        <p class="mt-3 max-w-xl font-inter-tight text-sm leading-relaxed text-white/70">
+          Cuéntanos qué tarea se está atorantando: la primera respuesta, el agendamiento, los avisos al cliente o el registro en el CRM. Revisamos el caso y te decimos si pide reglas, un flujo con IA o un agente con límites claros.
+        </p>
+        <div class="mt-6">
+          <DualCTA
+            whatsappMessage={whatsappMessage}
+            whatsappText="Hablar por WhatsApp"
+            emailText="Contacto"
+            emailHref="/contacto/"
+            centered={false}
+          />
+        </div>
+        <p class="mt-4 font-inter-tight text-sm leading-relaxed text-white/70">
+          al <a class="font-semibold text-white underline decoration-white/30 underline-offset-4" href={`tel:${PHONE_E164}`}>{PHONE_DISPLAY}</a>
+        </p>
+        <p class="mt-3 font-inter-tight text-sm leading-relaxed text-white/70">
+          También puedes escribirnos desde <a class="underline decoration-white/30 underline-offset-4 hover:text-white" href="/contacto/">Contacto</a>. Te respondemos en menos de 24 horas hábiles con una orientación inicial.
+        </p>
+        <p class="mt-4 font-inter-tight text-sm leading-relaxed text-white/60">
+          Cra. 14 #35 Norte-18, Oficina 405, Armenia, Quindío, Colombia · {PHONE_DISPLAY}
+        </p>
+      </section>
+    </div>
+  </article>
+</BaseLayout>

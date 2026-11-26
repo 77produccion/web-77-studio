@@ -5,6 +5,11 @@ Todos los cambios notables en este proyecto serán documentados en este archivo.
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/), y este proyecto adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 
 ---
+## [Unreleased] - 2026-11-26
+
+### Added
+- **Agentes de IA para WhatsApp en Colombia (`/agentes-ia-whatsapp-colombia/`)**: página de servicio nacional, indexable, con canonical en www. El texto, las 7 preguntas y el JSON-LD Service + FAQPage salen del copy aprobado. El grafo global de Organization no se duplica y no incluye código postal. El WhatsApp precargado es el de `/ia-automatizacion/`. `/ia-automatizacion/` enlaza esta URL. Entra al sitemap por la integración de Astro.
+
 ## [Unreleased] - 2026-11-16
 
 ### Added

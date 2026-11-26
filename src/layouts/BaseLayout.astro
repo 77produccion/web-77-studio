@@ -33,6 +33,8 @@ interface Props {
   breadcrumbTrail?: { name: string; path: string }[];
   /** @id de la entidad principal de esta URL (un Service local, por ejemplo). */
   mainEntityId?: string;
+  /** Omite el WebPage del grafo global cuando la página publica el suyo. */
+  suppressWebPage?: boolean;
   hideNav?: boolean;
   hideFooter?: boolean;
   hideMobileBar?: boolean;
@@ -55,6 +57,7 @@ const {
   breadcrumbLabel,
   breadcrumbTrail,
   mainEntityId,
+  suppressWebPage = false,
   noindex = false,
 } = Astro.props;
 
@@ -86,6 +89,7 @@ const structuredData = JSON.stringify(buildStructuredData({
   breadcrumbLabel,
   breadcrumbTrail,
   mainEntityId,
+  suppressWebPage,
 })).replace(/</g, '\\u003c');
 const gtmId = import.meta.env.PUBLIC_GTM_ID || 'GTM-M6NH5PGW';
 ---
