@@ -140,6 +140,8 @@ PUBLIC_WHATSAPP_NUMBER=12029337792
 PUBLIC_API_URL=https://api.77.studio/v1/leads
 
 # Medición y publicidad
+# GA4 solo se carga en el build de producción y en www.77studio.co o 77studio.co.
+# PUBLIC_GA4_MEASUREMENT_ID es opcional: si falta, se usa G-8DCJ7P4HBB.
 PUBLIC_GTM_ID=GTM-M6NH5PGW
 PUBLIC_GA4_MEASUREMENT_ID=G-8DCJ7P4HBB
 PUBLIC_GOOGLE_ADS_ID=AW-11397435689
@@ -169,5 +171,5 @@ El JSON-LD del layout mantiene `ProfessionalService` y publica `Organization` + 
 - [ ] Proyecto Astro 5 inicializado con soporte MDX, sitemap y Vercel.
 - [ ] Tailwind CSS v4 configurado con los design tokens de `77-design-system`.
 - [ ] Tipografías Sora, Inter Tight e IBM Plex Mono cargadas en `global.css` o `BaseLayout.astro`.
-- [ ] Contenedor `GTM-M6NH5PGW` visible en Tag Assistant y eventos de `dataLayer` validados sin PII.
+- [ ] Contenedor `GTM-M6NH5PGW` visible en Tag Assistant solo en `www.77studio.co` (o `77studio.co`) y eventos de `dataLayer` validados sin PII. En local y en preview no debe haber petición a `gtm.js`.
 - [ ] Repositorio de GitHub vinculado a `https://github.com/77produccion/web-77-studio.git` con política de Trunk-Based Development.
