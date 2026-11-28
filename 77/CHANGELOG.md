@@ -5,6 +5,12 @@ Todos los cambios notables en este proyecto serán documentados en este archivo.
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/), y este proyecto adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 
 ---
+## [Unreleased] - 2026-11-28
+
+### Fixed
+- **GA4 solo en el dominio público (`BaseLayout.astro`, `src/utils/google-tag.ts`)**: la etiqueta de Google deja de cargarse en `astro dev`, en preview de Vercel y en cualquier host distinto de `www.77studio.co` o `77studio.co`. El measurement ID sale de `PUBLIC_GA4_MEASUREMENT_ID` y, si no está, sigue siendo `G-8DCJ7P4HBB`. Fuera de esos hosts se apaga la propiedad con `ga-disable` antes de cualquier hit. No se añade un segundo `gtag.js`: el contenedor GTM ya envía la página y duplicaría `page_view`.
+- **`form_submit` y `generate_lead` (`src/scripts/tracking.ts`, `ContactForm.astro`)**: `form_submit` ya no sale en cada intento, validación fallida o mensaje del chat. Sale una vez, cuando el formulario comercial confirma el envío, junto con `generate_lead` (`method: 'form'`, `form_id`, `location`). El clic de WhatsApp mantiene `click_whatsapp` y suma `generate_lead` con `method: 'whatsapp'`. `chat_message_submit` sigue en cada mensaje con texto; `generate_lead` con `method: 'chat'` solo en el primero de la sesión. Siguen igual `contact_cta_click`, `chat_open` y `view_service`.
+
 ## [Unreleased] - 2026-11-26
 
 ### Added

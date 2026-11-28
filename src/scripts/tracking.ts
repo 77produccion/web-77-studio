@@ -7,6 +7,7 @@ declare global {
 }
 
 const ATTRIBUTION_STORAGE_KEY = '77_tracking_attribution_v1';
+const CHAT_LEAD_STORAGE_KEY = '77_generate_lead_chat_v1';
 const ATTRIBUTION_KEYS = [
   'utm_source',
   'utm_medium',
@@ -107,6 +108,19 @@ function pushEvent(event: string, parameters: DataLayerEntry = {}) {
   });
 }
 
+type LeadMethod = 'form' | 'whatsapp' | 'chat';
+
+function pushGenerateLead(parameters: DataLayerEntry & { method: LeadMethod; location?: string }) {
+  const location = parameters.location;
+  pushEvent('generate_lead', {
+    ...parameters,
+    // El contenedor GTM reenvía link_location e interaction_variant, no method/location.
+    // Se duplican para que el método y el lugar lleguen a GA4 sin un segundo hit.
+    ...(location ? { link_location: location } : {}),
+    interaction_variant: parameters.method,
+  });
+}
+
 function getElementLabel(element: Element): string | undefined {
   return safeValue(
     element.getAttribute('aria-label') ||
@@ -175,27 +189,45 @@ document.addEventListener(
   { capture: true },
 );
 
+let chatLeadRecorded = false;
+
+function hasChatLeadThisSession(): boolean {
+  if (chatLeadRecorded) return true;
+  try {
+    return sessionStorage.getItem(CHAT_LEAD_STORAGE_KEY) === '1';
+  } catch {
+    return false;
+  }
+}
+
+function markChatLeadThisSession() {
+  chatLeadRecorded = true;
+  try {
+    sessionStorage.setItem(CHAT_LEAD_STORAGE_KEY, '1');
+  } catch {
+    // Si sessionStorage está bloqueado, la marca en memoria evita repetir el lead en esta página.
+  }
+}
+
+function chatMessageText(form: HTMLFormElement): string {
+  return form.querySelector<HTMLInputElement>('input, textarea')?.value.trim() ?? '';
+}
+
 document.addEventListener(
   'submit',
   (event) => {
     const form = event.target;
-    if (!(form instanceof HTMLFormElement)) return;
+    if (!(form instanceof HTMLFormElement) || form.id !== 'chatFooterForm') return;
+    if (!chatMessageText(form)) return;
 
-    if (form.id === 'chatFooterForm') {
-      pushEvent('chat_message_submit');
-      return;
-    }
+    pushEvent('chat_message_submit');
 
-    if (form.id !== 'lead-contact-form') return;
-
-    pushEvent('form_submit', {
+    if (hasChatLeadThisSession()) return;
+    markChatLeadThisSession();
+    pushGenerateLead({
+      method: 'chat',
       form_id: form.id,
-      form_origin: safeValue(
-        form.querySelector<HTMLInputElement>('[name="origin_page"]')?.value,
-      ),
-      selected_service: safeValue(
-        form.querySelector<HTMLSelectElement>('[name="service"]')?.value,
-      ),
+      location: 'ai_chat',
     });
   },
   { capture: true },
@@ -214,11 +246,11 @@ document.addEventListener(
     const linkLocation = getElementLocation(clickable);
 
     if (clickable.dataset.trackEvent === 'click_whatsapp') {
-      pushEvent('click_whatsapp', {
-        link_label: linkLabel,
-        link_location: linkLocation,
-        interaction_variant: safeValue(clickable.dataset.trackVariant, 40),
-      });
+      trackWhatsAppClick(
+        linkLabel,
+        linkLocation,
+        safeValue(clickable.dataset.trackVariant, 40),
+      );
       return;
     }
 
@@ -251,10 +283,7 @@ document.addEventListener(
     }
 
     if (url.hostname === 'wa.me' || url.hostname === 'api.whatsapp.com') {
-      pushEvent('click_whatsapp', {
-        link_label: linkLabel,
-        link_location: linkLocation,
-      });
+      trackWhatsAppClick(linkLabel, linkLocation);
       return;
     }
 
@@ -283,19 +312,52 @@ document.addEventListener(
   { capture: true },
 );
 
+function trackWhatsAppClick(
+  linkLabel: string | undefined,
+  linkLocation: string,
+  interactionVariant?: string,
+) {
+  pushEvent('click_whatsapp', {
+    link_label: linkLabel,
+    link_location: linkLocation,
+    ...(interactionVariant ? { interaction_variant: interactionVariant } : {}),
+  });
+  pushGenerateLead({
+    method: 'whatsapp',
+    location: linkLocation,
+  });
+}
+
+const recordedLeadForms = new Set<string>();
+
+function detailString(detail: Record<string, unknown>, key: string): string | undefined {
+  return typeof detail[key] === 'string' ? safeValue(detail[key]) : undefined;
+}
+
 window.addEventListener('77:lead-success', ((event: CustomEvent) => {
   const detail = event.detail && typeof event.detail === 'object'
     ? (event.detail as Record<string, unknown>)
     : {};
 
-  pushEvent('generate_lead', {
-    form_id: typeof detail.form_id === 'string' ? safeValue(detail.form_id) : undefined,
-    form_origin:
-      typeof detail.form_origin === 'string' ? safeValue(detail.form_origin) : undefined,
-    selected_service:
-      typeof detail.selected_service === 'string'
-        ? safeValue(detail.selected_service)
-        : undefined,
+  const formId = detailString(detail, 'form_id') ?? 'lead-contact-form';
+  if (recordedLeadForms.has(formId)) return;
+  recordedLeadForms.add(formId);
+
+  const formOrigin = detailString(detail, 'form_origin');
+  const selectedService = detailString(detail, 'selected_service');
+  const location = detailString(detail, 'location') ?? formOrigin;
+
+  pushEvent('form_submit', {
+    form_id: formId,
+    form_origin: formOrigin,
+    selected_service: selectedService,
+  });
+  pushGenerateLead({
+    method: 'form',
+    form_id: formId,
+    location,
+    form_origin: formOrigin,
+    selected_service: selectedService,
   });
 }) as EventListener);
 
