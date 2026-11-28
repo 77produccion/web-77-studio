@@ -11,6 +11,12 @@ import { alternatePathMap } from '@/utils/public-routes';
 import type { WhatsAppContext } from '@/utils/whatsapp';
 import type { SupportedLocale } from '@/lib/i18n/ui';
 import { getLangFromUrl } from '@/lib/i18n/utils';
+import {
+  GA_PRODUCTION_HOSTS,
+  resolveGaMeasurementId,
+  resolveGtmId,
+  shouldEmitGoogleTag,
+} from '@/utils/google-tag';
 
 interface HeroPreload {
   href: string;
@@ -91,49 +97,76 @@ const structuredData = JSON.stringify(buildStructuredData({
   mainEntityId,
   suppressWebPage,
 })).replace(/</g, '\\u003c');
-const gtmId = import.meta.env.PUBLIC_GTM_ID || 'GTM-M6NH5PGW';
+const gaMeasurementId = resolveGaMeasurementId(import.meta.env.PUBLIC_GA4_MEASUREMENT_ID);
+const gtmId = resolveGtmId(import.meta.env.PUBLIC_GTM_ID);
+const productionHosts = [...GA_PRODUCTION_HOSTS];
+const emitGoogleTag = shouldEmitGoogleTag({
+  prod: import.meta.env.PROD,
+  vercelEnv: process.env.VERCEL_ENV,
+  measurementId: gaMeasurementId,
+});
 ---
 
 <!DOCTYPE html>
 <html lang={currentLang} class="scroll-smooth">
   <head>
     <!--
-      Google Tag Manager se carga después del load (o al primer gesto) para no competir con el LCP.
-      dataLayer sigue recibiendo eventos antes: GTM los procesa al arrancar.
+      Fuera de www.77studio.co y 77studio.co la propiedad queda apagada antes de que
+      cualquier etiqueta pueda enviar un hit. El ID sale de PUBLIC_GA4_MEASUREMENT_ID.
     -->
-    <script is:inline define:vars={{ gtmId }}>
-      window.dataLayer = window.dataLayer || [];
+    <script is:inline define:vars={{ gaMeasurementId }}>
       (function () {
-        var loaded = false;
-        function loadGtm() {
-          if (loaded) return;
-          loaded = true;
-          (function (w, d, s, l, i) {
-            w[l] = w[l] || [];
-            w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
-            var f = d.getElementsByTagName(s)[0],
-              j = d.createElement(s),
-              dl = l != 'dataLayer' ? '&l=' + l : '';
-            j.async = true;
-            j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-            f.parentNode.insertBefore(j, f);
-          })(window, document, 'script', 'dataLayer', gtmId);
-        }
-        function schedule() {
-          if ('requestIdleCallback' in window) requestIdleCallback(loadGtm, { timeout: 2000 });
-          else setTimeout(loadGtm, 1);
-        }
-        function arm() {
-          setTimeout(schedule, 1200);
-        }
-        if (document.readyState === 'complete') arm();
-        else window.addEventListener('load', arm);
-        ['pointerdown', 'keydown', 'touchstart'].forEach(function (eventName) {
-          window.addEventListener(eventName, schedule, { once: true, passive: true });
-        });
+        var host = location.hostname;
+        if (host === 'www.77studio.co' || host === '77studio.co') return;
+        window['ga-disable-' + gaMeasurementId] = true;
+        window['ga-disable-G-8DCJ7P4HBB'] = true;
       })();
     </script>
-    <!-- End Google Tag Manager -->
+    <!--
+      gtag entra solo en el build de producción (no en preview de Vercel ni en astro dev)
+      y solo si el hostname es el dominio público. GTM-M6NH5PGW carga la etiqueta de
+      Google (gtag.js) con el measurement ID; no se inyecta un segundo gtag.js porque
+      duplicaría page_view. Se difiere hasta después del load o el primer gesto.
+      dataLayer sigue en cola para no perder la analítica.
+    -->
+    {emitGoogleTag && (
+      <script is:inline define:vars={{ gtmId, gaMeasurementId, productionHosts }}>
+        window.dataLayer = window.dataLayer || [];
+        (function () {
+          var host = location.hostname;
+          if (productionHosts.indexOf(host) === -1 || !gaMeasurementId) return;
+          window.dataLayer.push({ measurement_id: gaMeasurementId });
+          var loaded = false;
+          function loadGoogleTag() {
+            if (loaded) return;
+            loaded = true;
+            (function (w, d, s, l, i) {
+              w[l] = w[l] || [];
+              w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+              var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s),
+                dl = l != 'dataLayer' ? '&l=' + l : '';
+              j.async = true;
+              j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+              f.parentNode.insertBefore(j, f);
+            })(window, document, 'script', 'dataLayer', gtmId);
+          }
+          function schedule() {
+            if ('requestIdleCallback' in window) requestIdleCallback(loadGoogleTag, { timeout: 2000 });
+            else setTimeout(loadGoogleTag, 1);
+          }
+          function arm() {
+            setTimeout(schedule, 1200);
+          }
+          if (document.readyState === 'complete') arm();
+          else window.addEventListener('load', arm);
+          ['pointerdown', 'keydown', 'touchstart'].forEach(function (eventName) {
+            window.addEventListener(eventName, schedule, { once: true, passive: true });
+          });
+        })();
+      </script>
+    )}
+    <!-- End Google tag -->
 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -238,18 +271,18 @@ const gtmId = import.meta.env.PUBLIC_GTM_ID || 'GTM-M6NH5PGW';
   </head>
 
   <body class="min-h-screen flex flex-col bg-slate-50 text-background-13 antialiased selection:bg-opai-purple selection:text-white">
-    <!-- Google Tag Manager (noscript) -->
-    <noscript>
-      <iframe
-        src={`https://www.googletagmanager.com/ns.html?id=${gtmId}`}
-        height="0"
-        width="0"
-        style="display:none;visibility:hidden"
-        title="Google Tag Manager"
-        aria-hidden="true"
-      ></iframe>
-    </noscript>
-    <!-- End Google Tag Manager (noscript) -->
+    {emitGoogleTag && (
+      <noscript>
+        <iframe
+          src={`https://www.googletagmanager.com/ns.html?id=${gtmId}`}
+          height="0"
+          width="0"
+          style="display:none;visibility:hidden"
+          title="Google Tag Manager"
+          aria-hidden="true"
+        ></iframe>
+      </noscript>
+    )}
     
     {isHome && !hideNav && (
       <div data-beasties-container>

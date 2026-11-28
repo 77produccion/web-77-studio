@@ -61,9 +61,9 @@ La web utiliza un **Event Bus client-side** centralizado en `src/scripts/trackin
 | `contact_cta_click` | Clic interno hacia formulario o página de contacto | Microconversión |
 | `outbound_click` | Salida a un dominio externo | Navegación externa |
 | `form_start` | Primera interacción con el formulario comercial | Inicio de formulario |
-| `form_submit` | Intento de envío del formulario comercial | Diagnóstico; no es conversión final |
-| `generate_lead` | Solo después de una respuesta real de éxito del backend | Conversión principal |
-| `chat_open` / `chat_message_submit` | Apertura y uso de Sofía AI | Interacción comercial |
+| `form_submit` | Una sola vez, cuando el formulario comercial confirma el envío | Éxito del formulario; no incluye intentos ni el chat |
+| `generate_lead` | Una vez por lead, con `method`: `form`, `whatsapp` o `chat` | Conversión principal |
+| `chat_open` / `chat_message_submit` | Apertura y cada mensaje enviado a Sofía AI | Interacción comercial |
 | `scroll_depth` | Profundidad de 25%, 50%, 75% y 90% | Calidad de lectura |
 
 ---
@@ -73,25 +73,40 @@ La web utiliza un **Event Bus client-side** centralizado en `src/scripts/trackin
 ### 1. Google Tag Manager Container
 - **Contenedor:** `GTM-M6NH5PGW`.
 - **Configuración:** `PUBLIC_GTM_ID`, con el mismo ID como respaldo seguro en `BaseLayout.astro`.
-- El script principal se carga al inicio de `<head>` y el iframe `noscript` inmediatamente después de abrir `<body>`.
-- **Destino GA4 existente:** `G-8DCJ7P4HBB`.
+- **Cuándo carga:** solo en el build de producción (no en `astro dev` ni en un deploy con `VERCEL_ENV=preview` o `development`) y solo si `location.hostname` es `www.77studio.co` o `77studio.co`. En cualquier otro host se fija `window['ga-disable-' + measurementId]` antes de que una etiqueta pueda enviar un hit.
+- El script sigue difiriéndose hasta después del `load` o el primer gesto. `dataLayer` queda en cola.
+- **Measurement ID:** `PUBLIC_GA4_MEASUREMENT_ID`. Si no está definida, el valor de producción es `G-8DCJ7P4HBB`. Se publica en `dataLayer` como `measurement_id`. La etiqueta de Google dentro del contenedor sigue apuntando a ese ID; no se añade un segundo `gtag.js` para no duplicar `page_view`.
 - **Destino Google Ads existente:** `AW-11397435689`.
 
 ### 2. Conversiones de Google Ads
-- **Conversión principal:** `generate_lead`, únicamente cuando el backend confirme que recibió el formulario.
-- **Conversión secundaria:** `click_whatsapp`.
+- **Conversión principal:** `generate_lead`.
+- **Conversión secundaria:** `click_whatsapp`. Ese clic también emite `generate_lead` con `method: 'whatsapp'` y `location` del lugar del enlace.
 - El widget flotante se distingue con `link_location: whatsapp_floating` y `interaction_variant: floating_button` o `tooltip_cta`.
-- `form_submit` mide intención y errores del embudo, pero no debe importarse como conversión principal.
+- `form_submit` se emite una sola vez, junto con `generate_lead` (`method: 'form'`), cuando el formulario muestra el envío confirmado. No se emite en validaciones fallidas, en reintentos ni en el formulario de Sofía.
 - Los `conversion_label` se obtienen desde las acciones reales de Google Ads; no se inventan ni se incluyen en el repositorio.
 
-Para confirmar un lead real, la integración del formulario debe emitir:
+Parámetros de `generate_lead`:
+
+| `method` | Cuándo | `form_id` | `location` |
+|---|---|---|---|
+| `form` | Una vez, al confirmar el formulario comercial (`77:lead-success`) | `lead-contact-form` | Página de origen del formulario (`origin_page`) |
+| `whatsapp` | En el mismo clic que `click_whatsapp` | — | Misma ubicación del enlace |
+| `chat` | Junto al primer `chat_message_submit` de la sesión | `chatFooterForm` | `ai_chat` |
+
+`chat_message_submit` sigue en cada mensaje con texto. Los siguientes mensajes de la misma sesión no repiten `generate_lead`.
+
+La etiqueta de evento de GA4 del contenedor reenvía una lista fija (`form_id`, `form_origin`, `selected_service`, `link_location`, `interaction_variant`, entre otras). `generate_lead` manda `method` y `location` en el `dataLayer` y copia esos valores a `interaction_variant` y `link_location` para que el método y el lugar lleguen a GA4 con la etiqueta actual, sin un segundo evento.
+
+Para confirmar el formulario, el componente emite:
 
 ```typescript
 window.dispatchEvent(new CustomEvent('77:lead-success', {
   detail: {
     form_id: 'lead-contact-form',
     form_origin: 'contacto',
-    selected_service: 'marketing'
+    selected_service: 'marketing',
+    location: 'contacto',
+    method: 'form'
   }
 }));
 ```
@@ -113,7 +128,7 @@ window.dispatchEvent(new CustomEvent('77:lead-success', {
 
 - No se envían a `dataLayer` nombres, empresas, correos, teléfonos ni mensajes escritos.
 - Los enlaces se registran sin parámetros de consulta para no exponer el texto prellenado de WhatsApp.
-- `generate_lead` solo acepta metadatos técnicos permitidos: formulario, página de origen y servicio seleccionado.
+- `generate_lead` solo acepta metadatos técnicos permitidos: `method`, `form_id`, `location`, página de origen y servicio seleccionado. No incluye el texto del chat ni datos de contacto.
 
 ---
 
